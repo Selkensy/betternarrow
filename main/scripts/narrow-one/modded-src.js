@@ -3,6 +3,8 @@ let globalPanic = false;
 
 let globalNotificationPtr = null;
 
+let styles = [];
+
 !function () {
     var t = !1;
     try {

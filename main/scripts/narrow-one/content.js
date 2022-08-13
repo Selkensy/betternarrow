@@ -15,12 +15,6 @@ if (!window.injected) {
 		gameInstance.innerHTML = await fetch(chrome.runtime.getURL('main/scripts/narrow-one/modded-src.js')).then((resp) => resp.text()).then();
 		document.documentElement.prepend(gameInstance);
 		document.documentElement.insertBefore(gameInstance, document.documentElement.firstChild);
-		
-		let styleInstance = document.createElement('style');
-		styleInstance.id = "GameStyle";
-		styleInstance.innerHTML = await fetch(chrome.runtime.getURL('main/scripts/narrow-one/resources/dark-mode.css')).then((resp) => resp.text()).then();
-		document.head.prepend(styleInstance);
-		document.head.insertBefore(styleInstance, document.head.firstChild);
 	}
 	
 	let counter = 0;

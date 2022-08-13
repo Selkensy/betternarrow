@@ -1,5 +1,25 @@
 console.log('Injected!');
 
+function waitForElm(selector) {
+    return new Promise(resolve => {
+        if (document.querySelector(selector)) {
+            return resolve(document.querySelector(selector));
+        }
+
+        const observer = new MutationObserver(mutations => {
+            if (document.querySelector(selector)) {
+                resolve(document.querySelector(selector));
+                observer.disconnect();
+            }
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    });
+}
+
 function init() {
 	__require(['https://unpkg.com/three@latest/build/three.min.js'], function(threejs)
 	{
@@ -25,12 +45,18 @@ function init() {
 					text: "BetterNarrow by yeemi#9764 created to allow more graphics control"
 				})
 				
-				for (let i = 0; i < document.head.children.length; i++) {
-					if (document.head.children[i].tagName == "STYLE")  {
-						document.head.children[i].remove();
-						return;
+				waitForElm('head > style:nth-child(24)').then((elm) => {
+					elm.remove(); 
+					
+					async function addCustomStyle() {
+						let styleInstance = document.createElement('style');
+						styleInstance.id = "GameStyle";
+						styleInstance.innerHTML = await fetch('https://raw.githubusercontent.com/Laamy/betternarrow/main/main/scripts/narrow-one/resources/dark-mode.css').then((resp) => resp.text()).then();
+						document.head.prepend(styleInstance);
+						document.head.insertBefore(styleInstance, document.head.firstChild);
 					}
-				}
+					addCustomStyle();
+				});
 			}
 			
 			try {
