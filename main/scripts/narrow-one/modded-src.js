@@ -29191,7 +29191,7 @@ class oh {
         const o = n + r;
         n -= o - Math.min(o, .9);
 		
-		if (globalInstance.settingsManager.getValue("displaydamage") && this === uc().gameManager.currentGame.getMyPlayer()) {
+		if (globalInstance.settingsManager.getValue("damagedisplay") && this === uc().gameManager.currentGame.getMyPlayer()) {
 			if (Math.floor(n * 100) <= 0) return;
 			
 			uc().gameManager.currentGame.scoreOffsetNotificationsUi.showOffsetNotification("Player damaged " + Math.floor(n * 100) + " saved " + Math.floor(Math.abs(i.arrowDamage - n) * 100), null, "hey");
