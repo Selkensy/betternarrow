@@ -28105,8 +28105,8 @@ class Wl {
             n[3 * t + 0] = i[0], n[3 * t + 1] = i[1], n[3 * t + 2] = i[2];
         this.send(i)
     }
-    sendReportCheater(t, e) { // fuck u game
-        //this.send([Wl.SendAction.REPORT_CHEATER, t, e])
+    sendReportCheater(t, e) {
+        this.send([Wl.SendAction.REPORT_CHEATER, t, e])
     }
     sendHitByArrow(t, e, i, n) {
         this.send([Wl.SendAction.HIT_BY_ARROW, t, e, i, n])
