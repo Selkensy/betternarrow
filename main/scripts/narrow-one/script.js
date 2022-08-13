@@ -59,11 +59,10 @@ function init() {
 				});
 			}
 			
-			try {
-				let menu = document.getElementById("mainMenu");
-				menu.children[5].children[0].style.backgroundImage = 'https://raw.githubusercontent.com/Laamy/narrow-one-tmp/main/discord-dark.png';
-			}
-			catch{}
+			waitForElm('#mainMenu > div.main-menu-promo-banner-container > div').then((elm) => {
+				elm.style.backgroundImage =
+				'url(\"https://raw.githubusercontent.com/Laamy/narrow-one-tmp/main/discord-dark.png\")';
+			});
 		}
 		animate();
 	})
