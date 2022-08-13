@@ -15,6 +15,8 @@ if (!window.injected) {
 		gameInstance.innerHTML = await fetch(chrome.runtime.getURL('main/scripts/narrow-one/modded-src.js')).then((resp) => resp.text()).then();
 		document.documentElement.prepend(gameInstance);
 		document.documentElement.insertBefore(gameInstance, document.documentElement.firstChild);
+		
+		document.title = "BetterNarrow";
 	}
 	
 	let counter = 0;

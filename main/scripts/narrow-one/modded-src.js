@@ -19625,13 +19625,7 @@ class Ca {
 class _a extends Ma { // client settings
     constructor(t, e, i) {
         if (super(), this.settingsManager = t, this.dialogManager = e, this.titleEl = document.createElement("h2"), this.titleEl.classList.add("dialogTitle", "blueNight"), this.titleEl.textContent = "Settings", this.el.appendChild(this.titleEl), this.settings = new Map,
-				this.settings.set("optimization", new Ca({
-                    text: "Optimize Game",
-                    type: "toggle"
-                })), this.settings.set("damagedisplay", new Ca({
-                    text: "Damage Display",
-                    type: "toggle"
-                })), this.settings.set("sfxVolume", new Ca({
+				this.settings.set("sfxVolume", new Ca({
                     text: "Sound effects volume",
                     type: "slider",
                     min: 0,
@@ -19680,6 +19674,41 @@ class _a extends Ma { // client settings
             });
             //t.el.style.transform = "scale(-1, 1)",
             this.settings.set("afFlipScreen", t)
+        }
+        this.settingsListEl = document.createElement("div"),
+        this.settingsListEl.classList.add("settings-list"),
+        this.el.appendChild(this.settingsListEl);
+        for (const [e, i] of this.settings) {
+            this.settingsListEl.appendChild(i.el);
+            const n = t.getValue(e);
+            i.setValue(n),
+            i.onValueChange((i => {
+                    t.setValue(e, i)
+                }))
+        }
+        this.addButtonsContainer(),
+        this.addButton({
+            text: "Save",
+            onClick: async() => {
+                await this.settingsManager.saveSettings() ? this.close() : this.dialogManager.showAlert({
+                    title: "Settings could not be saved.",
+                    text: "An error occurred while saving the settings. Are third party cookies disabled?"
+                })
+            }
+        })
+    }
+}
+
+class graphicSettings extends Ma { // client graphic settings
+    constructor(t, e, i) {
+        if (super(), this.settingsManager = t, this.dialogManager = e, this.titleEl = document.createElement("h2"), this.titleEl.classList.add("dialogTitle", "blueNight"), this.titleEl.textContent = "Settings", this.el.appendChild(this.titleEl), this.settings = new Map,
+				this.settings.set("optimization", new Ca({
+                    text: "Optimize Game",
+                    type: "toggle"
+                })), this.settings.set("damagedisplay", new Ca({
+                    text: "Damage Display",
+                    type: "toggle"
+                })), true) {
         }
         this.settingsListEl = document.createElement("div"),
         this.settingsListEl.classList.add("settings-list"),
@@ -24413,6 +24442,19 @@ class fl {
         this.menuButtonsContainer = document.createElement("div"),
         this.menuButtonsContainer.classList.add("menuButtonsContainer"),
         this.el.appendChild(this.menuButtonsContainer),
+        this.graphicsDialog = null,
+        this.graphicsButton = new ba({
+            text: "BetterNarrow",
+            icon: "img/menuUI/settings.svg",
+            iconSizeMultiplier: .6,
+            testLabel: "betternarrow",
+            onClick: () => {
+                const t = uc();
+                this.graphicsDialog = new graphicSettings(t.settingsManager, t.dialogManager, t.aprilFools),
+                uc().dialogManager.addDialog(this.graphicsDialog)
+            }
+        }),
+        this.menuButtonsContainer.appendChild(this.graphicsButton.containerEl),
         this.settingsDialog = null,
         this.settingsButton = new ba({
             text: "Settings",
