@@ -27821,10 +27821,10 @@ class Wl {
             let t = null;
             switch (this.lastDisconnectReason) {
             case "version-out-of-date":
-                t = "Your version is out of date, please bug yeemi#9764 on discord to update";
+                t = "Your version is out of date, please bug yeemi#9764 on discord to update (or if an update has already released go to https://github.com/Laamy/betternarrow)";
                 break;
             case "afk":
-                t = "You have been kicked for being afk for too long";
+                t = "You have been kicked for being idle";
                 break;
             case "game-doesnt-exist":
                 t = "Game not found.";
