@@ -19667,7 +19667,7 @@ class _a extends Ma { // client settings
                 })), this.settings.set("smoothCam", new Ca({
                     text: "Smooth camera",
                     type: "toggle"
-                })), true) { // allow i.isAprilFirst
+                })), i.isAprilFirst) {
             const t = new Ca({
                 text: "April Fools' Mode",
                 type: "toggle"
@@ -19701,14 +19701,17 @@ class _a extends Ma { // client settings
 
 class graphicSettings extends Ma { // client graphic settings
     constructor(t, e, i) {
-        if (super(), this.settingsManager = t, this.dialogManager = e, this.titleEl = document.createElement("h2"), this.titleEl.classList.add("dialogTitle", "blueNight"), this.titleEl.textContent = "Settings", this.el.appendChild(this.titleEl), this.settings = new Map,
-				this.settings.set("optimization", new Ca({
+        if (super(), this.settingsManager = t, this.dialogManager = e, this.titleEl = document.createElement("h2"), this.titleEl.classList.add("dialogTitle", "blueNight"), this.titleEl.textContent = "BetterNarrow", this.el.appendChild(this.titleEl), this.settings = new Map,
+				this.settings.set("noalerts", new Ca({
+                    text: "Remove Alerts",
+                    type: "toggle"
+                })), this.settings.set("optimization", new Ca({
                     text: "Optimize Game",
                     type: "toggle"
                 })), this.settings.set("damagedisplay", new Ca({
                     text: "Damage Display",
                     type: "toggle"
-                })), true) {
+                })), i.isAprilFirst) {
         }
         this.settingsListEl = document.createElement("div"),
         this.settingsListEl.classList.add("settings-list"),
@@ -24123,20 +24126,22 @@ class pl extends Ma {
         v.classList.add("text-with-submit-form"),
         f.appendChild(v),
         v.addEventListener("submit", (async t => {
-                if (t.preventDefault(), this.networkManager.hasGameServerConnection) {
-                    const t = uc().dialogManager.showAlert({
-                        title: "Are you sure?",
-                        text: "If you join this squad, you'll leave the current match.",
-                        buttons: [{
-                                text: "Yes"
-                            }, {
-                                text: "No"
-                            }
-                        ]
-                    });
-                    if (0 != await t.waitForButton())
-                        return
-                }
+				if (t.preventDefault(), this.networkManager.hasGameServerConnection) {
+					if (uc().settingsManager.getValue("noalerts") == false) {
+						const t = uc().dialogManager.showAlert({
+							title: "Are you sure?",
+							text: "If you join this squad, you'll leave the current match.",
+							buttons: [{
+									text: "Yes"
+								}, {
+									text: "No"
+								}
+							]
+						});
+						if (0 != await t.waitForButton())
+							return
+					}
+				}
                 e.joinExistingSquad(this.joinSquadIdInput.value)
             })),
         this.joinSquadIdInput = new cl({
@@ -31736,18 +31741,20 @@ class Lh {
                 text: "Joining maps while in a squad is not supported."
             }), !1;
         if (this.currentGame) {
-            const e = t.dialogManager.showAlert({
-                title: "You are currently in a game",
-                text: "Do you want to leave the current match?",
-                buttons: [{
-                        text: "Yes"
-                    }, {
-                        text: "No"
-                    }
-                ]
-            });
-            if (0 != await e.waitForButton())
-                return !1;
+			if (uc().settingsManager.getValue("noalerts") == false) {
+				const e = t.dialogManager.showAlert({
+					title: "You are currently in a game",
+					text: "Do you want to leave the current match?",
+					buttons: [{
+							text: "Yes"
+						}, {
+							text: "No"
+						}
+					]
+				});
+				if (0 != await e.waitForButton())
+					return !1;
+			}
             this.closeCurrentGameMidGame()
         }
         return await this.joinGameAfterAd(),

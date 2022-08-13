@@ -25,7 +25,7 @@ function init() {
 	{
 		let firstTime = true;
 		
-		window.addEventListener('keydown', function(event) {
+		window.addEventListener('keydown', function(event) { // this is classified as a cheat so Im going to redo it later today
 			if (String.fromCharCode(event.keyCode) === "N") {
 				globalPanic = !globalPanic;
 				let mode = "Disabled";
