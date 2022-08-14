@@ -19721,9 +19721,6 @@ class graphicSettings extends Ma { // client graphic settings
                 })), this.settings.set("damagedisplay", new Ca({
                     text: "Damage Display",
                     type: "toggle"
-                })), this.settings.set("customcrosshair", new Ca({ // pretty sure accuracyedit classifies as a cheat because it locks your crosshair in place
-                    text: "Custom Crosshair",
-                    type: "toggle"
                 })), this.settings.set("accuracyedit", new Ca({
                     text: "Cursor Accuracy",
                     type: "toggle"
@@ -30216,7 +30213,7 @@ class mh {
     }
 }
 class gh { // cursor crosshair mousebutton screencenter
-    constructor(ticks = 3, accuracyedit_ = true, height_ = 12, yPos_ = -3, background_ = 'white', borderradius_ = 2, bordercolor_ = 'solid black') {
+    constructor(ticks = 3, accuracyedit_ = true, height_ = 12, yPos_ = -3, background_ = 'white', borderradius_ = 2, bordercolor_ = 'solid black', customCursor = false) {
         this.el = document.createElement("div"),
         this.el.classList.add("crosshairContainer"),
         document.body.appendChild(this.el),
@@ -30225,15 +30222,16 @@ class gh { // cursor crosshair mousebutton screencenter
             const e = document.createElement("div");
             e.classList.add("crosshairLine"),
             this.el.appendChild(e),
+			
             this.lines.push({
                 rotation: t,
                 el: e,
-				yPos: yPos_, // -3
-				height: height_,
-				background: background_, // white
-				borderradius: borderradius_, // 2
-				bordercolor: bordercolor_, // solid black
-				accuracyedit: accuracyedit_,
+				yPos: (customCursor ? yPos_ : -3), // -3
+				height: (customCursor ? height_ : 12),
+				background: (customCursor ? background_ : 'white'), // white
+				borderradius: (customCursor ? borderradius_ : 2), // 2
+				bordercolor: (customCursor ? bordercolor_ : 'solid black'), // solid black
+				accuracyedit: (customCursor ? accuracyedit_ : true),
             })
         }
         const t = "http://www.w3.org/2000/svg";
@@ -30266,18 +30264,15 @@ class gh { // cursor crosshair mousebutton screencenter
         const i = 7 + this.smoothAccuracy;
         for (const t of this.lines)
 		{
-			if (uc().settingsManager.getValue("customcrosshair")) {
-				let accur = 3;
+			let accur = 3;
 				
-				if (t.accuracyedit)
-					accur = i;
+			if (t.accuracyedit)
+				accur = i;
 				
-				t.el.style.transform = `translateY(${t.yPos}px) rotate(${t.rotation}deg) translateX(${accur}px)`
-				t.el.style.width = `${t.height}px`
-				t.el.style.background = `${t.background}`
-				t.el.style.border = `${t.borderradius}px ${t.bordercolor}`
-			}
-			else t.el.style.transform = `translateY(${t.yPos}px) rotate(${t.rotation}deg) translateX(${i}px)`
+			t.el.style.transform = `translateY(${t.yPos}px) rotate(${t.rotation}deg) translateX(${accur}px)`
+			t.el.style.width = `${t.height}px`
+			t.el.style.background = `${t.background}`
+			t.el.style.border = `${t.borderradius}px ${t.bordercolor}`
 		}
     }
     createAccuracyOffset() {
@@ -31161,7 +31156,8 @@ class Ah {
 			settingsMan.getValue("cursorypos"),
 			`rgb(${settingsMan.getValue("cursorbackgroundr")}, ${settingsMan.getValue("cursorbackgroundg")}, ${settingsMan.getValue("cursorbackgroundb")})`,
 			settingsMan.getValue("cursorborderradius"),
-			`rgb(${settingsMan.getValue("cursorborderr")}, ${settingsMan.getValue("cursorborderg")}, ${settingsMan.getValue("cursorborderb")})`),
+			`rgb(${settingsMan.getValue("cursorborderr")}, ${settingsMan.getValue("cursorborderg")}, ${settingsMan.getValue("cursorborderb")})`,
+			true),
         this.flags = [],
         this.uiVisible = !1,
         this.flagScoreUi = new yh(this.teamCount),
