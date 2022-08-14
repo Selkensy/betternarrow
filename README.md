@@ -1,4 +1,4 @@
-# betternarrow
+# BetterNarrow
 
 Small optimization mod to enhance ones gameplay on https://narrow.one/
 
@@ -8,3 +8,6 @@ Once downloaded extract it to a safe folder
 open chrome/brave (or whatever you use)
 click on the three dots then go to extensions
 once in extensions unpack the extracted source
+
+# Links
+https://discord.gg/mfJBTJR9gt

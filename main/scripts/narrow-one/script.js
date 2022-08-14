@@ -1,5 +1,17 @@
 console.log('Injected!');
 
+class BetterNarrow {
+	onFrameRender_Event = new Event('onFrameRender')
+	
+	GetClient() {
+		return globalInstance
+	}
+	onFrameRender(func) {
+		window.addEventListener("onFrameRender", function(THREE) { func(three); });
+	}
+}
+let BetterNarrowAPI = new BetterNarrow();
+
 function waitForElm(selector) {
     return new Promise(resolve => {
         if (document.querySelector(selector)) {
@@ -30,17 +42,21 @@ function init() {
 				globalPanic = !globalPanic;
 				let mode = "Disabled";
 				if (globalPanic) mode = "Enabled";
-				globalInstance.gameManager.currentGame.scoreOffsetNotificationsUi.showOffsetNotification("Panic mode is now " + mode, null, "hey");
+				BetterNarrowAPI.GetClient().gameManager.currentGame.scoreOffsetNotificationsUi.showOffsetNotification("Panic mode is now " + mode, null, "hey");
 			}
 		});
 		
 		function animate() {
 			requestAnimationFrame(animate);
 			
-			if (globalInstance && firstTime) {
+			window.dispatchEvent(BetterNarrowAPI.onFrameRender_Event); // call onRender event for plugins
+			
+			let client = BetterNarrowAPI.GetClient();
+			
+			if (client && firstTime) {
 				firstTime = false;
 				
-				globalInstance.dialogManager.showAlert({
+				client.dialogManager.showAlert({
 					title: "BetterNarrow",
 					text: "BetterNarrow by yeemi#9764 created to allow more graphics control"
 				})
