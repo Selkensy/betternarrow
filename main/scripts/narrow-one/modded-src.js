@@ -7,6 +7,8 @@ let styles = [];
 
 let camHeight = 1.6;
 
+let betterNarrowCharacter = '‎';
+
 !function () {
     var t = !1;
     try {
@@ -27531,6 +27533,9 @@ class Wl {
         e + "://" + window.location.hostname + ":" + t + "/gameServer"
     }
     async prepareJoinGame() {
+		if (!uc().profileState.getCurrentState().username.includes(betterNarrowCharacter))
+			uc().profileState.setUsername(betterNarrowCharacter + uc().profileState.getCurrentState().username)
+		
         let t = null;
         const e = va();
         if (this.nextCloseIsIntentional = !1, e.ip && !this.squadManager.isInSquad)
@@ -30703,8 +30708,10 @@ class xh extends Ma {
             const i = document.createElement("tr");
             i.classList.add("playersListItem", "tableItem"),
             this.teamEls[e.teamId].tbody.appendChild(i);
-            let n = null;
-            e.hasOwnership ? n = "You" : e.isSameSquadPlayer && (n = "Squad");
+            let n = "";
+			e.playerName.includes(betterNarrowCharacter) && (n = "BetterNarrow");
+			e.isSameSquadPlayer && (n += "Squad");
+            e.hasOwnership ? n = "You";
             const s = [{
                     text: "",
                     isAvatar: !0

@@ -2,8 +2,14 @@ if (!window.injected) {
 	window.injected = true;
 	console.log('Injecting...');
 	
+	async function LoadPlugin(plugin) {
+		let pluginInstance = document.createElement('script');
+		pluginInstance.innerHTML = await fetch(chrome.runtime.getURL(plugin)).then((resp) => resp.text()).then();
+		document.documentElement.prepend(pluginInstance);
+		document.documentElement.insertBefore(pluginInstance, document.documentElement.firstChild);
+	}
+	
 	async function injectProp() {
-		
 		let scr = document.createElement('script');
 		scr.innerHTML = (await fetch(chrome.runtime.getURL('main/scripts/narrow-one/scene.js')).then((resp) => resp.text())) + "\r\n" +
 						(await fetch(chrome.runtime.getURL('main/header.js')).then((resp) => resp.text())) + "\r\n" +
@@ -17,6 +23,11 @@ if (!window.injected) {
 		document.documentElement.insertBefore(gameInstance, document.documentElement.firstChild);
 		
 		document.title = "BetterNarrow";
+		
+		// plugins
+		setTimeout(function() {
+			LoadPlugin('main/scripts/narrow-one/plugins/template.plugin.js');
+		}, 50)
 	}
 	
 	let counter = 0;

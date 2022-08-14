@@ -1,13 +1,26 @@
 console.log('Injected!');
 
+let ThreeAPI;
+
 class BetterNarrow {
 	onFrameRender_Event = new Event('onFrameRender')
+	onInitialization_Event = new Event('onInitialization')
 	
 	GetClient() {
 		return globalInstance
 	}
+	Log(plugin, output) {
+		console.log('[' + plugin + '] ' + output);
+	}
 	onFrameRender(func) {
-		window.addEventListener("onFrameRender", function(THREE) { func(three); });
+		window.addEventListener("onFrameRender", function() {
+			func(ThreeAPI);
+		});
+	}
+	onInitialization(func) {
+		window.addEventListener("onInitialization", function() {
+			func(ThreeAPI, BetterNarrowAPI.GetClient());
+		});
 	}
 }
 let BetterNarrowAPI = new BetterNarrow();
@@ -35,6 +48,8 @@ function waitForElm(selector) {
 function init() {
 	__require(['https://unpkg.com/three@latest/build/three.min.js'], function(threejs)
 	{
+		ThreeAPI = threejs
+		
 		let firstTime = true;
 		
 		window.addEventListener('keydown', function(event) { // this is classified as a cheat so Im going to redo it later today
@@ -76,6 +91,7 @@ function init() {
 			if (client && firstTime) {
 				firstTime = false;
 				
+				
 				client.dialogManager.showAlert({
 					title: "BetterNarrow",
 					text: "BetterNarrow by yeemi#9764 created to allow more graphics control"
@@ -93,11 +109,13 @@ function init() {
 					}
 					addCustomStyle();
 				});
+				
+				window.dispatchEvent(BetterNarrowAPI.onInitialization_Event);
 			}
 			
 			waitForElm('#mainMenu > div.main-menu-promo-banner-container > div').then((elm) => {
 				elm.style.backgroundImage =
-				'url(\"https://raw.githubusercontent.com/Laamy/narrow-one-tmp/main/discord-dark.png\")';
+				'url(\"https://raw.githubusercontent.com/Laamy/narrow-one-tmp/main/discord-dark.png")';
 			});
 		}
 		animate();

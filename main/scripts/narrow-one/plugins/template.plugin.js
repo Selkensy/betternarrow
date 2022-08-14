@@ -1,11 +1,18 @@
 // suicide keybind
 
+let pluginName;
+
 let client;
 
-BetterNarrow.__onInitialize(function(THREE, gameClient) {
-	cleint = gameClient;
+BetterNarrowAPI.onInitialization(function(THREE, gameClient) {
+	pluginName = "Template";
+	client = gameClient;
+	
+	BetterNarrowAPI.Log(pluginName, 'Initalized');
 });
 
-BetterNarrow.__onFrameRender(function(THREE) {
+BetterNarrowAPI.onFrameRender(function(THREE) {
+	if (pluginName === undefined) return; // theres a single frame before initialization
 	
+	//BetterNarrowAPI.Log(pluginName, 'Frame');
 });
