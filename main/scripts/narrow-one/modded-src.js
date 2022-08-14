@@ -30711,7 +30711,7 @@ class xh extends Ma {
             let n = "";
 			e.playerName.includes(betterNarrowCharacter) && (n = "BetterNarrow");
 			e.isSameSquadPlayer && (n += "Squad");
-            e.hasOwnership ? n = "You";
+            e.hasOwnership ? n = "You" : n = n;
             const s = [{
                     text: "",
                     isAvatar: !0
