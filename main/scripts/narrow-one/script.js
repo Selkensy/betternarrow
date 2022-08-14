@@ -59,7 +59,7 @@ function init() {
 				if (client.gameManager && client.gameManager.currentGame) {
 					let curGame = client.gameManager.currentGame;
 					
-					if (curGame.getMyPlayer()) { // run code in here for ontick(only when ingame) shit
+					if (curGame.getMyPlayer()) {
 						let player = curGame.getMyPlayer();
 						
 						//client.settingsManager.setValue("thirdpersoncam", false)

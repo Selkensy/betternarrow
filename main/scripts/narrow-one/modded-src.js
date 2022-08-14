@@ -30204,7 +30204,26 @@ class ph {
 		}
     }
     createArrow(t, e) {
-		if (globalPanic) return;
+		
+		if (t === uc().gameManager.currentGame.getMyPlayer() && uc().settingsManager.getValue("thirdpersoncam"))
+		{
+			console.log(e.pos);
+			let offset = uc().settingsManager.getValue("thirdpersonradius");
+			let posX = t.getLookDirection().x;
+			let posY = t.getLookDirection().y;
+			let posZ = t.getLookDirection().z;
+			posX *= offset;
+			posY *= offset;
+			posZ *= offset;
+			posX += e.pos.x;
+			posY += e.pos.y;
+			posZ += e.pos.z;
+			e.pos = new w(posX, posY, posZ);
+			
+			//(looking * radius) + pos;
+			
+			console.log(e.pos);
+		}
 		
 		const i = new ch(t, e, {
 			arrowManager: this,
