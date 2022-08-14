@@ -30207,7 +30207,6 @@ class ph {
 		
 		if (t === uc().gameManager.currentGame.getMyPlayer() && uc().settingsManager.getValue("thirdpersoncam"))
 		{
-			console.log(e.pos);
 			let offset = uc().settingsManager.getValue("thirdpersonradius");
 			let posX = t.getLookDirection().x;
 			let posY = t.getLookDirection().y;
@@ -30221,8 +30220,6 @@ class ph {
 			e.pos = new w(posX, posY, posZ);
 			
 			//(looking * radius) + pos;
-			
-			console.log(e.pos);
 		}
 		
 		const i = new ch(t, e, {
