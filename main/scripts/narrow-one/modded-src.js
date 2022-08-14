@@ -5,6 +5,8 @@ let globalNotificationPtr = null;
 
 let styles = [];
 
+let camHeight = 1.6;
+
 !function () {
     var t = !1;
     try {
@@ -19046,6 +19048,8 @@ class na {
         this.defaultValues = {
             sfxVolume: 100,
             musicVolume: 100,
+            thirdpersonradius: 1,
+            camheight: 1.6,
             cursorticks: 3,
             cursorheight: 12,
             cursorypos: -3,
@@ -19712,7 +19716,16 @@ class _a extends Ma { // client settings
 class graphicSettings extends Ma { // client graphic settings
     constructor(t, e, i) {
         if (super(), this.settingsManager = t, this.dialogManager = e, this.titleEl = document.createElement("h2"), this.titleEl.classList.add("dialogTitle", "blueNight"), this.titleEl.textContent = "BetterNarrow", this.el.appendChild(this.titleEl), this.settings = new Map,
-				this.settings.set("noalerts", new Ca({
+				this.settings.set("thirdpersoncam", new Ca({
+                    text: "Third Person",
+                    type: "toggle"
+                })), this.settings.set("thirdpersonradius", new Ca({
+                    text: "Third Person Radius",
+                    type: "slider",
+                    min: 0.5,
+                    max: 2.5,
+                    step: 0.1
+                })), this.settings.set("noalerts", new Ca({
                     text: "Remove Alerts",
                     type: "toggle"
                 })), this.settings.set("optimization", new Ca({
@@ -19721,6 +19734,12 @@ class graphicSettings extends Ma { // client graphic settings
                 })), this.settings.set("damagedisplay", new Ca({
                     text: "Damage Display",
                     type: "toggle"
+                })), this.settings.set("camheight", new Ca({
+                    text: "Player Height",
+                    type: "slider",
+                    min: 1.2,
+                    max: 1.8,
+                    step: 0.1
                 })), this.settings.set("accuracyedit", new Ca({
                     text: "Cursor Accuracy",
                     type: "toggle"
@@ -19796,6 +19815,9 @@ class graphicSettings extends Ma { // client graphic settings
             i.setValue(n),
             i.onValueChange((i => {
 				t.setValue(e, i)
+				
+				if (e == "camheight") 
+					camHeight = i;
 			}))
         }
         this.addButtonsContainer(),
@@ -28726,10 +28748,10 @@ class oh {
         },
         this.isSameSquadPlayer = !1,
         this.gender = "male",
-        this.walkSpeed = 60,
+        this.walkSpeed = 60, // 60
         this.airWalkSpeedMultiplier = .4,
         this.flagWalkSpeed = 45,
-        this.jumpForce = 8.6,
+        this.jumpForce = 8.6, // 8.6
         this.ladderClimbSpeed = 1,
         this.ladderTangentWalkSpeed = .5,
         this.health = 1,
@@ -28786,7 +28808,7 @@ class oh {
         this.currentFallingSfx = null,
         this.hasKeyEvents = !1,
         this.useFirstPersonHoldingHandlers = !1,
-        this.thirdPerson = !1,
+        this.thirdPerson = !0,
         this.noclip = !1,
         this.noclipSpeed = 0,
         this.movementAccuracyOffset = null,
@@ -29212,7 +29234,14 @@ class oh {
         uc().renderer.renderWorthyEventHappened()
     }
     updateModelVisibility() {
-        this.obj && (this.obj.visible = !this.dead && this.skeleton.isInit && (!this.hasOwnership || this.thirdPerson || this.noclip), this.updateUseFirstPersonHoldingHandlers())
+		if (this.obj)
+		{
+			if (this.thirdPerson)
+				this.obj.visible = true;
+			else this.obj.visible = this.skeleton.isInit && (!this.hasOwnership || this.noclip || this.thirdPerson);
+			
+			this.updateUseFirstPersonHoldingHandlers();
+		}
     }
     updateUseFirstPersonHoldingHandlers() {
         const t = this.hasOwnership && !this.thirdPerson && !this.noclip;
@@ -29334,10 +29363,10 @@ class oh {
     }
     getCamPos() {
         if (this.cachedCamPosDirty) {
-            if (this.cachedCamPos.copy(this.pos), this.cachedCamPos.y += 1.6, this.noclip && this.noclipCamPos)
+            if (this.cachedCamPos.copy(this.pos), this.cachedCamPos.y += camHeight, this.noclip && this.noclipCamPos)
                 this.cachedCamPos.add(this.noclipCamPos);
             else if (this.thirdPerson) {
-                const t = new w(0, 0, 5);
+                const t = new w(0, 0, uc().settingsManager.getValue("thirdpersonradius"));
                 t.applyQuaternion(this.getCamRot()),
                 this.cachedCamPos.add(t)
             }

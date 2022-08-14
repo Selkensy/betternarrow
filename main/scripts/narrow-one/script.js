@@ -38,11 +38,13 @@ function init() {
 		let firstTime = true;
 		
 		window.addEventListener('keydown', function(event) { // this is classified as a cheat so Im going to redo it later today
+			if (String.fromCharCode(event.keyCode) === "R") {
+				let settings = BetterNarrowAPI.GetClient().settingsManager;
+				settings.setValue("thirdpersoncam", !settings.getValue("thirdpersoncam"))
+			}
+			
 			if (String.fromCharCode(event.keyCode) === "N") {
-				globalPanic = !globalPanic;
-				let mode = "Disabled";
-				if (globalPanic) mode = "Enabled";
-				BetterNarrowAPI.GetClient().gameManager.currentGame.scoreOffsetNotificationsUi.showOffsetNotification("Panic mode is now " + mode, null, "hey");
+				BetterNarrowAPI.GetClient().gameManager.currentGame.scoreOffsetNotificationsUi.showOffsetNotification("Panic mode has been removed" , null, "hey");
 			}
 		});
 		
@@ -52,6 +54,24 @@ function init() {
 			window.dispatchEvent(BetterNarrowAPI.onFrameRender_Event); // call onRender event for plugins
 			
 			let client = BetterNarrowAPI.GetClient();
+			
+			if (client) {
+				if (client.gameManager && client.gameManager.currentGame) {
+					let curGame = client.gameManager.currentGame;
+					
+					if (curGame.getMyPlayer()) { // run code in here for ontick(only when ingame) shit
+						let player = curGame.getMyPlayer();
+						
+						//client.settingsManager.setValue("thirdpersoncam", false)
+						if (client.settingsManager.getValue("thirdpersoncam"))
+							player.thirdPerson = true;
+						else player.thirdPerson = false;
+						
+						player.updateModelVisibility()
+					}
+				}
+				
+			}
 			
 			if (client && firstTime) {
 				firstTime = false;
