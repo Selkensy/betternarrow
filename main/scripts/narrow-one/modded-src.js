@@ -29241,9 +29241,11 @@ class oh {
     updateModelVisibility() {
 		if (this.obj)
 		{
-			if (this.thirdPerson)
+			if (this.dead)
+				this.obj.visible = false;
+			else if (this.thirdPerson)
 				this.obj.visible = true;
-			else this.obj.visible = this.skeleton.isInit && (!this.hasOwnership || this.noclip || this.thirdPerson);
+			else this.obj.visible = this.skeleton.isInit && (!this.hasOwnership || this.noclip)
 			
 			this.updateUseFirstPersonHoldingHandlers();
 		}
