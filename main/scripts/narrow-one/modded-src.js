@@ -31633,7 +31633,10 @@ class Ah {
 		let pingObj = GetLabelById("Ping");
 			
 		if (pingObj === undefined && pingObj === null) return;
-		pingObj.innerHTML = `PING: ${e}ms`;
+		try {
+			pingObj.innerHTML = `PING: ${e}ms`;
+		}
+		catch {}
 		
     }
     createServerArrow(t, e, i, n, s, r, o, a, l) {
