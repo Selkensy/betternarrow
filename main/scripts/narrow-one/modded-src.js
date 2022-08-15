@@ -9,6 +9,46 @@ let camHeight = 1.6;
 
 let betterNarrowCharacter = '‎';
 
+let labArray = [];
+
+let pingTimer = 0;
+let gameFramerate = 0;
+
+let qty = 0;
+let avrgDmg = 0;
+
+function createLab(id, x, y, text, color){
+	var labelTest = document.createElement('div');
+	labelTest.style.position = 'absolute';
+	labelTest.style.width = 100;
+	labelTest.id = id;
+	labelTest.className = "main-menu-button-text whiteBigText blueNight";
+	labelTest.style.height = 100;
+	labelTest.style.color = 100;
+	labelTest.style.backgroundColor = 'transparent';
+	labelTest.innerHTML = text;
+	labelTest.style.bottom = y + 'px';
+	labelTest.style.left = x + 'px';
+	labArray.push(labelTest);
+	document.body.appendChild(labelTest);
+};
+
+function ReloadLabels() {
+	for (let i = 0; i < labArray.length; i++)
+		labArray[i].remove();
+	labArray = [];
+		
+	let keepInTouch = ["FPS", "Ping", "DMG"]
+	keepInTouch.reverse(); // reverse them so their in proper order (Newest added is the first in the array)
+	
+	for (let i = 0; i < keepInTouch.length; i++)
+		createLab(keepInTouch[i], 10, 10 + (25 * i), keepInTouch[i].toUpperCase() + ": 0", "white")
+}
+
+function GetLabelById(id) {
+	return document.getElementById(id);
+}
+
 !function () {
     var t = !1;
     try {
@@ -19830,6 +19870,8 @@ class graphicSettings extends Ma { // client graphic settings
                     title: "Settings could not be saved.",
                     text: "An error occurred while saving the settings. Are third party cookies disabled?"
                 })
+				
+				ReloadLabels();
             }
         })
     }
@@ -27776,7 +27818,9 @@ class Wl {
             [o, a, l] = this.mapNetworkVelocityToWorldVelocity(r[6], r[7], r[8]);
             t.setFlagDroppedPosition(e, i, n, s, o, a, l)
         } else if (n[0] == Wl.ReceiveAction.PING)
-            this.send([Wl.SendAction.PONG]);
+		{
+			this.send([Wl.SendAction.PONG]);
+		}
         else if (n[0] == Wl.ReceiveAction.PLAYER_PING_DATA) {
             const t = uc().gameManager.currentGame;
             if (!t)
@@ -29329,8 +29373,8 @@ class oh {
             }
         }
         this.hasOwnership || (t.hasOwnership ? this.lastShotByOwnerTime = uc().now : this.addHitFlash(i), this.sfxManager.playSound(`player/takeDamage/${this.gender}/${pa(1,4)}`, {
-                pos: this.getSfxPos()
-            }))
+            pos: this.getSfxPos()
+        }))
     }
     onValidArrowHitFromServer(t, e, i) {
         let n = i.arrowDamage;
@@ -29348,10 +29392,22 @@ class oh {
         const o = n + r;
         n -= o - Math.min(o, .9);
 		
-		if (globalInstance.settingsManager.getValue("damagedisplay") && this === uc().gameManager.currentGame.getMyPlayer()) {
-			if (Math.floor(n * 100) <= 0) return;
+		if (this === uc().gameManager.currentGame.getMyPlayer()) {
+			let cd = Math.floor(n * 100);
 			
-			uc().gameManager.currentGame.scoreOffsetNotificationsUi.showOffsetNotification("Player damaged " + Math.floor(n * 100) + " saved " + Math.floor(Math.abs(i.arrowDamage - n) * 100), null, "hey");
+			qty++;
+			avrgDmg += (cd - avrgDmg) / qty; // what i use for my screenrecorder average framerate
+			
+			let dmgObj = GetLabelById("DMG");
+			
+			if (dmgObj !== undefined && dmgObj !== null);
+			dmgObj.innerHTML = `DMG: ${Math.floor(avrgDmg)}`;
+			
+			if (globalInstance.settingsManager.getValue("damagedisplay")) {
+				if (cd <= 0) return;
+				
+				uc().gameManager.currentGame.scoreOffsetNotificationsUi.showOffsetNotification("Player damaged " + cd + " saved " + Math.floor(Math.abs(i.arrowDamage - n) * 100), null, "hey");
+			}
 		}
 		
         const a = {
@@ -31559,6 +31615,13 @@ class Ah {
     setPlayerPingData(t, e) {
         const i = this.players.get(t);
         i && i.setPingData(e)
+		
+		if (this.players.get(t) !== this.getMyPlayer()) return;
+		let pingObj = GetLabelById("Ping");
+			
+		if (pingObj === undefined && pingObj === null) return;
+		pingObj.innerHTML = `PING: ${e}ms`;
+		
     }
     createServerArrow(t, e, i, n, s, r, o, a, l) {
         const h = this.players.get(t),

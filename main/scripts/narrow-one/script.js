@@ -63,8 +63,25 @@ function init() {
 			}
 		});
 		
+		let frames = 0;
+		let prevTimer = Date.now();
 		function animate() {
-			requestAnimationFrame(animate);
+			requestAnimationFrame(animate); // insane calcilatopoms pl;z terust me
+			
+			frames++;
+			if (Math.abs(prevTimer - Date.now()) >= 1000)
+			{
+				prevTimer = Date.now();
+				
+				if (gameFramerate === null || gameFramerate == undefined) return;
+				gameFramerate = frames;
+				frames = 0;
+				
+				let frameObj = GetLabelById("FPS");
+				
+				if (frameObj === null || frameObj == undefined) return;
+				frameObj.innerHTML = `FPS: ${gameFramerate}`;
+			}
 			
 			window.dispatchEvent(BetterNarrowAPI.onFrameRender_Event); // call onRender event for plugins
 			
