@@ -33,10 +33,14 @@ function createLab(id, x, y, text, color){
 	document.body.appendChild(labelTest);
 };
 
-function ReloadLabels() {
+function ClearLabels() {
 	for (let i = 0; i < labArray.length; i++)
 		labArray[i].remove();
 	labArray = [];
+}
+
+function ReloadLabels() {
+	ClearLabels()
 		
 	let keepInTouch = ["FPS", "Ping", "DMG"]
 	keepInTouch.reverse(); // reverse them so their in proper order (Newest added is the first in the array)
@@ -19758,7 +19762,10 @@ class _a extends Ma { // client settings
 class graphicSettings extends Ma { // client graphic settings
     constructor(t, e, i) {
         if (super(), this.settingsManager = t, this.dialogManager = e, this.titleEl = document.createElement("h2"), this.titleEl.classList.add("dialogTitle", "blueNight"), this.titleEl.textContent = "BetterNarrow", this.el.appendChild(this.titleEl), this.settings = new Map,
-				this.settings.set("thirdpersoncam", new Ca({
+				this.settings.set("statsfornerds", new Ca({
+                    text: "Stats for nerds",
+                    type: "toggle"
+                })), this.settings.set("thirdpersoncam", new Ca({
                     text: "Third Person",
                     type: "toggle"
                 })), this.settings.set("thirdpersonradius", new Ca({
@@ -19858,8 +19865,16 @@ class graphicSettings extends Ma { // client graphic settings
             i.onValueChange((i => {
 				t.setValue(e, i)
 				
-				if (e == "camheight") 
-					camHeight = i;
+				switch(e) {
+					case "camheight":
+						camHeight = i;
+						break;
+					case "statsfornerds":
+						if (i)
+							ReloadLabels();
+						else ClearLabels();
+						break;
+				}
 			}))
         }
         this.addButtonsContainer(),
@@ -19870,8 +19885,6 @@ class graphicSettings extends Ma { // client graphic settings
                     title: "Settings could not be saved.",
                     text: "An error occurred while saving the settings. Are third party cookies disabled?"
                 })
-				
-				ReloadLabels();
             }
         })
     }
