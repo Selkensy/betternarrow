@@ -1,3 +1,5 @@
+let debug = false;
+
 let globalInstance = null;
 
 let globalNotificationPtr = null;
@@ -24,7 +26,7 @@ let tmpFunc2 = null; // lazy
 
 const delay = ms => new Promise(res => setTimeout(res, ms));//fuck
 
-function createLab(id, x, y, text, color){
+function createLab(id, x, y, text, color, explorer){
 	var labelTest = document.createElement('div');
 	labelTest.style.position = 'absolute';
 	labelTest.style.width = 100;
@@ -34,9 +36,17 @@ function createLab(id, x, y, text, color){
 	labelTest.style.color = 100;
 	labelTest.style.backgroundColor = 'transparent';
 	labelTest.innerHTML = text;
-	labelTest.style.bottom = y + 'px';
-	labelTest.style.left = x + 'px';
-	labArray.push(labelTest);
+	if (explorer == undefined)
+	{
+		labelTest.style.bottom = y + 'px';
+		labelTest.style.left = x + 'px';
+		labArray.push(labelTest);
+	}
+	else {
+		labelTest.style.bottom = y + 'px';
+		labelTest.style.right = x + 'px';
+		globalInstance.explorer.PushItem(labelTest);
+	}
 	document.body.appendChild(labelTest);
 };
 
@@ -4434,6 +4444,9 @@ class xt extends t {
         n && (dt.extractRotation(n.matrixWorld), ct.setFromRotationMatrix(dt), this.quaternion.premultiply(ct.invert()))
     }
     add(t) {
+		if (globalInstance !== null && debug)
+			globalInstance.explorer.RefreshWindow();
+		
         if (arguments.length > 1) {
             for (let t = 0; t < arguments.length; t++)
                 this.add(arguments[t]);
@@ -12198,7 +12211,7 @@ function is(t) {
         }))
 }
 (class extends is {}).prototype.isWebGL1Renderer = !0;
-class ns extends xt {
+class ns extends xt { // threejs scene class
     constructor() {
         super(),
         this.type = "Scene",
@@ -19163,13 +19176,15 @@ class na {
                 this.fireValueChange(t, i)
             }
 			
-			console.log(this.getValue("statsfornerds"))
 			if (this.getValue("statsfornerds"))
 				ReloadLabels();
 			
 			vsyncActive = this.getValue("vsync");
 			gamesTargetFramerate = this.getValue("framerate");
 			camHeight = this.getValue("camheight");
+			
+			if (debug)
+				globalInstance.explorer.init()
 		}
         this._settingsLoaded = !0,
         this.onSettingsLoadedCbs.forEach((t => t()))
@@ -35134,6 +35149,7 @@ class cc { // global instance
         this.scene.autoUpdate = !1,
         ph.setCurrentScene(this.scene),
         this.indexedDb = new ia,
+		this.explorer = new EnvironmentExplorer(this.scene),
         this.settingsManager = new na(this.indexedDb),
         this.mainMenu = new fl,
         this.adBanners = new yl,
@@ -35295,6 +35311,39 @@ class cc { // global instance
         this.renderer.loop(t, i),
         this.sfx.loop(t, i)
     }
+}
+class EnvironmentExplorer { // CLASSIFIED AS A CHEAT, DONT ACTIVATE UNLESS DEBUGGING
+	constructor(t) {
+		this.scene = t;
+		this.explorerLab = [];
+	}
+	PushItem(item) {
+		this.explorerLab.push(item);
+	}
+	init() {
+		this.RefreshWindow();
+	}
+	ClearWindow() {
+		for (let i = 0; i < this.explorerLab.length; i++)
+			this.explorerLab[i].remove();
+		this.explorerLab = [];
+	}
+	RefreshWindow() { // called everytime something has been modified in the scene
+		this.ClearWindow()
+		
+		let explorerItems = []
+		
+		scene.traverse(function(obj) {
+			if (explorerItems.length >= 24)
+				explorerItems.shift(); // delete last item
+			
+			if (obj != undefined && obj != null)
+				explorerItems.push(obj.name === "" ? "UNDEFINED" : obj.name);
+		});
+		
+		for (let i = 0; i < explorerItems.length; i++)
+			createLab(explorerItems[i], 10, 10 + (25 * i), explorerItems[i], "white", true)
+	}
 }
 globalThis.VERSION_TIMESTAMP = "1660585689", globalThis.false = !1, globalThis.true = !1;
 let dc = null;
