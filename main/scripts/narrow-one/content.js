@@ -29,13 +29,13 @@ if (!window.injected) {
 			LoadPlugin('main/scripts/narrow-one/plugins/template.plugin.js');
 		}, 50)
 	}
-	
+
 	let counter = 0;
 	
 	let observer = new MutationObserver((mutations) => {
 		for (const mutation of mutations) {
 			for (let node of mutation.addedNodes) {
-				if (node.src == 'https://narrow.one/js.js?v=1660661580') {
+				if (node.src == 'https://narrow.one/js.js?v=1660674507') {
 					node.src = chrome.runtime.getURL('main/empty.js');
 					
 					injectProp().then();

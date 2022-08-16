@@ -73,7 +73,7 @@ function ReloadLabels() {
             createLab(keepInTouch[i], 10, 10 + (25 * i), keepInTouch[i].toUpperCase() + ": 0", "white")
 
     GetLabelById("VERSION").innerHTML = "v1.0.1";
-    GetLabelById("NARROWVERSION").innerHTML = "1660661580";
+    GetLabelById("NARROWVERSION").innerHTML = "1660674507";
 }
 
 const GetLabelById = id => document.getElementById(id)
@@ -35348,7 +35348,7 @@ class EnvironmentExplorer { // CLASSIFIED AS A CHEAT, DONT ACTIVATE UNLESS DEBUG
             createLab(explorerItems[i], 10, 10 + (25 * i), explorerItems[i], "white", true)
     }
 }
-globalThis.VERSION_TIMESTAMP = "1660661580", globalThis.false = !1, globalThis.true = !1;
+globalThis.VERSION_TIMESTAMP = "1660674507", globalThis.false = !1, globalThis.true = !1;
 let dc = null;
 function uc() {
     if (!dc)
@@ -35374,11 +35374,11 @@ bc.replaceSync('#qc-cmp2-ui {\n\tbackground: paint(wrinkledPaper);\n\t--wrinkled
     let t = "";
     if (window.Intl && Intl.RelativeTimeFormat) {
         const e = new Intl.RelativeTimeFormat,
-            i = Date.now() / 1e3 - Number("1660661580");
+            i = Date.now() / 1e3 - Number("1660674507");
         t = i < 60 ? e.format(-Math.floor(i), "second") : i < 3600 ? e.format(-Math.floor(i / 60), "minute") : i < 86400 ? e.format(-Math.floor(i / 60 / 60), "hour") : i < 31536e3 ? e.format(-Math.floor(i / 60 / 60 / 24), "day") : e.format(-Math.floor(i / 60 / 60 / 24 / 365), "year"),
             t = " (" + t + ")"
     }
-    console.log("loading v1660661580" + t),
+    console.log("loading v1660674507" + t),
         dc = new cc,
         dc.init()
         globalInstance = dc;
