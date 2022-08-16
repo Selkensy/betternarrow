@@ -92,10 +92,10 @@ function init() {
 				firstTime = false;
 				
 				
-				client.dialogManager.showAlert({
-					title: "BetterNarrow",
-					text: "BetterNarrow by yeemi#9764 created to allow more graphics control"
-				})
+				//client.dialogManager.showAlert({
+				//	title: "BetterNarrow",
+				//	text: "BetterNarrow by yeemi#9764 created to allow more graphics control"
+				//})
 				
 				waitForElm('head > style:nth-child(24)').then((elm) => {
 					elm.remove(); 

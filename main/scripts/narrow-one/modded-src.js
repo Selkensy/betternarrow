@@ -16,6 +16,14 @@ let gameFramerate = 0;
 let qty = 0;
 let avrgDmg = 0;
 
+let gamesTargetFramerate = 60;
+let vsyncActive = true;
+
+let tmpFunc = null;
+let tmpFunc2 = null; // lazy
+
+const delay = ms => new Promise(res => setTimeout(res, ms));//fuck
+
 function createLab(id, x, y, text, color){
 	var labelTest = document.createElement('div');
 	labelTest.style.position = 'absolute';
@@ -19102,6 +19110,7 @@ class na {
             sfxVolume: 100,
             musicVolume: 100,
             thirdpersonradius: 1,
+            framerate: 60,
             camheight: 1.6,
             cursorticks: 3,
             cursorheight: 12,
@@ -19157,6 +19166,9 @@ class na {
 			console.log(this.getValue("statsfornerds"))
 			if (this.getValue("statsfornerds"))
 				ReloadLabels();
+			
+			vsyncActive = this.getValue("vsync");
+			gamesTargetFramerate = this.getValue("framerate");
 		}
         this._settingsLoaded = !0,
         this.onSettingsLoadedCbs.forEach((t => t()))
@@ -19772,7 +19784,16 @@ class _a extends Ma { // client settings
 class graphicSettings extends Ma { // client graphic settings
     constructor(t, e, i) {
         if (super(), this.settingsManager = t, this.dialogManager = e, this.titleEl = document.createElement("h2"), this.titleEl.classList.add("dialogTitle", "blueNight"), this.titleEl.textContent = "BetterNarrow", this.el.appendChild(this.titleEl), this.settings = new Map,
-				this.settings.set("statsfornerds", new Ca({
+				this.settings.set("framerate", new Ca({
+                    text: "Target Framerate",
+                    type: "slider",
+                    min: 5,
+                    max: 260,
+                    step: 5
+                })), this.settings.set("vsync", new Ca({
+                    text: "Vsync",
+                    type: "toggle"
+                })),  this.settings.set("statsfornerds", new Ca({
                     text: "Stats for nerds",
                     type: "toggle"
                 })), this.settings.set("thirdpersoncam", new Ca({
@@ -19856,7 +19877,7 @@ class graphicSettings extends Ma { // client graphic settings
                     min: 0,
                     max: 255,
                     step: 1
-                })),this.settings.set("cursorborderb", new Ca({
+                })), this.settings.set("cursorborderb", new Ca({
                     text: "Cursor Border Blue",
                     type: "slider",
                     min: 0,
@@ -19883,6 +19904,12 @@ class graphicSettings extends Ma { // client graphic settings
 						if (i)
 							ReloadLabels();
 						else ClearLabels();
+						break;
+					case "framerate":
+						gamesTargetFramerate = i;
+						break;
+					case "vsync":
+						vsyncActive = i;
 						break;
 				}
 			}))
@@ -35135,7 +35162,6 @@ class cc { // global instance
         this.quantcastManager = new ic,
         this.poki = new ec(this.thirdPartyEnabled),
         this.aprilFools = new lc(this.settingsManager),
-        this.boundLoop = this.vsyncLoop.bind(this),
         this.prevNow = 0,
         this.now = 0,
         this.dt = 0,
@@ -35144,7 +35170,8 @@ class cc { // global instance
         this.fakeNow = 0,
         this.fastLoopCount = 1,
         this.frameCount = 0,
-        this.frameCap = 1;
+        this.frameCap = 1,
+        this.boundLoop = this.initVsync.bind(this);
         const e = function (t) {
             try {
                 return localStorage.getItem(t)
@@ -35184,15 +35211,51 @@ class cc { // global instance
 		this.frames = 0;
 		this.prevTimer = Date.now();
 		
-        this.vsyncLoop()
+        this.reinitFramerate();
     }
-    vsyncLoop() {
-        if (this.frameCount++, this.frameCount % this.frameCap == 0) {
-            for (let t = 0; t < this.fastLoopCount - 1; t++)
-                this.loop();
-            this.loop()
-        }
-        window.requestAnimationFrame(this.boundLoop)
+	reinitFramerate() {
+		tmpFunc = this.initVsync;
+		tmpFunc2 = this.renderFrame;
+		
+		if (vsyncActive)
+			this.initVsync();
+		else this.initUnlimited();
+	}
+	async initUnlimited() {
+		let frameFunc = this.renderFrame;
+		let instance = this;
+		let oldFramerate = gamesTargetFramerate;
+		let tmpBrk = true;
+		
+		let id = setInterval(function() {
+			if (gamesTargetFramerate != oldFramerate || vsyncActive)
+			{
+				instance.reinitFramerate();
+				clearInterval(id);
+				tmpBrk = false;
+			}
+				
+			if (globalInstance)
+				globalInstance.renderFrame();
+		}, 1000 / gamesTargetFramerate)
+	}
+    initVsync() {
+		if (!vsyncActive) {
+			globalInstance.reinitFramerate();
+			return;
+		}
+		
+		tmpFunc2(globalInstance);
+		window.requestAnimationFrame(tmpFunc);
+    }
+    async renderFrame() {
+		if (globalInstance) {
+			if (globalInstance.frameCount++, globalInstance.frameCount % globalInstance.frameCap == 0) {
+				for (let t = 0; t < globalInstance.fastLoopCount - 1; t++)
+					globalInstance.loop();
+				globalInstance.loop()
+			}
+		}
     }
     loop() { // called every frame
 		this.frames++;
@@ -35200,7 +35263,6 @@ class cc { // global instance
 		{
 			this.prevTimer = Date.now();
 			
-			if (gameFramerate === null || gameFramerate == undefined) return;
 			gameFramerate = this.frames;
 			this.frames = 0;
 			
