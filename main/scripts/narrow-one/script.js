@@ -108,6 +108,12 @@ function init() {
 						document.head.insertBefore(styleInstance, document.head.firstChild);
 					}
 					addCustomStyle();
+					
+					let lazystyelrl = document.createElement('style');
+					lazystyelrl.id = "GameStyle";
+					lazystyelrl.innerHTML = '.buttonImage, .dialog-text-input, .dialog-checkbox-input, .dialog-toggle-input, .dialog-checkbox-input:checked::before, .dialog-button:not(:disabled), span, .dialog-button-icon, .dialog-select-input {\n-webkit-filter: invert(1);\nfilter: invert(1);\n}\n.shop-skin-selection-item {\nmargin: 2px !important;\nborder: 9px solid white;\n}\n}\n\n.class-selection-image {\nmargin: -9px !important;\n}';
+					document.head.prepend(lazystyelrl);
+					document.head.insertBefore(lazystyelrl, document.head.firstChild);
 				});
 				
 				window.dispatchEvent(BetterNarrowAPI.onInitialization_Event);
