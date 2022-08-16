@@ -19169,6 +19169,7 @@ class na {
 			
 			vsyncActive = this.getValue("vsync");
 			gamesTargetFramerate = this.getValue("framerate");
+			camHeight = this.getValue("camheight");
 		}
         this._settingsLoaded = !0,
         this.onSettingsLoadedCbs.forEach((t => t()))
