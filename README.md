@@ -30,7 +30,7 @@ Select the folder where you extracted the zip file:
 And you're done! Enjoy!
 
 ## Usage
-### Just open https://narrow.one/ . Betternarrow should start automatically.
+### Just open https://narrow.one/ . BetterNarrow should start automatically.
 
 ## Known Issues
 ### If the optimization doesn't start, refresh the page with fn5. Otherwise it means that Narrow One has been updated, and you'll have to wait for BetterNarrow to be updated too.
