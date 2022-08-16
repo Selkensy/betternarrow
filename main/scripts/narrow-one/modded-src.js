@@ -35179,7 +35179,11 @@ class cc { // global instance
         this.profileState.init(),
         this.shopState.init(),
         this.quantcastManager.init(this.thirdPartyEnabled),
-        this.poki.init(),
+        this.poki.init()
+		
+		this.frames = 0;
+		this.prevTimer = Date.now();
+		
         this.vsyncLoop()
     }
     vsyncLoop() {
@@ -35190,7 +35194,22 @@ class cc { // global instance
         }
         window.requestAnimationFrame(this.boundLoop)
     }
-    loop() {
+    loop() { // called every frame
+		this.frames++;
+		if (Math.abs(this.prevTimer - Date.now()) >= 1000)
+		{
+			this.prevTimer = Date.now();
+			
+			if (gameFramerate === null || gameFramerate == undefined) return;
+			gameFramerate = this.frames;
+			this.frames = 0;
+			
+			let frameObj = GetLabelById("FPS");
+			
+			if (frameObj === null || frameObj == undefined) return;
+			frameObj.innerHTML = `FPS: ${gameFramerate}`;
+		}
+		
         let t = performance.now();
         this.useFakeNow && (t = this.fakeNow, this.fakeNow += 30),
         this.prevNow <= 0 && (this.prevNow = t);
