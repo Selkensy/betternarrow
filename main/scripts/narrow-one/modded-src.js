@@ -29403,7 +29403,7 @@ class oh {
 			
 			let dmgObj = GetLabelById("DMG");
 			
-			if (dmgObj !== undefined && dmgObj !== null);
+			if (dmgObj !== undefined && dmgObj !== null) return;
 			dmgObj.innerHTML = `DMG: ${Math.floor(avrgDmg)}`;
 			
 			if (globalInstance.settingsManager.getValue("damagedisplay")) {
