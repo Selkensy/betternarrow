@@ -41,16 +41,24 @@ function ClearLabels() {
 function ReloadLabels() {
 	ClearLabels()
 		
-	let keepInTouch = ["FPS", "Ping", "DMG"]
+	let keepInTouch = [
+		"FPS",
+		"Ping",
+		"DMG",
+		"",
+		"VERSION",
+		"NARROWVERSION"]
 	keepInTouch.reverse(); // reverse them so their in proper order (Newest added is the first in the array)
 	
 	for (let i = 0; i < keepInTouch.length; i++)
-		createLab(keepInTouch[i], 10, 10 + (25 * i), keepInTouch[i].toUpperCase() + ": 0", "white")
+		if (keepInTouch[i] != "")
+			createLab(keepInTouch[i], 10, 10 + (25 * i), keepInTouch[i].toUpperCase() + ": 0", "white")
+	
+	GetLabelById("VERSION").innerHTML = "v1.0.1";
+	GetLabelById("NARROWVERSION").innerHTML = "1660585689";
 }
 
-function GetLabelById(id) {
-	return document.getElementById(id);
-}
+const GetLabelById = id => document.getElementById(id)
 
 !function () {
     var t = !1;
@@ -19139,12 +19147,17 @@ class na {
         } catch (t) {
             console.warn("Unable to load settings, third party cookies are probably blocked")
         }
-        if (t)
+        if (t) {
             for (const [e, i] of Object.entries(t)) {
                 const t = e;
                 this.currentValues.set(t, i),
                 this.fireValueChange(t, i)
             }
+			
+			console.log(this.getValue("statsfornerds"))
+			if (this.getValue("statsfornerds"))
+				ReloadLabels();
+		}
         this._settingsLoaded = !0,
         this.onSettingsLoadedCbs.forEach((t => t()))
     }
