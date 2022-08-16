@@ -29403,13 +29403,13 @@ class oh {
 			
 			let dmgObj = GetLabelById("DMG");
 			
-			if (dmgObj !== undefined && dmgObj !== null) return;
-			dmgObj.innerHTML = `DMG: ${Math.floor(avrgDmg)}`;
+			if (dmgObj !== undefined && dmgObj !== null) {
+				dmgObj.innerHTML = `DMG: ${Math.floor(avrgDmg)}`;
 			
-			if (globalInstance.settingsManager.getValue("damagedisplay")) {
-				if (cd <= 0) return;
-				
-				uc().gameManager.currentGame.scoreOffsetNotificationsUi.showOffsetNotification("Player damaged " + cd + " saved " + Math.floor(Math.abs(i.arrowDamage - n) * 100), null, "hey");
+				if (globalInstance.settingsManager.getValue("damagedisplay")) {
+					if (cd >= 1) 
+					globalInstance.gameManager.currentGame.scoreOffsetNotificationsUi.showOffsetNotification("Player damaged " + cd + " saved " + Math.floor(Math.abs(i.arrowDamage - n) * 100), null, "hey");
+				}
 			}
 		}
 		
