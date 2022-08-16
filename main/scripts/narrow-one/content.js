@@ -35,7 +35,7 @@ if (!window.injected) {
 	let observer = new MutationObserver((mutations) => {
 		for (const mutation of mutations) {
 			for (let node of mutation.addedNodes) {
-				if (node.src == 'https://narrow.one/js.js?v=1659120483') {
+				if (node.src == 'https://narrow.one/js.js?v=1660585689') {
 					node.src = chrome.runtime.getURL('main/empty.js');
 					
 					injectProp().then();

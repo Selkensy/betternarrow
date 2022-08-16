@@ -1,5 +1,4 @@
 let globalInstance = null;
-let globalPanic = false;
 
 let globalNotificationPtr = null;
 
@@ -19629,7 +19628,6 @@ class Ca {
             text: e,
             type: i
         } = t;
-		
         if (this.type = i, this.el = document.createElement("div"), this.el.classList.add("settingsItem"), this.textEl = document.createElement("div"), this.el.appendChild(this.textEl), this.textEl.textContent = e, this.textEl.classList.add("settingsItemText"), this.onValueChangeCbs = new Set, "slider" == this.type) {
             this.inputContainer = document.createElement("div"),
             this.inputContainer.classList.add("settingsItemSlider"),
@@ -19651,7 +19649,6 @@ class Ca {
                     const n = Number(i.value);
                     this.onValueChangeCbs.forEach((t => t(n)))
                 }))
-			
         } else if ("toggle" == this.type) {
             this.inputEl = document.createElement("input"),
             this.inputEl.type = "checkbox",
@@ -19732,7 +19729,7 @@ class _a extends Ma { // client settings
                 text: "April Fools' Mode",
                 type: "toggle"
             });
-            //t.el.style.transform = "scale(-1, 1)",
+            t.el.style.transform = "scale(-1, 1)",
             this.settings.set("afFlipScreen", t)
         }
         this.settingsListEl = document.createElement("div"),
@@ -20293,14 +20290,9 @@ class Aa {
     async getFileAsBuffer(t) {
         if (this.loaded || await this.waitForLoad(), !this.arrayBuffer)
             throw new Error("Assertion failed, arrayBuffer not loaded");
-		
         for (const e of this.fileLocations)
             if (e.path == t)
-			{
-				let arrBuff = this.arrayBuffer.slice(e.start, e.start + e.length);
-				
-				return arrBuff;
-			}
+                return this.arrayBuffer.slice(e.start, e.start + e.length);
         throw new Error(`Trying to load asset at ${t} but it doesn't exist!`)
     }
     async getAsObjectUrl(t, e) {
@@ -27831,9 +27823,7 @@ class Wl {
             [o, a, l] = this.mapNetworkVelocityToWorldVelocity(r[6], r[7], r[8]);
             t.setFlagDroppedPosition(e, i, n, s, o, a, l)
         } else if (n[0] == Wl.ReceiveAction.PING)
-		{
-			this.send([Wl.SendAction.PONG]);
-		}
+            this.send([Wl.SendAction.PONG]);
         else if (n[0] == Wl.ReceiveAction.PLAYER_PING_DATA) {
             const t = uc().gameManager.currentGame;
             if (!t)
@@ -28029,7 +28019,7 @@ class Wl {
                 t = "Your version is out of date, please bug yeemi#9764 on discord to update (or if an update has already released go to https://github.com/Laamy/betternarrow)";
                 break;
             case "afk":
-                t = "You have been kicked for being idle";
+                t = "You have been kicked for being afk for too long";
                 break;
             case "game-doesnt-exist":
                 t = "Game not found.";
@@ -28810,10 +28800,10 @@ class oh {
         },
         this.isSameSquadPlayer = !1,
         this.gender = "male",
-        this.walkSpeed = 60, // 60
+        this.walkSpeed = 60,
         this.airWalkSpeedMultiplier = .4,
         this.flagWalkSpeed = 45,
-        this.jumpForce = 8.6, // 8.6
+        this.jumpForce = 8.6,
         this.ladderClimbSpeed = 1,
         this.ladderTangentWalkSpeed = .5,
         this.health = 1,
@@ -28870,7 +28860,7 @@ class oh {
         this.currentFallingSfx = null,
         this.hasKeyEvents = !1,
         this.useFirstPersonHoldingHandlers = !1,
-        this.thirdPerson = !0,
+        this.thirdPerson = !1,
         this.noclip = !1,
         this.noclipSpeed = 0,
         this.movementAccuracyOffset = null,
@@ -29386,8 +29376,8 @@ class oh {
             }
         }
         this.hasOwnership || (t.hasOwnership ? this.lastShotByOwnerTime = uc().now : this.addHitFlash(i), this.sfxManager.playSound(`player/takeDamage/${this.gender}/${pa(1,4)}`, {
-            pos: this.getSfxPos()
-        }))
+                pos: this.getSfxPos()
+            }))
     }
     onValidArrowHitFromServer(t, e, i) {
         let n = i.arrowDamage;
@@ -29439,6 +29429,7 @@ class oh {
     }
     getCamPos() {
         if (this.cachedCamPosDirty) {
+			
             if (this.cachedCamPos.copy(this.pos), this.cachedCamPos.y += camHeight, this.noclip && this.noclipCamPos)
                 this.cachedCamPos.add(this.noclipCamPos);
             else if (this.thirdPerson) {
@@ -29528,17 +29519,7 @@ class oh {
         this.hasOwnership && (this.holdingFlag && this.sendChangeFlag(this.holdingFlag.id, Wl.FlagChangeOperation.RETURN, !1), this.die())
     }
     die() {
-        this.dead || (this.hasOwnership && (this.sfxManager.playSound("feedback/die"),
-			this.game.showKilledNotification(),
-			this.game.weaponSelectionDialog.visible = !0,
-			this.game.gameStarted && uc().adBanners.setPageVisibility("respawn", !0)),
-			this.sendPerformAction(oh.PlayerAction.DIE),
-			this.dead = !0,
-			this.updateMySelectedWeapon(),
-			this.stopFallSound(), this.updateModelVisibility(),
-			uc().now - this.lastShotByOwnerTime < 1e3 && (this.game.showKillNotification(),
-			this.sfxManager.playSound("feedback/kill")),
-			this.hasOwnership && setTimeout((() => {
+        this.dead || (this.hasOwnership && (this.sfxManager.playSound("feedback/die"), this.game.showKilledNotification(), this.game.weaponSelectionDialog.visible = !0, this.game.gameStarted && uc().adBanners.setPageVisibility("respawn", !0)), this.sendPerformAction(oh.PlayerAction.DIE), this.dead = !0, this.updateMySelectedWeapon(), this.stopFallSound(), this.updateModelVisibility(), uc().now - this.lastShotByOwnerTime < 1e3 && (this.game.showKillNotification(), this.sfxManager.playSound("feedback/kill")), this.hasOwnership && setTimeout((() => {
                     this.destructed || this.respawn()
                 }), 1e3))
     }
@@ -30210,6 +30191,53 @@ function uh(t, e, i) {
     return [l, h, c]
 }
 class ph {
+    static setCurrentScene(t) {
+        this.scene = t,
+        this.drawLinesNextFrame = [],
+        this.removeLinesNextFrame = [],
+        this.material || (this.material = new Is({
+                color: 16777215,
+                vertexColors: !0
+            }))
+    }
+    static loop() {
+        if (this.drawLinesNextFrame && this.removeLinesNextFrame) {
+            for (const t of this.removeLinesNextFrame) {
+                const e = t.line;
+                e.parent.remove(e),
+                e.geometry.dispose()
+            }
+            this.removeLinesNextFrame = [];
+            for (const t of this.drawLinesNextFrame) {
+                const e = new ae,
+                i = new Float32Array([...t.from.toArray(), ...t.to.toArray()]);
+                e.setAttribute("position", new Xt(i, 3));
+                let n = this.material;
+                t.color && (n = new Is({
+                        color: t.color
+                    }));
+                const s = new Bs(e, n);
+                t.line = s,
+                this.scene.add(s),
+                this.removeLinesNextFrame.push(t)
+            }
+            this.drawLinesNextFrame = []
+        }
+    }
+    static drawLine(t, e, i) {
+        this.drawLinesNextFrame && this.drawLinesNextFrame.push({
+            from: t.clone(),
+            to: e.clone(),
+            color: i
+        })
+    }
+    static drawRay(t, e, i) {
+        const n = (t = t.clone()).clone();
+        n.add(e),
+        this.drawLine(t, n, i)
+    }
+}
+class mh {
     constructor(t) {
         this.teamCount = t,
         this.arrows = new Map,
@@ -30240,6 +30268,7 @@ class ph {
             t.setAttribute("color", new Xt(n, 3)),
             this.sphereGeos.push(t)
         }
+        uc(),
         this.destructed = !1
     }
     destructor() {
@@ -30249,7 +30278,8 @@ class ph {
                 e.destructor();
         this.arrows.clear();
         for (const t of this.sphereGeos)
-            t.dispose()
+            t.dispose();
+        uc()
     }
     getSphereGeo(t) {
         return this.sphereGeos[t]
@@ -30257,27 +30287,11 @@ class ph {
     loop(t, e) {
         for (const [i, n] of this.arrows) {
             for (const [i, s] of n)
-			{
-				s.loop(t, e) 
-				if (s.existingTime > 5e3) {
-					s.destructor()
-					n.delete(i)
-				}
-			}
-			
-            if (n.size <= 0)
-			{
-				this.arrows.delete(i)
-			}
+                s.loop(t, e), s.existingTime > 5e3 && (s.destructor(), n.delete(i));
+            n.size <= 0 && this.arrows.delete(i)
         }
         for (const i of this.oldPlayerArrows)
-		{
-			i.loop(t, e)
-			if (i.existingTime > 5e3) {
-				i.destructor()
-				this.oldPlayerArrows.delete(i)
-			}
-		}
+            i.loop(t, e), i.existingTime > 5e3 && (i.destructor(), this.oldPlayerArrows.delete(i))
     }
     createArrow(t, e) {
 		
@@ -30298,29 +30312,27 @@ class ph {
 			//(looking * radius) + pos;
 		}
 		
-		const i = new ch(t, e, {
-			arrowManager: this,
-			scene: uc().scene
-		});
-		
-		i.initModel()
-		i.initTrail();
-		
-		const n = i.arrowId,
-		s = i.shotBy.id;
-		let r = this.arrows.get(s);
-		r || (r = new Map, this.arrows.set(s, r));
-		const o = r.get(n);
-		o && this.oldPlayerArrows.add(o),
-		r.set(n, i),
-		uc().renderer.renderWorthyEventHappened()
+        const i = new ch(t, e, {
+            arrowManager: this,
+            scene: uc().scene
+        });
+        i.initModel(),
+        i.initTrail();
+        const n = i.arrowId,
+        s = i.shotBy.id;
+        let r = this.arrows.get(s);
+        r || (r = new Map, this.arrows.set(s, r));
+        const o = r.get(n);
+        o && this.oldPlayerArrows.add(o),
+        r.set(n, i),
+        uc().renderer.renderWorthyEventHappened()
     }
     getArrowById(t, e) {
         const i = this.arrows.get(t);
         return i && i.get(e) || null
     }
 }
-class mh {
+class gh {
     constructor(t) {
         this.crosshair = t,
         this._offset = 0
@@ -30333,7 +30345,7 @@ class mh {
         this.crosshair.updateAccuracyOffset()
     }
 }
-class gh { // cursor crosshair mousebutton screencenter
+class fh {// cursor crosshair mousebutton screencenter
     constructor(ticks = 3, accuracyedit_ = true, height_ = 12, yPos_ = -3, background_ = 'white', borderradius_ = 2, bordercolor_ = 'solid black', customCursor = false) {
         this.el = document.createElement("div"),
         this.el.classList.add("crosshairContainer"),
@@ -30397,7 +30409,7 @@ class gh { // cursor crosshair mousebutton screencenter
 		}
     }
     createAccuracyOffset() {
-        const t = new mh(this);
+        const t = new gh(this);
         return this.accuracyOffsets.add(t),
         t
     }
@@ -30426,7 +30438,7 @@ class gh { // cursor crosshair mousebutton screencenter
         this.el.style.display = t ? "" : "none"
     }
 }
-class fh {
+class yh {
     constructor(t) {
         this.el = document.createElement("div"),
         this.el.classList.add("flagScoreItem"),
@@ -30472,7 +30484,7 @@ class fh {
         return this.score >= this.maxScore
     }
 }
-class yh {
+class vh {
     constructor(t) {
         this.el = document.createElement("div"),
         this.el.classList.add("flagScoreContainer"),
@@ -30481,7 +30493,7 @@ class yh {
         for (let e = 0; e < t; e++) {
             if (0 == e)
                 continue;
-            const t = new fh(e);
+            const t = new yh(e);
             this.el.appendChild(t.el),
             this.scoreItems[e] = t
         }
@@ -30513,7 +30525,7 @@ class yh {
         this.el.style.display = t ? null : "none"
     }
 }
-class vh {
+class wh {
     constructor() {
         this.el = document.createElement("div"),
         this.el.classList.add("healthUiContainer"),
@@ -30539,7 +30551,7 @@ class vh {
         this.el.style.display = t ? null : "none"
     }
 }
-class wh {
+class bh {
     constructor() {
         this.el = document.createElement("div"),
         this.el.classList.add("gameplayBottomText", "blueNight", "whiteBigText"),
@@ -30561,7 +30573,7 @@ class wh {
         this.el.style.display = t ? null : "none"
     }
 }
-class bh {
+class xh {
     constructor() {
         this.el = document.createElement("div"),
         this.el.classList.add("skipDialogText"),
@@ -30582,7 +30594,6 @@ class bh {
             })),
         this.startCreationCooldown(),
         this.updateText()
-		this.fireSkipAction()
     }
     destructor() {
         window.removeEventListener("keydown", this.keyDownCb),
@@ -30635,7 +30646,7 @@ class bh {
         return await Promise.race([this.waitForTimerEnd(), this.waitForSkipAction()])
     }
 }
-class xh extends Ma {
+class Sh extends Ma {
     constructor(t, e, i) {
         super({
             allowCurtainClose: !1,
@@ -30707,7 +30718,7 @@ class xh extends Ma {
                 name: e.name
             }
         }
-        this.skipText = new bh,
+        this.skipText = new xh,
         this.el.appendChild(this.skipText.el),
         this.skipText.setVisibility(!1),
         this.scoresFrozen = !1,
@@ -30876,7 +30887,7 @@ class xh extends Ma {
         this.teamWonTitle.style.color = e.cssColor
     }
 }
-class Sh {
+class Mh {
     constructor({
         classId: t,
         keyNumber: e,
@@ -30917,7 +30928,7 @@ class Sh {
         this.classSelectionImage.setTeamId(t)
     }
 }
-class Mh extends Ma {
+class Ch extends Ma {
     constructor() {
         super({
             allowCurtainClose: !1,
@@ -30933,7 +30944,7 @@ class Mh extends Ma {
             const i = e.id,
             n = t + 1,
             s = `img/weaponSelectionUI/${e.bowId}.svg`,
-            r = new Sh({
+            r = new Mh({
                 classId: i,
                 keyNumber: n,
                 iconPath: s
@@ -31010,7 +31021,7 @@ class Mh extends Ma {
         this.onSelectionChangeCbs.delete(t)
     }
 }
-class Ch {
+class _h {
     constructor(t = "topleft") {
         this.el = document.createElement("div"),
         this.el.classList.add("notificationIconsUiContainer", t),
@@ -31030,44 +31041,44 @@ class Ch {
         this.showIcon(null)
     }
 }
-const _h = new Map;
-_h.set(Wl.PlayerScoreOffsetReason.KILL, {
+const Eh = new Map;
+Eh.set(Wl.PlayerScoreOffsetReason.KILL, {
     text: "Kill",
     overviewText: "Kills"
-}), _h.set(Wl.PlayerScoreOffsetReason.ASSIST, {
+}), Eh.set(Wl.PlayerScoreOffsetReason.ASSIST, {
     text: "Assist",
     overviewText: "Assists"
-}), _h.set(Wl.PlayerScoreOffsetReason.FLAG_CARRIER_KILL, {
+}), Eh.set(Wl.PlayerScoreOffsetReason.FLAG_CARRIER_KILL, {
     text: "Carrier Kill",
     overviewText: "Carrier Kills"
-}), _h.set(Wl.PlayerScoreOffsetReason.FLAG_GRAB, {
+}), Eh.set(Wl.PlayerScoreOffsetReason.FLAG_GRAB, {
     text: "Grab",
     overviewText: "Flag Grabs"
-}), _h.set(Wl.PlayerScoreOffsetReason.FLAG_CARRY, {
+}), Eh.set(Wl.PlayerScoreOffsetReason.FLAG_CARRY, {
     text: "",
     overviewText: "Flag Carry",
     visibilityDuration: .5
-}), _h.set(Wl.PlayerScoreOffsetReason.FLAG_CARRY_ASSIST, {
+}), Eh.set(Wl.PlayerScoreOffsetReason.FLAG_CARRY_ASSIST, {
     text: "Carrier Assist",
     overviewText: "Carrier Assist",
     visibilityDuration: .5
-}), _h.set(Wl.PlayerScoreOffsetReason.FLAG_CAPTURE, {
+}), Eh.set(Wl.PlayerScoreOffsetReason.FLAG_CAPTURE, {
     text: "Capture",
     overviewText: "Flag Captures"
-}), _h.set(Wl.PlayerScoreOffsetReason.WIN_BONUS, {
+}), Eh.set(Wl.PlayerScoreOffsetReason.WIN_BONUS, {
     overviewText: "Win Bonus",
     hideInGame: !0
-}), _h.set(Wl.PlayerScoreOffsetReason.FLAG_RETURN, {
+}), Eh.set(Wl.PlayerScoreOffsetReason.FLAG_RETURN, {
     text: "Flag Return",
     overviewText: "Flag Return"
-}), _h.set(Wl.PlayerScoreOffsetReason.HEADSHOT, {
+}), Eh.set(Wl.PlayerScoreOffsetReason.HEADSHOT, {
     text: "Headshot",
     overviewText: "Headshots"
-}), _h.set(Wl.PlayerScoreOffsetReason.LONG_RANGE, {
+}), Eh.set(Wl.PlayerScoreOffsetReason.LONG_RANGE, {
     text: "Long Range",
     overviewText: "Long Range Hits"
 });
-class Eh {
+class Ph {
     constructor() {
         this.el = document.createElement("div"),
         this.el.classList.add("score-offset-notifications-container", "fullScreen"),
@@ -31080,9 +31091,8 @@ class Eh {
     destructor() {
         document.body.removeChild(this.el)
     }
-    showOffsetNotification(t, e, custom) {
-        let i = _h.get(e);
-		if (custom != undefined) i = custom;
+    showOffsetNotification(t, e) {
+        const i = Eh.get(e);
         if (!i || i.hideInGame)
             return;
         let n = i.visibilityDuration;
@@ -31130,7 +31140,7 @@ class Eh {
             this.listEl.removeChild(this.listEl.firstChild)
     }
 }
-class Ph extends Ma {
+class Th extends Ma {
     constructor({
         trackedMyPlayerScores: t,
         totalScore: e,
@@ -31155,7 +31165,7 @@ class Ph extends Ma {
         this.statsContainer.appendChild(o);
         const a = document.createElement("tbody");
         o.appendChild(a);
-        for (const [e, i] of _h.entries()) {
+        for (const [e, i] of Eh.entries()) {
             if (!t.has(e))
                 continue;
             const n = t.get(e),
@@ -31210,7 +31220,7 @@ class Ph extends Ma {
             });
             t.appendChild(i.el)
         }
-        this.skipText = new bh,
+        this.skipText = new xh,
         this.el.appendChild(this.skipText.el),
         this.boundOnResize = this.onResize.bind(this),
         ea.addListener(this.boundOnResize),
@@ -31228,7 +31238,7 @@ class Ph extends Ma {
         this.onRewardedAdIsPlayingChangeCbs.forEach((e => e(t)))
     }
 }
-class Th {
+class Ah {
     constructor(t = 0, e = "") {
         this.timeSeconds = t,
         this.name = e,
@@ -31266,14 +31276,14 @@ class Th {
 `<${this.name} ${t}>`
     }
 }
-class Ah {
+class Lh {
     constructor() {
 		let settingsMan = uc().settingsManager;
 		
         this.teamCount = 3,
         this.players = new Map,
-        this.arrowManager = new ph(this.teamCount),
-        this.crosshair = new gh(settingsMan.getValue("cursorticks"),
+        this.arrowManager = new mh(this.teamCount),
+        this.crosshair = new fh(settingsMan.getValue("cursorticks"),
 			settingsMan.getValue("accuracyedit"),
 			settingsMan.getValue("cursorheight"),
 			settingsMan.getValue("cursorypos"),
@@ -31283,18 +31293,18 @@ class Ah {
 			true),
         this.flags = [],
         this.uiVisible = !1,
-        this.flagScoreUi = new yh(this.teamCount),
-        this.healthUi = new vh,
-        this.bottomText = new wh,
-        this.weaponSelectionDialog = new Mh,
+        this.flagScoreUi = new vh(this.teamCount),
+        this.healthUi = new wh,
+        this.bottomText = new bh,
+        this.weaponSelectionDialog = new Ch,
         uc().dialogManager.addDialog(this.weaponSelectionDialog),
-        this.playersListDialog = new xh(this.players, uc().avatars, uc().skins),
+        this.playersListDialog = new Sh(this.players, uc().avatars, uc().skins),
         uc().dialogManager.addDialog(this.playersListDialog),
         this.gameOverStatsDialog = null,
-        this.cornerNotificationsUi = new Ch,
-        this.gameOverNotificationsUi = new Ch("centerbig"),
-        this.crosshairNotificationsUi = new Ch("crosshair"),
-        this.scoreOffsetNotificationsUi = new Eh,
+        this.cornerNotificationsUi = new _h,
+        this.gameOverNotificationsUi = new _h("centerbig"),
+        this.crosshairNotificationsUi = new _h("crosshair"),
+        this.scoreOffsetNotificationsUi = new Ph,
         this.gameEndLoweringTimeScaleDuration = 6,
         this.gameEndTitleDurationWin = 3,
         this.gameEndTitleDurationLose = 2,
@@ -31790,7 +31800,7 @@ class Ah {
         if (this.gameEndStatsShowTimer = this.createGameEndWaitTimer(0, "stats"), this.gameEndAdBreakTimer = this.createGameEndWaitTimer(10, "adbreak"), this.updateGameEndShowStatsScreen(), r.start(), await ra.promise(1e3 * this.gameEndLoweringTimeScaleDuration), !this.destructed && (uc().physics.startLoweringTimeScale(), await ra.promise(1e3 * s), !this.destructed && (this.currentGameEndWaitingMusic || (this.currentGameEndWaitingMusic = await uc().sfx.playSound("music/waiting")), r.clear(), this.playersListDialog.showTeamWonTitle(t), this.playersListDialog.visible = !0, this.playersListDialog.skipText.setVisibility(!0), this.playersListDialog.skipText.startTimer(this.gameEndPlayersListDuration), this.playersListDialog.skipText.startCreationCooldown(), uc().adBanners.setPageVisibility("gameEnd", !0), uc().input.unlockPointer(), o.start(), await this.playersListDialog.skipText.waitForSkip(), !this.destructed))) {
             if (o.clear(), this.playersListDialog.visible = !1, this.gameEndShowStatsScreen) {
                 let t = 0;
-                if (e && (t = e.teamId), this.gameOverStatsDialog = new Ph({
+                if (e && (t = e.teamId), this.gameOverStatsDialog = new Th({
                         trackedMyPlayerScores: this.trackedMyPlayerScores,
                         totalScore: this.gameEndMyTotalScore,
                         myTeamId: t,
@@ -31813,7 +31823,7 @@ class Ah {
         return t
     }
     createGameEndWaitTimer(t = 0, e = "") {
-        const i = new Th(t, e);
+        const i = new Ah(t, e);
         return i.onSuddenChange((() => {
                 this.gameEndTimerSuddenChangeDisabled || this.fireEstimatedMaxGameEndWaitTimeSuddenChange()
             })),
@@ -31857,7 +31867,7 @@ class Ah {
         t || (this.cornerNotificationsUi.removeIcon(), this.crosshairNotificationsUi.removeIcon(), this.scoreOffsetNotificationsUi.removeAll())
     }
 }
-class Lh {
+class kh {
     constructor() {
         this.currentGame = null,
         this.joinedOnce = !1,
@@ -31942,7 +31952,7 @@ class Lh {
     }
     joinedGameId(t) {
         this.currentGame && (this.currentGame.destructor(), this.updateSdkGameplayStarted());
-        const e = new Ah;
+        const e = new Lh;
         this.currentGame = e,
         this.updateSdkGameplayStarted(),
         this.currentGame.onGameEnd((() => {
@@ -32044,7 +32054,7 @@ class Lh {
         this.onReadyToJoinChangeCbs.forEach((e => e(t)))
     }
 }
-class kh extends jl {
+class Ih extends jl {
     constructor(...t) {
         super(...t),
         this.radius = this.worldMatrix.getMaxScaleOnAxis(),
@@ -32091,7 +32101,7 @@ class kh extends jl {
         }
     }
 }
-class Ih {
+class Rh {
     constructor(t, e = 0) {
         this.aabb = t,
         this.depth = e,
@@ -32131,7 +32141,7 @@ class Ih {
             n % 2 < 1 ? (s.min.x = t.x, s.max.x = i.x) : (s.min.x = i.x, s.max.x = e.x),
             n % 4 < 2 ? (s.min.y = t.y, s.max.y = i.y) : (s.min.y = i.y, s.max.y = e.y),
             n < 4 ? (s.min.z = t.z, s.max.z = i.z) : (s.min.z = i.z, s.max.z = e.z);
-            const r = new Ih(s, this.depth + 1);
+            const r = new Rh(s, this.depth + 1);
             this.children.add(r),
             this.allChildren[n] = r
         }
@@ -32149,7 +32159,7 @@ class Ih {
             0 != e.items.length && (yield e)
     }
 }
-class Rh {
+class Dh {
     constructor() {
         this.rigidBodies = new Set,
         this.mapColliders = [],
@@ -32194,7 +32204,7 @@ class Rh {
     addMapCollider(t, e, i) {
         const n = (new $).fromArray(e);
         let s;
-        return s = "sphere" == t ? new kh(n, i) : new Ql(n, i),
+        return s = "sphere" == t ? new Ih(n, i) : new Ql(n, i),
         this.mapColliders.push(s),
         s
     }
@@ -32214,7 +32224,7 @@ class Rh {
         this.worldToOctreeVoxelSpaceMultiplier.set(1, 1, 1),
         this.worldToOctreeVoxelSpaceMultiplier.divide(e),
         this.worldToOctreeVoxelSpaceMultiplier.multiplyScalar(this.octreeAxisVoxelCount),
-        this.rootOctreeNode = new Ih(t),
+        this.rootOctreeNode = new Rh(t),
         this.rootOctreeNode.addItems(this.mapColliders),
         this.rootOctreeNode.subdivideRecursive({
             boundsContainsCb: (t, e) => !!t.aabb && t.aabb.intersectsBox(e),
@@ -32343,7 +32353,7 @@ class Rh {
         return n
     }
 }
-class Dh {
+class Oh {
     constructor() {
         this.baseFov = 90,
         this.cam = new Re(65, 1, .08, 900),
@@ -32434,7 +32444,7 @@ class Dh {
         this.currentLobbyShot = null
     }
 }
-class Oh {
+class Fh {
     constructor(t, {
         size: e = .05,
         url: i = null
@@ -32488,7 +32498,7 @@ class Oh {
         }
     }
 }
-class Fh {
+class Nh {
     constructor() {
         this.globalVisibility = !0,
         this.geo = new Ge,
@@ -32520,7 +32530,7 @@ class Fh {
             t.updateIconSize(window.innerHeight, window.innerWidth)
     }
     createIcon(t) {
-        const e = new Oh(this, t);
+        const e = new Fh(this, t);
         return this.createdIcons.add(e),
         e
     }
@@ -32530,7 +32540,7 @@ class Fh {
             t.updateVisibility()
     }
 }
-class Nh {
+class Bh {
     constructor(t, e, i, n) {
         this.scene = t,
         this.material = e.clone(),
@@ -32553,7 +32563,7 @@ class Nh {
         e > 10 && (this.shouldBeDestroyed = !0)
     }
 }
-class Bh {
+class Vh {
     constructor(t, e) {
         this.scene = t,
         this.camera = e,
@@ -32567,7 +32577,7 @@ class Bh {
         if (!this.material)
             return;
         const i = this.getThetaFromArrowHitNormal(t),
-        n = new Nh(this.scene, this.material, 1 - e, i);
+        n = new Bh(this.scene, this.material, 1 - e, i);
         this.createdFlashes.add(n)
     }
     getThetaFromArrowHitNormal(t) {
@@ -32594,7 +32604,7 @@ class Bh {
             t.destructor(), this.createdFlashes.delete(t)
     }
 }
-class Vh {
+class Uh {
     constructor({
         width: t = 100,
         height: e = 100
@@ -32641,7 +32651,7 @@ class Vh {
         return await t
     }
 }
-class Uh {
+class zh { // login shit
     constructor({
         minFov: t = 0,
         maxFov: e = 180,
@@ -32666,7 +32676,7 @@ class Uh {
         this.cam.updateProjectionMatrix()
     }
 }
-class zh {
+class Hh {
     constructor() {
         this.renderer = null,
         this.canvas = null,
@@ -32766,7 +32776,7 @@ class zh {
         this.renderer && this.renderer.setSize(t, e, !1)
     }
     createRenderView(...t) {
-        const e = new Vh(...t);
+        const e = new Uh(...t);
         return this.renderViews.add(e),
         e
     }
@@ -32774,7 +32784,7 @@ class zh {
         this.renderViews.delete(t)
     }
     createRenderOverlay(...t) {
-        const e = new Uh(...t);
+        const e = new zh(...t);
         return this.renderOverlays.add(e),
         e
     }
@@ -32864,7 +32874,7 @@ class zh {
             }))
     }
 }
-class Hh {
+class Gh {
     constructor() {
         this.cachedAssetPromises = new Map
     }
@@ -32888,7 +32898,7 @@ class Hh {
         e
     }
 }
-class Gh {
+class Wh {
     constructor() {
         this.cachedPoses = new Map,
         this.loadingPoseCbs = new Map
@@ -32923,7 +32933,7 @@ class Gh {
         return e ? n.clone() : n
     }
 }
-class Wh {
+class qh {
     constructor(t, e) {
         this.opts = t,
         this.ctx = e,
@@ -32941,14 +32951,14 @@ class Wh {
                     this.onLoadCbs.push(t)
                 }));
         this.loading = !0;
-        const t = uc().assets.getPackage("sfx" + jh.audioFormatCamelCase);
+        const t = uc().assets.getPackage("sfx" + Yh.audioFormatCamelCase);
         if (this.opts.useMediaElement) {
-            const e = await t.getAsObjectUrl(this.opts.name + "." + jh.audioFormat, "audio/" + jh.audioFormat);
+            const e = await t.getAsObjectUrl(this.opts.name + "." + Yh.audioFormat, "audio/" + Yh.audioFormat);
             this.mediaElement = document.createElement("audio"),
             this.mediaElement.src = e,
             this.mediaElement.loop = this.opts.loop
         } else {
-            const e = await t.getFileAsBuffer(this.opts.name + "." + jh.audioFormat);
+            const e = await t.getFileAsBuffer(this.opts.name + "." + Yh.audioFormat);
             this.buffer = await new Promise((t => {
                         this.ctx.decodeAudioData(e, t)
                     }))
@@ -32971,7 +32981,7 @@ class Wh {
         this.mediaElement
     }
 }
-class qh {
+class jh {
     constructor(t, e = {}) {
         this.cachedSfx = t,
         this.opts = {
@@ -33087,10 +33097,10 @@ class qh {
             })() : this.sourceNode.playbackRate.value = this.pitch)
     }
 }
-class jh {
+class Yh {
     constructor() {
         if (window.AudioContext = window.AudioContext || window.webkitAudioContext, this.supported = !!AudioContext, this.supported && this.supported) {
-            this.packageName = "sfx" + jh.audioFormatCamelCase,
+            this.packageName = "sfx" + Yh.audioFormatCamelCase,
             this.ctx = new AudioContext,
             this.ctx.destination.maxChannelCount >= 6 && (this.ctx.destination.channelCount = 6),
             this.cachedSfx = {},
@@ -33322,7 +33332,7 @@ class jh {
                 }
             ];
             for (const t of this.soundsConfig)
-                this.cachedSfx[t.name] = new Wh(t, this.ctx);
+                this.cachedSfx[t.name] = new qh(t, this.ctx);
             this.ctxStatePossiblyInvalid = !1,
             document.addEventListener("visibilitychange", (t => {
                     document.hidden ? this.ctx.suspend() : (this.ctxStatePossiblyInvalid = !0, window.setTimeout((t => this.ctx.resume()), 300))
@@ -33392,7 +33402,7 @@ class jh {
         const i = this.cachedSfx[t];
         if (!i)
             return void console.warn("attempted to play sound " + t + " but it doesn't exist");
-        const n = new qh(i, e);
+        const n = new jh(i, e);
         return await n.init() ? (this.createdSfx.push(n), n) : null
     }
     setMutedSettings(t) {
@@ -33413,7 +33423,7 @@ class jh {
         e >= 0 && this.createdSfx.splice(e, 1)
     }
 }
-class Yh extends Ma {
+class Jh extends Ma {
     constructor(t = "login") {
         super({
             title: "login" == t ? "Log in and keep your loot safe!" : "Link new account"
@@ -33503,20 +33513,20 @@ class Yh extends Ma {
         await new Promise((t => this.onOAuthLoginFinishCbs.add(t)))
     }
 }
-function Jh() {
+function Xh() {
     const t = new URL(location.href);
     return t.searchParams.get("useProductionServers") && (t.href = "https://narrow.one/"),
     uc().poki.isPokiBuild && (t.searchParams.get("pokiDebug") ? t.href = "https://staging.narrow.one/" : t.href = "https://narrow.one/"),
     t
 }
-function Xh(t) {
-    const e = Jh();
+function $h(t) {
+    const e = Xh();
     return e.search = "",
     e.hash = "",
     e.pathname = "/api/" + t,
     e
 }
-class $h { // login shit
+class Zh {
     constructor() {
         this.oAuthProviderConfigs = new Map,
         this.oAuthProviderConfigs.set("google", {
@@ -33550,7 +33560,7 @@ class $h { // login shit
         this.onLoggedInAccountChangeCbs = new Set,
         this.onGuestSessionDataChangeCbs = new Set,
         window.addEventListener("message", (t => {
-                if (t.origin == Jh().origin && t.data) {
+                if (t.origin == Xh().origin && t.data) {
                     const e = t.source;
                     "requestOpenerOrigin" == t.data.type ? t.source && e.postMessage({
                         type: "openerOrigin",
@@ -33599,7 +33609,7 @@ class $h { // login shit
         this.onGuestSessionDataChangeCbs.add(t)
     }
     async showLoginDialog(t = "login") {
-        const e = new Yh(t);
+        const e = new Jh(t);
         return uc().dialogManager.addDialog(e),
         await e.waitForFlowEnd()
     }
@@ -33631,7 +33641,7 @@ class $h { // login shit
         const i = e.issuer;
         if (!i)
             return null;
-        const n = Xh("auth/authEndpoint");
+        const n = $h("auth/authEndpoint");
         let s;
         n.searchParams.set("issuer", i);
         try {
@@ -33647,7 +33657,7 @@ class $h { // login shit
         r.response_types_supported.includes("id_token") && (a = "id_token"),
         o.searchParams.set("response_type", a),
         o.searchParams.set("client_id", e.clientId);
-        const l = Xh("auth/oAuthCallback");
+        const l = $h("auth/oAuthCallback");
         l.searchParams.set("issuer", i),
         o.searchParams.set("redirect_uri", l.href);
         const h = "facebook" == t ? "," : " ";
@@ -33711,7 +33721,7 @@ class $h { // login shit
         let n,
         s = !1;
         if (this.isLoggedIn) {
-            const e = Xh("auth/linkNewAccount"),
+            const e = $h("auth/linkNewAccount"),
             r = new URLSearchParams;
             r.set("idToken", t),
             r.set("nonce", i);
@@ -33727,7 +33737,7 @@ class $h { // login shit
             }
             o && (s = o.ok, n = await o.text())
         } else {
-            const e = Xh("auth/getSession"),
+            const e = $h("auth/getSession"),
             n = new URLSearchParams;
             n.set("idToken", t),
             n.set("nonce", i),
@@ -33751,7 +33761,7 @@ class $h { // login shit
     async mergeAccountToCurrent(t, e) {
         if (!this.isLoggedIn)
             return !1;
-        const i = Xh("auth/mergeAccount"),
+        const i = $h("auth/mergeAccount"),
         n = new URLSearchParams;
         n.set("idToken", t),
         n.set("nonce", e);
@@ -33773,7 +33783,7 @@ class $h { // login shit
         const t = await this.getGuestAccountData();
         if (!t)
             return !1;
-        const e = Xh("auth/mergeGuestAccount"),
+        const e = $h("auth/mergeGuestAccount"),
         i = new URLSearchParams;
         i.set("guestData", t);
         let n = null;
@@ -33801,7 +33811,7 @@ class $h { // login shit
         !0
     }
     async refreshSession() {
-        const t = Xh("auth/refreshSession");
+        const t = $h("auth/refreshSession");
         await this.fetchAuthSessionData(t, null, !0)
     }
     async refreshSessionIfNeeded() {
@@ -33852,7 +33862,7 @@ class $h { // login shit
     }
     async logout() {
         await this.waitForInit();
-        const t = Xh("auth/logout"),
+        const t = $h("auth/logout"),
         e = new URLSearchParams;
         e.set("tokenId", this.currentSessionData.secureId),
         e.set("token", this.currentSessionData.token);
@@ -33872,7 +33882,7 @@ class $h { // login shit
     }
     async logoutEverywhere() {
         await this.waitForInit();
-        const t = Xh("auth/logoutEverywhere"),
+        const t = $h("auth/logoutEverywhere"),
         e = await wa(t.href, {
             method: "POST",
             credentials: "include"
@@ -33915,7 +33925,7 @@ class $h { // login shit
     }
     async postGuestAccountDataToRestService() {
         const t = await this.getGuestAccountData(),
-        e = Xh("auth/guestAccountData"),
+        e = $h("auth/guestAccountData"),
         i = new URLSearchParams;
         i.set("guestData", t ?? "");
         const n = await fetch(e.href, {
@@ -33941,7 +33951,7 @@ class $h { // login shit
     async syncGuestDataWithRestServiceFn() {
         if (this.isLoggedIn)
             return;
-        const t = Xh("auth/guestAccountData"),
+        const t = $h("auth/guestAccountData"),
         e = await this.getRestAuthHeader(!1);
         if (!e)
             return !1;
@@ -33956,7 +33966,7 @@ class $h { // login shit
         this.setGuestAccountData(n, !0)
     }
     async deleteGuestAccountDataFromRestService() {
-        const t = Xh("auth/guestAccountData"),
+        const t = $h("auth/guestAccountData"),
         e = await this.getRestAuthHeader(!1);
         if (!e)
             return !0;
@@ -34000,7 +34010,7 @@ class $h { // login shit
         }
     }
 }
-class Zh {
+class Kh {
     constructor(t, e) {
         this.authManager = t,
         this.indexedDb = e,
@@ -34057,7 +34067,7 @@ class Zh {
         await this.fetchCurrentDataInstance.waitForFinishIfRunning()
     }
     async fetchCurrentDataFn() {
-        const t = Xh(this.getStateUrl), {
+        const t = $h(this.getStateUrl), {
             success: e,
             authError: i,
             data: n
@@ -34113,7 +34123,7 @@ class Zh {
     }
     clearCurrentDataImpl() {}
 }
-class Kh extends Zh {
+class Qh extends Kh {
     constructor(...t) {
         super(...t),
         this.cachedStateIndexDbKey = "cachedProfileState",
@@ -34132,7 +34142,7 @@ class Kh extends Zh {
         this.username = null
     }
     async setUsername(t) {
-        const e = Xh("profile/username"),
+        const e = $h("profile/username"),
         i = new URLSearchParams;
         i.set("username", t);
         const n = await this.authManager.requestWithAuthHeader((async t => {
@@ -34164,7 +34174,7 @@ class Kh extends Zh {
         n
     }
 }
-class Qh extends Zh {
+class tc extends Kh {
     constructor(...t) {
         super(...t),
         this.cachedStateIndexDbKey = "cachedShopState",
@@ -34190,7 +34200,7 @@ class Qh extends Zh {
         const e = t.id;
         let i = this.purchasingItemTasks.get(e);
         i || (i = (async() => {
-                const i = Xh("shop/purchaseItem");
+                const i = $h("shop/purchaseItem");
                 return await this.authManager.requestWithAuthHeader((async n => {
                         if (!n)
                             return {
@@ -34253,7 +34263,7 @@ class Qh extends Zh {
         this.fireStateChanged()
     }
     async doubleLastGameCoins() {
-        const t = Xh("shop/doubleLastGameCoins");
+        const t = $h("shop/doubleLastGameCoins");
         return await this.authManager.requestWithAuthHeader((async e => {
                 if (!e)
                     return {
@@ -34305,7 +34315,7 @@ class Qh extends Zh {
         e && await e
     }
 }
-class tc {
+class ec {
     constructor(t) {
         this.pokiInit = !1,
         this.pokiErrored = !1,
@@ -34537,53 +34547,6 @@ class tc {
     get isHappyDay() {
         const t = new Date;
         return t.getUTCDate() > new Date(t.getUTCFullYear(), t.getUTCMonth() + 1, 0).getDate() / 2
-    }
-}
-class ec {
-    static setCurrentScene(t) {
-        this.scene = t,
-        this.drawLinesNextFrame = [],
-        this.removeLinesNextFrame = [],
-        this.material || (this.material = new Is({
-                color: 16777215,
-                vertexColors: !0
-            }))
-    }
-    static loop() {
-        if (this.drawLinesNextFrame && this.removeLinesNextFrame) {
-            for (const t of this.removeLinesNextFrame) {
-                const e = t.line;
-                e.parent.remove(e),
-                e.geometry.dispose()
-            }
-            this.removeLinesNextFrame = [];
-            for (const t of this.drawLinesNextFrame) {
-                const e = new ae,
-                i = new Float32Array([...t.from.toArray(), ...t.to.toArray()]);
-                e.setAttribute("position", new Xt(i, 3));
-                let n = this.material;
-                t.color && (n = new Is({
-                        color: t.color
-                    }));
-                const s = new Bs(e, n);
-                t.line = s,
-                this.scene.add(s),
-                this.removeLinesNextFrame.push(t)
-            }
-            this.drawLinesNextFrame = []
-        }
-    }
-    static drawLine(t, e, i) {
-        this.drawLinesNextFrame && this.drawLinesNextFrame.push({
-            from: t.clone(),
-            to: e.clone(),
-            color: i
-        })
-    }
-    static drawRay(t, e, i) {
-        const n = (t = t.clone()).clone();
-        n.add(e),
-        this.drawLine(t, n, i)
     }
 }
 class ic {
@@ -35128,7 +35091,7 @@ class cc { // global instance
         t.thirdParty && (this.thirdPartyEnabled = "false" != t.thirdParty),
         this.scene = new ns,
         this.scene.autoUpdate = !1,
-        ec.setCurrentScene(this.scene),
+        ph.setCurrentScene(this.scene),
         this.indexedDb = new ia,
         this.settingsManager = new na(this.indexedDb),
         this.mainMenu = new fl,
@@ -35138,26 +35101,26 @@ class cc { // global instance
         this.config = new Fl,
         this.mapLoader = new kl(this.config, this.config.mapsConfig),
         this.preferredMapManager = new hc(this.mapLoader, this.config.mapsConfig),
-        this.gameManager = new Lh,
-        this.physics = new Rh,
-        this.cam = new Dh,
+        this.gameManager = new kh,
+        this.physics = new Dh,
+        this.cam = new Oh,
         this.materials = new Wa,
-        this.hudIcons = new Fh,
-        this.screenFlash = new Bh(this.scene, this.cam.cam),
-        this.renderer = new zh,
+        this.hudIcons = new Nh,
+        this.screenFlash = new Vh(this.scene, this.cam.cam),
+        this.renderer = new Hh,
         this.assets = new La,
-        this.arrowAssetCache = new Hh,
+        this.arrowAssetCache = new Gh,
         this.skins = new Va,
-        this.skeletons = new Gh,
+        this.skeletons = new Wh,
         this.avatars = new rc(this.renderer),
         this.classSelectionImageManager = new ac,
-        this.sfx = new jh,
+        this.sfx = new Yh,
         this.network = new Wl(this.gameManager),
-        this.auth = new $h,
-        this.profileState = new Kh(this.auth, this.indexedDb),
-        this.shopState = new Qh(this.auth, this.indexedDb),
+        this.auth = new Zh,
+        this.profileState = new Qh(this.auth, this.indexedDb),
+        this.shopState = new tc(this.auth, this.indexedDb),
         this.quantcastManager = new ic,
-        this.poki = new tc(this.thirdPartyEnabled),
+        this.poki = new ec(this.thirdPartyEnabled),
         this.aprilFools = new lc(this.settingsManager),
         this.boundLoop = this.vsyncLoop.bind(this),
         this.prevNow = 0,
@@ -35233,12 +35196,12 @@ class cc { // global instance
         this.gameManager.afterPhysicsLoop(t, i),
         this.cam.loop(t, i),
         this.screenFlash.loop(t),
-        ec.loop(),
+        ph.loop(),
         this.renderer.loop(t, i),
         this.sfx.loop(t, i)
     }
 }
-globalThis.VERSION_TIMESTAMP = "1659120483", globalThis.false = !1, globalThis.true = !1;
+globalThis.VERSION_TIMESTAMP = "1660585689", globalThis.false = !1, globalThis.true = !1;
 let dc = null;
 function uc() {
     if (!dc)
@@ -35246,7 +35209,7 @@ function uc() {
     return dc
 }
 const pc = new CSSStyleSheet;
-pc.replaceSync(":root{\n\t--default-drop-shadow: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));\n\t--default-wrinkled-paper-border-color: #353535;\n\t--disabled-wrinkled-paper-border-color: #919191;\n\t--shop-item-background-color: #f1f1f1;\n\t--shop-item-highlight-color: #fdc570;\n\t--blue-highlight-color: #0c5fcc;\n}\n\nbody, html {\n\t/* Setting overflow to hidden prevents the page from being scrolled by the user.\n\tBut scripts like scrollIntoView() can still cause the page to be scrolled.\n\tTry fixing the element that causet the page to get scrollable rather than setting\n\tthe body to overflow: hidden */\n\t/* overflow: hidden; */\n}\n\n.allow-select {\n\tuser-select: text;\n\t-webkit-user-select: text;\n}\n\n@property --wrinkled-paper-color {\n\tsyntax: '<color>';\n\tinherits: false;\n\tinitial-value: blue;\n}\n\n.fullScreen.safeArea{\n\tleft: 0;\n\tright: 0;\n\ttop: 0;\n\tbottom: 0;\n\tleft: env(safe-area-inset-left);\n\tright: env(safe-area-inset-right);\n\ttop: env(safe-area-inset-top);\n\tbottom: env(safe-area-inset-bottom);\n\twidth: initial;\n\theight: initial;\n}\n\n.mainCanvas{\n\tz-index: -1;\n}\n\n.wrinkledPaper{\n\t--wrinkled-paper-wrinkle-size: 6px;\n\t--wrinkled-paper-color: white;\n\t--wrinkled-paper-border-segments: 0.016;\n\t--wrinkled-paper-tear-count-min: 0.001;\n\t--wrinkled-paper-tear-count-max: 0.003;\n\t--wrinkled-paper-tear-depth-min: 5px;\n\t--wrinkled-paper-tear-depth-max: 15px;\n\t--wrinkled-paper-tear-width-min: 10px;\n\t--wrinkled-paper-tear-width-max: 20px;\n\t--wrinkled-paper-tear-angle-offset-min: 0.7;\n\t--wrinkled-paper-tear-angle-offset-max: 1.1;\n}\n\n.wrinkledLine {\n\t--wrinkled-line-color: black;\n\t--wrinkled-line-width: 1px;\n\t--wrinkled-line-wrinkle-size: 6px;\n\t--wrinkled-line-segments: 0.016;\n}\n\n.dialogCurtain{\n\tbackground: rgba(0,0,0,0.3);\n}\n.dialogCurtain.hidden{\n\tvisibility: hidden;\n\topacity: 0;\n}\n\n.dialogWrapper, .dialog {\n\tdisplay: block;\n\tposition: absolute;\n\tmax-width: 100%;\n\tmin-height: 150px;\n\tmax-height: 100%;\n\tleft: 50%;\n\ttop: 50%;\n\ttransform: translate(-50%, -50%);\n\t-webkit-transform: translate3d(-50%,-50%,0);\n\ttransition: transform 0.2s, opacity 0.2s, visibility 0.2s;\n\ttransition-timing-function: cubic-bezier(0.3, -0.8, 0.7, 1.8);\n}\n\n.dialogWrapper > .dialog {\n\tposition: relative;\n\tleft: 0;\n\ttop: 0;\n\ttransform: initial;\n\t-webkit-transform: initial;\n}\n\n.dialog{\n\tfilter: var(--default-drop-shadow);\n\tpadding: 30px;\n\tbox-sizing: border-box;\n\twidth: fit-content;\n}\n.dialog.hidden, .dialogWrapper.hidden{\n\topacity: 0;\n\ttransform: translate(-50%, -50%) scale(0.95);\n\tvisibility: hidden;\n}\n.dialog.topCenter{\n\ttop: 10px;\n\ttransform: translate(-50%, 0);\n}\n\n.dialog-title-header-container {\n\tdisplay: flex;\n\tgap: 20px;\n}\n\nh2.dialogTitle{\n\tmargin: 0px 0px 20px 0px;\n\tfont-size: 42px;\n}\n\nh3.dialogTitle{\n\tmargin: 0px 0px 10px 0px;\n\tfont-size: 30px;\n}\n\n.dialogButtonsContainer {\n\tmargin-top: 10px;\n\ttext-align: center;\n\tdisplay: flex;\n\tjustify-content: center;\n}\n\n.dialogButtonsContainer.vertical {\n\tflex-direction: column;\n\tmax-width: 300px;\n\tmargin: auto;\n}\n\n.dialog-art-wrapper {\n\twidth: 100%;\n\tmargin: auto;\n}\n\n.dialog-art {\n\twidth: 0;\n\tmin-width: 100%;\n\theight: 100%;\n\tmax-height: 50vh;\n\tobject-fit: contain;\n}\n\n.dialog-art-buttons-container {\n\tdisplay: flex;\n}\n\n@media (min-height: 500px) {\n\t.dialog-art-buttons-container {\n\t\tflex-direction: column;\n\t}\n}\n\n@media (max-width: 500px) and (max-height: 600px) {\n\t.dialog-art-wrapper {\n\t\tdisplay: none;\n\t}\n}\n\n.currency-button {\n\tpadding: 0px 30px;\n}\n\n.currency-container {\n\tdisplay: flex;\n\talign-items: center;\n\tfont-size: 18px;\n\tjustify-content: center;\n}\n\n.coin-icon {\n\twidth: 20px;\n\theight: 20px;\n\tdisplay: inline-block;\n\tbackground-image: url(img/coin.svg);\n\tmargin-right: 5px;\n}\n\n.coin-count-text {\n\tcolor: #fbd413;\n\tfont-weight: 900;\n\t-webkit-text-stroke: 2px #766200;\n\tfilter: drop-shadow(0px 1px #766200);\n\tposition: relative;\n\tletter-spacing: 1px;\n\tfont-size: 20pt;\n}\n\n.coin-count-text::after {\n\tcontent: attr(data-text-content);\n\t-webkit-text-stroke: 0;\n\tfilter: none;\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0px;\n}\n\n.dialogTabs {\n\tposition: absolute;\n\ttop: -50px;\n\tleft: 5px;\n\tpointer-events: none;\n}\n\n.dialogTab {\n\tdisplay: inline-block;\n\tpointer-events: auto;\n\ttransition: transform 0.1s;\n\theight: 80px;\n}\n\n.dialogTabSpacer {\n\tdisplay: inline-block;\n\twidth: 20px;\n}\n\n.dialogTab.back {\n\t--wrinkled-paper-color: #d1d1d1;\n}\n\n.dialogTab.front:not(.active), .dialogTab.back.active {\n\topacity: 0;\n\tpointer-events: none;\n}\n\n.dialogTab.back:not(.active) {\n\ttransform: translateY(4px);\n\tcursor: pointer;\n}\n\n.dialogTab:not(.active):hover {\n\ttransform: translateY(2px);\n}\n\n.dialogTabIcon {\n\twidth: 60px;\n\theight: 60px;\n\tbackground-size: contain;\n\tbackground-repeat: no-repeat;\n}\n\n.skipDialogText {\n\tposition: absolute;\n\tbottom: 0;\n\tleft: 50%;\n\ttransform: translate(-50%, 25px);\n\tcolor: #dddddd;\n\ttext-shadow: 1px 1px #00000073;\n\tfont-size: 16px;\n\tcursor: pointer;\n\twhite-space: nowrap;\n}\n\n.toggle-menu-touch-button {\n\tpadding: 10px;\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\tz-index: 110;\n}\n\n.menuButtonsContainer {\n\tmax-width: fit-content;\n}\n\n.main-menu-corner-profile {\n\twidth: 300px;\n\tdisplay: flex;\n\tgap: 10px;\n\tmargin: 10px;\n}\n\n.main-menu-username {\n\tfont-size: 30px;\n}\n\n.main-menu-username:not(.blueNight) {\n\tfont-size: 25px;\n\tfont-weight: bold;\n}\n\n.main-menu-promo-banner-container {\n\ttop: 20px;\n\tright: 20px;\n\tposition: absolute;\n\twidth: 320px;\n\theight: 210px;\n\tfilter: var(--default-drop-shadow);\n}\n.main-menu-promo-banner-container.hidden {\n\tdisplay: none;\n}\n\n@media (max-width: 1200px), (max-height: 700px) {\n\t.main-menu-promo-banner-container {\n\t\twidth: 220px;\n\t\theight: 140px;\n\t}\n}\n\n@media (max-width: 500px), (max-height: 420px) {\n\t.main-menu-promo-banner-container {\n\t\tdisplay: none;\n\t}\n}\n\n.main-menu-promo-banner {\n\twidth: 100%;\n\theight: 100%;\n\tbackground: center / cover, white;\n\t--wrinkled-paper-wrinkle-size: 8px;\n\t--wrinkled-paper-tear-count-min: 0.003;\n\t--wrinkled-paper-tear-count-max: 0.004;\n\tcursor: pointer;\n}\n.main-menu-promo-banner:hover {\n\tfilter: brightness(0.9);\n}\n.main-menu-promo-banner:active {\n\tfilter: brightness(0.85);\n}\n\n.main-menu-promo-button {\n\tposition: absolute;\n\tbottom: 0;\n\tleft: 50%;\n\ttransform: translate(-50%, 50%);\n\tmargin: 0;\n}\n\n.gameAd{\n\tposition: absolute;\n\tbottom: 0;\n\tmargin-bottom: 20px;\n\tleft: 50%;\n\ttransform: translate(-50%);\n\tbackground: #0000004f;\n\tz-index: 20;\n}\n.gameAd.desktop{\n\twidth: 728px;\n\theight: 90px;\n}\n.gameAd.mobile{\n\twidth: 320px;\n\theight: 50px;\n\tdisplay: none;\n}\n@media(max-width: 1220px){\n\t.gameAd.desktop{\n\t\tdisplay: none;\n\t}\n\t.gameAd.mobile{\n\t\tdisplay: inherit;\n\t}\n}\n.gameAd.hidden{\n\tdisplay: none;\n}\n\n.shake-anim {\n\tanimation: 2.5s linear infinite shake;\n}\n\n@keyframes shake {\n\t0% { transform: rotate(0deg); }\n\t4% { transform: rotate(4deg); }\n\t8% { transform: rotate(-3deg); }\n\t12% { transform: rotate(2deg); }\n\t16% { transform: rotate(1deg); }\n\t20% { transform: rotate(0deg); }\n}\n\n.crosshairContainer{\n\tposition: absolute;\n\tleft: 50%;\n\ttop: 50%;\n\tz-index: 100;\n\ttransform: translate(-50%, -50%);\n\tpointer-events: none;\n}\n.crosshairLine{\n\tposition: absolute;\n\theight: 2px;\n\tborder-radius: 10px;\n\ttransform-origin: left;\n\twill-change: transform;\n}\n.flagReturnProgressContainer {\n\tposition: absolute;\n\ttransform: translate(-50%, -50%);\n\ttransition: opacity 0.2s;\n}\n.flagReturnProgressContainer.hidden{\n\topacity: 0;\n}\n.flagReturnProgressPath {\n\tfill: none;\n\tstroke-width: 10px;\n\tstroke-linecap: round;\n}\n\n.flagScoreContainer{\n\tposition: absolute;\n\tright: 0;\n\ttop: 0;\n\tz-index: 100;\n\tmargin: 30px;\n\tfilter: var(--default-drop-shadow);\n\tpointer-events: none;\n}\n\n.flagScoreItem{\n\tmargin: 3px;\n\tdisplay: flex;\n}\n\n.flagScoreIcon{\n\theight: 50px;\n\twidth: 50px;\n\ttransform: translateY(-5px);\n}\n\n.flagScorePointEl{\n\twidth: 40px;\n\theight: 40px;\n\talign-self: center;\n}\n\n.healthUiContainer{\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\tmargin: 30px;\n\twidth: 330px;\n\theight: 50px;\n\tz-index: 100;\n\tpointer-events: none;\n}\n\n.healthUiBorder{\n\tbackground: url(img/healthUiBorder.svg);\n\twidth: 100%;\n\theight: 100%;\n\tposition: absolute;\n\tfilter: var(--default-drop-shadow);\n}\n\n.healthUiBarContainer{\n\tbackground: black;\n\twidth: 276px;\n\theight: 20px;\n\tposition: absolute;\n\ttop: 15px;\n\tleft: 37px;\n\toverflow: hidden;\n}\n\n.healthUiBar{\n\twidth: 100%;\n\theight: 100%;\n\tbackground: #e81d25;\n\tbackground: linear-gradient(90deg, #740e12 33.333%, #ae161c 33.334%, #ae161c 66.666%, #e81d25 66.667%);\n}\n\n.gameplayBottomText{\n\tfont-size: 45px;\n\tposition: absolute;\n\tleft: 0;\n\twidth: 100%;\n\tbottom: 25px;\n\ttext-align: center;\n\tpointer-events: none;\n}\n\n.scoreBoardContainer{\n\tbackground: white;\n}\n\n.notificationIconsUiContainer{\n\twidth: 200px;\n\theight: 200px;\n\tpointer-events: none;\n}\n\n.notificationIconsUiContainer.topleft{\n\tleft: 0;\n\ttop: 80px;\n\tposition: absolute;\n\ttransform-origin: top left;\n}\n\n.notificationIconsUiContainer.centerbig{\n\tleft: 50%;\n\ttop: 50%;\n\twidth: 50vw;\n\theight: min(50vw, 100vh);\n\tposition: absolute;\n\ttransform: translate(-50%, -50%);\n}\n\n.notificationIconsUiContainer.crosshair{\n\tleft: 50%;\n\ttop: 50%;\n\twidth: 200px;\n\theight: 200px;\n\tposition: absolute;\n\ttransform: translate(-50%, -50%) translateY(-140px);\n}\n\n.notificationIcon{\n\tfilter: var(--default-drop-shadow);\n\tanimation: 1s notificationIconFade 6s both, 0.2s notificationIconPop;\n\twidth: 100%;\n\theight: 100%;\n\tbackground-position: center;\n\tbackground-repeat: no-repeat;\n}\n\n.crosshair > .notificationIcon{\n\tanimation: 1s notificationIconFade 0.5s both, 0.2s notificationIconPop;\n}\n\n@keyframes notificationIconPop{\n\t0%{\n\t\ttransform: scale(1);\n\t}\n\t50%{\n\t\ttransform: scale(1.2);\n\t}\n\t100%{\n\t\ttransform: scale(1);\n\t}\n}\n@keyframes notificationIconFade{\n\t0%{\n\t\topacity: 1;\n\t}\n\n\t100%{\n\t\topacity: 0;\n\t}\n}\n\n.score-offset-notifications-container {\n\tpointer-events: none;\n\toverflow: hidden;\n}\n\n.score-offset-notifications-list {\n\tfont-size: 30px;\n\ttext-align: center;\n\ttop: 20%;\n\tposition: absolute;\n\twidth: 100%;\n}\n\n.scoreOffsetNotification {\n\tposition: absolute;\n\twidth: 100%;\n\ttransition: transform 0.5s;\n}\n\n.scoreOffsetNotificationScore {\n\tcolor: #b0e9b0;\n}\n\n.touchInputWhiteBorder{\n\tbackground: #00000047;\n\tborder-radius: 150px;\n\tbox-sizing: border-box;\n\tborder: solid white;\n\tpointer-events: none;\n}\n\n.touchInputJoyStickContainer{\n\twidth: 150px;\n\theight: 150px;\n\tposition: absolute;\n\ttransition: opacity 0.3s;\n}\n\n.touchInputJoyStick{\n\twidth: 60px;\n\theight: 60px;\n\tleft: 50%;\n\ttop: 50%;\n\tbackground: white;\n\tborder-radius: 60px;\n\tposition: absolute;\n\ttransform: translate(-50%, -50%);\n}\n\n.touchInputButton{\n\twidth: 70px;\n\theight: 70px;\n\tposition: absolute;\n}\n\n.touchInputButton.touching{\n\tbackground: #ffffff47;\n}\n\n@media(max-width: 700px), (max-height: 450px){\n\t.healthUiContainer{\n\t\tmargin: 10px;\n\t\ttransform: scale(0.5) translateX(60px);\n\t\ttransform-origin: top left;\n\t}\n\n\t.flagScoreContainer{\n\t\tmargin: 10px;\n\t\ttransform: scale(0.5);\n\t\ttransform-origin: top right;\n\t}\n\n\t.notificationIconsUiContainer{\n\t\ttransform: scale(0.5);\n\t}\n\n\t.notificationIconsUiContainer.topleft{\n\t\ttop: 40px;\n\t}\n}\n\n.screenFlash{\n\tpointer-events: none;\n\tbackground: red;\n\topacity: 0;\n}\n\n.settingsItem{\n\tdisplay: flex;\n\tmargin-bottom: 6px;\n\tflex-wrap: wrap;\n}\n.settingsItemText{\n\tdisplay: inline;\n\tflex-grow: 1;\n\tflex-shrink: 0;\n\twidth: 200px;\n}\n.settingsItemSlider{\n\tdisplay: inline;\n\twidth: 220px;\n\tflex-shrink: 0;\n}\n.settingsItemSlider > input{\n\twidth: 170px;\n}\n.settingsItemSliderValue{\n\tdisplay: inline-block;\n\twidth: 40px;\n\ttext-align: right;\n}\n\n.settings-list {\n\toverflow: auto;\n\tmax-height: min(250px, 40vh);\n}\n\n.playersListTeamWonTitle{\n\ttext-align: center;\n\tfont-size: 34px;\n\tmargin: 0;\n}\n\n.playersListContainer{\n\toverflow: auto;\n\tmax-height: 600px;\n\tdisplay: flex;\n\tgap: 20px;\n\talign-items: flex-start;\n}\n\n@media(max-width: 1000px){\n\t.playersListContainer{\n\t\tflex-direction: column;\n\t}\n}\n\n.playersListTeam{\n\t--wrinkled-paper-wrinkle-size: 4px;\n\twidth: 550px;\n}\n\n.itemsTable{\n\tborder-collapse: collapse;\n}\n\n.playersListHead{\n\tcolor: white;\n}\n\n.itemsTable > tbody > tr:nth-child(even){\n\t--wrinkled-paper-wrinkle-size: 2px;\n\t--wrinkled-paper-color: #ffffff6b;\n}\n\n.itemsTable > tbody > tr > td:first-child{\n\tpadding-left: 10px;\n}\n.itemsTable > tbody > tr > td:last-child{\n\tpadding-right: 10px;\n}\n\n.itemsTable > tbody > tr > td, .playersListHead > th{\n\tpadding: 10px 0px;\n}\n\n.player-list-avatar {\n\twidth: 40px;\n\theight: 40px;\n\tbackground-size: contain;\n}\n\n.players-list-label{\n\tcolor: white;\n\tbackground: #909090;\n\tpadding: 2px 3px;\n\tfont-size: 13px;\n\tmargin-left: 7px;\n\tborder-radius: 3px;\n}\n\n.players-list-item-username {\n\tdisplay: flex;\n\tmax-width: 200px;\n\talign-items: center;\n}\n\n.player-list-username {\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\twhite-space: nowrap;\n}\n\n.player-name-verified-icon {\n\tmargin-left: 5px;\n\twidth: 20px;\n\theight: 20px;\n\tbackground-repeat: no-repeat;\n\tbackground-image: url(img/menuUI/verified.svg);\n}\n\n.playersListItem > td:first-child {\n\tpadding: 0px;\n}\n\n.playersListItemScore{\n\ttext-align: center;\n}\n\n.gameoverStatsContainer {\n\t--wrinkled-paper-color: #cdcdcd;\n\twidth: fit-content;\n\tmargin: auto;\n\toverflow: auto;\n}\n\n.gameOverStatsTable {\n\twidth: 240px;\n}\n\n.game-over-stats-coins-container {\n\tdisplay: flex;\n\tgap: 10px;\n\tjustify-content: center;\n\tmargin-top: 20px;\n}\n\n.totalScoreRow {\n\tfont-weight: bold;\n}\n\n.ownedCoinsContainer {\n\tposition: absolute;\n\ttop: -20px;\n\tright: -20px;\n\tpadding: 10px;\n\tfilter: var(--default-drop-shadow);\n}\n\n.weaponSelectionDialog{\n\tbottom: 130px;\n\ttop: inherit;\n\ttransform: translate(-50%, 0px);\n\ttransform-origin: bottom;\n}\n.weaponSelectionDialog.hidden{\n\ttransform: translate(-50%, 0px) scale(0.95);\n}\n\n@media(max-width: 1220px){\n\t.weaponSelectionDialog{\n\t\tbottom: 90px;\n\t\ttransform: translate(-50%, 0px) scale(0.5);\n\t}\n\t.weaponSelectionDialog.hidden{\n\t\ttransform: translate(-50%, 0px) scale(0.45);\n\t}\n}\n.weaponSelectionContainer{\n\tdisplay: flex;\n\tgap: 10px;\n}\n\n.weaponSelectionItem{\n\ttransition: transform 0.2s;\n\ttransition-timing-function: cubic-bezier(0.0, 0.0, 0.0, 1.8);\n\t--wrinkled-paper-color: #d8d8d8;\n\t--wrinkled-paper-border-segments: 0.02;\n\t--wrinkled-paper-banner-color: #0000001c;\n\t--wrinkled-paper-banner-size: 17px;\n\t--wrinkled-paper-border-size: 8px;\n\t--wrinkled-paper-border-color: #0000002b;\n\tposition: relative;\n\tfilter: var(--default-drop-shadow);\n}\n\n.weaponSelectionItem.selected{\n\ttransform: scale(1.1);\n\t--wrinkled-paper-color: #bfbfbf;\n}\n.weaponSelectionItem:not(.selected){\n\tfilter: brightness(0.8);\n}\n.weaponSelectionItem:not(.selected):hover{\n\tfilter: brightness(0.9);\n}\n\n.weaponSelectionItemKeyNumber{\n\tposition: absolute;\n\tmargin: 9px;\n\tcolor: white;\n\ttop: 0;\n\tright: 0;\n}\n\n.weaponSelectionItemIcon{\n\twidth: 80px;\n\theight: 80px;\n\tmargin: 5px;\n}\n\n.text-with-submit-form {\n\tdisplay: flex;\n\tgap: 5px;\n\twidth: 100%;\n\tpadding: 4px 10px;\n\tbox-sizing: border-box;\n}\n\n.text-with-submit-form > * {\n\tmargin-left: 0;\n\tmargin-right: 0;\n}\n\n.text-with-submit-form > button {\n\tpadding-left: 10px;\n\tpadding-right: 10px;\n}\n\n.skin-downloader-dialog-content {\n\tmax-width: 600px;\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: center;\n}\n\n.skin-downloader-dialog-controls {\n\tdisplay: flex;\n\tflex-direction: column;\n}\n\n.skin-downloader-dialog-controls > * {\n\theight: 30px;\n}\n\n.skin-downloader-size-input {\n\twidth: 50px;\n}\n\n.skin-downloader-download-container {\n\tpadding: 10px;\n\talign-self: center;\n}\n\n.downloadable-skin-preview {\n\twidth: 250px;\n\theight: 250px;\n\tbackground-size: contain;\n\tbackground-repeat: no-repeat;\n\tflex-shrink: 0;\n}\n\n.af-mirror > #mainMenu,\n.af-mirror > .mainCanvas {\n\ttransform: scale(-1, 1);\n}\n\n.af-mirror > .dialog,\n.af-mirror > .dialogWrapper {\n\ttransform: translate(-50%, -50%) scale(-1, 1);\n}\n\n.af-mirror> .weaponSelectionDialog{\n\ttransform: translate(-50%, 0px) scale(-1, 1);\n}\n.af-mirror > .weaponSelectionDialog.hidden{\n\ttransform: translate(-50%, 0px) scale(-0.95, 0.95);\n}\n\n@media(max-width: 1220px){\n\t.af-mirror > .weaponSelectionDialog{\n\t\ttransform: translate(-50%, 0px) scale(-0.5, 0.5);\n\t}\n\t.af-mirror > .weaponSelectionDialog.hidden{\n\t\ttransform: translate(-50%, 0px) scale(-0.45, 0.45);\n\t}\n}\n.af-mirror > .dialog.topCenter{\n\ttransform: translate(-50%, 0) scale(-1, 1);\n}\n\n.shop-paged-view-container {\n\twidth: 340px;\n\theight: 300px;\n\tposition: relative;\n\toverflow: hidden;\n}\n");
+pc.replaceSync(":root{\n\t--default-drop-shadow: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));\n\t--default-wrinkled-paper-border-color: #353535;\n\t--disabled-wrinkled-paper-border-color: #919191;\n\t--shop-item-background-color: #f1f1f1;\n\t--shop-item-highlight-color: #fdc570;\n\t--blue-highlight-color: #0c5fcc;\n}\n\nbody, html {\n\t/* Setting overflow to hidden prevents the page from being scrolled by the user.\n\tBut scripts like scrollIntoView() can still cause the page to be scrolled.\n\tTry fixing the element that causet the page to get scrollable rather than setting\n\tthe body to overflow: hidden */\n\t/* overflow: hidden; */\n}\n\n.allow-select {\n\tuser-select: text;\n\t-webkit-user-select: text;\n}\n\n@property --wrinkled-paper-color {\n\tsyntax: '<color>';\n\tinherits: false;\n\tinitial-value: blue;\n}\n\n.fullScreen.safeArea{\n\tleft: 0;\n\tright: 0;\n\ttop: 0;\n\tbottom: 0;\n\tleft: env(safe-area-inset-left);\n\tright: env(safe-area-inset-right);\n\ttop: env(safe-area-inset-top);\n\tbottom: env(safe-area-inset-bottom);\n\twidth: initial;\n\theight: initial;\n}\n\n.mainCanvas{\n\tz-index: -1;\n}\n\n.wrinkledPaper{\n\t--wrinkled-paper-wrinkle-size: 6px;\n\t--wrinkled-paper-color: white;\n\t--wrinkled-paper-border-segments: 0.016;\n\t--wrinkled-paper-tear-count-min: 0.001;\n\t--wrinkled-paper-tear-count-max: 0.003;\n\t--wrinkled-paper-tear-depth-min: 5px;\n\t--wrinkled-paper-tear-depth-max: 15px;\n\t--wrinkled-paper-tear-width-min: 10px;\n\t--wrinkled-paper-tear-width-max: 20px;\n\t--wrinkled-paper-tear-angle-offset-min: 0.7;\n\t--wrinkled-paper-tear-angle-offset-max: 1.1;\n}\n\n.wrinkledLine {\n\t--wrinkled-line-color: black;\n\t--wrinkled-line-width: 1px;\n\t--wrinkled-line-wrinkle-size: 6px;\n\t--wrinkled-line-segments: 0.016;\n}\n\n.dialogCurtain{\n\tbackground: rgba(0,0,0,0.3);\n}\n.dialogCurtain.hidden{\n\tvisibility: hidden;\n\topacity: 0;\n}\n\n.dialogWrapper, .dialog {\n\tdisplay: block;\n\tposition: absolute;\n\tmax-width: 100%;\n\tmin-height: 150px;\n\tmax-height: 100%;\n\tleft: 50%;\n\ttop: 50%;\n\ttransform: translate(-50%, -50%);\n\t-webkit-transform: translate3d(-50%,-50%,0);\n\ttransition: transform 0.2s, opacity 0.2s, visibility 0.2s;\n\ttransition-timing-function: cubic-bezier(0.3, -0.8, 0.7, 1.8);\n}\n\n.dialogWrapper > .dialog {\n\tposition: relative;\n\tleft: 0;\n\ttop: 0;\n\ttransform: initial;\n\t-webkit-transform: initial;\n}\n\n.dialog{\n\tfilter: var(--default-drop-shadow);\n\tpadding: 30px;\n\tbox-sizing: border-box;\n\twidth: fit-content;\n}\n.dialog.hidden, .dialogWrapper.hidden{\n\topacity: 0;\n\ttransform: translate(-50%, -50%) scale(0.95);\n\tvisibility: hidden;\n}\n.dialog.topCenter{\n\ttop: 10px;\n\ttransform: translate(-50%, 0);\n}\n\n.dialog-title-header-container {\n\tdisplay: flex;\n\tgap: 20px;\n}\n\nh2.dialogTitle{\n\tmargin: 0px 0px 20px 0px;\n\tfont-size: 42px;\n}\n\nh3.dialogTitle{\n\tmargin: 0px 0px 10px 0px;\n\tfont-size: 30px;\n}\n\n.dialogButtonsContainer {\n\tmargin-top: 10px;\n\ttext-align: center;\n\tdisplay: flex;\n\tjustify-content: center;\n}\n\n.dialogButtonsContainer.vertical {\n\tflex-direction: column;\n\tmax-width: 300px;\n\tmargin: auto;\n}\n\n.dialog-art-wrapper {\n\twidth: 100%;\n\tmargin: auto;\n}\n\n.dialog-art {\n\twidth: 0;\n\tmin-width: 100%;\n\theight: 100%;\n\tmax-height: 50vh;\n\tobject-fit: contain;\n}\n\n.dialog-art-buttons-container {\n\tdisplay: flex;\n}\n\n@media (min-height: 500px) {\n\t.dialog-art-buttons-container {\n\t\tflex-direction: column;\n\t}\n}\n\n@media (max-width: 500px) and (max-height: 600px) {\n\t.dialog-art-wrapper {\n\t\tdisplay: none;\n\t}\n}\n\n.currency-button {\n\tpadding: 0px 30px;\n}\n\n.currency-container {\n\tdisplay: flex;\n\talign-items: center;\n\tfont-size: 18px;\n\tjustify-content: center;\n}\n\n.coin-icon {\n\twidth: 20px;\n\theight: 20px;\n\tdisplay: inline-block;\n\tbackground-image: url(img/coin.svg);\n\tmargin-right: 5px;\n}\n\n.coin-count-text {\n\tcolor: #fbd413;\n\tfont-weight: 900;\n\t-webkit-text-stroke: 2px #766200;\n\tfilter: drop-shadow(0px 1px #766200);\n\tposition: relative;\n\tletter-spacing: 1px;\n\tfont-size: 20pt;\n}\n\n.coin-count-text::after {\n\tcontent: attr(data-text-content);\n\t-webkit-text-stroke: 0;\n\tfilter: none;\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0px;\n}\n\n.dialogTabs {\n\tposition: absolute;\n\ttop: -50px;\n\tleft: 5px;\n\tpointer-events: none;\n}\n\n.dialogTab {\n\tdisplay: inline-block;\n\tpointer-events: auto;\n\ttransition: transform 0.1s;\n\theight: 80px;\n}\n\n.dialogTabSpacer {\n\tdisplay: inline-block;\n\twidth: 20px;\n}\n\n.dialogTab.back {\n\t--wrinkled-paper-color: #d1d1d1;\n}\n\n.dialogTab.front:not(.active), .dialogTab.back.active {\n\topacity: 0;\n\tpointer-events: none;\n}\n\n.dialogTab.back:not(.active) {\n\ttransform: translateY(4px);\n\tcursor: pointer;\n}\n\n.dialogTab:not(.active):hover {\n\ttransform: translateY(2px);\n}\n\n.dialogTabIcon {\n\twidth: 60px;\n\theight: 60px;\n\tbackground-size: contain;\n\tbackground-repeat: no-repeat;\n}\n\n.skipDialogText {\n\tposition: absolute;\n\tbottom: 0;\n\tleft: 50%;\n\ttransform: translate(-50%, 25px);\n\tcolor: #dddddd;\n\ttext-shadow: 1px 1px #00000073;\n\tfont-size: 16px;\n\tcursor: pointer;\n\twhite-space: nowrap;\n}\n\n.toggle-menu-touch-button {\n\tpadding: 10px;\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\tz-index: 110;\n}\n\n.menuButtonsContainer {\n\tmax-width: fit-content;\n}\n\n.main-menu-corner-profile {\n\twidth: 300px;\n\tdisplay: flex;\n\tgap: 10px;\n\tmargin: 10px;\n}\n\n.main-menu-username {\n\tfont-size: 30px;\n}\n\n.main-menu-username:not(.blueNight) {\n\tfont-size: 25px;\n\tfont-weight: bold;\n}\n\n.main-menu-promo-banner-container {\n\ttop: 20px;\n\tright: 20px;\n\tposition: absolute;\n\twidth: 320px;\n\theight: 210px;\n\tfilter: var(--default-drop-shadow);\n}\n.main-menu-promo-banner-container.hidden {\n\tdisplay: none;\n}\n\n@media (max-width: 1200px), (max-height: 700px) {\n\t.main-menu-promo-banner-container {\n\t\twidth: 220px;\n\t\theight: 140px;\n\t}\n}\n\n@media (max-width: 500px), (max-height: 420px) {\n\t.main-menu-promo-banner-container {\n\t\tdisplay: none;\n\t}\n}\n\n.main-menu-promo-banner {\n\twidth: 100%;\n\theight: 100%;\n\tbackground: center / cover, white;\n\t--wrinkled-paper-wrinkle-size: 8px;\n\t--wrinkled-paper-tear-count-min: 0.003;\n\t--wrinkled-paper-tear-count-max: 0.004;\n\tcursor: pointer;\n}\n.main-menu-promo-banner:hover {\n\tfilter: brightness(0.9);\n}\n.main-menu-promo-banner:active {\n\tfilter: brightness(0.85);\n}\n\n.main-menu-promo-button {\n\tposition: absolute;\n\tbottom: 0;\n\tleft: 50%;\n\ttransform: translate(-50%, 50%);\n\tmargin: 0;\n}\n\n.gameAd{\n\tposition: absolute;\n\tbottom: 0;\n\tmargin-bottom: 20px;\n\tleft: 50%;\n\ttransform: translate(-50%);\n\tbackground: #0000004f;\n\tz-index: 20;\n}\n.gameAd.desktop{\n\twidth: 728px;\n\theight: 90px;\n}\n.gameAd.mobile{\n\twidth: 320px;\n\theight: 50px;\n\tdisplay: none;\n}\n@media(max-width: 1220px){\n\t.gameAd.desktop{\n\t\tdisplay: none;\n\t}\n\t.gameAd.mobile{\n\t\tdisplay: inherit;\n\t}\n}\n.gameAd.hidden{\n\tdisplay: none;\n}\n\n.shake-anim {\n\tanimation: 2.5s linear infinite shake;\n}\n\n@keyframes shake {\n\t0% { transform: rotate(0deg); }\n\t4% { transform: rotate(4deg); }\n\t8% { transform: rotate(-3deg); }\n\t12% { transform: rotate(2deg); }\n\t16% { transform: rotate(1deg); }\n\t20% { transform: rotate(0deg); }\n}\n\n.crosshairContainer{\n\tposition: absolute;\n\tleft: 50%;\n\ttop: 50%;\n\tz-index: 100;\n\ttransform: translate(-50%, -50%);\n\tpointer-events: none;\n}\n.crosshairLine{\n\tposition: absolute;\n\twidth: 15px;\n\theight: 2px;\n\tbackground: white;\n\tborder: 2px solid black;\n\tborder-radius: 10px;\n\ttransform-origin: left;\n\twill-change: transform;\n}\n.flagReturnProgressContainer {\n\tposition: absolute;\n\ttransform: translate(-50%, -50%);\n\ttransition: opacity 0.2s;\n}\n.flagReturnProgressContainer.hidden{\n\topacity: 0;\n}\n.flagReturnProgressPath {\n\tfill: none;\n\tstroke-width: 10px;\n\tstroke-linecap: round;\n}\n\n.flagScoreContainer{\n\tposition: absolute;\n\tright: 0;\n\ttop: 0;\n\tz-index: 100;\n\tmargin: 30px;\n\tfilter: var(--default-drop-shadow);\n\tpointer-events: none;\n}\n\n.flagScoreItem{\n\tmargin: 3px;\n\tdisplay: flex;\n}\n\n.flagScoreIcon{\n\theight: 50px;\n\twidth: 50px;\n\ttransform: translateY(-5px);\n}\n\n.flagScorePointEl{\n\twidth: 40px;\n\theight: 40px;\n\talign-self: center;\n}\n\n.healthUiContainer{\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\tmargin: 30px;\n\twidth: 330px;\n\theight: 50px;\n\tz-index: 100;\n\tpointer-events: none;\n}\n\n.healthUiBorder{\n\tbackground: url(img/healthUiBorder.svg);\n\twidth: 100%;\n\theight: 100%;\n\tposition: absolute;\n\tfilter: var(--default-drop-shadow);\n}\n\n.healthUiBarContainer{\n\tbackground: black;\n\twidth: 276px;\n\theight: 20px;\n\tposition: absolute;\n\ttop: 15px;\n\tleft: 37px;\n\toverflow: hidden;\n}\n\n.healthUiBar{\n\twidth: 100%;\n\theight: 100%;\n\tbackground: #e81d25;\n\tbackground: linear-gradient(90deg, #740e12 33.333%, #ae161c 33.334%, #ae161c 66.666%, #e81d25 66.667%);\n}\n\n.gameplayBottomText{\n\tfont-size: 45px;\n\tposition: absolute;\n\tleft: 0;\n\twidth: 100%;\n\tbottom: 25px;\n\ttext-align: center;\n\tpointer-events: none;\n}\n\n.scoreBoardContainer{\n\tbackground: white;\n}\n\n.notificationIconsUiContainer{\n\twidth: 200px;\n\theight: 200px;\n\tpointer-events: none;\n}\n\n.notificationIconsUiContainer.topleft{\n\tleft: 0;\n\ttop: 80px;\n\tposition: absolute;\n\ttransform-origin: top left;\n}\n\n.notificationIconsUiContainer.centerbig{\n\tleft: 50%;\n\ttop: 50%;\n\twidth: 50vw;\n\theight: min(50vw, 100vh);\n\tposition: absolute;\n\ttransform: translate(-50%, -50%);\n}\n\n.notificationIconsUiContainer.crosshair{\n\tleft: 50%;\n\ttop: 50%;\n\twidth: 200px;\n\theight: 200px;\n\tposition: absolute;\n\ttransform: translate(-50%, -50%) translateY(-140px);\n}\n\n.notificationIcon{\n\tfilter: var(--default-drop-shadow);\n\tanimation: 1s notificationIconFade 6s both, 0.2s notificationIconPop;\n\twidth: 100%;\n\theight: 100%;\n\tbackground-position: center;\n\tbackground-repeat: no-repeat;\n}\n\n.crosshair > .notificationIcon{\n\tanimation: 1s notificationIconFade 0.5s both, 0.2s notificationIconPop;\n}\n\n@keyframes notificationIconPop{\n\t0%{\n\t\ttransform: scale(1);\n\t}\n\t50%{\n\t\ttransform: scale(1.2);\n\t}\n\t100%{\n\t\ttransform: scale(1);\n\t}\n}\n@keyframes notificationIconFade{\n\t0%{\n\t\topacity: 1;\n\t}\n\n\t100%{\n\t\topacity: 0;\n\t}\n}\n\n.score-offset-notifications-container {\n\tpointer-events: none;\n\toverflow: hidden;\n}\n\n.score-offset-notifications-list {\n\tfont-size: 30px;\n\ttext-align: center;\n\ttop: 20%;\n\tposition: absolute;\n\twidth: 100%;\n}\n\n.scoreOffsetNotification {\n\tposition: absolute;\n\twidth: 100%;\n\ttransition: transform 0.5s;\n}\n\n.scoreOffsetNotificationScore {\n\tcolor: #b0e9b0;\n}\n\n.touchInputWhiteBorder{\n\tbackground: #00000047;\n\tborder-radius: 150px;\n\tbox-sizing: border-box;\n\tborder: solid white;\n\tpointer-events: none;\n}\n\n.touchInputJoyStickContainer{\n\twidth: 150px;\n\theight: 150px;\n\tposition: absolute;\n\ttransition: opacity 0.3s;\n}\n\n.touchInputJoyStick{\n\twidth: 60px;\n\theight: 60px;\n\tleft: 50%;\n\ttop: 50%;\n\tbackground: white;\n\tborder-radius: 60px;\n\tposition: absolute;\n\ttransform: translate(-50%, -50%);\n}\n\n.touchInputButton{\n\twidth: 70px;\n\theight: 70px;\n\tposition: absolute;\n}\n\n.touchInputButton.touching{\n\tbackground: #ffffff47;\n}\n\n@media(max-width: 700px), (max-height: 450px){\n\t.healthUiContainer{\n\t\tmargin: 10px;\n\t\ttransform: scale(0.5) translateX(60px);\n\t\ttransform-origin: top left;\n\t}\n\n\t.flagScoreContainer{\n\t\tmargin: 10px;\n\t\ttransform: scale(0.5);\n\t\ttransform-origin: top right;\n\t}\n\n\t.notificationIconsUiContainer{\n\t\ttransform: scale(0.5);\n\t}\n\n\t.notificationIconsUiContainer.topleft{\n\t\ttop: 40px;\n\t}\n}\n\n.screenFlash{\n\tpointer-events: none;\n\tbackground: red;\n\topacity: 0;\n}\n\n.settingsItem{\n\tdisplay: flex;\n\tmargin-bottom: 6px;\n\tflex-wrap: wrap;\n}\n.settingsItemText{\n\tdisplay: inline;\n\tflex-grow: 1;\n\tflex-shrink: 0;\n\twidth: 200px;\n}\n.settingsItemSlider{\n\tdisplay: inline;\n\twidth: 220px;\n\tflex-shrink: 0;\n}\n.settingsItemSlider > input{\n\twidth: 170px;\n}\n.settingsItemSliderValue{\n\tdisplay: inline-block;\n\twidth: 40px;\n\ttext-align: right;\n}\n\n.settings-list {\n\toverflow: auto;\n\tmax-height: min(250px, 40vh);\n}\n\n.playersListTeamWonTitle{\n\ttext-align: center;\n\tfont-size: 34px;\n\tmargin: 0;\n}\n\n.playersListContainer{\n\toverflow: auto;\n\tmax-height: 600px;\n\tdisplay: flex;\n\tgap: 20px;\n\talign-items: flex-start;\n}\n\n@media(max-width: 1000px){\n\t.playersListContainer{\n\t\tflex-direction: column;\n\t}\n}\n\n.playersListTeam{\n\t--wrinkled-paper-wrinkle-size: 4px;\n\twidth: 550px;\n}\n\n.itemsTable{\n\tborder-collapse: collapse;\n}\n\n.playersListHead{\n\tcolor: white;\n}\n\n.itemsTable > tbody > tr:nth-child(even){\n\t--wrinkled-paper-wrinkle-size: 2px;\n\t--wrinkled-paper-color: #ffffff6b;\n}\n\n.itemsTable > tbody > tr > td:first-child{\n\tpadding-left: 10px;\n}\n.itemsTable > tbody > tr > td:last-child{\n\tpadding-right: 10px;\n}\n\n.itemsTable > tbody > tr > td, .playersListHead > th{\n\tpadding: 10px 0px;\n}\n\n.player-list-avatar {\n\twidth: 40px;\n\theight: 40px;\n\tbackground-size: contain;\n}\n\n.players-list-label{\n\tcolor: white;\n\tbackground: #909090;\n\tpadding: 2px 3px;\n\tfont-size: 13px;\n\tmargin-left: 7px;\n\tborder-radius: 3px;\n}\n\n.players-list-item-username {\n\tdisplay: flex;\n\tmax-width: 200px;\n\talign-items: center;\n}\n\n.player-list-username {\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\twhite-space: nowrap;\n}\n\n.player-name-verified-icon {\n\tmargin-left: 5px;\n\twidth: 20px;\n\theight: 20px;\n\tbackground-repeat: no-repeat;\n\tbackground-image: url(img/menuUI/verified.svg);\n}\n\n.playersListItem > td:first-child {\n\tpadding: 0px;\n}\n\n.playersListItemScore{\n\ttext-align: center;\n}\n\n.gameoverStatsContainer {\n\t--wrinkled-paper-color: #cdcdcd;\n\twidth: fit-content;\n\tmargin: auto;\n\toverflow: auto;\n}\n\n.gameOverStatsTable {\n\twidth: 240px;\n}\n\n.game-over-stats-coins-container {\n\tdisplay: flex;\n\tgap: 10px;\n\tjustify-content: center;\n\tmargin-top: 20px;\n}\n\n.totalScoreRow {\n\tfont-weight: bold;\n}\n\n.ownedCoinsContainer {\n\tposition: absolute;\n\ttop: -20px;\n\tright: -20px;\n\tpadding: 10px;\n\tfilter: var(--default-drop-shadow);\n}\n\n.weaponSelectionDialog{\n\tbottom: 130px;\n\ttop: inherit;\n\ttransform: translate(-50%, 0px);\n\ttransform-origin: bottom;\n}\n.weaponSelectionDialog.hidden{\n\ttransform: translate(-50%, 0px) scale(0.95);\n}\n\n@media(max-width: 1220px){\n\t.weaponSelectionDialog{\n\t\tbottom: 90px;\n\t\ttransform: translate(-50%, 0px) scale(0.5);\n\t}\n\t.weaponSelectionDialog.hidden{\n\t\ttransform: translate(-50%, 0px) scale(0.45);\n\t}\n}\n.weaponSelectionContainer{\n\tdisplay: flex;\n\tgap: 10px;\n}\n\n.weaponSelectionItem{\n\ttransition: transform 0.2s;\n\ttransition-timing-function: cubic-bezier(0.0, 0.0, 0.0, 1.8);\n\t--wrinkled-paper-color: #d8d8d8;\n\t--wrinkled-paper-border-segments: 0.02;\n\t--wrinkled-paper-banner-color: #0000001c;\n\t--wrinkled-paper-banner-size: 17px;\n\t--wrinkled-paper-border-size: 8px;\n\t--wrinkled-paper-border-color: #0000002b;\n\tposition: relative;\n\tfilter: var(--default-drop-shadow);\n}\n\n.weaponSelectionItem.selected{\n\ttransform: scale(1.1);\n\t--wrinkled-paper-color: #bfbfbf;\n}\n.weaponSelectionItem:not(.selected){\n\tfilter: brightness(0.8);\n}\n.weaponSelectionItem:not(.selected):hover{\n\tfilter: brightness(0.9);\n}\n\n.weaponSelectionItemKeyNumber{\n\tposition: absolute;\n\tmargin: 9px;\n\tcolor: white;\n\ttop: 0;\n\tright: 0;\n}\n\n.weaponSelectionItemIcon{\n\twidth: 80px;\n\theight: 80px;\n\tmargin: 5px;\n}\n\n.text-with-submit-form {\n\tdisplay: flex;\n\tgap: 5px;\n\twidth: 100%;\n\tpadding: 4px 10px;\n\tbox-sizing: border-box;\n}\n\n.text-with-submit-form > * {\n\tmargin-left: 0;\n\tmargin-right: 0;\n}\n\n.text-with-submit-form > button {\n\tpadding-left: 10px;\n\tpadding-right: 10px;\n}\n\n.skin-downloader-dialog-content {\n\tmax-width: 600px;\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: center;\n}\n\n.skin-downloader-dialog-controls {\n\tdisplay: flex;\n\tflex-direction: column;\n}\n\n.skin-downloader-dialog-controls > * {\n\theight: 30px;\n}\n\n.skin-downloader-size-input {\n\twidth: 50px;\n}\n\n.skin-downloader-download-container {\n\tpadding: 10px;\n\talign-self: center;\n}\n\n.downloadable-skin-preview {\n\twidth: 250px;\n\theight: 250px;\n\tbackground-size: contain;\n\tbackground-repeat: no-repeat;\n\tflex-shrink: 0;\n}\n\n.af-mirror > #mainMenu,\n.af-mirror > .mainCanvas {\n\ttransform: scale(-1, 1);\n}\n\n.af-mirror > .dialog,\n.af-mirror > .dialogWrapper {\n\ttransform: translate(-50%, -50%) scale(-1, 1);\n}\n\n.af-mirror> .weaponSelectionDialog{\n\ttransform: translate(-50%, 0px) scale(-1, 1);\n}\n.af-mirror > .weaponSelectionDialog.hidden{\n\ttransform: translate(-50%, 0px) scale(-0.95, 0.95);\n}\n\n@media(max-width: 1220px){\n\t.af-mirror > .weaponSelectionDialog{\n\t\ttransform: translate(-50%, 0px) scale(-0.5, 0.5);\n\t}\n\t.af-mirror > .weaponSelectionDialog.hidden{\n\t\ttransform: translate(-50%, 0px) scale(-0.45, 0.45);\n\t}\n}\n.af-mirror > .dialog.topCenter{\n\ttransform: translate(-50%, 0) scale(-1, 1);\n}\n\n.shop-paged-view-container {\n\twidth: 340px;\n\theight: 300px;\n\tposition: relative;\n\toverflow: hidden;\n}\n");
 const mc = new CSSStyleSheet;
 mc.replaceSync('.dialog-button,\n.icon-button {\n\tborder: none;\n\tappearance: none;\n}\n\n.dialog-button,\n.main-menu-button {\n\t-webkit-tap-highlight-color: transparent;\n}\n\n.dialog-button{\n\tpadding: 7px 30px;\n\tmargin: 4px 10px;\n\tfont-size: 24px;\n\theight: 38px;\n\tcolor: var(--default-wrinkled-paper-border-color);\n\tvertical-align: middle;\n\twhite-space: nowrap;\n\t--wrinkled-paper-border-size: 3;\n\t--wrinkled-paper-border-size-bottom: 6;\n\t--wrinkled-paper-border-color: var(--default-wrinkled-paper-border-color);\n\t--wrinkled-paper-seed: 70;\n\t--wrinkled-paper-wrinkle-size: 2px;\n\t--wrinkled-paper-border-segments: 0.02;\n\t--wrinkled-paper-tear-count-min: 0;\n\t--wrinkled-paper-tear-count-max: 0;\n}\n.dialog-button:hover:not(:disabled){\n\tfilter: brightness(0.9);\n}\n.dialog-button:active:not(:disabled){\n\tfilter: brightness(0.8);\n}\n\n.dialog-button:not(:disabled){\n\tcursor: pointer;\n}\n\n.dialog-button:disabled {\n\t--wrinkled-paper-border-color: #959595;\n\tcolor: #959595;\n}\n\n.dialog-button:disabled > .currency-container, .dialog-button:disabled > .dialog-button-icon {\n\topacity: 0.5;\n}\n\n.dialog-button-icon {\n\twidth: 20px;\n\theight: 20px;\n\tdisplay: inline-block;\n\tbackground-size: contain;\n\tbackground-position: center;\n\tbackground-repeat: no-repeat;\n\tmargin-right: 10px;\n\tvertical-align: middle;\n}\n\n.icon-button {\n\tcursor: pointer;\n\tbackground: transparent;\n\tbackground-repeat: no-repeat;\n\tbackground-position: center;\n}\n\n.icon-button:hover {\n\topacity: 0.7;\n}\n.icon-button:active {\n\topacity: 0.6;\n}\n\n.header-button {\n\tpadding: 0;\n}\n\n.icon-button > .dialog-button-icon,\n.header-button > .dialog-button-icon {\n\twidth: 20px;\n\theight: 20px;\n\tmargin: 3px;\n}\n\n.header-back-button > .dialog-button-icon {\n\twidth: 30px;\n}\n\n\n.main-menu-button-container {\n\tdisplay: flex;\n\talign-items: center;\n}\n\n.main-menu-button{\n\tborder: none;\n\twidth: 70px;\n\theight: 70px;\n\tcursor: pointer;\n\tmargin: 5px;\n\tpadding: 0;\n\t--wrinkled-paper-border-segments: 0.04;\n\t--wrinkled-paper-wrinkle-size: 5px;\n\t--wrinkled-paper-tear-count-min: 0.003;\n\t--wrinkled-paper-tear-count-max: 0.004;\n\t--wrinkled-paper-border-size: 3;\n\t--wrinkled-paper-border-size-bottom: 6;\n\t--wrinkled-paper-border-color: var(--default-wrinkled-paper-border-color);\n\t--wrinkled-paper-tear-count-min: 0;\n\t--wrinkled-paper-tear-count-max: 0;\n\tfilter: var(--default-drop-shadow);\n}\n.main-menu-button:hover{\n\tfilter: var(--default-drop-shadow) brightness(0.9);\n}\n.main-menu-button:active{\n\tfilter: var(--default-drop-shadow) brightness(0.8);\n}\n\n.main-menu-button-text {\n\tcolor: white;\n\tfont-size: 30px;\n}\n\n.buttonImage{\n\twidth: 100%;\n\theight: 100%;\n\tbackground-size: contain;\n\tbackground-repeat: no-repeat;\n\tbackground-position: center;\n}\n\n.dialog-text-input,\n.dialog-select-wrapper,\n.dialog-checkbox-input,\n.dialog-toggle-input {\n\t--wrinkled-paper-border-size: 3;\n\t--wrinkled-paper-border-size-bottom: 4;\n\t--wrinkled-paper-border-color: var(--default-wrinkled-paper-border-color);\n\t--wrinkled-paper-seed: 70;\n\t--wrinkled-paper-wrinkle-size: 2px;\n\t--wrinkled-paper-border-segments: 0.02;\n\t--wrinkled-paper-border-color-top-extra: #e2e2e2;\n\t--wrinkled-paper-border-size-top-extra: 10;\n\t--wrinkled-paper-tear-count-min: 0;\n\t--wrinkled-paper-tear-count-max: 0;\n}\n.dialog-checkbox-input:focus-visible,\n.dialog-toggle-input:focus-visible,\n.dialog-text-input:focus-visible,\n.dialog-button:focus-visible,\n.main-menu-button:focus-visible,\n.dialog-select-wrapper:has(> select:focus-visible) {\n\toutline: none;\n\t--wrinkled-paper-border-color: var(--blue-highlight-color);\n\t--wrinkled-paper-border-size: 5;\n\t--wrinkled-paper-border-size-bottom: 7;\n}\n.icon-button:focus-visible {\n\toutline: var(--blue-highlight-color) auto 1px;\n}\n.dialog-text-input:disabled,\n.dialog-checkbox-input:disabled,\n.dialog-toggle-input:disabled {\n\t--wrinkled-paper-border-color: var(--disabled-wrinkled-paper-border-color);\n}\n\n.dialog-text-input {\n\tpadding: 7px;\n\tmargin: 4px 10px;\n\tfont-size: 24px;\n\theight: 38px;\n\tborder: none;\n\tbox-sizing: border-box;\n}\n\n.dialog-checkbox-input,\n.dialog-toggle-input {\n\tappearance: none;\n\twidth: 30px;\n\theight: 30px;\n\tdisplay: grid;\n\tplace-content: center;\n}\n.dialog-toggle-input {\n\twidth: 45px;\n}\n.dialog-checkbox-input:active:not(:disabled),\n.dialog-toggle-input:active:not(:disabled) {\n\t--wrinkled-paper-color: #e7e7e7;\n}\n.dialog-checkbox-input:checked::before {\n\tcontent: "";\n\twidth: 20px;\n\theight: 20px;\n\tbackground-image: url(img/menuUI/check.svg);\n\tbackground-size: contain;\n}\n.dialog-checkbox-input:checked:disabled::before,\n.dialog-toggle-input:checked:disabled::before {\n\topacity: 0.5;\n}\n.dialog-toggle-input {\n\t--wrinkled-paper-extra-box-color: white;\n\t--wrinkled-paper-extra-box-size: 10px;\n\t--wrinkled-paper-extra-box-border-color: var(--default-wrinkled-paper-border-color);\n\t--wrinkled-paper-extra-box-border-size: 2;\n\t--wrinkled-paper-extra-box-side: left;\n}\n.dialog-toggle-input:checked {\n\t--wrinkled-paper-extra-box-side: right;\n}\n\n.dialog-select-input {\n\tappearance: none;\n\toutline: none;\n\tborder: none;\n\tpadding: 8px 25px 8px 8px;\n\tfont-size: 14pt;\n\tbackground: url(img/downArrowSmall.svg) no-repeat right center;\n}\n');
 const gc = new CSSStyleSheet;
@@ -35264,11 +35227,11 @@ bc.replaceSync('#qc-cmp2-ui {\n\tbackground: paint(wrinkledPaper);\n\t--wrinkled
     let t = "";
     if (window.Intl && Intl.RelativeTimeFormat) {
         const e = new Intl.RelativeTimeFormat,
-        i = Date.now() / 1e3 - Number("1659120483");
+        i = Date.now() / 1e3 - Number("1660585689");
         t = i < 60 ? e.format(-Math.floor(i), "second") : i < 3600 ? e.format(-Math.floor(i / 60), "minute") : i < 86400 ? e.format(-Math.floor(i / 60 / 60), "hour") : i < 31536e3 ? e.format(-Math.floor(i / 60 / 60 / 24), "day") : e.format(-Math.floor(i / 60 / 60 / 24 / 365), "year"),
         t = " (" + t + ")"
     }
-    console.log("loading v1659120483" + t),
+    console.log("loading v1660585689" + t),
     dc = new cc,
     dc.init()
 	
