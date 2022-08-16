@@ -33,7 +33,7 @@ And you're done! Enjoy!
 ### Just open https://narrow.one/ . BetterNarrow should start automatically.
 
 ## Known Issues
-### If the BetterNarrow doesn't start, refresh the page with fn5. Otherwise it means that Narrow One has been updated, and you'll have to wait for BetterNarrow to be updated too.
+### If BetterNarrow doesn't start, refresh the page with fn5. Otherwise it means that Narrow One has been updated, and you'll have to wait for BetterNarrow to be updated too.
 
 ## Discord Server
 ### https://discord.gg/mfJBTJR9gt
