@@ -19103,8 +19103,8 @@ class na {
             gamesTargetFramerate = this.getValue("framerate");
             camHeight = this.getValue("camheight");
             
-			SpoofVersion(this.getValue("versionspoof"))
-			globalThis.VERSION_TIMESTAMP = Number(versionKey)
+			//SpoofVersion(this.getValue("versionspoof"))
+			//globalThis.VERSION_TIMESTAMP = Number(versionKey)
 
             if (debug)
                 globalInstance.explorer.init()
@@ -19721,10 +19721,10 @@ class _a extends Ma { // client settings
 class graphicSettings extends Ma { // client graphic settings
     constructor(t, e, i) {
         if (super(), this.settingsManager = t, this.dialogManager = e, this.titleEl = document.createElement("h2"), this.titleEl.classList.add("dialogTitle", "blueNight"), this.titleEl.textContent = "BetterNarrow", this.el.appendChild(this.titleEl), this.settings = new Map,
-				this.settings.set("versionspoof", new Ca({
+				/*this.settings.set("versionspoof", new Ca({
                     text: "Version Spoof",
                     type: "toggle"
-                })), this.settings.set("framerate", new Ca({
+                })),*/ this.settings.set("framerate", new Ca({
                     text: "Target Framerate",
                     type: "slider",
                     min: 5,
@@ -19851,10 +19851,10 @@ class graphicSettings extends Ma { // client graphic settings
                     case "vsync":
                         vsyncActive = i;
                         break;
-                    case "versionspoof":
+                    /*case "versionspoof":
                         SpoofVersion(i)
 						globalThis.VERSION_TIMESTAMP = Number(versionKey)
-                        break;
+                        break;*/
                     }
                 }))
         }
