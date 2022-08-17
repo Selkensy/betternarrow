@@ -2,6 +2,125 @@ console.log('Injected!');
 
 let ThreeAPI;
 
+let oVersionKey = '1660674506';
+let versionKey = oVersionKey;
+
+function SpoofVersion(bool) {
+	if (bool)
+		versionKey = document.getElementById('versionKey').innerHTML;
+	else versionKey = oVersionKey;
+}
+
+let debug = false;
+
+let globalInstance = null;
+
+let globalNotificationPtr = null;
+
+let styles = [];
+
+let camHeight = 1.6;
+
+let betterNarrowCharacter = '‎';
+
+let labArray = [];
+
+let pingTimer = 0;
+let gameFramerate = 0;
+
+let qty = 0;
+let avrgDmg = 0;
+
+let gamesTargetFramerate = 60;
+let vsyncActive = true;
+
+let tmpFunc = null;
+let tmpFunc2 = null; // lazy
+
+const delay = ms => new Promise(res => setTimeout(res, ms)); //fuck
+
+function createLab(id, x, y, text, color, explorer) {
+    var labelTest = document.createElement('div');
+    labelTest.style.position = 'absolute';
+    labelTest.style.width = 100;
+    labelTest.id = id;
+    labelTest.className = "main-menu-button-text whiteBigText blueNight";
+    labelTest.style.height = 100;
+    labelTest.style.color = 100;
+    labelTest.style.backgroundColor = 'transparent';
+    labelTest.innerHTML = text;
+    if (explorer == undefined) {
+        labelTest.style.bottom = y + 'px';
+        labelTest.style.left = x + 'px';
+        labArray.push(labelTest);
+    } else {
+        labelTest.style.bottom = y + 'px';
+        labelTest.style.right = x + 'px';
+        globalInstance.explorer.PushItem(labelTest);
+    }
+    document.body.appendChild(labelTest);
+};
+function ClearLabels() {
+    for (let i = 0; i < labArray.length; i++)
+        labArray[i].remove();
+    labArray = [];
+}
+function ReloadLabels() {
+    ClearLabels()
+
+    let keepInTouch = [
+        "FPS",
+        "Ping",
+        "DMG",
+        "",
+        "VERSION",
+        "NARROWVERSION"]
+    keepInTouch.reverse(); // reverse them so their in proper order (Newest added is the first in the array)
+
+    for (let i = 0; i < keepInTouch.length; i++)
+        if (keepInTouch[i] != "")
+            createLab(keepInTouch[i], 10, 10 + (25 * i), keepInTouch[i].toUpperCase() + ": 0", "white")
+
+            GetLabelById("VERSION").innerHTML = "v1.0.2";
+    GetLabelById("NARROWVERSION").innerHTML = versionKey;
+}
+
+const GetLabelById = id => document.getElementById(id);
+
+class EnvironmentExplorer { // CLASSIFIED AS A CHEAT, DONT ACTIVATE UNLESS DEBUGGING
+    constructor(t) {
+        this.scene = t;
+        this.explorerLab = [];
+    }
+    PushItem(item) {
+        this.explorerLab.push(item);
+    }
+    init() {
+        this.RefreshWindow();
+    }
+    ClearWindow() {
+        for (let i = 0; i < this.explorerLab.length; i++)
+            this.explorerLab[i].remove();
+        this.explorerLab = [];
+    }
+    RefreshWindow() { // called everytime something has been modified in the scene
+        this.ClearWindow()
+
+        let explorerItems = []
+
+        scene.traverse(function (obj) {
+            if (explorerItems.length >= 24)
+                explorerItems.shift(); // delete last item
+
+            if (obj != undefined && obj != null)
+                explorerItems.push(obj.name === "" ? "UNDEFINED" : obj.name);
+        });
+
+        for (let i = 0; i < explorerItems.length; i++)
+            createLab(explorerItems[i], 10, 10 + (25 * i), explorerItems[i], "white", true)
+    }
+}
+
 class BetterNarrow {
 	onFrameRender_Event = new Event('onFrameRender')
 	onInitialization_Event = new Event('onInitialization')

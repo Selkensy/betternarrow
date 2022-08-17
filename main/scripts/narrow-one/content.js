@@ -35,9 +35,17 @@ if (!window.injected) {
 	let observer = new MutationObserver((mutations) => {
 		for (const mutation of mutations) {
 			for (let node of mutation.addedNodes) {
-				if (node.src == 'https://narrow.one/js.js?v=1660674507') {
-					node.src = chrome.runtime.getURL('main/empty.js');
+				if (node.src != undefined && node.src.startsWith('https://narrow.one/js.js?v=')) {
 					
+					let versionKeyVariable = document.createElement('div');
+					versionKeyVariable.innerHTML = node.src.split('=')[1];
+					versionKeyVariable.id = 'versionKey';
+					versionKeyVariable.style.display = "none"
+					document.documentElement.prepend(versionKeyVariable);
+					document.documentElement.insertBefore(versionKeyVariable, document.documentElement.firstChild);
+					
+					node.src = chrome.runtime.getURL('main/empty.js');
+		
 					injectProp().then();
 				}
 			}
