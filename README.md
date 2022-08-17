@@ -7,13 +7,13 @@ If you're looking for the best way to improve your narrow.one experience, Better
 ## Download: [betternarrow-main.zip](https://github.com/Laamy/betternarrow/archive/refs/heads/main.zip)
 
 ## What it does does?
-*-Framerate Control
--Turn Vsync On/Off
--Enable/Disable Third Person (Press R in game)
--Enable/Disable Visual Effects
--Crosshair customization
--Dark Mode
--Stats (FPS,Ping,Damage,Version)
+- Framerate Control
+- Turn Vsync On/Off
+- Enable/Disable Third Person (Press R in game)
+- Enable/Disable Visual Effects
+- Crosshair customization
+- Dark Mode
+- Stats (FPS,Ping,Damage,Version)
 
 ## How to install?
 Once downloaded extract it to a safe folder. An example of how it should look like:
