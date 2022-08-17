@@ -5,7 +5,7 @@
 
 If you're looking for the best way to improve your narrow.one experience, BetterNarrow is definitely the modification you need. It includes countless features that will make your game much more enjoyable, such as custom crosshairs and a thirdperson camera and a custom damage display so you can see how much damage your armour saves you from. With all of these features and more, you'll be getting the best Narrow.one gaming experience you could ask for!
 
-## Download: [betternarrow-main.zip](https://github.com/Laamy/betternarrow/archive/refs/heads/main.zip)
+## Download: [BetterNarrow-1.1.3.zip](https://github.com/Laamy/betternarrow/releases/download/v1.1.3/BetterNarrow-1.1.3.zip)
 
 ## What it does does?
 - Framerate Control
