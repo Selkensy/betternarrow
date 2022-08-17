@@ -1,5 +1,5 @@
 <p align="center">
-# BetterNarrow
+<h1>BetterNarrow</h1>
 </p>
 ## Small optimization mod to enhance ones gameplay on https://narrow.one/
 
