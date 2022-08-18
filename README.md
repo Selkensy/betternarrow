@@ -7,7 +7,7 @@ If you're looking for the best way to improve your narrow.one experience, Better
 ## Download: [betternarrow-main.zip](https://github.com/Laamy/betternarrow/archive/refs/heads/main.zip)
 
 ## Compatibility
-<h3>The setup only works on Windows/Chrome</h3>
+<h3>The setup only works on Windows with Chrome installed</h3>
 
 ## How to install?
 
