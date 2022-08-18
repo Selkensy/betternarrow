@@ -218,7 +218,7 @@ function init() {
 			}
 			
 			if (String.fromCharCode(event.keyCode) === "N") {
-				BetterNarrowAPI.GetClient().gameManager.currentGame.scoreOffsetNotificationsUi.showOffsetNotification("Panic mode has been removed" , null, "hey");
+				//BetterNarrowAPI.GetClient().gameManager.currentGame.scoreOffsetNotificationsUi.showOffsetNotification("Panic mode has been removed" , null, "hey");
 			}
 		});
 		
