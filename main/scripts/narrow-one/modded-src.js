@@ -19721,109 +19721,112 @@ class _a extends Ma { // client settings
 class graphicSettings extends Ma { // client graphic settings
     constructor(t, e, i) {
         if (super(), this.settingsManager = t, this.dialogManager = e, this.titleEl = document.createElement("h2"), this.titleEl.classList.add("dialogTitle", "blueNight"), this.titleEl.textContent = "BetterNarrow", this.el.appendChild(this.titleEl), this.settings = new Map,
-				/*this.settings.set("versionspoof", new Ca({
-                    text: "Version Spoof",
-                    type: "toggle"
-                })),*/ this.settings.set("framerate", new Ca({
-                    text: "Target Framerate",
-                    type: "slider",
-                    min: 5,
-                    max: 260,
-                    step: 5
-                })), this.settings.set("vsync", new Ca({
-                    text: "Vsync",
-                    type: "toggle"
-                })), this.settings.set("statsfornerds", new Ca({
-                    text: "Stats for nerds",
-                    type: "toggle"
-                })), this.settings.set("thirdpersoncam", new Ca({
-                    text: "Third Person",
-                    type: "toggle"
-                })), this.settings.set("thirdpersonradius", new Ca({
-                    text: "Third Person Radius",
-                    type: "slider",
-                    min: 0.5,
-                    max: 2.5,
-                    step: 0.1
-                })), this.settings.set("noalerts", new Ca({
-                    text: "Remove Alerts",
-                    type: "toggle"
-                })), this.settings.set("optimization", new Ca({
-                    text: "Optimize Game",
-                    type: "toggle"
-                })), this.settings.set("damagedisplay", new Ca({
-                    text: "Damage Display",
-                    type: "toggle"
-                })), this.settings.set("camheight", new Ca({
-                    text: "Player Height",
-                    type: "slider",
-                    min: 1.2,
-                    max: 1.8,
-                    step: 0.1
-                })), this.settings.set("accuracyedit", new Ca({
-                    text: "Cursor Accuracy",
-                    type: "toggle"
-                })), this.settings.set("cursorticks", new Ca({
-                    text: "Cursor Ticks",
-                    type: "slider",
-                    min: 1,
-                    max: 12,
-                    step: 1
-                })), this.settings.set("cursorheight", new Ca({
-                    text: "Cursor Height",
-                    type: "slider",
-                    min: 1,
-                    max: 24,
-                    step: 1
-                })), this.settings.set("cursorypos", new Ca({
-                    text: "Cursor Y Position",
-                    type: "slider",
-                    min: -12,
-                    max: 12,
-                    step: 1
-                })), this.settings.set("cursorbackgroundr", new Ca({
-                    text: "Cursor Background Red",
-                    type: "slider",
-                    min: 0,
-                    max: 255,
-                    step: 1
-                })), this.settings.set("cursorbackgroundg", new Ca({
-                    text: "Cursor Background Green",
-                    type: "slider",
-                    min: 0,
-                    max: 255,
-                    step: 1
-                })), this.settings.set("cursorbackgroundb", new Ca({
-                    text: "Cursor Background Blue",
-                    type: "slider",
-                    min: 0,
-                    max: 255,
-                    step: 1
-                })), this.settings.set("cursorborderradius", new Ca({
-                    text: "Cursor Border Radius",
-                    type: "slider",
-                    min: 0,
-                    max: 4,
-                    step: 1
-                })), this.settings.set("cursorborderr", new Ca({
-                    text: "Cursor Border Red",
-                    type: "slider",
-                    min: 0,
-                    max: 255,
-                    step: 1
-                })), this.settings.set("cursorborderg", new Ca({
-                    text: "Cursor Border Green",
-                    type: "slider",
-                    min: 0,
-                    max: 255,
-                    step: 1
-                })), this.settings.set("cursorborderb", new Ca({
-                    text: "Cursor Border Blue",
-                    type: "slider",
-                    min: 0,
-                    max: 255,
-                    step: 1
-                })), i.isAprilFirst) {}
+            /*this.settings.set("versionspoof", new Ca({
+                text: "Version Spoof",
+                type: "toggle"
+            })),*/ this.settings.set("framerate", new Ca({
+            text: "Target Framerate",
+            type: "slider",
+            min: 5,
+            max: 260,
+            step: 5
+        })), this.settings.set("vsync", new Ca({
+            text: "Vsync",
+            type: "toggle"
+        })), this.settings.set("statsfornerds", new Ca({
+            text: "Stats for nerds",
+            type: "toggle"
+        })), this.settings.set("noalerts", new Ca({
+            text: "Remove Alerts",
+            type: "toggle"
+        })), this.settings.set("optimization1", new Ca({
+            text: "No Arrow Sphere (for faster rendering)",
+            type: "toggle"
+        })), this.settings.set("optimization2", new Ca({
+            text: "No Arrow Trail (for faster rendering)",
+            type: "toggle"
+        })), this.settings.set("damagedisplay", new Ca({
+            text: "Damage Display",
+            type: "toggle"
+        })), this.settings.set("thirdpersoncam", new Ca({
+            text: "Third Person",
+            type: "toggle"
+        })), this.settings.set("thirdpersonradius", new Ca({
+            text: "Third Person Radius",
+            type: "slider",
+            min: 0.5,
+            max: 2.5,
+            step: 0.1
+        })), this.settings.set("camheight", new Ca({
+            text: "Player Height",
+            type: "slider",
+            min: 1.2,
+            max: 1.8,
+            step: 0.1
+        })), this.settings.set("accuracyedit", new Ca({
+            text: "Crosshair Accuracy",
+            type: "toggle"
+        })), this.settings.set("cursorticks", new Ca({
+            text: "Crosshair Ticks",
+            type: "slider",
+            min: 1,
+            max: 12,
+            step: 1
+        })), this.settings.set("cursorheight", new Ca({
+            text: "Crosshair Height",
+            type: "slider",
+            min: 1,
+            max: 24,
+            step: 1
+        })), this.settings.set("cursorborderradius", new Ca({
+            text: "Crosshair Border Radius",
+            type: "slider",
+            min: 0,
+            max: 4,
+            step: 1
+        })), this.settings.set("cursorypos", new Ca({
+            text: "Crosshair Y Position",
+            type: "slider",
+            min: -12,
+            max: 12,
+            step: 1
+        })), this.settings.set("cursorbackgroundr", new Ca({
+            text: "Crosshair Background Red",
+            type: "slider",
+            min: 0,
+            max: 255,
+            step: 1
+        })), this.settings.set("cursorbackgroundg", new Ca({
+            text: "Crosshair Background Green",
+            type: "slider",
+            min: 0,
+            max: 255,
+            step: 1
+        })), this.settings.set("cursorbackgroundb", new Ca({
+            text: "Crosshair Background Blue",
+            type: "slider",
+            min: 0,
+            max: 255,
+            step: 1
+        })), this.settings.set("cursorborderr", new Ca({
+            text: "Crosshair Border Red",
+            type: "slider",
+            min: 0,
+            max: 255,
+            step: 1
+        })), this.settings.set("cursorborderg", new Ca({
+            text: "Crosshair Border Green",
+            type: "slider",
+            min: 0,
+            max: 255,
+            step: 1
+        })), this.settings.set("cursorborderb", new Ca({
+            text: "Crosshair Border Blue",
+            type: "slider",
+            min: 0,
+            max: 255,
+            step: 1
+        })), i.isAprilFirst) {}
         // ticks = 3, accuracyedit_ = true, height_ = 12, yPos_ = -3, background_ = 'white', borderradius_ = 2, bordercolor_ = 'solid black'
         this.settingsListEl = document.createElement("div"),
         this.settingsListEl.classList.add("settings-list"),
@@ -29866,7 +29869,7 @@ class ch {
             return;
         this.obj.add(t.clone());
 
-        if (globalInstance.settingsManager.getValue("optimization") == false) {
+        if (globalInstance.settingsManager.getValue("optimization1") == false) {
             const e = this.arrowManager.getSphereGeo(this.shotBy.teamId);
             this.sphere = new _e(e, uc().materials.basicUnlitMat),
             this.sphere.name = "Arrow sphere",
@@ -29875,7 +29878,7 @@ class ch {
         }
     }
     initTrail() {
-        if (globalInstance.settingsManager.getValue("optimization") == false) {
+        if (globalInstance.settingsManager.getValue("optimization2") == false) {
             const t = .005 * this.arrowWeaponOpts.trailThicknessMultiplier,
             e = 30,
             i = [];
