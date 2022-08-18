@@ -19305,7 +19305,7 @@ async function wa(t, e = {}) {
     return clearTimeout(s),
     r
 }
-class ba {
+class ba { // menu container buttons
     constructor({
         text: t = "",
         icon: e = "",
@@ -19586,7 +19586,7 @@ class Ma {
         e
     }
 }
-class Ca {
+class Ca { // settings shit
     constructor(t) {
         const {
             text: e,
@@ -19613,7 +19613,8 @@ class Ca {
                     const n = Number(i.value);
                     this.onValueChangeCbs.forEach((t => t(n)))
                 }))
-        } else if ("toggle" == this.type) {
+        }
+		else if ("toggle" == this.type) {
             this.inputEl = document.createElement("input"),
             this.inputEl.type = "checkbox",
             this.inputEl.classList.add("dialog-checkbox-input", "wrinkledPaper"),
@@ -19622,6 +19623,16 @@ class Ca {
             this.inputEl.addEventListener("input", (() => {
                     this.onValueChangeCbs.forEach((e => e(t.checked)))
                 }))
+        }
+		else if ("button" == this.type) {
+            this.inputEl = document.createElement("input"),
+            this.inputEl.type = "button",
+            this.inputEl.classList.add("dialog-checkbox-input", "wrinkledPaper"),
+            this.el.appendChild(this.inputEl);
+            const t = this.inputEl;
+            this.inputEl.addEventListener("input", (() => {
+                this.onValueChangeCbs.forEach((e => e("hi")))
+            }))
         }
     }
     setValue(t) {
@@ -19633,8 +19644,15 @@ class Ca {
             if (this.inputEl.value = String(t), !this.valueEl)
                 throw new Error("Assertion failed, value element doesn't exist.");
             this.valueEl.textContent = this.inputEl.value
-        } else
-            "toggle" == this.type && "boolean" == typeof t && (this.inputEl.checked = t)
+        }
+		else if ("toggle" == this.type && "boolean" == typeof t)
+		{
+			this.inputEl.checked = t
+		}
+		else if ("button" == this.type)
+		{
+			console.log(t);
+		}
     }
     onValueChange(t) {
         this.onValueChangeCbs.add(t)
@@ -19724,7 +19742,13 @@ class graphicSettings extends Ma { // client graphic settings
 				/*this.settings.set("versionspoof", new Ca({
                     text: "Version Spoof",
                     type: "toggle"
-                })),*/ this.settings.set("framerate", new Ca({
+                })),*/ this.settings.set("debugbutton", new Ca({
+                    text: "Debug Button",
+                    type: "button",
+                    onclick: function() {
+						console.log('logged');
+					}
+                })), this.settings.set("framerate", new Ca({
                     text: "Target Framerate",
                     type: "slider",
                     min: 5,
@@ -30289,12 +30313,15 @@ class mh {
             let posX = t.getLookDirection().x;
             let posY = t.getLookDirection().y;
             let posZ = t.getLookDirection().z;
+			
             posX *= offset;
             posY *= offset;
             posZ *= offset;
+			
             posX += e.pos.x;
             posY += e.pos.y;
             posZ += e.pos.z;
+			
             e.pos = new w(posX, posY, posZ);
 
             //(looking * radius) + pos;

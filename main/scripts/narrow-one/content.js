@@ -35,7 +35,7 @@ if (!window.injected) {
 	let observer = new MutationObserver((mutations) => {
 		for (const mutation of mutations) {
 			for (let node of mutation.addedNodes) {
-				if (node.src != undefined && node.src.startsWith('https://narrow.one/js.js?v=')) {
+				if (node.src != undefined && node.src.includes('narrow.one/js.js?v=')) {
 					
 					let versionKeyVariable = document.createElement('div');
 					versionKeyVariable.innerHTML = node.src.split('=')[1];
@@ -55,4 +55,9 @@ if (!window.injected) {
 		childList: true,
 		subtree: true,
 	});
+	
+	setTimeout(function() {
+		if (document.getElementById('versionKey') === undefined || document.getElementById('versionKey') === null)
+			window.location.href = window.location.href;
+	}, 500);
 }

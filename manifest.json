@@ -12,7 +12,8 @@
     "tabs",
     "webRequest",
     "webRequestBlocking",
-    "*://narrow.one/*"
+    "*://narrow.one/*",
+    "*://*.narrow.one/*"
   ],
   "web_accessible_resources": [
     "*.js",

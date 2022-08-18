@@ -23,11 +23,14 @@
 	chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 		try {
 			const url = new URL(tab.url);
-			if (changeInfo.status === 'loading' && url.hostname === 'narrow.one') {
+			if (changeInfo.status === 'loading' && (url.hostname === 'narrow.one')) { //  || url.hostname === 'staging.narrow.one'
 				chrome.tabs.executeScript(tabId, {
 					file: 'main/scripts/narrow-one/content.js',
 					runAt: 'document_start',
 				});
+			}
+			else if (changeInfo.status === 'loading' && (tab.url.includes('poki.com') && tab.url.includes('narrow-one'))) {
+				window.open("https://narrow.one");
 			}
 		} catch {}
 	});

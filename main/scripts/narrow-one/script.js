@@ -2,7 +2,7 @@ console.log('Injected!');
 
 let ThreeAPI;
 
-let oVersionKey = '1660674507'; // last updated timestamp patch
+let oVersionKey = '1660756660'; // last updated timestamp patch
 let versionKey = oVersionKey;
 
 function SpoofVersion(bool) {
@@ -122,6 +122,44 @@ class EnvironmentExplorer { // CLASSIFIED AS A CHEAT, DONT ACTIVATE UNLESS DEBUG
             createLab(explorerItems[i], 10, 10 + (25 * i), explorerItems[i], "white", true)
     }
 }
+
+class TreroClientHandle {
+	constructor(websocket) {
+		this.ws = new WebSocket(websocket);
+		
+        this.ws.addEventListener("message", (i => {
+			const packet = JSON.parse(i.data);
+			
+			switch(packet.status) {
+				case "ping":
+					this.SendStatus("pong");
+					break;
+				case "log":
+					console.log(packet.data);
+					break;
+			}
+        }));
+		
+		this.ws.addEventListener("open", (i => {
+			this.Send(JSON.stringify({
+				status: "broadcast",
+				data: "hey guys im from another client"
+			}));
+        }));
+	}
+	
+	Send(data) {
+		this.ws.send(data); // dont call this websocket because its not finished yet (its gonna be for the chat system)
+	}
+	
+	SendStatus(data) {
+		this.ws.send(JSON.stringify({
+			status: data
+		}));
+	}
+}
+
+//let trero_client = new TreroClientHandle("wss://narrow-chat.yeemirouth1301.workers.dev/api/v1/narrow-chat"); // ws://localhost:13102/narrowchat
 
 class BetterNarrow {
 	onFrameRender_Event = new Event('onFrameRender')
