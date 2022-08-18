@@ -2,7 +2,7 @@ console.log('Injected!');
 
 let ThreeAPI;
 
-let oVersionKey = '1660756660'; // last updated timestamp patch
+let oVersionKey = '1660844401'; // last updated timestamp patch
 let versionKey = oVersionKey;
 
 function SpoofVersion(bool) {
@@ -71,7 +71,7 @@ function ReloadLabels() {
     ClearLabels()
 
     let keepInTouch = [
-        "FPS",
+        //"FPS", NEEDED FIX
         "Ping",
         "DMG",
         "",
@@ -83,7 +83,7 @@ function ReloadLabels() {
         if (keepInTouch[i] != "")
             createLab(keepInTouch[i], 10, 10 + (25 * i), keepInTouch[i].toUpperCase() + ": 0", "white")
 
-            GetLabelById("VERSION").innerHTML = "v1.1.5";
+            GetLabelById("VERSION").innerHTML = "v1.1.6a";
     GetLabelById("NARROWVERSION").innerHTML = versionKey;
 }
 
@@ -221,7 +221,7 @@ function init() {
 				//BetterNarrowAPI.GetClient().gameManager.currentGame.scoreOffsetNotificationsUi.showOffsetNotification("Panic mode has been removed" , null, "hey");
 			}
 		});
-		
+
 		function animate() {
 			requestAnimationFrame(animate); // insane calcilatopoms pl;z terust me
 			
@@ -246,7 +246,7 @@ function init() {
 				}
 				
 			}
-			
+			/***
 			if (client && firstTime) {
 				firstTime = false;
 				
@@ -255,10 +255,10 @@ function init() {
 				//	title: "BetterNarrow",
 				//	text: "BetterNarrow by yeemi#9764 created to allow more graphics control"
 				//})
-				
+
 				waitForElm('head > style:nth-child(24)').then((elm) => {
 					elm.remove(); 
-					
+
 					async function addCustomStyle() {
 						let styleInstance = document.createElement('style');
 						styleInstance.id = "GameStyle";
@@ -267,21 +267,22 @@ function init() {
 						document.head.insertBefore(styleInstance, document.head.firstChild);
 					}
 					addCustomStyle();
-					
+
 					let lazystyelrl = document.createElement('style');
 					lazystyelrl.id = "GameStyle";
-					lazystyelrl.innerHTML = '.buttonImage, .dialog-text-input, .dialog-checkbox-input, .dialog-toggle-input, .dialog-checkbox-input:checked::before, .dialog-button:not(:disabled), span, .dialog-button-icon, .dialog-select-input, .squad-settings-button, .icon-button, .squad-leader-icon {\n-webkit-filter: invert(1) !important;\nfilter: invert(1) !important;\n}\n.coin-count-text, .squad-split-divider > span, .playersListItemScore, .player-list-username, td {\n-webkit-filter: invert(0) !important;\nfilter: invert(0) !important;\n}\n.shop-skin-selection-item {\nmargin: 4.5px !important;\nborder: 4.5px solid white;\n}\n}\n.shop-skin-selection-item {\nmin-height: 220px !important;\n}\n.playersListTeamTable, .playersListTeam {\n--wrinkled-paper-color: #111 !important;\n}\n.playersListItemScore, td {\ncolor: #000 !important;\n}\n.player-list-username, .playersListItemScore, td {\ncolor: #fff !important;\n}\n.itemsTable > tbody > tr > td:last-child {\ncolor: #fff !important;\n}\n.squad-players-list > .itemsTable > tbody > tr {\nbackground-color: #141414 !important;\nborder: 1px solid #fff;\n}\n.playersListContainer {\nborder: 0px !important;\n}\n.gameOverStatsTable {\nbackground-color: #141414 !important;\n}';
+					lazystyelrl.innerHTML = '';
 					document.head.prepend(lazystyelrl);
 					document.head.insertBefore(lazystyelrl, document.head.firstChild);
 				});
 				
 				window.dispatchEvent(BetterNarrowAPI.onInitialization_Event);
-			}
-			
+			} ***/
+			/***
 			waitForElm('#mainMenu > div.main-menu-promo-banner-container > div').then((elm) => {
 				elm.style.backgroundImage =
 				'url(\"https://raw.githubusercontent.com/Laamy/narrow-one-tmp/main/discord-dark.png")';
-			});
+			});***/
+
 		}
 		animate();
 	})

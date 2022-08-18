@@ -31,7 +31,7 @@ if (!window.injected) {
 	}
 
 	let counter = 0;
-	
+
 	let observer = new MutationObserver((mutations) => {
 		for (const mutation of mutations) {
 			for (let node of mutation.addedNodes) {
@@ -45,7 +45,7 @@ if (!window.injected) {
 					document.documentElement.insertBefore(versionKeyVariable, document.documentElement.firstChild);
 					
 					node.src = chrome.runtime.getURL('main/empty.js');
-		
+
 					injectProp().then();
 				}
 			}

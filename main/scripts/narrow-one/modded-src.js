@@ -173,8 +173,8 @@
     m = !1,
     g = [],
     f = /(paint\(|-moz-element\(#paint-|-webkit-canvas\(paint-|[('"]blob:[^'"#]+#paint=|[('"]data:image\/paint-)/,
-    y = "getCSSCanvasContext" in document,
-    v = (p.backgroundImage = "-moz-element(#" + l + ")") === p.backgroundImage,
+        v = "getCSSCanvasContext" in document,
+        y = (p.backgroundImage = "-moz-element(#" + l + ")") === p.backgroundImage,
     w = "function" == typeof Promise;
     p.cssText = "display:none !important;";
     var b = window.requestAnimationFrame || setTimeout,
@@ -445,10 +445,10 @@
         t.$$paintGeometry && !t.$$paintGeometry.live && (t.$$paintGeometry = null),
         B(t)
     }
-    var Y = {
+    var J = {
         get: function (t) {
             var e = s[t],
-            i = e && !1 === e.inherits ? O.style.getPropertyValue(t) : Y.getRaw(t);
+                    i = e && !1 === e.inherits ? O.style.getPropertyValue(t) : J.getRaw(t);
             if (null == i && e)
                 i = e.initialValue;
             else if (e && e.syntax) {
@@ -466,7 +466,7 @@
             F[t] = e
         }
     },
-    J = window.ResizeObserver && new window.ResizeObserver((function (t) {
+        Y = window.ResizeObserver && new window.ResizeObserver((function (t) {
                 for (var e = 0; e < t.length; e++) {
                     var i = t[e],
                     n = i.target.$$paintGeometry;
@@ -506,7 +506,7 @@
         }
         (t);
         !function (t) {
-            J && !t.$$paintGeometry.live && (t.$$paintGeometry.live = !0, J.observe(t))
+            Y && !t.$$paintGeometry.live && (t.$$paintGeometry.live = !0, Y.observe(t))
         }
         (t),
         r = {
@@ -515,7 +515,7 @@
         };
         for (var a = x(), l = t.$$paintedProperties, c = 0; c < n.length; c++) {
             var d = n[c],
-            u = Y.getRaw(d),
+                u = J.getRaw(d),
             p = /(,|\b|^)(?:url\((['"]?))?((?:-moz-element\(#|-webkit-canvas\()paint-\d+-([^;,]+)|(?:data:image\/paint-|blob:[^'"#]+#paint=)([^"';, ]+)(?:[;,].*?)?)\2\)(;|,|\s|\b|$)/g,
             m = "",
             g = 0,
@@ -530,9 +530,9 @@
                 if (/border-image/.test(d)) {
                     var T = P.width,
                     A = P.height,
-                    L = nt(Y.getRaw("border-image-slice").replace(/\sfill/, "").split(" ")),
-                    k = nt(Y.getRaw("border-width").split(" ")),
-                    I = nt(Y.getRaw("border-image-outset").split(" "));
+                        L = nt(J.getRaw("border-image-slice").replace(/\sfill/, "").split(" ")),
+                        k = nt(J.getRaw("border-width").split(" ")),
+                        I = nt(J.getRaw("border-image-outset").split(" "));
                     T += it("0" != L.left && parseFloat(k.left) || 0, I.left || 0, !0),
                     T += it("0" != L.right && parseFloat(k.right) || 0, I.right || 0, !0),
                     A += it("0" != L.top && parseFloat(k.top) || 0, I.top || 0, !0),
@@ -559,12 +559,12 @@
                     X = t.$$paintContext,
                     $ = "paint-" + M + "-" + R,
                     Z = X && X.canvas;
-                    if (!Z || Z.width != q || Z.height != j || !0 === y && X && $ !== X.id) {
-                        if (!0 === y)
+                    if (!Z || Z.width != q || Z.height != j || !0 === v && X && $ !== X.id) {
+                        if (!0 === v)
                             (X = document.getCSSCanvasContext("2d", $, q, j)).id = $, t.$$paintContext && X.clearRect(0, 0, q, j);
                         else {
                             var st = !1;
-                            Z || ((Z = document.createElement("canvas")).id = $, st = v),
+                            Z || ((Z = document.createElement("canvas")).id = $, st = y),
                             Z.width = q,
                             Z.height = j,
                             st && (Z.style.display = "none", h.appendChild(Z)),
@@ -575,9 +575,9 @@
                         1 !== U && X.scale(U, U)
                     } else
                         X.clearRect(0, 0, q, j);
-                    if (W && (X.save(), X.beginPath(), W.paint(X, P, Y), X.closePath(), X.restore(), !1 === y && !v && "resetTransform" in X && X.resetTransform()), m += C[1], !0 === y)
+                    if (W && (X.save(), X.beginPath(), W.paint(X, P, J), X.closePath(), X.restore(), !1 === v && !y && "resetTransform" in X && X.resetTransform()), m += C[1], !0 === v)
                         m += "-webkit-canvas(" + $ + ")", (null == C[4] || Z && Z.id !== $) && (w = !0);
-                    else if (!0 === v)
+                    else if (!0 === y)
                         m += "-moz-element(#" + $ + ")", null == C[4] && (w = !0), Z && Z.id !== $ && (Z.id = $, w = !0);
                     else {
                         var rt = Z.toDataURL("image/png").replace("/png", "/paint-" + R);
@@ -591,13 +591,13 @@
                     m += C[6],
                     g = C.index + C[0].length
                 }
-                !1 !== b || null == l || null == l[d] ? (m += u.substring(g), w && (i || (i = G(t)), null == l && (l = t.$$paintedProperties = {}), l[d] = !0, "background" === d.substring(0, 10) && 1 !== a && et(i.style, "background-size", "100% 100%"), /mask/.test(d) && 1 !== a && (et(i.style, "mask-size", "contain"), y && et(i.style, "-webkit-mask-size", "contain")), /border-image/.test(d) && y && (et(i.style, "border-color", "initial"), et(i.style, "image-rendering", "optimizeSpeed")), 0 === f.length ? et(i.style, d, m) : z(f, et, [i.style, d, m]))) : (i || (i = G(t)), i.style.removeProperty(d), J && J.unobserve(t), t.$$paintGeometry && (t.$$paintGeometry.live = !1))
+                !1 !== b || null == l || null == l[d] ? (m += u.substring(g), w && (i || (i = G(t)), null == l && (l = t.$$paintedProperties = {}), l[d] = !0, "background" === d.substring(0, 10) && 1 !== a && et(i.style, "background-size", "100% 100%"), /mask/.test(d) && 1 !== a && (et(i.style, "mask-size", "contain"), v && et(i.style, "-webkit-mask-size", "contain")), /border-image/.test(d) && v && (et(i.style, "border-color", "initial"), et(i.style, "image-rendering", "optimizeSpeed")), 0 === f.length ? et(i.style, d, m) : z(f, et, [i.style, d, m]))) : (i || (i = G(t)), i.style.removeProperty(d), Y && Y.unobserve(t), t.$$paintGeometry && (t.$$paintGeometry.live = !1))
             }
         }
         t.$$paintObservedProperties = 0 === s.length ? null : s;
         for (var at = t.$$paintedPropertyValues = {}, lt = 0; lt < s.length; lt++) {
             var ht = s[lt];
-            at[ht] = Y.getRaw(ht)
+            at[ht] = J.getRaw(ht)
         }
         !0 === t.$$needsOverrides && Q(),
         t.$$needsOverrides = null
@@ -708,7 +708,7 @@
                                                 1 === r[a].nodeType && P(r[a], B);
                                         if (o = n.removedNodes)
                                             for (var l = 0; l < o.length; l++)
-                                                J && o[l].$$paintGeometry && (o[l].$$paintGeometry.live = !1, J && J.unobserve(o[l]))
+                                        Y && o[l].$$paintGeometry && (o[l].$$paintGeometry.live = !1, Y && Y.unobserve(o[l]))
                                     } else if ("attributes" === n.type && 1 === s.nodeType) {
                                         if ("data-css-paint" === n.attributeName && n.oldValue && null != s.$$paintId && !s.getAttribute("data-css-paint")) {
                                             H(s);
@@ -801,12 +801,12 @@
                 var g = {
                     passive: !0
                 };
-                function y(t) {
+            function v(t) {
                     for (var e = t.target; e; )
                         1 === e.nodeType && B(e), e = e.parentNode
                 }
                 ["animationiteration", "animationend", "animationstart", "transitionstart", "transitionend", "transitionrun", "transitioncancel", "mouseover", "mouseout", "mousedown", "mouseup", "focus", "blur"].forEach((function (t) {
-                        addEventListener(t, y, g)
+                addEventListener(t, v, g)
                     })),
                 T()
             }
@@ -903,7 +903,7 @@
         m = new WeakMap,
         g = new WeakMap,
         f = new WeakMap,
-        y = new WeakMap;
+            v = new WeakMap;
         if (R.prototype = {
                 isConnected: function () {
                     var t = g.get(this);
@@ -914,14 +914,14 @@
                 },
                 connect: function () {
                     var t = k(this);
-                    y.get(this).observe(t, p),
+                v.get(this).observe(t, p),
                     f.get(this).length > 0 && I(this),
                     L(t, (function (t) {
                             T(t).connect()
                         }))
                 },
                 disconnect: function () {
-                    y.get(this).disconnect()
+                v.get(this).disconnect()
                 },
                 update: function (t) {
                     var e = this,
@@ -957,9 +957,9 @@
                     }
                 }, window.CSSStyleSheet = P, A(Document), "ShadowRoot" in window) {
                 A(ShadowRoot);
-                var v = Element.prototype,
-                w = v.attachShadow;
-                v.attachShadow = function (t) {
+            var y = Element.prototype,
+                w = y.attachShadow;
+            y.attachShadow = function (t) {
                     var e = w.call(this, t);
                     return "closed" === t.mode && i.set(this, e),
                     e
@@ -1031,7 +1031,7 @@
     function I(t) {
         var e = document.createDocumentFragment(),
         i = f.get(t),
-        n = y.get(t),
+            n = v.get(t),
         s = k(t);
         n.disconnect(),
         i.forEach((function (i) {
@@ -1054,7 +1054,7 @@
         i.sheets = [],
         g.set(i, e),
         f.set(i, []),
-        y.set(i, new MutationObserver((function (e, n) {
+            v.set(i, new MutationObserver((function (e, n) {
                     document ? e.forEach((function (e) {
                             t || r.call(e.addedNodes, (function (t) {
                                     t instanceof Element && L(t, (function (t) {
@@ -1455,20 +1455,20 @@ class c {
         m = n[0],
         g = n[3],
         f = n[6],
-        y = n[1],
-        v = n[4],
+            v = n[1],
+            y = n[4],
         w = n[7],
         b = n[2],
         x = n[5],
         S = n[8];
-        return s[0] = r * m + o * y + a * b,
-        s[3] = r * g + o * v + a * x,
+        return s[0] = r * m + o * v + a * b,
+            s[3] = r * g + o * y + a * x,
         s[6] = r * f + o * w + a * S,
-        s[1] = l * m + h * y + c * b,
-        s[4] = l * g + h * v + c * x,
+            s[1] = l * m + h * v + c * b,
+            s[4] = l * g + h * y + c * x,
         s[7] = l * f + h * w + c * S,
-        s[2] = d * m + u * y + p * b,
-        s[5] = d * g + u * v + p * x,
+            s[2] = d * m + u * v + p * b,
+            s[5] = d * g + u * y + p * x,
         s[8] = d * f + u * w + p * S,
         this
     }
@@ -2005,19 +2005,19 @@ class f {
             e = Math.PI;
             const t = (l + 1) / 2,
             a = (u + 1) / 2,
-            y = (f + 1) / 2,
-            v = (h + d) / 4,
+                v = (f + 1) / 2,
+                y = (h + d) / 4,
             w = (c + m) / 4,
             b = (p + g) / 4;
-            return t > a && t > y ? t < r ? (i = 0, n = .707106781, s = .707106781) : (i = Math.sqrt(t), n = v / i, s = w / i) : a > y ? a < r ? (i = .707106781, n = 0, s = .707106781) : (n = Math.sqrt(a), i = v / n, s = b / n) : y < r ? (i = .707106781, n = .707106781, s = 0) : (s = Math.sqrt(y), i = w / s, n = b / s),
+            return t > a && t > v ? t < r ? (i = 0, n = .707106781, s = .707106781) : (i = Math.sqrt(t), n = y / i, s = w / i) : a > v ? a < r ? (i = .707106781, n = 0, s = .707106781) : (n = Math.sqrt(a), i = y / n, s = b / n) : v < r ? (i = .707106781, n = .707106781, s = 0) : (s = Math.sqrt(v), i = w / s, n = b / s),
             this.set(i, n, s, e),
             this
         }
-        let y = Math.sqrt((g - p) * (g - p) + (c - m) * (c - m) + (d - h) * (d - h));
-        return Math.abs(y) < .001 && (y = 1),
-        this.x = (g - p) / y,
-        this.y = (c - m) / y,
-        this.z = (d - h) / y,
+        let v = Math.sqrt((g - p) * (g - p) + (c - m) * (c - m) + (d - h) * (d - h));
+        return Math.abs(v) < .001 && (v = 1),
+            this.x = (g - p) / v,
+            this.y = (c - m) / v,
+            this.z = (d - h) / v,
         this.w = Math.acos((l + u + f - 1) / 2),
         this
     }
@@ -2154,7 +2154,7 @@ class f {
     }
 }
 f.prototype.isVector4 = !0;
-class y extends t {
+class v extends t {
     constructor(t, e, i) {
         super(),
         this.width = t,
@@ -2208,8 +2208,8 @@ class y extends t {
         })
     }
 }
-y.prototype.isWebGLRenderTarget = !0;
-(class extends y {
+v.prototype.isWebGLRenderTarget = !0;
+(class extends v {
     constructor(t, e, i) {
         super(t, e, i),
         this.samples = 4
@@ -2220,7 +2220,7 @@ y.prototype.isWebGLRenderTarget = !0;
         this
     }
 }).prototype.isWebGLMultisampleRenderTarget = !0;
-class v {
+class y {
     constructor(t = 0, e = 0, i = 0, n = 1) {
         this._x = t,
         this._y = e,
@@ -2573,7 +2573,7 @@ class v {
     }
     _onChangeCallback() {}
 }
-v.prototype.isQuaternion = !0;
+y.prototype.isQuaternion = !0;
 class w {
     constructor(t = 0, e = 0, i = 0) {
         this.x = t,
@@ -2973,7 +2973,7 @@ class w {
     }
 }
 w.prototype.isVector3 = !0;
-const b = new w, x = new v;
+const b = new w, x = new y;
 class S {
     constructor(t = new w(1 / 0, 1 / 0, 1 / 0), e = new w(-1 / 0, -1 / 0, -1 / 0)) {
         this.min = t,
@@ -3275,7 +3275,7 @@ class z {
         return (new this.constructor).copy(this)
     }
 }
-const H = new w, G = new w, W = new w, q = new w, j = new w, Y = new w, J = new w;
+const H = new w, G = new w, W = new w, q = new w, j = new w, J = new w, Y = new w;
 class X {
     constructor(t = new w, e = new w(0, 0, -1)) {
         this.origin = t,
@@ -3402,10 +3402,10 @@ class X {
     }
     intersectTriangle(t, e, i, n, s) {
         j.subVectors(e, t),
-        Y.subVectors(i, t),
-        J.crossVectors(j, Y);
+            J.subVectors(i, t),
+            Y.crossVectors(j, J);
         let r,
-        o = this.direction.dot(J);
+            o = this.direction.dot(Y);
         if (o > 0) {
             if (n)
                 return null;
@@ -3417,7 +3417,7 @@ class X {
             o = -o
         }
         q.subVectors(this.origin, t);
-        const a = r * this.direction.dot(Y.crossVectors(q, Y));
+        const a = r * this.direction.dot(J.crossVectors(q, J));
         if (a < 0)
             return null;
         const l = r * this.direction.dot(j.cross(q));
@@ -3425,7 +3425,7 @@ class X {
             return null;
         if (a + l > o)
             return null;
-        const h = -r * q.dot(J);
+        const h = -r * q.dot(Y);
         return h < 0 ? null : this.at(h / o, s)
     }
     applyMatrix4(t) {
@@ -3691,8 +3691,8 @@ class $ {
         m = i[6],
         g = i[10],
         f = i[14],
-        y = i[3],
-        v = i[7],
+            v = i[3],
+            y = i[7],
         w = i[11],
         b = i[15],
         x = n[0],
@@ -3723,10 +3723,10 @@ class $ {
         s[6] = p * S + m * E + g * L + f * D,
         s[10] = p * M + m * P + g * k + f * O,
         s[14] = p * C + m * T + g * I + f * F,
-        s[3] = y * x + v * _ + w * A + b * R,
-        s[7] = y * S + v * E + w * L + b * D,
-        s[11] = y * M + v * P + w * k + b * O,
-        s[15] = y * C + v * T + w * I + b * F,
+            s[3] = v * x + y * _ + w * A + b * R,
+            s[7] = v * S + y * E + w * L + b * D,
+            s[11] = v * M + y * P + w * k + b * O,
+            s[15] = v * C + y * T + w * I + b * F,
         this
     }
     multiplyScalar(t) {
@@ -3811,19 +3811,19 @@ class $ {
         m = t[13],
         g = t[14],
         f = t[15],
-        y = c * g * l - m * d * l + m * a * u - o * g * u - c * a * f + o * d * f,
-        v = p * d * l - h * g * l - p * a * u + r * g * u + h * a * f - r * d * f,
+            v = c * g * l - m * d * l + m * a * u - o * g * u - c * a * f + o * d * f,
+            y = p * d * l - h * g * l - p * a * u + r * g * u + h * a * f - r * d * f,
         w = h * m * l - p * c * l + p * o * u - r * m * u - h * o * f + r * c * f,
         b = p * c * a - h * m * a - p * o * d + r * m * d + h * o * g - r * c * g,
-        x = e * y + i * v + n * w + s * b;
+            x = e * v + i * y + n * w + s * b;
         if (0 === x)
             return this.set(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         const S = 1 / x;
-        return t[0] = y * S,
+        return t[0] = v * S,
         t[1] = (m * d * s - c * g * s - m * n * u + i * g * u + c * n * f - i * d * f) * S,
         t[2] = (o * g * s - m * a * s + m * n * l - i * g * l - o * n * f + i * a * f) * S,
         t[3] = (c * a * s - o * d * s - c * n * l + i * d * l + o * n * u - i * a * u) * S,
-        t[4] = v * S,
+            t[4] = y * S,
         t[5] = (h * g * s - p * d * s + p * n * u - e * g * u - h * n * f + e * d * f) * S,
         t[6] = (p * a * s - r * g * s - p * n * l + e * g * l + r * n * f - e * a * f) * S,
         t[7] = (r * d * s - h * a * s + h * n * l - e * d * l - r * n * u + e * a * u) * S,
@@ -3920,22 +3920,22 @@ class $ {
         m = r * h,
         g = r * c,
         f = o * c,
-        y = a * l,
-        v = a * h,
+            v = a * l,
+            y = a * h,
         w = a * c,
         b = i.x,
         x = i.y,
         S = i.z;
         return n[0] = (1 - (m + f)) * b,
         n[1] = (u + w) * b,
-        n[2] = (p - v) * b,
+            n[2] = (p - y) * b,
         n[3] = 0,
         n[4] = (u - w) * x,
         n[5] = (1 - (d + f)) * x,
-        n[6] = (g + y) * x,
+            n[6] = (g + v) * x,
         n[7] = 0,
-        n[8] = (p + v) * S,
-        n[9] = (g - y) * S,
+            n[8] = (p + y) * S,
+            n[9] = (g - v) * S,
         n[10] = (1 - (d + m)) * S,
         n[11] = 0,
         n[12] = t.x,
@@ -4060,7 +4060,7 @@ class $ {
     }
 }
 $.prototype.isMatrix4 = !0;
-const Z = new w, K = new $, Q = new w(0, 0, 0), tt = new w(1, 1, 1), et = new w, it = new w, nt = new w, st = new $, rt = new v;
+const Z = new w, K = new $, Q = new w(0, 0, 0), tt = new w(1, 1, 1), et = new w, it = new w, nt = new w, st = new $, rt = new y;
 class ot {
     constructor(t = 0, e = 0, i = 0, n = ot.DefaultOrder) {
         this._x = t,
@@ -4224,7 +4224,7 @@ class at {
     }
 }
 let lt = 0;
-const ht = new w, ct = new v, dt = new $, ut = new w, pt = new w, mt = new w, gt = new v, ft = new w(1, 0, 0), yt = new w(0, 1, 0), vt = new w(0, 0, 1), wt = {
+const ht = new w, ct = new y, dt = new $, ut = new w, pt = new w, mt = new w, gt = new y, ft = new w(1, 0, 0), vt = new w(0, 1, 0), yt = new w(0, 0, 1), wt = {
     type: "added"
 }, bt = {
     type: "removed"
@@ -4243,7 +4243,7 @@ class xt extends t {
         this.up = xt.DefaultUp.clone();
         const t = new w,
         e = new ot,
-        i = new v,
+            i = new y,
         n = new w(1, 1, 1);
         e._onChange((function () {
                 i.setFromEuler(e, !1)
@@ -4329,10 +4329,10 @@ class xt extends t {
         return this.rotateOnAxis(ft, t)
     }
     rotateY(t) {
-        return this.rotateOnAxis(yt, t)
+        return this.rotateOnAxis(vt, t)
     }
     rotateZ(t) {
-        return this.rotateOnAxis(vt, t)
+        return this.rotateOnAxis(yt, t)
     }
     translateOnAxis(t, e) {
         return ht.copy(t).applyQuaternion(this.quaternion),
@@ -4343,10 +4343,10 @@ class xt extends t {
         return this.translateOnAxis(ft, t)
     }
     translateY(t) {
-        return this.translateOnAxis(yt, t)
+        return this.translateOnAxis(vt, t)
     }
     translateZ(t) {
-        return this.translateOnAxis(vt, t)
+        return this.translateOnAxis(yt, t)
     }
     localToWorld(t) {
         return t.applyMatrix4(this.matrixWorld)
@@ -4423,7 +4423,7 @@ class xt extends t {
         t.setFromMatrixPosition(this.matrixWorld)
     }
     getWorldQuaternion(t) {
-        return void 0 === t && (console.warn("THREE.Object3D: .getWorldQuaternion() target is now required"), t = new v),
+        return void 0 === t && (console.warn("THREE.Object3D: .getWorldQuaternion() target is now required"), t = new y),
         this.updateWorldMatrix(!0, !1),
         this.matrixWorld.decompose(pt, t, mt),
         t
@@ -5465,7 +5465,7 @@ class jt extends Bt {
     }
 }
 jt.prototype.isMeshBasicMaterial = !0;
-const Yt = new w, Jt = new h;
+const Jt = new w, Yt = new h;
 class Xt {
     constructor(t, e, i) {
         if (Array.isArray(t))
@@ -5561,25 +5561,25 @@ class Xt {
     applyMatrix3(t) {
         if (2 === this.itemSize)
             for (let e = 0, i = this.count; e < i; e++)
-                Jt.fromBufferAttribute(this, e), Jt.applyMatrix3(t), this.setXY(e, Jt.x, Jt.y);
+                Yt.fromBufferAttribute(this, e), Yt.applyMatrix3(t), this.setXY(e, Yt.x, Yt.y);
         else if (3 === this.itemSize)
             for (let e = 0, i = this.count; e < i; e++)
-                Yt.fromBufferAttribute(this, e), Yt.applyMatrix3(t), this.setXYZ(e, Yt.x, Yt.y, Yt.z);
+                Jt.fromBufferAttribute(this, e), Jt.applyMatrix3(t), this.setXYZ(e, Jt.x, Jt.y, Jt.z);
         return this
     }
     applyMatrix4(t) {
         for (let e = 0, i = this.count; e < i; e++)
-            Yt.x = this.getX(e), Yt.y = this.getY(e), Yt.z = this.getZ(e), Yt.applyMatrix4(t), this.setXYZ(e, Yt.x, Yt.y, Yt.z);
+            Jt.x = this.getX(e), Jt.y = this.getY(e), Jt.z = this.getZ(e), Jt.applyMatrix4(t), this.setXYZ(e, Jt.x, Jt.y, Jt.z);
         return this
     }
     applyNormalMatrix(t) {
         for (let e = 0, i = this.count; e < i; e++)
-            Yt.x = this.getX(e), Yt.y = this.getY(e), Yt.z = this.getZ(e), Yt.applyNormalMatrix(t), this.setXYZ(e, Yt.x, Yt.y, Yt.z);
+            Jt.x = this.getX(e), Jt.y = this.getY(e), Jt.z = this.getZ(e), Jt.applyNormalMatrix(t), this.setXYZ(e, Jt.x, Jt.y, Jt.z);
         return this
     }
     transformDirection(t) {
         for (let e = 0, i = this.count; e < i; e++)
-            Yt.x = this.getX(e), Yt.y = this.getY(e), Yt.z = this.getZ(e), Yt.transformDirection(t), this.setXYZ(e, Yt.x, Yt.y, Yt.z);
+            Jt.x = this.getX(e), Jt.y = this.getY(e), Jt.z = this.getZ(e), Jt.transformDirection(t), this.setXYZ(e, Jt.x, Jt.y, Jt.z);
         return this
     }
     set(t, e = 0) {
@@ -5873,8 +5873,8 @@ class ae extends t {
         m = new h,
         g = new h,
         f = new h,
-        y = new w,
-        v = new w;
+            v = new w,
+            y = new w;
         function b(t, e, i) {
             d.fromArray(n, 3 * t),
             u.fromArray(n, 3 * e),
@@ -5887,7 +5887,7 @@ class ae extends t {
             g.sub(m),
             f.sub(m);
             const s = 1 / (g.x * f.y - f.x * g.y);
-            isFinite(s) && (y.copy(u).multiplyScalar(f.y).addScaledVector(p, -g.y).multiplyScalar(s), v.copy(p).multiplyScalar(g.x).addScaledVector(u, -f.x).multiplyScalar(s), l[t].add(y), l[e].add(y), l[i].add(y), c[t].add(v), c[e].add(v), c[i].add(v))
+            isFinite(s) && (v.copy(u).multiplyScalar(f.y).addScaledVector(p, -g.y).multiplyScalar(s), y.copy(p).multiplyScalar(g.x).addScaledVector(u, -f.x).multiplyScalar(s), l[t].add(v), l[e].add(v), l[i].add(v), c[t].add(y), c[e].add(y), c[i].add(y))
         }
         let x = this.groups;
         0 === x.length && (x = [{
@@ -6133,7 +6133,7 @@ class ae extends t {
     }
 }
 ae.prototype.isBufferGeometry = !0;
-const le = new $, he = new X, ce = new z, de = new w, ue = new w, pe = new w, me = new w, ge = new w, fe = new w, ye = new w, ve = new w, we = new w, be = new h, xe = new h, Se = new h, Me = new w, Ce = new w;
+const le = new $, he = new X, ce = new z, de = new w, ue = new w, pe = new w, me = new w, ge = new w, fe = new w, ve = new w, ye = new w, we = new w, be = new h, xe = new h, Se = new h, Me = new w, Ce = new w;
 class _e extends xt {
     constructor(t = new ae, e = new jt) {
         super(),
@@ -6240,16 +6240,16 @@ function Ee(t, e, i, n, s, r, o, a, l, c, d, u) {
     pe.fromBufferAttribute(s, u);
     const p = t.morphTargetInfluences;
     if (e.morphTargets && r && p) {
-        ye.set(0, 0, 0),
         ve.set(0, 0, 0),
+        ye.set(0, 0, 0),
         we.set(0, 0, 0);
         for (let t = 0, e = r.length; t < e; t++) {
             const e = p[t],
             i = r[t];
-            0 !== e && (me.fromBufferAttribute(i, c), ge.fromBufferAttribute(i, d), fe.fromBufferAttribute(i, u), o ? (ye.addScaledVector(me, e), ve.addScaledVector(ge, e), we.addScaledVector(fe, e)) : (ye.addScaledVector(me.sub(de), e), ve.addScaledVector(ge.sub(ue), e), we.addScaledVector(fe.sub(pe), e)))
+            0 !== e && (me.fromBufferAttribute(i, c), ge.fromBufferAttribute(i, d), fe.fromBufferAttribute(i, u), o ? (ve.addScaledVector(me, e), ye.addScaledVector(ge, e), we.addScaledVector(fe, e)) : (ve.addScaledVector(me.sub(de), e), ye.addScaledVector(ge.sub(ue), e), we.addScaledVector(fe.sub(pe), e)))
         }
-        de.add(ye),
-        ue.add(ve),
+        de.add(ve),
+            ue.add(ye),
         pe.add(we)
     }
     t.isSkinnedMesh && e.skinning && (t.boneTransform(c, de), t.boneTransform(d, ue), t.boneTransform(u, pe));
@@ -6305,8 +6305,8 @@ class Pe extends ae {
         c = [];
         let d = 0,
         u = 0;
-        function p(t, e, i, n, s, r, p, m, g, f, y) {
-            const v = r / g,
+        function p(t, e, i, n, s, r, p, m, g, f, v) {
+            const y = r / g,
             b = p / f,
             x = r / 2,
             S = p / 2,
@@ -6319,7 +6319,7 @@ class Pe extends ae {
             for (let r = 0; r < _; r++) {
                 const o = r * b - S;
                 for (let a = 0; a < C; a++) {
-                    const d = a * v - x;
+                    const d = a * y - x;
                     T[t] = d * n,
                     T[e] = o * s,
                     T[i] = M,
@@ -6343,7 +6343,7 @@ class Pe extends ae {
                     a.push(n, s, r),
                     P += 6
                 }
-            o.addGroup(u, P, y),
+            o.addGroup(u, P, v),
             u += P,
             d += E
         }
@@ -6697,7 +6697,7 @@ class Oe extends m {
     }
 }
 Oe.prototype.isCubeTexture = !0;
-class Fe extends y {
+class Fe extends v {
     constructor(t, e, i) {
         Number.isInteger(e) && (console.warn("THREE.WebGLCubeRenderTarget: constructor signature is now WebGLCubeRenderTarget( size, options )"), e = i),
         super(t, t, e),
@@ -6805,14 +6805,14 @@ class Ue {
         m = i[11],
         g = i[12],
         f = i[13],
-        y = i[14],
-        v = i[15];
-        return e[0].setComponents(o - n, c - a, m - d, v - g).normalize(),
-        e[1].setComponents(o + n, c + a, m + d, v + g).normalize(),
-        e[2].setComponents(o + s, c + l, m + u, v + f).normalize(),
-        e[3].setComponents(o - s, c - l, m - u, v - f).normalize(),
-        e[4].setComponents(o - r, c - h, m - p, v - y).normalize(),
-        e[5].setComponents(o + r, c + h, m + p, v + y).normalize(),
+            v = i[14],
+            y = i[15];
+        return e[0].setComponents(o - n, c - a, m - d, y - g).normalize(),
+            e[1].setComponents(o + n, c + a, m + d, y + g).normalize(),
+            e[2].setComponents(o + s, c + l, m + u, y + f).normalize(),
+            e[3].setComponents(o - s, c - l, m - u, y - f).normalize(),
+            e[4].setComponents(o - r, c - h, m - p, y - v).normalize(),
+            e[5].setComponents(o + r, c + h, m + p, y + v).normalize(),
         this
     }
     intersectsObject(t) {
@@ -7554,7 +7554,7 @@ const We = {
         fragmentShader: We.shadow_frag
     }
 };
-function Ye(t, e, i, n, s) {
+function Je(t, e, i, n, s) {
     const r = new qt(0);
     let o,
     a,
@@ -7585,8 +7585,8 @@ function Ye(t, e, i, n, s) {
             let g = !0 === s.isScene ? s.background : null;
             g && g.isTexture && (g = e.get(g));
             const f = t.xr,
-            y = f.getSession && f.getSession();
-            y && "additive" === y.environmentBlendMode && (g = null),
+                v = f.getSession && f.getSession();
+            v && "additive" === v.environmentBlendMode && (g = null),
             null === g ? u(r, l) : g && g.isColor && (u(g, 1), m = !0),
             (t.autoClear || m) && t.clear(t.autoClearColor, t.autoClearDepth, t.autoClearStencil),
             g && (g.isCubeTexture || 306 === g.mapping) ? (void 0 === a && (a = new _e(new Pe(1, 1, 1), new ke({
@@ -7621,7 +7621,7 @@ function Ye(t, e, i, n, s) {
         }
     }
 }
-function Je(t, e, i, n) {
+function Ye(t, e, i, n) {
     const s = t.getParameter(34921),
     r = n.isWebGL2 ? null : e.get("OES_vertex_array_object"),
     o = n.isWebGL2 || null !== r,
@@ -7675,10 +7675,10 @@ function Je(t, e, i, n) {
         for (let n = 0, s = i.length; n < s; n++)
             i[n] !== e[n] && (t.disableVertexAttribArray(n), i[n] = 0)
     }
-    function y(e, i, s, r, o, a) {
+    function v(e, i, s, r, o, a) {
         !0 !== n.isWebGL2 || 5124 !== s && 5125 !== s ? t.vertexAttribPointer(e, i, s, r, o, a) : t.vertexAttribIPointer(e, i, s, o, a)
     }
-    function v() {
+    function y() {
         w(),
         h !== l && (h = l, c(h.object))
     }
@@ -7688,7 +7688,7 @@ function Je(t, e, i, n) {
         l.wireframe = !1
     }
     return {
-        setup: function (s, l, d, v, w) {
+        setup: function (s, l, d, y, w) {
             let b = !1;
             if (o) {
                 const e = function (e, i, s) {
@@ -7701,7 +7701,7 @@ function Je(t, e, i, n) {
                     void 0 === c && (c = u(n.isWebGL2 ? t.createVertexArray() : r.createVertexArrayOES()), h[o] = c);
                     return c
                 }
-                (v, d, l);
+                (y, d, l);
                 h !== e && (h = e, c(h.object)),
                 b = function (t, e) {
                     const i = h.attributes,
@@ -7720,7 +7720,7 @@ function Je(t, e, i, n) {
                     }
                     return h.attributesNum !== s || h.index !== e
                 }
-                (v, w),
+                    (y, w),
                 b && function (t, e) {
                     const i = {},
                     n = t.attributes;
@@ -7737,10 +7737,10 @@ function Je(t, e, i, n) {
                     h.attributesNum = s,
                     h.index = e
                 }
-                (v, w)
+                (y, w)
             } else {
                 const t = !0 === l.wireframe;
-                h.geometry === v.id && h.program === d.id && h.wireframe === t || (h.geometry = v.id, h.program = d.id, h.wireframe = t, b = !0)
+                h.geometry === y.id && h.program === d.id && h.wireframe === t || (h.geometry = y.id, h.program = d.id, h.wireframe = t, b = !0)
             }
             !0 === s.isInstancedMesh && (b = !0),
             null !== w && i.update(w, 34963),
@@ -7770,9 +7770,9 @@ function Je(t, e, i, n) {
                                 d = r.offset;
                                 i && i.isInstancedInterleavedBuffer ? (g(n, i.meshPerAttribute), void 0 === a._maxInstanceCount && (a._maxInstanceCount = i.meshPerAttribute * i.count)) : m(n),
                                 t.bindBuffer(34962, l),
-                                y(n, s, h, e, o * c, d * c)
+                                    v(n, s, h, e, o * c, d * c)
                             } else
-                                r.isInstancedBufferAttribute ? (g(n, r.meshPerAttribute), void 0 === a._maxInstanceCount && (a._maxInstanceCount = r.meshPerAttribute * r.count)) : m(n), t.bindBuffer(34962, l), y(n, s, h, e, 0, 0)
+                                r.isInstancedBufferAttribute ? (g(n, r.meshPerAttribute), void 0 === a._maxInstanceCount && (a._maxInstanceCount = r.meshPerAttribute * r.count)) : m(n), t.bindBuffer(34962, l), v(n, s, h, e, 0, 0)
                         } else if ("instanceMatrix" === e) {
                             const e = i.get(s.instanceMatrix);
                             if (void 0 === e)
@@ -7818,12 +7818,12 @@ function Je(t, e, i, n) {
                 }
                 f()
             }
-                (s, l, d, v), null !== w && t.bindBuffer(34963, i.get(w).buffer))
+            (s, l, d, y), null !== w && t.bindBuffer(34963, i.get(w).buffer))
         },
-        reset: v,
+        reset: y,
         resetDefaultState: w,
         dispose: function () {
-            v();
+            y();
             for (const t in a) {
                 const e = a[t];
                 for (const t in e) {
@@ -7909,8 +7909,8 @@ function $e(t, e, i) {
     m = t.getParameter(36347),
     g = t.getParameter(36348),
     f = t.getParameter(36349),
-    y = c > 0,
-    v = r || e.has("OES_texture_float");
+        v = c > 0,
+        y = r || e.has("OES_texture_float");
     return {
         isWebGL2: r,
         getMaxAnisotropy: function () {
@@ -7934,9 +7934,9 @@ function $e(t, e, i) {
         maxVertexUniforms: m,
         maxVaryings: g,
         maxFragmentUniforms: f,
-        vertexTextures: y,
-        floatFragmentTextures: v,
-        floatVertexTextures: y && v,
+        vertexTextures: v,
+        floatFragmentTextures: y,
+        floatVertexTextures: v && y,
         maxSamples: r ? t.getParameter(36183) : 0
     }
 }
@@ -8386,8 +8386,8 @@ class li extends m {
     }
 }
 li.prototype.isDataTexture3D = !0;
-const hi = new m, ci = new ai, di = new li, ui = new Oe, pi = [], mi = [], gi = new Float32Array(16), fi = new Float32Array(9), yi = new Float32Array(4);
-function vi(t, e, i) {
+const hi = new m, ci = new ai, di = new li, ui = new Oe, pi = [], mi = [], gi = new Float32Array(16), fi = new Float32Array(9), vi = new Float32Array(4);
+function yi(t, e, i) {
     const n = t[0];
     if (n <= 0 || n > 0)
         return t;
@@ -8469,8 +8469,8 @@ function Ei(t, e) {
     } else {
         if (wi(i, n))
             return;
-        yi.set(n),
-        t.uniformMatrix2fv(this.addr, !1, yi),
+        vi.set(n),
+            t.uniformMatrix2fv(this.addr, !1, vi),
         bi(i, n)
     }
 }
@@ -8566,30 +8566,30 @@ function zi(t, e) {
     t.uniform1fv(this.addr, e)
 }
 function Hi(t, e) {
-    const i = vi(e, this.size, 2);
+    const i = yi(e, this.size, 2);
     t.uniform2fv(this.addr, i)
 }
 function Gi(t, e) {
-    const i = vi(e, this.size, 3);
+    const i = yi(e, this.size, 3);
     t.uniform3fv(this.addr, i)
 }
 function Wi(t, e) {
-    const i = vi(e, this.size, 4);
+    const i = yi(e, this.size, 4);
     t.uniform4fv(this.addr, i)
 }
 function qi(t, e) {
-    const i = vi(e, this.size, 4);
+    const i = yi(e, this.size, 4);
     t.uniformMatrix2fv(this.addr, !1, i)
 }
 function ji(t, e) {
-    const i = vi(e, this.size, 9);
+    const i = yi(e, this.size, 9);
     t.uniformMatrix3fv(this.addr, !1, i)
 }
-function Yi(t, e) {
-    const i = vi(e, this.size, 16);
+function Ji(t, e) {
+    const i = yi(e, this.size, 16);
     t.uniformMatrix4fv(this.addr, !1, i)
 }
-function Ji(t, e) {
+function Yi(t, e) {
     t.uniform1iv(this.addr, e)
 }
 function Xi(t, e) {
@@ -8711,10 +8711,10 @@ function on(t, e, i) {
         case 35675:
             return ji;
         case 35676:
-            return Yi;
+                    return Ji;
         case 5124:
         case 35670:
-            return Ji;
+                    return Yi;
         case 35667:
         case 35671:
             return Xi;
@@ -8863,11 +8863,11 @@ function fn(t, e) {
     const i = mn(e);
     return "vec4 " + t + "( vec4 value ) { return " + i[0] + "ToLinear" + i[1] + "; }"
 }
-function yn(t, e) {
+function vn(t, e) {
     const i = mn(e);
     return "vec4 " + t + "( vec4 value ) { return LinearTo" + i[0] + i[1] + "; }"
 }
-function vn(t, e) {
+function yn(t, e) {
     let i;
     switch (e) {
     case 1:
@@ -8998,9 +8998,9 @@ function kn(t, e, i, n) {
     (r),
     g = s.createProgram();
     let f,
-    y,
-    v = i.glslVersion ? "#version " + i.glslVersion + "\n" : "";
-    i.isRawShaderMaterial ? (f = [m].filter(wn).join("\n"), f.length > 0 && (f += "\n"), y = [p, m].filter(wn).join("\n"), y.length > 0 && (y += "\n")) : (f = [Ln(i), "#define SHADER_NAME " + i.shaderName, m, i.instancing ? "#define USE_INSTANCING" : "", i.instancingColor ? "#define USE_INSTANCING_COLOR" : "", i.supportsVertexTextures ? "#define VERTEX_TEXTURES" : "", "#define GAMMA_FACTOR " + u, "#define MAX_BONES " + i.maxBones, i.useFog && i.fog ? "#define USE_FOG" : "", i.useFog && i.fogExp2 ? "#define FOG_EXP2" : "", i.map ? "#define USE_MAP" : "", i.envMap ? "#define USE_ENVMAP" : "", i.envMap ? "#define " + c : "", i.lightMap ? "#define USE_LIGHTMAP" : "", i.aoMap ? "#define USE_AOMAP" : "", i.emissiveMap ? "#define USE_EMISSIVEMAP" : "", i.bumpMap ? "#define USE_BUMPMAP" : "", i.normalMap ? "#define USE_NORMALMAP" : "", i.normalMap && i.objectSpaceNormalMap ? "#define OBJECTSPACE_NORMALMAP" : "", i.normalMap && i.tangentSpaceNormalMap ? "#define TANGENTSPACE_NORMALMAP" : "", i.clearcoatMap ? "#define USE_CLEARCOATMAP" : "", i.clearcoatRoughnessMap ? "#define USE_CLEARCOAT_ROUGHNESSMAP" : "", i.clearcoatNormalMap ? "#define USE_CLEARCOAT_NORMALMAP" : "", i.displacementMap && i.supportsVertexTextures ? "#define USE_DISPLACEMENTMAP" : "", i.specularMap ? "#define USE_SPECULARMAP" : "", i.roughnessMap ? "#define USE_ROUGHNESSMAP" : "", i.metalnessMap ? "#define USE_METALNESSMAP" : "", i.alphaMap ? "#define USE_ALPHAMAP" : "", i.transmissionMap ? "#define USE_TRANSMISSIONMAP" : "", i.vertexTangents ? "#define USE_TANGENT" : "", i.vertexColors ? "#define USE_COLOR" : "", i.vertexAlphas ? "#define USE_COLOR_ALPHA" : "", i.vertexUvs ? "#define USE_UV" : "", i.uvsVertexOnly ? "#define UVS_VERTEX_ONLY" : "", i.flatShading ? "#define FLAT_SHADED" : "", i.skinning ? "#define USE_SKINNING" : "", i.useVertexTexture ? "#define BONE_TEXTURE" : "", i.morphTargets ? "#define USE_MORPHTARGETS" : "", i.morphNormals && !1 === i.flatShading ? "#define USE_MORPHNORMALS" : "", i.doubleSided ? "#define DOUBLE_SIDED" : "", i.flipSided ? "#define FLIP_SIDED" : "", i.shadowMapEnabled ? "#define USE_SHADOWMAP" : "", i.shadowMapEnabled ? "#define " + l : "", i.sizeAttenuation ? "#define USE_SIZEATTENUATION" : "", i.logarithmicDepthBuffer ? "#define USE_LOGDEPTHBUF" : "", i.logarithmicDepthBuffer && i.rendererExtensionFragDepth ? "#define USE_LOGDEPTHBUF_EXT" : "", "uniform mat4 modelMatrix;", "uniform mat4 modelViewMatrix;", "uniform mat4 projectionMatrix;", "uniform mat4 viewMatrix;", "uniform mat3 normalMatrix;", "uniform vec3 cameraPosition;", "uniform bool isOrthographic;", "#ifdef USE_INSTANCING", "\tattribute mat4 instanceMatrix;", "#endif", "#ifdef USE_INSTANCING_COLOR", "\tattribute vec3 instanceColor;", "#endif", "attribute vec3 position;", "attribute vec3 normal;", "attribute vec2 uv;", "#ifdef USE_TANGENT", "\tattribute vec4 tangent;", "#endif", "#if defined( USE_COLOR_ALPHA )", "\tattribute vec4 color;", "#elif defined( USE_COLOR )", "\tattribute vec3 color;", "#endif", "#ifdef USE_MORPHTARGETS", "\tattribute vec3 morphTarget0;", "\tattribute vec3 morphTarget1;", "\tattribute vec3 morphTarget2;", "\tattribute vec3 morphTarget3;", "\t#ifdef USE_MORPHNORMALS", "\t\tattribute vec3 morphNormal0;", "\t\tattribute vec3 morphNormal1;", "\t\tattribute vec3 morphNormal2;", "\t\tattribute vec3 morphNormal3;", "\t#else", "\t\tattribute vec3 morphTarget4;", "\t\tattribute vec3 morphTarget5;", "\t\tattribute vec3 morphTarget6;", "\t\tattribute vec3 morphTarget7;", "\t#endif", "#endif", "#ifdef USE_SKINNING", "\tattribute vec4 skinIndex;", "\tattribute vec4 skinWeight;", "#endif", "\n"].filter(wn).join("\n"), y = [p, Ln(i), "#define SHADER_NAME " + i.shaderName, m, i.alphaTest ? "#define ALPHATEST " + i.alphaTest + (i.alphaTest % 1 ? "" : ".0") : "", "#define GAMMA_FACTOR " + u, i.useFog && i.fog ? "#define USE_FOG" : "", i.useFog && i.fogExp2 ? "#define FOG_EXP2" : "", i.map ? "#define USE_MAP" : "", i.matcap ? "#define USE_MATCAP" : "", i.envMap ? "#define USE_ENVMAP" : "", i.envMap ? "#define " + h : "", i.envMap ? "#define " + c : "", i.envMap ? "#define " + d : "", i.lightMap ? "#define USE_LIGHTMAP" : "", i.aoMap ? "#define USE_AOMAP" : "", i.emissiveMap ? "#define USE_EMISSIVEMAP" : "", i.bumpMap ? "#define USE_BUMPMAP" : "", i.normalMap ? "#define USE_NORMALMAP" : "", i.normalMap && i.objectSpaceNormalMap ? "#define OBJECTSPACE_NORMALMAP" : "", i.normalMap && i.tangentSpaceNormalMap ? "#define TANGENTSPACE_NORMALMAP" : "", i.clearcoatMap ? "#define USE_CLEARCOATMAP" : "", i.clearcoatRoughnessMap ? "#define USE_CLEARCOAT_ROUGHNESSMAP" : "", i.clearcoatNormalMap ? "#define USE_CLEARCOAT_NORMALMAP" : "", i.specularMap ? "#define USE_SPECULARMAP" : "", i.roughnessMap ? "#define USE_ROUGHNESSMAP" : "", i.metalnessMap ? "#define USE_METALNESSMAP" : "", i.alphaMap ? "#define USE_ALPHAMAP" : "", i.sheen ? "#define USE_SHEEN" : "", i.transmissionMap ? "#define USE_TRANSMISSIONMAP" : "", i.vertexTangents ? "#define USE_TANGENT" : "", i.vertexColors || i.instancingColor ? "#define USE_COLOR" : "", i.vertexAlphas ? "#define USE_COLOR_ALPHA" : "", i.vertexUvs ? "#define USE_UV" : "", i.uvsVertexOnly ? "#define UVS_VERTEX_ONLY" : "", i.gradientMap ? "#define USE_GRADIENTMAP" : "", i.flatShading ? "#define FLAT_SHADED" : "", i.doubleSided ? "#define DOUBLE_SIDED" : "", i.flipSided ? "#define FLIP_SIDED" : "", i.shadowMapEnabled ? "#define USE_SHADOWMAP" : "", i.shadowMapEnabled ? "#define " + l : "", i.premultipliedAlpha ? "#define PREMULTIPLIED_ALPHA" : "", i.physicallyCorrectLights ? "#define PHYSICALLY_CORRECT_LIGHTS" : "", i.logarithmicDepthBuffer ? "#define USE_LOGDEPTHBUF" : "", i.logarithmicDepthBuffer && i.rendererExtensionFragDepth ? "#define USE_LOGDEPTHBUF_EXT" : "", (i.extensionShaderTextureLOD || i.envMap) && i.rendererExtensionShaderTextureLod ? "#define TEXTURE_LOD_EXT" : "", "uniform mat4 viewMatrix;", "uniform vec3 cameraPosition;", "uniform bool isOrthographic;", 0 !== i.toneMapping ? "#define TONE_MAPPING" : "", 0 !== i.toneMapping ? We.tonemapping_pars_fragment : "", 0 !== i.toneMapping ? vn("toneMapping", i.toneMapping) : "", i.dithering ? "#define DITHERING" : "", We.encodings_pars_fragment, i.map ? fn("mapTexelToLinear", i.mapEncoding) : "", i.matcap ? fn("matcapTexelToLinear", i.matcapEncoding) : "", i.envMap ? fn("envMapTexelToLinear", i.envMapEncoding) : "", i.emissiveMap ? fn("emissiveMapTexelToLinear", i.emissiveMapEncoding) : "", i.lightMap ? fn("lightMapTexelToLinear", i.lightMapEncoding) : "", yn("linearToOutputTexel", i.outputEncoding), i.depthPacking ? "#define DEPTH_PACKING " + i.depthPacking : "", "\n"].filter(wn).join("\n")),
+        v,
+        y = i.glslVersion ? "#version " + i.glslVersion + "\n" : "";
+    i.isRawShaderMaterial ? (f = [m].filter(wn).join("\n"), f.length > 0 && (f += "\n"), v = [p, m].filter(wn).join("\n"), v.length > 0 && (v += "\n")) : (f = [Ln(i), "#define SHADER_NAME " + i.shaderName, m, i.instancing ? "#define USE_INSTANCING" : "", i.instancingColor ? "#define USE_INSTANCING_COLOR" : "", i.supportsVertexTextures ? "#define VERTEX_TEXTURES" : "", "#define GAMMA_FACTOR " + u, "#define MAX_BONES " + i.maxBones, i.useFog && i.fog ? "#define USE_FOG" : "", i.useFog && i.fogExp2 ? "#define FOG_EXP2" : "", i.map ? "#define USE_MAP" : "", i.envMap ? "#define USE_ENVMAP" : "", i.envMap ? "#define " + c : "", i.lightMap ? "#define USE_LIGHTMAP" : "", i.aoMap ? "#define USE_AOMAP" : "", i.emissiveMap ? "#define USE_EMISSIVEMAP" : "", i.bumpMap ? "#define USE_BUMPMAP" : "", i.normalMap ? "#define USE_NORMALMAP" : "", i.normalMap && i.objectSpaceNormalMap ? "#define OBJECTSPACE_NORMALMAP" : "", i.normalMap && i.tangentSpaceNormalMap ? "#define TANGENTSPACE_NORMALMAP" : "", i.clearcoatMap ? "#define USE_CLEARCOATMAP" : "", i.clearcoatRoughnessMap ? "#define USE_CLEARCOAT_ROUGHNESSMAP" : "", i.clearcoatNormalMap ? "#define USE_CLEARCOAT_NORMALMAP" : "", i.displacementMap && i.supportsVertexTextures ? "#define USE_DISPLACEMENTMAP" : "", i.specularMap ? "#define USE_SPECULARMAP" : "", i.roughnessMap ? "#define USE_ROUGHNESSMAP" : "", i.metalnessMap ? "#define USE_METALNESSMAP" : "", i.alphaMap ? "#define USE_ALPHAMAP" : "", i.transmissionMap ? "#define USE_TRANSMISSIONMAP" : "", i.vertexTangents ? "#define USE_TANGENT" : "", i.vertexColors ? "#define USE_COLOR" : "", i.vertexAlphas ? "#define USE_COLOR_ALPHA" : "", i.vertexUvs ? "#define USE_UV" : "", i.uvsVertexOnly ? "#define UVS_VERTEX_ONLY" : "", i.flatShading ? "#define FLAT_SHADED" : "", i.skinning ? "#define USE_SKINNING" : "", i.useVertexTexture ? "#define BONE_TEXTURE" : "", i.morphTargets ? "#define USE_MORPHTARGETS" : "", i.morphNormals && !1 === i.flatShading ? "#define USE_MORPHNORMALS" : "", i.doubleSided ? "#define DOUBLE_SIDED" : "", i.flipSided ? "#define FLIP_SIDED" : "", i.shadowMapEnabled ? "#define USE_SHADOWMAP" : "", i.shadowMapEnabled ? "#define " + l : "", i.sizeAttenuation ? "#define USE_SIZEATTENUATION" : "", i.logarithmicDepthBuffer ? "#define USE_LOGDEPTHBUF" : "", i.logarithmicDepthBuffer && i.rendererExtensionFragDepth ? "#define USE_LOGDEPTHBUF_EXT" : "", "uniform mat4 modelMatrix;", "uniform mat4 modelViewMatrix;", "uniform mat4 projectionMatrix;", "uniform mat4 viewMatrix;", "uniform mat3 normalMatrix;", "uniform vec3 cameraPosition;", "uniform bool isOrthographic;", "#ifdef USE_INSTANCING", "\tattribute mat4 instanceMatrix;", "#endif", "#ifdef USE_INSTANCING_COLOR", "\tattribute vec3 instanceColor;", "#endif", "attribute vec3 position;", "attribute vec3 normal;", "attribute vec2 uv;", "#ifdef USE_TANGENT", "\tattribute vec4 tangent;", "#endif", "#if defined( USE_COLOR_ALPHA )", "\tattribute vec4 color;", "#elif defined( USE_COLOR )", "\tattribute vec3 color;", "#endif", "#ifdef USE_MORPHTARGETS", "\tattribute vec3 morphTarget0;", "\tattribute vec3 morphTarget1;", "\tattribute vec3 morphTarget2;", "\tattribute vec3 morphTarget3;", "\t#ifdef USE_MORPHNORMALS", "\t\tattribute vec3 morphNormal0;", "\t\tattribute vec3 morphNormal1;", "\t\tattribute vec3 morphNormal2;", "\t\tattribute vec3 morphNormal3;", "\t#else", "\t\tattribute vec3 morphTarget4;", "\t\tattribute vec3 morphTarget5;", "\t\tattribute vec3 morphTarget6;", "\t\tattribute vec3 morphTarget7;", "\t#endif", "#endif", "#ifdef USE_SKINNING", "\tattribute vec4 skinIndex;", "\tattribute vec4 skinWeight;", "#endif", "\n"].filter(wn).join("\n"), v = [p, Ln(i), "#define SHADER_NAME " + i.shaderName, m, i.alphaTest ? "#define ALPHATEST " + i.alphaTest + (i.alphaTest % 1 ? "" : ".0") : "", "#define GAMMA_FACTOR " + u, i.useFog && i.fog ? "#define USE_FOG" : "", i.useFog && i.fogExp2 ? "#define FOG_EXP2" : "", i.map ? "#define USE_MAP" : "", i.matcap ? "#define USE_MATCAP" : "", i.envMap ? "#define USE_ENVMAP" : "", i.envMap ? "#define " + h : "", i.envMap ? "#define " + c : "", i.envMap ? "#define " + d : "", i.lightMap ? "#define USE_LIGHTMAP" : "", i.aoMap ? "#define USE_AOMAP" : "", i.emissiveMap ? "#define USE_EMISSIVEMAP" : "", i.bumpMap ? "#define USE_BUMPMAP" : "", i.normalMap ? "#define USE_NORMALMAP" : "", i.normalMap && i.objectSpaceNormalMap ? "#define OBJECTSPACE_NORMALMAP" : "", i.normalMap && i.tangentSpaceNormalMap ? "#define TANGENTSPACE_NORMALMAP" : "", i.clearcoatMap ? "#define USE_CLEARCOATMAP" : "", i.clearcoatRoughnessMap ? "#define USE_CLEARCOAT_ROUGHNESSMAP" : "", i.clearcoatNormalMap ? "#define USE_CLEARCOAT_NORMALMAP" : "", i.specularMap ? "#define USE_SPECULARMAP" : "", i.roughnessMap ? "#define USE_ROUGHNESSMAP" : "", i.metalnessMap ? "#define USE_METALNESSMAP" : "", i.alphaMap ? "#define USE_ALPHAMAP" : "", i.sheen ? "#define USE_SHEEN" : "", i.transmissionMap ? "#define USE_TRANSMISSIONMAP" : "", i.vertexTangents ? "#define USE_TANGENT" : "", i.vertexColors || i.instancingColor ? "#define USE_COLOR" : "", i.vertexAlphas ? "#define USE_COLOR_ALPHA" : "", i.vertexUvs ? "#define USE_UV" : "", i.uvsVertexOnly ? "#define UVS_VERTEX_ONLY" : "", i.gradientMap ? "#define USE_GRADIENTMAP" : "", i.flatShading ? "#define FLAT_SHADED" : "", i.doubleSided ? "#define DOUBLE_SIDED" : "", i.flipSided ? "#define FLIP_SIDED" : "", i.shadowMapEnabled ? "#define USE_SHADOWMAP" : "", i.shadowMapEnabled ? "#define " + l : "", i.premultipliedAlpha ? "#define PREMULTIPLIED_ALPHA" : "", i.physicallyCorrectLights ? "#define PHYSICALLY_CORRECT_LIGHTS" : "", i.logarithmicDepthBuffer ? "#define USE_LOGDEPTHBUF" : "", i.logarithmicDepthBuffer && i.rendererExtensionFragDepth ? "#define USE_LOGDEPTHBUF_EXT" : "", (i.extensionShaderTextureLOD || i.envMap) && i.rendererExtensionShaderTextureLod ? "#define TEXTURE_LOD_EXT" : "", "uniform mat4 viewMatrix;", "uniform vec3 cameraPosition;", "uniform bool isOrthographic;", 0 !== i.toneMapping ? "#define TONE_MAPPING" : "", 0 !== i.toneMapping ? We.tonemapping_pars_fragment : "", 0 !== i.toneMapping ? yn("toneMapping", i.toneMapping) : "", i.dithering ? "#define DITHERING" : "", We.encodings_pars_fragment, i.map ? fn("mapTexelToLinear", i.mapEncoding) : "", i.matcap ? fn("matcapTexelToLinear", i.matcapEncoding) : "", i.envMap ? fn("envMapTexelToLinear", i.envMapEncoding) : "", i.emissiveMap ? fn("emissiveMapTexelToLinear", i.emissiveMapEncoding) : "", i.lightMap ? fn("lightMapTexelToLinear", i.lightMapEncoding) : "", vn("linearToOutputTexel", i.outputEncoding), i.depthPacking ? "#define DEPTH_PACKING " + i.depthPacking : "", "\n"].filter(wn).join("\n")),
     o = Mn(o),
     o = bn(o, i),
     o = xn(o, i),
@@ -9009,9 +9009,9 @@ function kn(t, e, i, n) {
     a = xn(a, i),
     o = Pn(o),
     a = Pn(a),
-    i.isWebGL2 && !0 !== i.isRawShaderMaterial && (v = "#version 300 es\n", f = ["#define attribute in", "#define varying out", "#define texture2D texture"].join("\n") + "\n" + f, y = ["#define varying in", "300 es" === i.glslVersion ? "" : "out highp vec4 pc_fragColor;", "300 es" === i.glslVersion ? "" : "#define gl_FragColor pc_fragColor", "#define gl_FragDepthEXT gl_FragDepth", "#define texture2D texture", "#define textureCube texture", "#define texture2DProj textureProj", "#define texture2DLodEXT textureLod", "#define texture2DProjLodEXT textureProjLod", "#define textureCubeLodEXT textureLod", "#define texture2DGradEXT textureGrad", "#define texture2DProjGradEXT textureProjGrad", "#define textureCubeGradEXT textureGrad"].join("\n") + "\n" + y);
-    const w = v + y + a,
-    b = un(s, 35633, v + f + o),
+    i.isWebGL2 && !0 !== i.isRawShaderMaterial && (y = "#version 300 es\n", f = ["#define attribute in", "#define varying out", "#define texture2D texture"].join("\n") + "\n" + f, v = ["#define varying in", "300 es" === i.glslVersion ? "" : "out highp vec4 pc_fragColor;", "300 es" === i.glslVersion ? "" : "#define gl_FragColor pc_fragColor", "#define gl_FragDepthEXT gl_FragDepth", "#define texture2D texture", "#define textureCube texture", "#define texture2DProj textureProj", "#define texture2DLodEXT textureLod", "#define texture2DProjLodEXT textureProjLod", "#define textureCubeLodEXT textureLod", "#define texture2DGradEXT textureGrad", "#define texture2DProjGradEXT textureProjGrad", "#define textureCubeGradEXT textureGrad"].join("\n") + "\n" + v);
+    const w = y + v + a,
+        b = un(s, 35633, y + f + o),
     x = un(s, 35632, w);
     if (s.attachShader(g, b), s.attachShader(g, x), void 0 !== i.index0AttributeName ? s.bindAttribLocation(g, 0, i.index0AttributeName) : !0 === i.morphTargets && s.bindAttribLocation(g, 0, "position"), s.linkProgram(g), t.debug.checkShaderErrors) {
         const t = s.getProgramInfoLog(g).trim(),
@@ -9035,7 +9035,7 @@ function kn(t, e, i, n) {
                 },
                 fragmentShader: {
                     log: i,
-                    prefix: y
+                prefix: v
                 }
             })
     }
@@ -9106,12 +9106,12 @@ function In(t, e, i, n, s, r) {
         e
     }
     return {
-        getParameters: function (s, o, m, f, y) {
-            const v = f.fog,
+        getParameters: function (s, o, m, f, v) {
+            const y = f.fog,
             w = s.isMeshStandardMaterial ? f.environment : null,
             b = e.get(s.envMap || w),
             x = p[s.type],
-            S = y.isSkinnedMesh ? function (t) {
+                S = v.isSkinnedMesh ? function (t) {
                 const e = t.skeleton.bones;
                 if (h)
                     return 1024; {
@@ -9121,7 +9121,7 @@ function In(t, e, i, n, s, r) {
                     return n < e.length ? (console.warn("THREE.WebGLRenderer: Skeleton has " + e.length + " bones. This GPU supports " + n + "."), 0) : n
                 }
             }
-            (y) : 0;
+                (v) : 0;
             let M,
             C;
             if (null !== s.precision && (u = n.getMaxPrecision(s.precision), u !== s.precision && console.warn("THREE.WebGLProgram.getParameters:", s.precision, "not supported, using", u, "instead.")), x) {
@@ -9141,8 +9141,8 @@ function In(t, e, i, n, s, r) {
                 isRawShaderMaterial: !0 === s.isRawShaderMaterial,
                 glslVersion: s.glslVersion,
                 precision: u,
-                instancing: !0 === y.isInstancedMesh,
-                instancingColor: !0 === y.isInstancedMesh && null !== y.instanceColor,
+                instancing: !0 === v.isInstancedMesh,
+                instancingColor: !0 === v.isInstancedMesh && null !== v.instanceColor,
                 supportsVertexTextures: d,
                 outputEncoding: null !== _ ? g(_.texture) : t.outputEncoding,
                 map: !!s.map,
@@ -9176,12 +9176,12 @@ function In(t, e, i, n, s, r) {
                 combine: s.combine,
                 vertexTangents: s.normalMap && s.vertexTangents,
                 vertexColors: s.vertexColors,
-                vertexAlphas: !0 === s.vertexColors && y.geometry && y.geometry.attributes.color && 4 === y.geometry.attributes.color.itemSize,
+                vertexAlphas: !0 === s.vertexColors && v.geometry && v.geometry.attributes.color && 4 === v.geometry.attributes.color.itemSize,
                 vertexUvs: !!(s.map || s.bumpMap || s.normalMap || s.specularMap || s.alphaMap || s.emissiveMap || s.roughnessMap || s.metalnessMap || s.clearcoatMap || s.clearcoatRoughnessMap || s.clearcoatNormalMap || s.displacementMap || s.transmissionMap),
                 uvsVertexOnly: !(s.map || s.bumpMap || s.normalMap || s.specularMap || s.alphaMap || s.emissiveMap || s.roughnessMap || s.metalnessMap || s.clearcoatNormalMap || s.transmissionMap || !s.displacementMap),
-                fog: !!v,
+                fog: !!y,
                 useFog: s.fog,
-                fogExp2: v && v.isFogExp2,
+                fogExp2: y && y.isFogExp2,
                 flatShading: !!s.flatShading,
                 sizeAttenuation: s.sizeAttenuation,
                 logarithmicDepthBuffer: l,
@@ -9513,15 +9513,15 @@ function zn(t, e) {
             r.sort(Un);
             for (let t = 0, e = r.length; t < e; t++) {
                 const e = r[t],
-                y = e.color,
-                v = e.intensity,
+                    v = e.color,
+                    y = e.intensity,
                 w = e.distance,
                 b = e.shadow && e.shadow.map ? e.shadow.map.texture : null;
                 if (e.isAmbientLight)
-                    o += y.r * v, a += y.g * v, l += y.b * v;
+                    o += v.r * y, a += v.g * y, l += v.b * y;
                 else if (e.isLightProbe)
                     for (let t = 0; t < 9; t++)
-                        s.probe[t].addScaledVector(e.sh.coefficients[t], v);
+                        s.probe[t].addScaledVector(e.sh.coefficients[t], y);
                 else if (e.isDirectionalLight) {
                     const t = i.get(e);
                     if (t.color.copy(e.color).multiplyScalar(e.intensity), e.castShadow) {
@@ -9540,7 +9540,7 @@ function zn(t, e) {
                     h++
                 } else if (e.isSpotLight) {
                     const t = i.get(e);
-                    if (t.position.setFromMatrixPosition(e.matrixWorld), t.color.copy(y).multiplyScalar(v), t.distance = w, t.coneCos = Math.cos(e.angle), t.penumbraCos = Math.cos(e.angle * (1 - e.penumbra)), t.decay = e.decay, e.castShadow) {
+                    if (t.position.setFromMatrixPosition(e.matrixWorld), t.color.copy(v).multiplyScalar(y), t.distance = w, t.coneCos = Math.cos(e.angle), t.penumbraCos = Math.cos(e.angle * (1 - e.penumbra)), t.decay = e.decay, e.castShadow) {
                         const t = e.shadow,
                         i = n.get(e);
                         i.shadowBias = t.bias,
@@ -9556,7 +9556,7 @@ function zn(t, e) {
                     d++
                 } else if (e.isRectAreaLight) {
                     const t = i.get(e);
-                    t.color.copy(y).multiplyScalar(v),
+                    t.color.copy(v).multiplyScalar(y),
                     t.halfWidth.set(.5 * e.width, 0, 0),
                     t.halfHeight.set(0, .5 * e.height, 0),
                     s.rectArea[u] = t,
@@ -9581,8 +9581,8 @@ function zn(t, e) {
                     c++
                 } else if (e.isHemisphereLight) {
                     const t = i.get(e);
-                    t.skyColor.copy(e.color).multiplyScalar(v),
-                    t.groundColor.copy(e.groundColor).multiplyScalar(v),
+                    t.skyColor.copy(e.color).multiplyScalar(y),
+                        t.groundColor.copy(e.groundColor).multiplyScalar(y),
                     s.hemi[p] = t,
                     p++
                 }
@@ -9591,8 +9591,8 @@ function zn(t, e) {
             s.ambient[0] = o,
             s.ambient[1] = a,
             s.ambient[2] = l;
-            const y = s.hash;
-            y.directionalLength === h && y.pointLength === c && y.spotLength === d && y.rectAreaLength === u && y.hemiLength === p && y.numDirectionalShadows === m && y.numPointShadows === g && y.numSpotShadows === f || (s.directional.length = h, s.spot.length = d, s.rectArea.length = u, s.point.length = c, s.hemi.length = p, s.directionalShadow.length = m, s.directionalShadowMap.length = m, s.pointShadow.length = g, s.pointShadowMap.length = g, s.spotShadow.length = f, s.spotShadowMap.length = f, s.directionalShadowMatrix.length = m, s.pointShadowMatrix.length = g, s.spotShadowMatrix.length = f, y.directionalLength = h, y.pointLength = c, y.spotLength = d, y.rectAreaLength = u, y.hemiLength = p, y.numDirectionalShadows = m, y.numPointShadows = g, y.numSpotShadows = f, s.version = Vn++)
+            const v = s.hash;
+            v.directionalLength === h && v.pointLength === c && v.spotLength === d && v.rectAreaLength === u && v.hemiLength === p && v.numDirectionalShadows === m && v.numPointShadows === g && v.numSpotShadows === f || (s.directional.length = h, s.spot.length = d, s.rectArea.length = u, s.point.length = c, s.hemi.length = p, s.directionalShadow.length = m, s.directionalShadowMap.length = m, s.pointShadow.length = g, s.pointShadowMap.length = g, s.spotShadow.length = f, s.spotShadowMap.length = f, s.directionalShadowMatrix.length = m, s.pointShadowMatrix.length = g, s.spotShadowMatrix.length = f, v.directionalLength = h, v.pointLength = c, v.spotLength = d, v.rectAreaLength = u, v.hemiLength = p, v.numDirectionalShadows = m, v.numPointShadows = g, v.numSpotShadows = f, s.version = Vn++)
         },
         setupView: function (t, e) {
             let i = 0,
@@ -9793,22 +9793,22 @@ function jn(t, e, i) {
     m.defines.HORIZONTAL_PASS = 1;
     const g = new ae;
     g.setAttribute("position", new Xt(new Float32Array([-1, -1, .5, 3, -1, .5, -1, 3, .5]), 3));
-    const v = new _e(g, p),
+    const y = new _e(g, p),
     w = this;
     function b(i, n) {
-        const s = e.update(v);
+        const s = e.update(y);
         p.uniforms.shadow_pass.value = i.map.texture,
         p.uniforms.resolution.value = i.mapSize,
         p.uniforms.radius.value = i.radius,
         t.setRenderTarget(i.mapPass),
         t.clear(),
-        t.renderBufferDirect(n, null, s, p, v, null),
+            t.renderBufferDirect(n, null, s, p, y, null),
         m.uniforms.shadow_pass.value = i.mapPass.texture,
         m.uniforms.resolution.value = i.mapSize,
         m.uniforms.radius.value = i.radius,
         t.setRenderTarget(i.map),
         t.clear(),
-        t.renderBufferDirect(n, null, s, m, v, null)
+            t.renderBufferDirect(n, null, s, m, y, null)
     }
     function x(t, e, i) {
         const n = t << 0 | e << 1 | i << 2;
@@ -9923,9 +9923,9 @@ function jn(t, e, i) {
                     magFilter: 1006,
                     format: 1023
                 };
-                c.map = new y(s.x, s.y, t),
+                    c.map = new v(s.x, s.y, t),
                 c.map.texture.name = h.name + ".shadowMap",
-                c.mapPass = new y(s.x, s.y, t),
+                        c.mapPass = new v(s.x, s.y, t),
                 c.camera.updateProjectionMatrix()
             }
             if (null === c.map) {
@@ -9934,7 +9934,7 @@ function jn(t, e, i) {
                     magFilter: 1003,
                     format: 1023
                 };
-                c.map = new y(s.x, s.y, t),
+                    c.map = new v(s.x, s.y, t),
                 c.map.texture.name = h.name + ".shadowMap",
                 c.camera.updateProjectionMatrix()
             }
@@ -9956,7 +9956,7 @@ function jn(t, e, i) {
         t.setRenderTarget(l, h, c)
     }
 }
-function Yn(t, e, i) {
+function Jn(t, e, i) {
     const n = i.isWebGL2;
     const s = new function () {
         let e = !1;
@@ -10095,8 +10095,8 @@ function Yn(t, e, i) {
     p = null,
     m = null,
     g = null,
-    y = null,
-    v = null,
+        v = null,
+        y = null,
     w = null,
     b = !1,
     x = null,
@@ -10168,9 +10168,9 @@ function Yn(t, e, i) {
     function U(e, i, n, s, r, o, a, l) {
         if (0 !== e) {
             if (!1 === d && (F(3042), d = !0), 5 === e)
-                r = r || i, o = o || n, a = a || s, i === p && r === y || (t.blendEquationSeparate(B[i], B[r]), p = i, y = r), n === m && s === g && o === v && a === w || (t.blendFuncSeparate(V[n], V[s], V[o], V[a]), m = n, g = s, v = o, w = a), u = e, b = null;
+                r = r || i, o = o || n, a = a || s, i === p && r === v || (t.blendEquationSeparate(B[i], B[r]), p = i, v = r), n === m && s === g && o === y && a === w || (t.blendFuncSeparate(V[n], V[s], V[o], V[a]), m = n, g = s, y = o, w = a), u = e, b = null;
             else if (e !== u || l !== b) {
-                if (100 === p && 100 === y || (t.blendEquation(32774), p = 100, y = 100), l)
+                if (100 === p && 100 === v || (t.blendEquation(32774), p = 100, v = 100), l)
                     switch (e) {
                     case 1:
                         t.blendFuncSeparate(1, 771, 1, 771);
@@ -10206,7 +10206,7 @@ function Yn(t, e, i) {
                     }
                 m = null,
                 g = null,
-                v = null,
+                    y = null,
                 w = null,
                 u = e,
                 b = l
@@ -10353,8 +10353,8 @@ function Yn(t, e, i) {
             p = null,
             m = null,
             g = null,
-            y = null,
-            v = null,
+                v = null,
+                y = null,
             w = null,
             b = !1,
             x = null,
@@ -10370,7 +10370,7 @@ function Yn(t, e, i) {
         }
     }
 }
-function Jn(t, e, i, n, s, r, o) {
+function Yn(t, e, i, n, s, r, o) {
     const h = s.isWebGL2,
     c = s.maxTextures,
     d = s.maxCubemapSize,
@@ -10382,18 +10382,18 @@ function Jn(t, e, i, n, s, r, o) {
     try {
         f = "undefined" != typeof OffscreenCanvas && null !== new OffscreenCanvas(1, 1).getContext("2d")
     } catch (t) {}
-    function y(t, e) {
+    function v(t, e) {
         return f ? new OffscreenCanvas(t, e) : document.createElementNS("http://www.w3.org/1999/xhtml", "canvas")
     }
-    function v(t, e, i, n) {
+    function y(t, e, i, n) {
         let s = 1;
         if ((t.width > n || t.height > n) && (s = n / Math.max(t.width, t.height)), s < 1 || !0 === e) {
             if ("undefined" != typeof HTMLImageElement && t instanceof HTMLImageElement || "undefined" != typeof HTMLCanvasElement && t instanceof HTMLCanvasElement || "undefined" != typeof ImageBitmap && t instanceof ImageBitmap) {
                 const n = e ? l : Math.floor,
                 r = n(s * t.width),
                 o = n(s * t.height);
-                void 0 === g && (g = y(r, o));
-                const a = i ? y(r, o) : g;
+                void 0 === g && (g = v(r, o));
+                const a = i ? v(r, o) : g;
                 a.width = r,
                 a.height = o;
                 return a.getContext("2d").drawImage(t, 0, 0, r, o),
@@ -10505,7 +10505,7 @@ function Jn(t, e, i, n, s, r, o) {
             a = n.image[0] && n.image[0].isDataTexture,
             l = [];
             for (let t = 0; t < 6; t++)
-                l[t] = o || a ? a ? n.image[t].image : n.image[t] : v(n.image[t], !1, !0, d);
+                l[t] = o || a ? a ? n.image[t].image : n.image[t] : y(n.image[t], !1, !0, d);
             const c = l[0],
             u = w(c) || h,
             p = r.convert(n.format),
@@ -10586,7 +10586,7 @@ function Jn(t, e, i, n, s, r, o) {
             return !h && (1001 !== t.wrapS || 1001 !== t.wrapT || 1003 !== t.minFilter && 1006 !== t.minFilter)
         }
         (n) && !1 === w(n.image),
-        l = v(n.image, a, !1, u),
+            l = y(n.image, a, !1, u),
         c = w(l) || h,
         d = r.convert(n.format);
         let p,
@@ -11020,8 +11020,8 @@ class ts extends t {
         m.layers.enable(1),
         m.layers.enable(2);
         let g = null,
-        y = null;
-        function v(t) {
+            v = null;
+        function y(t) {
             const e = c.get(t.inputSource);
             e && e.dispatchEvent({
                 type: t.type,
@@ -11034,7 +11034,7 @@ class ts extends t {
                 })),
             c.clear(),
             g = null,
-            y = null,
+                v = null,
             n.bindXRFramebuffer(null),
             t.setRenderTarget(t.getRenderTarget()),
             E.stop(),
@@ -11097,12 +11097,12 @@ class ts extends t {
         },
         this.setSession = async function (t) {
             if (s = t, null !== s) {
-                s.addEventListener("select", v),
-                s.addEventListener("selectstart", v),
-                s.addEventListener("selectend", v),
-                s.addEventListener("squeeze", v),
-                s.addEventListener("squeezestart", v),
-                s.addEventListener("squeezeend", v),
+                    s.addEventListener("select", y),
+                        s.addEventListener("selectstart", y),
+                        s.addEventListener("selectend", y),
+                        s.addEventListener("squeeze", y),
+                        s.addEventListener("squeezestart", y),
+                        s.addEventListener("squeezeend", y),
                 s.addEventListener("end", b),
                 s.addEventListener("inputsourceschange", x);
                 const t = e.getContextAttributes();
@@ -11136,10 +11136,10 @@ class ts extends t {
         this.getCamera = function (t) {
             m.near = u.near = d.near = t.near,
             m.far = u.far = d.far = t.far,
-            g === m.near && y === m.far || (s.updateRenderState({
+            g === m.near && v === m.far || (s.updateRenderState({
                     depthNear: m.near,
                     depthFar: m.far
-                }), g = m.near, y = m.far);
+            }), g = m.near, v = m.far);
             const e = t.parent,
             i = m.cameras;
             C(m, e);
@@ -11173,12 +11173,12 @@ class ts extends t {
                 t.matrixWorld.compose(t.position, t.quaternion, t.scale),
                 t.matrixWorldInverse.copy(t.matrixWorld).invert();
                 const f = o + m,
-                y = a + m,
-                v = u - g,
+                    v = a + m,
+                    y = u - g,
                 w = p + (n - g),
-                b = l * a / y * f,
-                x = h * a / y * f;
-                t.projectionMatrix.makePerspective(v, w, b, x, f, y)
+                    b = l * a / v * f,
+                    x = h * a / v * f;
+                t.projectionMatrix.makePerspective(y, w, b, x, f, v)
             }
             (m, d, u) : m.projectionMatrix.copy(d.projectionMatrix),
             m
@@ -11380,8 +11380,8 @@ function is(t) {
     this.physicallyCorrectLights = !1,
     this.toneMapping = 0,
     this.toneMappingExposure = 1;
-    const y = this;
-    let v = !1,
+    const v = this;
+    let y = !1,
     b = 0,
     x = 0,
     S = null,
@@ -11417,8 +11417,8 @@ function is(t) {
     W,
     q,
     j,
-    Y,
-    J,
+        J,
+        Y,
     X,
     Z,
     K,
@@ -11456,9 +11456,9 @@ function is(t) {
             powerPreference: c,
             failIfMajorPerformanceCaveat: d
         };
-        if (e.addEventListener("webglcontextlost", ft, !1), e.addEventListener("webglcontextrestored", yt, !1), null === ut) {
+        if (e.addEventListener("webglcontextlost", ft, !1), e.addEventListener("webglcontextrestored", vt, !1), null === ut) {
             const e = ["webgl2", "webgl", "experimental-webgl"];
-            if (!0 === y.isWebGL1Renderer && e.shift(), ut = pt(e, t), null === ut)
+            if (!0 === v.isWebGL1Renderer && e.shift(), ut = pt(e, t), null === ut)
                 throw pt(e) ? new Error("Error creating WebGL context with your selected attributes.") : new Error("Error creating WebGL context.")
         }
         void 0 === ut.getShaderPrecisionFormat && (ut.getShaderPrecisionFormat = function () {
@@ -11477,44 +11477,44 @@ function is(t) {
         W = new $e(ut, G, t),
         G.init(W),
         ct = new Xn(ut, G, W),
-        q = new Yn(ut, G, W),
+            q = new Jn(ut, G, W),
         j = new ii,
-        Y = new Rn,
-        J = new Jn(ut, G, q, Y, W, ct, j),
-        X = new Ke(y),
+            J = new Rn,
+            Y = new Yn(ut, G, q, J, W, ct, j),
+            X = new Ke(v),
         Z = new He(ut, W),
-        dt = new Je(ut, G, Z, W),
+            dt = new Ye(ut, G, Z, W),
         K = new ti(ut, Z, j, dt),
         Q = new oi(ut, K, Z, j),
         at = new ri(ut),
-        st = new Ze(Y),
-        tt = new In(y, X, G, W, dt, st),
-        et = new es(Y),
-        it = new Nn(Y),
+            st = new Ze(J),
+            tt = new In(v, X, G, W, dt, st),
+            et = new es(J),
+            it = new Nn(J),
         nt = new Gn(G, W),
-        ot = new Ye(y, X, q, Q, a),
-        rt = new jn(y, Q, W),
+            ot = new Je(v, X, q, Q, a),
+            rt = new jn(v, Q, W),
         lt = new Xe(ut, G, j, W),
         ht = new ei(ut, G, j, W),
         j.programs = tt.programs,
-        y.capabilities = W,
-        y.extensions = G,
-        y.properties = Y,
-        y.renderLists = it,
-        y.shadowMap = rt,
-        y.state = q,
-        y.info = j
+            v.capabilities = W,
+            v.extensions = G,
+            v.properties = J,
+            v.renderLists = it,
+            v.shadowMap = rt,
+            v.state = q,
+            v.info = j
     }
     mt();
-    const gt = new ts(y, ut);
+    const gt = new ts(v, ut);
     function ft(t) {
         t.preventDefault(),
         console.log("THREE.WebGLRenderer: Context Lost."),
-        v = !0
+            y = !0
     }
-    function yt() {
+    function vt() {
         console.log("THREE.WebGLRenderer: Context Restored."),
-        v = !1;
+            y = !1;
         const t = j.autoReset,
         e = rt.enabled,
         i = rt.autoUpdate,
@@ -11527,17 +11527,17 @@ function is(t) {
         rt.needsUpdate = n,
         rt.type = s
     }
-    function vt(t) {
+    function yt(t) {
         const e = t.target;
-        e.removeEventListener("dispose", vt),
+        e.removeEventListener("dispose", yt),
         function (t) {
             (function (t) {
-                const e = Y.get(t).programs;
+                    const e = J.get(t).programs;
                 void 0 !== e && e.forEach((function (t) {
                         tt.releaseProgram(t)
                     }))
             })(t),
-            Y.remove(t)
+                    J.remove(t)
         }
         (e)
     }
@@ -11642,10 +11642,10 @@ function is(t) {
     },
     this.dispose = function () {
         e.removeEventListener("webglcontextlost", ft, !1),
-        e.removeEventListener("webglcontextrestored", yt, !1),
+                e.removeEventListener("webglcontextrestored", vt, !1),
         it.dispose(),
         nt.dispose(),
-        Y.dispose(),
+                J.dispose(),
         X.dispose(),
         Q.dispose(),
         dt.dispose(),
@@ -11656,7 +11656,7 @@ function is(t) {
     },
     this.renderBufferImmediate = function (t, e) {
         dt.initAttributes();
-        const i = Y.get(t);
+            const i = J.get(t);
         t.hasPositions && !i.position && (i.position = ut.createBuffer()),
         t.hasNormals && !i.normal && (i.normal = ut.createBuffer()),
         t.hasUvs && !i.uv && (i.uv = ut.createBuffer()),
@@ -11693,10 +11693,10 @@ function is(t) {
         m = i.drawRange.start * d,
         g = i.drawRange.count * d,
         f = null !== r ? r.start * d : 0,
-        y = null !== r ? r.count * d : 1 / 0,
-        v = Math.max(m, f),
-        w = Math.min(p, m + g, f + y) - 1,
-        b = Math.max(0, w - v + 1);
+                v = null !== r ? r.count * d : 1 / 0,
+                y = Math.max(m, f),
+                w = Math.min(p, m + g, f + v) - 1,
+                b = Math.max(0, w - y + 1);
         if (0 !== b) {
             if (s.isMesh)
                 !0 === n.wireframe ? (q.setLineWidth(n.wireframeLinewidth * H()), u.setMode(1)) : u.setMode(4);
@@ -11708,12 +11708,12 @@ function is(t) {
             } else
                 s.isPoints ? u.setMode(0) : s.isSprite && u.setMode(4);
             if (s.isInstancedMesh)
-                u.renderInstances(v, b, s.count);
+                    u.renderInstances(y, b, s.count);
             else if (i.isInstancedBufferGeometry) {
                 const t = Math.min(i.instanceCount, i._maxInstanceCount);
-                u.renderInstances(v, b, t)
+                    u.renderInstances(y, b, t)
             } else
-                u.render(v, b)
+                    u.render(y, b)
         }
     },
     this.compile = function (t, e) {
@@ -11798,23 +11798,23 @@ function is(t) {
         }
     }
     function _t(t, e, i, n, s, r) {
-        if (t.onBeforeRender(y, e, i, n, s, r), t.modelViewMatrix.multiplyMatrices(i.matrixWorldInverse, t.matrixWorld), t.normalMatrix.getNormalMatrix(t.modelViewMatrix), t.isImmediateRenderObject) {
+        if (t.onBeforeRender(v, e, i, n, s, r), t.modelViewMatrix.multiplyMatrices(i.matrixWorldInverse, t.matrixWorld), t.normalMatrix.getNormalMatrix(t.modelViewMatrix), t.isImmediateRenderObject) {
             const n = Tt(i, e, s, t);
             q.setMaterial(s),
             dt.reset(),
             function (t, e) {
                 t.render((function (t) {
-                        y.renderBufferImmediate(t, e)
+                        v.renderBufferImmediate(t, e)
                     }))
             }
             (t, n)
         } else
-            y.renderBufferDirect(i, e, n, s, t, r);
-        t.onAfterRender(y, e, i, n, s, r)
+            v.renderBufferDirect(i, e, n, s, t, r);
+        t.onAfterRender(v, e, i, n, s, r)
     }
     function Et(t, e, i) {
         !0 !== e.isScene && (e = z);
-        const n = Y.get(t),
+        const n = J.get(t),
         s = p.state.lights,
         r = p.state.shadowsArray,
         o = s.state.version,
@@ -11824,13 +11824,13 @@ function is(t) {
         n.environment = t.isMeshStandardMaterial ? e.environment : null,
         n.fog = e.fog,
         n.envMap = X.get(t.envMap || n.environment),
-        void 0 === h && (t.addEventListener("dispose", vt), h = new Map, n.programs = h);
+        void 0 === h && (t.addEventListener("dispose", yt), h = new Map, n.programs = h);
         let c = h.get(l);
         if (void 0 !== c) {
             if (n.currentProgram === c && n.lightsStateVersion === o)
                 return Pt(t, a), c
         } else
-            a.uniforms = tt.getUniforms(t), t.onBuild(a, y), t.onBeforeCompile(a, y), c = tt.acquireProgram(a, l), h.set(l, c), n.uniforms = a.uniforms;
+            a.uniforms = tt.getUniforms(t), t.onBuild(a, v), t.onBeforeCompile(a, v), c = tt.acquireProgram(a, l), h.set(l, c), n.uniforms = a.uniforms;
         const d = n.uniforms;
         (t.isShaderMaterial || t.isRawShaderMaterial) && !0 !== t.clipping || (d.clippingPlanes = st.uniform),
         Pt(t, a),
@@ -11847,7 +11847,7 @@ function is(t) {
         c
     }
     function Pt(t, e) {
-        const i = Y.get(t);
+        const i = J.get(t);
         i.outputEncoding = e.outputEncoding,
         i.instancing = e.instancing,
         i.numClippingPlanes = e.numClippingPlanes,
@@ -11856,13 +11856,13 @@ function is(t) {
     }
     function Tt(t, e, i, n) {
         !0 !== e.isScene && (e = z),
-        J.resetTextureUnits();
+            Y.resetTextureUnits();
         const s = e.fog,
         r = i.isMeshStandardMaterial ? e.environment : null,
-        o = null === S ? y.outputEncoding : S.texture.encoding,
+            o = null === S ? v.outputEncoding : S.texture.encoding,
         a = X.get(i.envMap || r),
         l = !0 === i.vertexColors && n.geometry && n.geometry.attributes.color && 4 === n.geometry.attributes.color.itemSize,
-        h = Y.get(i),
+            h = J.get(i),
         c = p.state.lights;
         if (!0 === N && (!0 === B || t !== C)) {
             const e = t === C && i.id === M;
@@ -11875,19 +11875,19 @@ function is(t) {
         let m = !1,
         g = !1,
         f = !1;
-        const v = u.getUniforms(),
+        const y = u.getUniforms(),
         w = h.uniforms;
         if (q.useProgram(u.program) && (m = !0, g = !0, f = !0), i.id !== M && (M = i.id, g = !0), m || C !== t) {
-            if (v.setValue(ut, "projectionMatrix", t.projectionMatrix), W.logarithmicDepthBuffer && v.setValue(ut, "logDepthBufFC", 2 / (Math.log(t.far + 1) / Math.LN2)), C !== t && (C = t, g = !0, f = !0), i.isShaderMaterial || i.isMeshPhongMaterial || i.isMeshToonMaterial || i.isMeshStandardMaterial || i.envMap) {
-                const e = v.map.cameraPosition;
+            if (y.setValue(ut, "projectionMatrix", t.projectionMatrix), W.logarithmicDepthBuffer && y.setValue(ut, "logDepthBufFC", 2 / (Math.log(t.far + 1) / Math.LN2)), C !== t && (C = t, g = !0, f = !0), i.isShaderMaterial || i.isMeshPhongMaterial || i.isMeshToonMaterial || i.isMeshStandardMaterial || i.envMap) {
+                const e = y.map.cameraPosition;
                 void 0 !== e && e.setValue(ut, U.setFromMatrixPosition(t.matrixWorld))
             }
-            (i.isMeshPhongMaterial || i.isMeshToonMaterial || i.isMeshLambertMaterial || i.isMeshBasicMaterial || i.isMeshStandardMaterial || i.isShaderMaterial) && v.setValue(ut, "isOrthographic", !0 === t.isOrthographicCamera),
-            (i.isMeshPhongMaterial || i.isMeshToonMaterial || i.isMeshLambertMaterial || i.isMeshBasicMaterial || i.isMeshStandardMaterial || i.isShaderMaterial || i.isShadowMaterial || i.skinning) && v.setValue(ut, "viewMatrix", t.matrixWorldInverse)
+            (i.isMeshPhongMaterial || i.isMeshToonMaterial || i.isMeshLambertMaterial || i.isMeshBasicMaterial || i.isMeshStandardMaterial || i.isShaderMaterial) && y.setValue(ut, "isOrthographic", !0 === t.isOrthographicCamera),
+            (i.isMeshPhongMaterial || i.isMeshToonMaterial || i.isMeshLambertMaterial || i.isMeshBasicMaterial || i.isMeshStandardMaterial || i.isShaderMaterial || i.isShadowMaterial || i.skinning) && y.setValue(ut, "viewMatrix", t.matrixWorldInverse)
         }
         if (i.skinning) {
-            v.setOptional(ut, n, "bindMatrix"),
-            v.setOptional(ut, n, "bindMatrixInverse");
+            y.setOptional(ut, n, "bindMatrix"),
+                y.setOptional(ut, n, "bindMatrixInverse");
             const t = n.skeleton;
             if (t) {
                 const e = t.bones;
@@ -11904,15 +11904,15 @@ function is(t) {
                         t.boneTexture = s,
                         t.boneTextureSize = i
                     }
-                    v.setValue(ut, "boneTexture", t.boneTexture, J),
-                    v.setValue(ut, "boneTextureSize", t.boneTextureSize)
+                    y.setValue(ut, "boneTexture", t.boneTexture, Y),
+                        y.setValue(ut, "boneTextureSize", t.boneTextureSize)
                 } else
-                    v.setOptional(ut, t, "boneMatrices")
+                    y.setOptional(ut, t, "boneMatrices")
             }
         }
         var b;
-        return (g || h.receiveShadow !== n.receiveShadow) && (h.receiveShadow = n.receiveShadow, v.setValue(ut, "receiveShadow", n.receiveShadow)),
-        g && (v.setValue(ut, "toneMappingExposure", y.toneMappingExposure), h.needsLights && function (t, e) {
+        return (g || h.receiveShadow !== n.receiveShadow) && (h.receiveShadow = n.receiveShadow, y.setValue(ut, "receiveShadow", n.receiveShadow)),
+        g && (y.setValue(ut, "toneMappingExposure", v.toneMappingExposure), h.needsLights && function (t, e) {
             t.ambientLightColor.needsUpdate = e,
             t.lightProbe.needsUpdate = e,
             t.directionalLights.needsUpdate = e,
@@ -11924,12 +11924,12 @@ function is(t) {
             t.rectAreaLights.needsUpdate = e,
             t.hemisphereLights.needsUpdate = e
         }
-            (w, f), s && i.fog && et.refreshFogUniforms(w, s), et.refreshMaterialUniforms(w, i, L, A), dn.upload(ut, h.uniformsList, w, J)),
-        i.isShaderMaterial && !0 === i.uniformsNeedUpdate && (dn.upload(ut, h.uniformsList, w, J), i.uniformsNeedUpdate = !1),
-        i.isSpriteMaterial && v.setValue(ut, "center", n.center),
-        v.setValue(ut, "modelViewMatrix", n.modelViewMatrix),
-        v.setValue(ut, "normalMatrix", n.normalMatrix),
-        v.setValue(ut, "modelMatrix", n.matrixWorld),
+        (w, f), s && i.fog && et.refreshFogUniforms(w, s), et.refreshMaterialUniforms(w, i, L, A), dn.upload(ut, h.uniformsList, w, Y)),
+        i.isShaderMaterial && !0 === i.uniformsNeedUpdate && (dn.upload(ut, h.uniformsList, w, Y), i.uniformsNeedUpdate = !1),
+        i.isSpriteMaterial && y.setValue(ut, "center", n.center),
+            y.setValue(ut, "modelViewMatrix", n.modelViewMatrix),
+            y.setValue(ut, "normalMatrix", n.normalMatrix),
+            y.setValue(ut, "modelMatrix", n.matrixWorld),
         u
     }
     St.setAnimationLoop((function (t) {
@@ -11948,12 +11948,12 @@ function is(t) {
         n;
         if (void 0 !== arguments[2] && (console.warn("THREE.WebGLRenderer.render(): the renderTarget argument has been removed. Use .setRenderTarget() instead."), i = arguments[2]), void 0 !== arguments[3] && (console.warn("THREE.WebGLRenderer.render(): the forceClear argument has been removed. Use .clear() instead."), n = arguments[3]), void 0 !== e && !0 !== e.isCamera)
             return void console.error("THREE.WebGLRenderer.render: camera is not an instance of THREE.Camera.");
-        if (!0 === v)
+            if (!0 === y)
             return;
         !0 === t.autoUpdate && t.updateMatrixWorld(),
         null === e.parent && e.updateMatrixWorld(),
         !0 === gt.enabled && !0 === gt.isPresenting && (e = gt.getCamera(e)),
-        !0 === t.isScene && t.onBeforeRender(y, t, e, i || S),
+            !0 === t.isScene && t.onBeforeRender(v, t, e, i || S),
         p = nt.get(t, g.length),
         p.init(),
         g.push(p),
@@ -11964,9 +11964,9 @@ function is(t) {
         u = it.get(t, m.length),
         u.init(),
         m.push(u),
-        Mt(t, e, 0, y.sortObjects),
+                Mt(t, e, 0, v.sortObjects),
         u.finish(),
-        !0 === y.sortObjects && u.sort(k, I),
+            !0 === v.sortObjects && u.sort(k, I),
         !0 === N && st.beginShadows();
         const s = p.state.shadowsArray;
         rt.render(s, t, e),
@@ -11980,8 +11980,8 @@ function is(t) {
         o = u.transparent;
         r.length > 0 && Ct(r, t, e),
         o.length > 0 && Ct(o, t, e),
-        null !== S && (J.updateRenderTargetMipmap(S), J.updateMultisampleRenderTarget(S)),
-        !0 === t.isScene && t.onAfterRender(y, t, e),
+            null !== S && (Y.updateRenderTargetMipmap(S), Y.updateMultisampleRenderTarget(S)),
+            !0 === t.isScene && t.onAfterRender(v, t, e),
         q.buffers.depth.setTest(!0),
         q.buffers.depth.setMask(!0),
         q.buffers.color.setMask(!0),
@@ -12007,25 +12007,25 @@ function is(t) {
         S = t,
         b = e,
         x = i,
-        t && void 0 === Y.get(t).__webglFramebuffer && J.setupRenderTarget(t);
+            t && void 0 === J.get(t).__webglFramebuffer && Y.setupRenderTarget(t);
         let n = null,
         s = !1,
         r = !1;
         if (t) {
             const i = t.texture;
             (i.isDataTexture3D || i.isDataTexture2DArray) && (r = !0);
-            const o = Y.get(t).__webglFramebuffer;
-            t.isWebGLCubeRenderTarget ? (n = o[e], s = !0) : n = t.isWebGLMultisampleRenderTarget ? Y.get(t).__webglMultisampledFramebuffer : o,
+                const o = J.get(t).__webglFramebuffer;
+                t.isWebGLCubeRenderTarget ? (n = o[e], s = !0) : n = t.isWebGLMultisampleRenderTarget ? J.get(t).__webglMultisampledFramebuffer : o,
             _.copy(t.viewport),
             E.copy(t.scissor),
             P = t.scissorTest
         } else
             _.copy(R).multiplyScalar(L).floor(), E.copy(D).multiplyScalar(L).floor(), P = O;
         if (q.bindFramebuffer(36160, n), q.viewport(_), q.scissor(E), q.setScissorTest(P), s) {
-            const n = Y.get(t.texture);
+                const n = J.get(t.texture);
             ut.framebufferTexture2D(36160, 36064, 34069 + e, n.__webglTexture, i)
         } else if (r) {
-            const n = Y.get(t.texture),
+                const n = J.get(t.texture),
             s = e || 0;
             ut.framebufferTextureLayer(36160, 36064, n.__webglTexture, i || 0, s)
         }
@@ -12033,7 +12033,7 @@ function is(t) {
     this.readRenderTargetPixels = function (t, e, i, n, s, r, o) {
         if (!t || !t.isWebGLRenderTarget)
             return void console.error("THREE.WebGLRenderer.readRenderTargetPixels: renderTarget is not THREE.WebGLRenderTarget.");
-        let a = Y.get(t).__webglFramebuffer;
+            let a = J.get(t).__webglFramebuffer;
         if (t.isWebGLCubeRenderTarget && void 0 !== o && (a = a[o]), a) {
             q.bindFramebuffer(36160, a);
             try {
@@ -12047,7 +12047,7 @@ function is(t) {
                     return void console.error("THREE.WebGLRenderer.readRenderTargetPixels: renderTarget is not in UnsignedByteType or implementation defined type.");
                 36053 === ut.checkFramebufferStatus(36160) ? e >= 0 && e <= t.width - n && i >= 0 && i <= t.height - s && ut.readPixels(e, i, n, s, ct.convert(a), ct.convert(l), r) : console.error("THREE.WebGLRenderer.readRenderTargetPixels: readPixels from renderTarget failed. Framebuffer not complete.")
             } finally {
-                const t = null !== S ? Y.get(S).__webglFramebuffer : null;
+                    const t = null !== S ? J.get(S).__webglFramebuffer : null;
                 q.bindFramebuffer(36160, t)
             }
         }
@@ -12057,7 +12057,7 @@ function is(t) {
         s = Math.floor(e.image.width * n),
         r = Math.floor(e.image.height * n),
         o = ct.convert(e.format);
-        J.setTexture2D(e, 0),
+            Y.setTexture2D(e, 0),
         ut.copyTexImage2D(3553, i, o, t.x, t.y, s, r, 0),
         q.unbindTexture()
     },
@@ -12066,7 +12066,7 @@ function is(t) {
         r = e.image.height,
         o = ct.convert(i.format),
         a = ct.convert(i.type);
-        J.setTexture2D(i, 0),
+            Y.setTexture2D(i, 0),
         ut.pixelStorei(37440, i.flipY),
         ut.pixelStorei(37441, i.premultiplyAlpha),
         ut.pixelStorei(3317, i.unpackAlignment),
@@ -12075,7 +12075,7 @@ function is(t) {
         q.unbindTexture()
     },
     this.copyTextureToTexture3D = function (t, e, i, n, s = 0) {
-        if (y.isWebGL1Renderer)
+            if (v.isWebGL1Renderer)
             return void console.warn("THREE.WebGLRenderer.copyTextureToTexture3D: can only be used with WebGL2.");
         const {
             width: r,
@@ -12086,11 +12086,11 @@ function is(t) {
         h = ct.convert(n.type);
         let c;
         if (n.isDataTexture3D)
-            J.setTexture3D(n, 0), c = 32879;
+                Y.setTexture3D(n, 0), c = 32879;
         else {
             if (!n.isDataTexture2DArray)
                 return void console.warn("THREE.WebGLRenderer.copyTextureToTexture3D: only supports THREE.DataTexture3D and THREE.DataTexture2DArray.");
-            J.setTexture2DArray(n, 0),
+                Y.setTexture2DArray(n, 0),
             c = 35866
         }
         ut.pixelStorei(37440, n.flipY),
@@ -12116,7 +12116,7 @@ function is(t) {
         q.unbindTexture()
     },
     this.initTexture = function (t) {
-        J.setTexture2D(t, 0),
+            Y.setTexture2D(t, 0),
         q.unbindTexture()
     },
     this.resetState = function () {
@@ -12375,7 +12375,7 @@ class as extends Bt {
 }
 let ls;
 as.prototype.isSpriteMaterial = !0;
-const hs = new w, cs = new w, ds = new w, us = new h, ps = new h, ms = new $, gs = new w, fs = new w, ys = new w, vs = new h, ws = new h, bs = new h;
+const hs = new w, cs = new w, ds = new w, us = new h, ps = new h, ms = new $, gs = new w, fs = new w, vs = new w, ys = new h, ws = new h, bs = new h;
 function xs(t, e, i, n, s, r) {
     us.subVectors(t, i).addScalar(.5).multiply(n),
     void 0 !== s ? (ps.x = r * us.x - s * us.y, ps.y = s * us.x + r * us.y) : ps.copy(us),
@@ -12412,18 +12412,18 @@ function xs(t, e, i, n, s, r) {
         const r = this.center;
         xs(gs.set( - .5,  - .5, 0), ds, r, cs, n, s),
         xs(fs.set(.5,  - .5, 0), ds, r, cs, n, s),
-        xs(ys.set(.5, .5, 0), ds, r, cs, n, s),
-        vs.set(0, 0),
+            xs(vs.set(.5, .5, 0), ds, r, cs, n, s),
+            ys.set(0, 0),
         ws.set(1, 0),
         bs.set(1, 1);
-        let o = t.ray.intersectTriangle(gs, fs, ys, !1, hs);
-        if (null === o && (xs(fs.set( - .5, .5, 0), ds, r, cs, n, s), ws.set(0, 1), o = t.ray.intersectTriangle(gs, ys, fs, !1, hs), null === o))
+        let o = t.ray.intersectTriangle(gs, fs, vs, !1, hs);
+        if (null === o && (xs(fs.set( - .5, .5, 0), ds, r, cs, n, s), ws.set(0, 1), o = t.ray.intersectTriangle(gs, vs, fs, !1, hs), null === o))
             return;
         const a = t.ray.origin.distanceTo(hs);
         a < t.near || a > t.far || e.push({
             distance: a,
             point: hs.clone(),
-            uv: Ft.getUV(hs, gs, fs, ys, vs, ws, bs, new h),
+            uv: Ft.getUV(hs, gs, fs, vs, ys, ws, bs, new h),
             face: null,
             object: this
         })
@@ -12746,7 +12746,7 @@ class Hs extends Bt {
 }
 Hs.prototype.isPointsMaterial = !0;
 const Gs = new $, Ws = new X, qs = new z, js = new w;
-function Ys(t, e, i, n, s, r, o) {
+function Js(t, e, i, n, s, r, o) {
     const a = Ws.distanceSqToPoint(t);
     if (a < i) {
         const i = new w;
@@ -12797,11 +12797,11 @@ function Ys(t, e, i, n, s, r, o) {
                 for (let i = Math.max(0, r.start), l = Math.min(s.count, r.start + r.count); i < l; i++) {
                     const r = s.getX(i);
                     js.fromBufferAttribute(o, r),
-                    Ys(js, r, a, n, t, e, this)
+                        Js(js, r, a, n, t, e, this)
                 }
             } else {
                 for (let i = Math.max(0, r.start), s = Math.min(o.count, r.start + r.count); i < s; i++)
-                    js.fromBufferAttribute(o, i), Ys(js, i, a, n, t, e, this)
+                    js.fromBufferAttribute(o, i), Js(js, i, a, n, t, e, this)
             }
         } else
             console.error("THREE.Points.raycast() no longer supports THREE.Geometry. Use THREE.BufferGeometry instead.")
@@ -12885,7 +12885,7 @@ function Ys(t, e, i, n, s, r, o) {
         this.generateMipmaps = !1
     }
 }).prototype.isDepthTexture = !0;
-class Js extends ae {
+class Ys extends ae {
     constructor(t, e, i = 1, n = 0) {
         super(),
         this.type = "PolyhedronGeometry",
@@ -13047,11 +13047,11 @@ function $s(t, e, i, n, s) {
             return s
         }
             (t, e, i, n) > 0)for (r = e; r < i; r += n)
-            o = yr(r, t[r], t[r + 1], o);
+        o = vr(r, t[r], t[r + 1], o);
     else
         for (r = i - n; r >= e; r -= n)
-            o = yr(r, t[r], t[r + 1], o);
-    return o && dr(o, o.next) && (vr(o), o = o.next),
+            o = vr(r, t[r], t[r + 1], o);
+    return o && dr(o, o.next) && (yr(o), o = o.next),
     o
 }
 function Zs(t, e) {
@@ -13064,7 +13064,7 @@ function Zs(t, e) {
         if (i = !1, n.steiner || !dr(n, n.next) && 0 !== cr(n.prev, n, n.next))
             n = n.next;
         else {
-            if (vr(n), n = e = n.prev, n === n.next)
+            if (yr(n), n = e = n.prev, n === n.next)
                 break;
             i = !0
         }
@@ -13113,7 +13113,7 @@ function Ks(t, e, i, n, s, r, o) {
     h = t;
     for (; t.prev !== t.next; )
         if (a = t.prev, l = t.next, r ? tr(t, n, s, r) : Qs(t))
-            e.push(a.i / i), e.push(t.i / i), e.push(l.i / i), vr(t), t = l.next, h = l.next;
+            e.push(a.i / i), e.push(t.i / i), e.push(l.i / i), yr(t), t = l.next, h = l.next;
         else if ((t = l) === h) {
             o ? 1 === o ? Ks(t = er(Zs(t), e, i), e, i, n, s, r, 2) : 2 === o && ir(t, e, i, n, s, r) : Ks(Zs(t), e, i, n, s, r, 1);
             break
@@ -13171,7 +13171,7 @@ function er(t, e, i) {
     do {
         const s = n.prev,
         r = n.next.next;
-        !dr(s, r) && ur(s, n, n.next, r) && gr(s, r) && gr(r, s) && (e.push(s.i / i), e.push(n.i / i), e.push(r.i / i), vr(n), vr(n.next), n = t = r),
+        !dr(s, r) && ur(s, n, n.next, r) && gr(s, r) && gr(r, s) && (e.push(s.i / i), e.push(n.i / i), e.push(r.i / i), yr(n), yr(n.next), n = t = r),
         n = n.next
     } while (n !== t);
     return Zs(n)
@@ -13318,12 +13318,12 @@ function fr(t, e) {
     n.prev = r,
     n
 }
-function yr(t, e, i, n) {
+function vr(t, e, i, n) {
     const s = new wr(t, e, i);
     return n ? (s.next = n.next, s.prev = n, n.next.prev = s, n.next = s) : (s.prev = s, s.next = s),
     s
 }
-function vr(t) {
+function yr(t) {
     t.next.prev = t.prev,
     t.prev.next = t.next,
     t.prevZ && (t.prevZ.nextZ = t.nextZ),
@@ -13403,13 +13403,13 @@ class Mr extends ae {
             const g = e.extrudePath,
             f = void 0 !== e.UVGenerator ? e.UVGenerator : Cr;
             void 0 !== e.amount && (console.warn("THREE.ExtrudeBufferGeometry: amount has been renamed to depth."), l = e.amount);
-            let y,
-            v,
+            let v,
+                y,
             b,
             x,
             S,
             M = !1;
-            g && (y = g.getSpacedPoints(a), M = !0, c = !1, v = g.computeFrenetFrames(a, !1), b = new w, x = new w, S = new w),
+            g && (v = g.getSpacedPoints(a), M = !0, c = !1, y = g.computeFrenetFrames(a, !1), b = new w, x = new w, S = new w),
             c || (m = 0, d = 0, u = 0, p = 0);
             const C = t.extractPoints(o);
             let _ = C.shape;
@@ -13451,10 +13451,10 @@ class Mr extends ae {
                     f = ((i.x - c / p - m) * c - (i.y + l / p - g) * l) / (o * c - a * l);
                     n = m + o * f - t.x,
                     s = g + a * f - t.y;
-                    const y = n * n + s * s;
-                    if (y <= 2)
+                    const v = n * n + s * s;
+                    if (v <= 2)
                         return new h(n, s);
-                    r = Math.sqrt(y / 2)
+                    r = Math.sqrt(v / 2)
                 } else {
                     let t = !1;
                     o > Number.EPSILON ? l > Number.EPSILON && (t = !0) : o < -Number.EPSILON ? l < -Number.EPSILON && (t = !0) : Math.sign(a) === Math.sign(c) && (t = !0),
@@ -13496,12 +13496,12 @@ class Mr extends ae {
             const N = u + p;
             for (let t = 0; t < L; t++) {
                 const e = c ? A(_[t], F[t], N) : _[t];
-                M ? (x.copy(v.normals[0]).multiplyScalar(e.x), b.copy(v.binormals[0]).multiplyScalar(e.y), S.copy(y[0]).add(x).add(b), V(S.x, S.y, S.z)) : V(e.x, e.y, 0)
+                M ? (x.copy(y.normals[0]).multiplyScalar(e.x), b.copy(y.binormals[0]).multiplyScalar(e.y), S.copy(v[0]).add(x).add(b), V(S.x, S.y, S.z)) : V(e.x, e.y, 0)
             }
             for (let t = 1; t <= a; t++)
                 for (let e = 0; e < L; e++) {
                     const i = c ? A(_[e], F[e], N) : _[e];
-                    M ? (x.copy(v.normals[t]).multiplyScalar(i.x), b.copy(v.binormals[t]).multiplyScalar(i.y), S.copy(y[t]).add(x).add(b), V(S.x, S.y, S.z)) : V(i.x, i.y, l / a * t)
+                    M ? (x.copy(y.normals[t]).multiplyScalar(i.x), b.copy(y.binormals[t]).multiplyScalar(i.y), S.copy(v[t]).add(x).add(b), V(S.x, S.y, S.z)) : V(i.x, i.y, l / a * t)
                 }
             for (let t = m - 1; t >= 0; t--) {
                 const e = t / m,
@@ -13516,7 +13516,7 @@ class Mr extends ae {
                     O = D[t];
                     for (let t = 0, s = e.length; t < s; t++) {
                         const s = A(e[t], O[t], n);
-                        M ? V(s.x, s.y + y[a - 1].y, y[a - 1].x + i) : V(s.x, s.y, l + i)
+                        M ? V(s.x, s.y + v[a - 1].y, v[a - 1].x + i) : V(s.x, s.y, l + i)
                     }
                 }
             }
@@ -13656,12 +13656,12 @@ const Cr = {
         m = e[3 * s + 1],
         g = e[3 * s + 2],
         f = e[3 * r],
-        y = e[3 * r + 1],
-        v = e[3 * r + 2];
-        return Math.abs(a - d) < .01 ? [new h(o, 1 - l), new h(c, 1 - u), new h(p, 1 - g), new h(f, 1 - v)] : [new h(a, 1 - l), new h(d, 1 - u), new h(m, 1 - g), new h(y, 1 - v)]
+            v = e[3 * r + 1],
+            y = e[3 * r + 2];
+        return Math.abs(a - d) < .01 ? [new h(o, 1 - l), new h(c, 1 - u), new h(p, 1 - g), new h(f, 1 - y)] : [new h(a, 1 - l), new h(d, 1 - u), new h(m, 1 - g), new h(v, 1 - y)]
     }
 };
-class _r extends Js {
+class _r extends Ys {
     constructor(t = 1, e = 0) {
         const i = (1 + Math.sqrt(5)) / 2;
         super([-1, i, 0, 1, i, 0, -1, -i, 0, 1, -i, 0, 0, -1, i, 0, 1, i, 0, -1, -i, 0, 1, -i, i, 0, -1, i, 0, 1, -i, 0, -1, -i, 0, 1], [0, 11, 5, 0, 5, 1, 0, 1, 7, 0, 7, 10, 0, 10, 11, 1, 5, 9, 5, 11, 4, 11, 10, 2, 10, 7, 6, 7, 1, 8, 3, 9, 4, 3, 4, 2, 3, 2, 6, 3, 6, 8, 3, 8, 9, 4, 9, 5, 2, 4, 11, 6, 2, 10, 8, 6, 7, 9, 8, 1], t, e),
@@ -13767,18 +13767,18 @@ class Pr extends ae {
         g = [];
         for (let u = 0; u <= i; u++) {
             const f = [],
-            y = u / i;
-            let v = 0;
-            0 == u && 0 == r ? v = .5 / e : u == i && a == Math.PI && (v =  - .5 / e);
+                v = u / i;
+            let y = 0;
+            0 == u && 0 == r ? y = .5 / e : u == i && a == Math.PI && (y =  - .5 / e);
             for (let i = 0; i <= e; i++) {
                 const a = i / e;
-                c.x = -t * Math.cos(n + a * s) * Math.sin(r + y * o),
-                c.y = t * Math.cos(r + y * o),
-                c.z = t * Math.sin(n + a * s) * Math.sin(r + y * o),
+                c.x = -t * Math.cos(n + a * s) * Math.sin(r + v * o),
+                    c.y = t * Math.cos(r + v * o),
+                    c.z = t * Math.sin(n + a * s) * Math.sin(r + v * o),
                 p.push(c.x, c.y, c.z),
                 d.copy(c).normalize(),
                 m.push(d.x, d.y, d.z),
-                g.push(a + v, 1 - y),
+                    g.push(a + y, 1 - v),
                 f.push(l++)
             }
             h.push(f)
@@ -14379,13 +14379,13 @@ const Ar = {
                 u = Ar.arraySlice(t.resultBuffer, e, i)
             }
             if ("quaternion" === s) {
-                (new v).fromArray(u).normalize().conjugate().toArray(u)
+                (new y).fromArray(u).normalize().conjugate().toArray(u)
             }
             const p = o.times.length;
             for (let t = 0; t < p; ++t) {
                 const e = t * c + h;
                 if ("quaternion" === s)
-                    v.multiplyQuaternionsFlat(o.values, e, u, 0, o.values, e);
+                    y.multiplyQuaternionsFlat(o.values, e, u, 0, o.values, e);
                 else {
                     const t = c - 2 * h;
                     for (let i = 0; i < t; ++i)
@@ -14548,11 +14548,11 @@ class kr extends Lr {
         m = p * p,
         g = m * p,
         f = -d * g + 2 * d * m - d * p,
-        y = (1 + d) * g + (-1.5 - 2 * d) * m + ( - .5 + d) * p + 1,
-        v = (-1 - u) * g + (1.5 + u) * m + .5 * p,
+            v = (1 + d) * g + (-1.5 - 2 * d) * m + ( - .5 + d) * p + 1,
+            y = (-1 - u) * g + (1.5 + u) * m + .5 * p,
         w = u * g - u * m;
         for (let t = 0; t !== o; ++t)
-            s[t] = f * r[h + t] + y * r[l + t] + v * r[a + t] + w * r[c + t];
+            s[t] = f * r[h + t] + v * r[l + t] + y * r[a + t] + w * r[c + t];
         return s
     }
 }
@@ -14794,7 +14794,7 @@ class Br extends Lr {
         a = (i - e) / (n - e);
         let l = t * o;
         for (let t = l + o; l !== t; l += 4)
-            v.slerpFlat(s, 0, r, l - o, r, l, a);
+            y.slerpFlat(s, 0, r, l - o, r, l, a);
         return s
     }
 }
@@ -15115,8 +15115,8 @@ class jr {
         this
     }
 }
-const Yr = {};
-class Jr extends jr {
+const Jr = {};
+class Yr extends jr {
     constructor(t) {
         super(t)
     }
@@ -15131,8 +15131,8 @@ class Jr extends jr {
                     e && e(r),
                     s.manager.itemEnd(t)
                 }), 0), r;
-        if (void 0 !== Yr[t])
-            return void Yr[t].push({
+        if (void 0 !== Jr[t])
+            return void Jr[t].push({
                 onLoad: e,
                 onProgress: i,
                 onError: n
@@ -15180,8 +15180,8 @@ class Jr extends jr {
                     }), 0)
             }
         } else {
-            Yr[t] = [],
-            Yr[t].push({
+            Jr[t] = [],
+                Jr[t].push({
                 onLoad: e,
                 onProgress: i,
                 onError: n
@@ -15190,8 +15190,8 @@ class Jr extends jr {
             a.open("GET", t, !0),
             a.addEventListener("load", (function (e) {
                     const i = this.response,
-                    n = Yr[t];
-                    if (delete Yr[t], 200 === this.status || 0 === this.status) {
+                        n = Jr[t];
+                    if (delete Jr[t], 200 === this.status || 0 === this.status) {
                         0 === this.status && console.warn("THREE.FileLoader: HTTP Status 0 received."),
                         Wr.add(t, i);
                         for (let t = 0, e = n.length; t < e; t++) {
@@ -15209,15 +15209,15 @@ class Jr extends jr {
                     }
                 }), !1),
             a.addEventListener("progress", (function (e) {
-                    const i = Yr[t];
+                    const i = Jr[t];
                     for (let t = 0, n = i.length; t < n; t++) {
                         const n = i[t];
                         n.onProgress && n.onProgress(e)
                     }
                 }), !1),
             a.addEventListener("error", (function (e) {
-                    const i = Yr[t];
-                    delete Yr[t];
+                    const i = Jr[t];
+                    delete Jr[t];
                     for (let t = 0, n = i.length; t < n; t++) {
                         const n = i[t];
                         n.onError && n.onError(e)
@@ -15226,8 +15226,8 @@ class Jr extends jr {
                     s.manager.itemEnd(t)
                 }), !1),
             a.addEventListener("abort", (function (e) {
-                    const i = Yr[t];
-                    delete Yr[t];
+                    const i = Jr[t];
+                    delete Jr[t];
                     for (let t = 0, n = i.length; t < n; t++) {
                         const n = i[t];
                         n.onError && n.onError(e)
@@ -15965,7 +15965,7 @@ class fo extends Kr {
     }
 }
 fo.prototype.isSplineCurve = !0;
-var yo = Object.freeze({
+var vo = Object.freeze({
     __proto__: null,
     ArcCurve: to,
     CatmullRomCurve3: oo,
@@ -16012,7 +16012,7 @@ var yo = Object.freeze({
     QuadraticBezierCurve3: go,
     SplineCurve: fo
 });
-class vo extends Kr {
+class yo extends Kr {
     constructor() {
         super(),
         this.type = "CurvePath",
@@ -16110,12 +16110,12 @@ class vo extends Kr {
         this.curves = [];
         for (let e = 0, i = t.curves.length; e < i; e++) {
             const i = t.curves[e];
-            this.curves.push((new yo[i.type]).fromJSON(i))
+            this.curves.push((new vo[i.type]).fromJSON(i))
         }
         return this
     }
 }
-class wo extends vo {
+class wo extends yo {
     constructor(t) {
         super(),
         this.type = "Path",
@@ -16825,7 +16825,7 @@ class No extends jr {
     }
     load(t, e, i, n) {
         const s = this,
-        r = new Jr(this.manager);
+            r = new Yr(this.manager);
         r.setResponseType("arraybuffer"),
         r.setPath(this.path),
         r.setRequestHeader(this.requestHeader),
@@ -16979,12 +16979,12 @@ class Bo {
                 t[e + n] = t[i + n]
     }
     _slerp(t, e, i, n) {
-        v.slerpFlat(t, e, t, e, t, i, n)
+        y.slerpFlat(t, e, t, e, t, i, n)
     }
     _slerpAdditive(t, e, i, n, s) {
         const r = this._workIndex * s;
-        v.multiplyQuaternionsFlat(t, r, t, e, t, i),
-        v.slerpFlat(t, e, t, e, t, r, n)
+        y.multiplyQuaternionsFlat(t, r, t, e, t, i),
+            y.slerpFlat(t, e, t, e, t, r, n)
     }
     _lerp(t, e, i, n, s) {
         const r = 1 - n;
@@ -17001,17 +17001,17 @@ class Bo {
     }
 }
 const Vo = new RegExp("[\\[\\]\\.:\\/]", "g"), Uo = "[^" + "\\[\\]\\.:\\/".replace("\\.", "") + "]", zo = /((?:WC+[\/:])*)/.source.replace("WC", "[^\\[\\]\\.:\\/]"), Ho = /(WCOD+)?/.source.replace("WCOD", Uo), Go = /(?:\.(WC+)(?:\[(.+)\])?)?/.source.replace("WC", "[^\\[\\]\\.:\\/]"), Wo = /\.(WC+)(?:\[(.+)\])?/.source.replace("WC", "[^\\[\\]\\.:\\/]"), qo = new RegExp("^" + zo + Ho + Go + Wo + "$"), jo = ["material", "materials", "bones"];
-class Yo {
+class Jo {
     constructor(t, e, i) {
         this.path = e,
-        this.parsedPath = i || Yo.parseTrackName(e),
-        this.node = Yo.findNode(t, this.parsedPath.nodeName) || t,
+            this.parsedPath = i || Jo.parseTrackName(e),
+            this.node = Jo.findNode(t, this.parsedPath.nodeName) || t,
         this.rootNode = t,
         this.getValue = this._getValue_unbound,
         this.setValue = this._setValue_unbound
     }
     static create(t, e, i) {
-        return t && t.isAnimationObjectGroup ? new Yo.Composite(t, e, i) : new Yo(t, e, i)
+        return t && t.isAnimationObjectGroup ? new Jo.Composite(t, e, i) : new Jo(t, e, i)
     }
     static sanitizeNodeName(t) {
         return t.replace(/\s/g, "_").replace(Vo, "")
@@ -17142,7 +17142,7 @@ class Yo {
         i = e.objectName,
         n = e.propertyName;
         let s = e.propertyIndex;
-        if (t || (t = Yo.findNode(this.rootNode, e.nodeName) || this.rootNode, this.node = t), this.getValue = this._getValue_unavailable, this.setValue = this._setValue_unavailable, !t)
+        if (t || (t = Jo.findNode(this.rootNode, e.nodeName) || this.rootNode, this.node = t), this.getValue = this._getValue_unavailable, this.setValue = this._setValue_unavailable, !t)
             return void console.error("THREE.PropertyBinding: Trying to update node for track: " + this.path + " but it wasn't found.");
         if (i) {
             let n = e.objectIndex;
@@ -17208,9 +17208,9 @@ class Yo {
         this.setValue = this._setValue_unbound
     }
 }
-Yo.Composite = class {
+Jo.Composite = class {
     constructor(t, e, i) {
-        const n = i || Yo.parseTrackName(e);
+        const n = i || Jo.parseTrackName(e);
         this._targetGroup = t,
         this._bindings = t.subscribe_(e, n)
     }
@@ -17235,17 +17235,17 @@ Yo.Composite = class {
         for (let e = this._targetGroup.nCachedObjects_, i = t.length; e !== i; ++e)
             t[e].unbind()
     }
-}, Yo.prototype.BindingType = {
+}, Jo.prototype.BindingType = {
     Direct: 0,
     EntireArray: 1,
     ArrayElement: 2,
     HasFromToArray: 3
-}, Yo.prototype.Versioning = {
+}, Jo.prototype.Versioning = {
     None: 0,
     NeedsUpdate: 1,
     MatrixWorldNeedsUpdate: 2
-}, Yo.prototype.GetterByBindingType = [Yo.prototype._getValue_direct, Yo.prototype._getValue_array, Yo.prototype._getValue_arrayElement, Yo.prototype._getValue_toArray], Yo.prototype.SetterByBindingTypeAndVersioning = [[Yo.prototype._setValue_direct, Yo.prototype._setValue_direct_setNeedsUpdate, Yo.prototype._setValue_direct_setMatrixWorldNeedsUpdate], [Yo.prototype._setValue_array, Yo.prototype._setValue_array_setNeedsUpdate, Yo.prototype._setValue_array_setMatrixWorldNeedsUpdate], [Yo.prototype._setValue_arrayElement, Yo.prototype._setValue_arrayElement_setNeedsUpdate, Yo.prototype._setValue_arrayElement_setMatrixWorldNeedsUpdate], [Yo.prototype._setValue_fromArray, Yo.prototype._setValue_fromArray_setNeedsUpdate, Yo.prototype._setValue_fromArray_setMatrixWorldNeedsUpdate]];
-class Jo {
+}, Jo.prototype.GetterByBindingType = [Jo.prototype._getValue_direct, Jo.prototype._getValue_array, Jo.prototype._getValue_arrayElement, Jo.prototype._getValue_toArray], Jo.prototype.SetterByBindingTypeAndVersioning = [[Jo.prototype._setValue_direct, Jo.prototype._setValue_direct_setNeedsUpdate, Jo.prototype._setValue_direct_setMatrixWorldNeedsUpdate], [Jo.prototype._setValue_array, Jo.prototype._setValue_array_setNeedsUpdate, Jo.prototype._setValue_array_setMatrixWorldNeedsUpdate], [Jo.prototype._setValue_arrayElement, Jo.prototype._setValue_arrayElement_setNeedsUpdate, Jo.prototype._setValue_arrayElement_setMatrixWorldNeedsUpdate], [Jo.prototype._setValue_fromArray, Jo.prototype._setValue_fromArray_setNeedsUpdate, Jo.prototype._setValue_fromArray_setMatrixWorldNeedsUpdate]];
+class Yo {
     constructor(t, e, i = null, n = e.blendMode) {
         this._mixer = t,
         this._clip = e,
@@ -17563,7 +17563,7 @@ class Jo {
                     continue
                 }
                 const n = e && e._propertyBindings[t].binding.parsedPath;
-                c = new Bo(Yo.create(i, l, n), s.ValueTypeName, s.getValueSize()),
+                c = new Bo(Jo.create(i, l, n), s.ValueTypeName, s.getValueSize()),
                 ++c.referenceCount,
                 this._addInactiveBinding(c, a, l),
                 r[t] = c
@@ -17785,7 +17785,7 @@ class Jo {
         }
         if (null === r)
             return null;
-        const h = new Jo(this, r, e, i);
+        const h = new Yo(this, r, e, i);
         return this._bindAction(h, l),
         this._addInactiveAction(h, o, s),
         h
@@ -18127,10 +18127,10 @@ new _e(new Pe, ta), Kr.create = function (t, e) {
 }, _t.prototype.isIntersectionLine = function (t) {
     return console.warn("THREE.Plane: .isIntersectionLine() has been renamed to .intersectsLine()."),
     this.intersectsLine(t)
-}, v.prototype.multiplyVector3 = function (t) {
+}, y.prototype.multiplyVector3 = function (t) {
     return console.warn("THREE.Quaternion: .multiplyVector3() has been removed. Use is now vector.applyQuaternion( quaternion ) instead."),
     t.applyQuaternion(this)
-}, v.prototype.inverse = function () {
+}, y.prototype.inverse = function () {
     return console.warn("THREE.Quaternion: .inverse() has been renamed to invert()."),
     this.invert()
 }, X.prototype.isIntersectionBox = function (t) {
@@ -18623,7 +18623,7 @@ new _e(new Pe, ta), Kr.create = function (t, e) {
             console.warn("THREE.WebGLRenderer: .shadowMap.renderSingleSided has been removed. Set Material.shadowSide instead.")
         }
     }
-}), Object.defineProperties(y.prototype, {
+}), Object.defineProperties(v.prototype, {
     wrapS: {
         get: function () {
             return console.warn("THREE.WebGLRenderTarget: .wrapS is now .texture.wrapS."),
@@ -19063,6 +19063,7 @@ class na {
             walkHeadBob: !0,
             landHeadBob: !0,
             afFlipScreen: !0,
+            theme: "system",
             hideUi: !1,
             smoothCam: !1
         },
@@ -19283,8 +19284,8 @@ function fa(t) {
     }
     (t, Math.random())
 }
-const ya = new Map;
-function va() {
+const va = new Map;
+function ya() {
     return function (t) {
         const e = new URLSearchParams(t),
         i = {};
@@ -19426,7 +19427,8 @@ class Sa {
         testLabel: o = "",
         isIconButton: a = !1,
         icon: l = null,
-        iconSize: h = 1
+                    iconSize: h = 1,
+                    iconIsInvertable: c = !0
     } = {}) {
         this.el = document.createElement("button"),
         a ? this.el.classList.add("icon-button", ...r) : this.el.classList.add("dialog-button", "blueNight", "wrinkledPaper", ...r),
@@ -19438,6 +19440,7 @@ class Sa {
         this.el.appendChild(this.textEl),
         this._iconEl = null,
         this._iconSize = h,
+            this._iconIsInvertable = c,
         this._currentIcon = null,
         this.setIcon(l),
         this._visible = !0,
@@ -19467,7 +19470,7 @@ class Sa {
     }
     setIcon(t) {
         const e = !!t;
-        !!this._iconEl != e && (e ? (this._iconEl = document.createElement("div"), this._iconEl.classList.add("dialog-button-icon"), this.el.insertBefore(this._iconEl, this.textEl), 1 != this._iconSize && (this._iconEl.style.transform = `scale(${this._iconSize})`)) : (this._iconEl && this.el.removeChild(this._iconEl), this._iconEl = null)),
+        !!this._iconEl != e && (e ? (this._iconEl = document.createElement("div"), this._iconEl.classList.add("dialog-button-icon"), this._iconEl.classList.toggle("no-dark-mode-invert", !this._iconIsInvertable), this.el.insertBefore(this._iconEl, this.textEl), 1 != this._iconSize && (this._iconEl.style.transform = `scale(${this._iconSize})`)) : (this._iconEl && this.el.removeChild(this._iconEl), this._iconEl = null)),
         t && this._iconEl && (this._iconEl.style.backgroundImage = `url(${t})`),
         this._currentIcon = t
     }
@@ -19590,57 +19593,82 @@ class Ca {
     constructor(t) {
         const {
             text: e,
-            type: i
+            type: i,
+            enumValues: n
         } = t;
         if (this.type = i, this.el = document.createElement("div"), this.el.classList.add("settingsItem"), this.textEl = document.createElement("div"), this.el.appendChild(this.textEl), this.textEl.textContent = e, this.textEl.classList.add("settingsItemText"), this.onValueChangeCbs = new Set, "slider" == this.type) {
             this.inputContainer = document.createElement("div"),
             this.inputContainer.classList.add("settingsItemSlider"),
             this.el.appendChild(this.inputContainer),
-            this.inputEl = document.createElement("input"),
-            this.inputContainer.appendChild(this.inputEl),
-            this.inputEl.type = "range",
-            this.inputEl.min = String(t.min),
-            this.inputEl.max = String(t.max),
-            this.inputEl.step = String(t.step || 1),
+                this.sliderEl = document.createElement("input"),
+                this.inputContainer.appendChild(this.sliderEl),
+                this.sliderEl.type = "range",
+                this.sliderEl.min = String(t.min),
+                this.sliderEl.max = String(t.max),
+                this.sliderEl.step = String(t.step || 1),
             this.valueEl = document.createElement("div"),
             this.valueEl.classList.add("settingsItemSliderValue"),
             this.inputContainer.appendChild(this.valueEl),
-            this.valueEl.textContent = this.inputEl.value;
+                this.valueEl.textContent = this.sliderEl.value;
             const e = this.valueEl,
-            i = this.inputEl;
-            this.inputEl.addEventListener("input", (t => {
+                i = this.sliderEl;
+            this.sliderEl.addEventListener("input", (t => {
                     e.textContent = i.value;
                     const n = Number(i.value);
                     this.onValueChangeCbs.forEach((t => t(n)))
                 }))
         } else if ("toggle" == this.type) {
-            this.inputEl = document.createElement("input"),
-            this.inputEl.type = "checkbox",
-            this.inputEl.classList.add("dialog-checkbox-input", "wrinkledPaper"),
-            this.el.appendChild(this.inputEl);
-            const t = this.inputEl;
-            this.inputEl.addEventListener("input", (() => {
+            this.toggleEl = document.createElement("input"),
+                this.toggleEl.type = "checkbox",
+                this.toggleEl.classList.add("dialog-checkbox-input", "wrinkledPaper"),
+                this.el.appendChild(this.toggleEl);
+            const t = this.toggleEl;
+            this.toggleEl.addEventListener("input", (() => {
                     this.onValueChangeCbs.forEach((e => e(t.checked)))
                 }))
+        } else if ("enum" == i) {
+            const t = document.createElement("div");
+            if (t.classList.add("dialog-select-wrapper", "wrinkledPaper"), this.el.appendChild(t), this.dropdownEl = document.createElement("select"), this.dropdownEl.classList.add("dialog-select-input", "blueNight"), t.appendChild(this.dropdownEl), n)
+                for (const [t, e] of Object.entries(n)) {
+                    const i = document.createElement("option");
+                    i.value = t,
+                        i.textContent = e,
+                        this.dropdownEl.appendChild(i)
+                }
+            const e = this.dropdownEl;
+            this.dropdownEl.addEventListener("input", (() => {
+                this.onValueChangeCbs.forEach((t => t(e.value)))
+            }))
         }
     }
     setValue(t) {
-        if (!this.inputEl)
-            throw new Error("Assertion failed, input element doesn't exist.");
         if ("slider" == this.type) {
+            if (!this.sliderEl)
+                throw new Error("Assertion failed, slider element doesn't exist.");
             if ("number" != typeof t)
                 throw new Error("Failed to set value of slider setting item: value is not a number");
-            if (this.inputEl.value = String(t), !this.valueEl)
+            if (this.sliderEl.value = String(t), !this.valueEl)
                 throw new Error("Assertion failed, value element doesn't exist.");
-            this.valueEl.textContent = this.inputEl.value
-        } else
-            "toggle" == this.type && "boolean" == typeof t && (this.inputEl.checked = t)
+            this.valueEl.textContent = this.sliderEl.value
+        } else if ("toggle" == this.type && "boolean" == typeof t) {
+            if (!this.toggleEl)
+                throw new Error("Assertion failed, toggle element doesn't exist.");
+            this.toggleEl.checked = t
+        } else if ("enum" == this.type) {
+            if (!this.dropdownEl)
+                throw new Error("Assertion failed, dropdown element doesn't exist.");
+            if ("string" != typeof t)
+                throw new Error("Failed to set value of enum setting item: value is not a string");
+            this.dropdownEl.value = t
+        }
     }
     onValueChange(t) {
         this.onValueChangeCbs.add(t)
     }
     setDisabled(t) {
-        this.inputEl && (this.inputEl.disabled = t)
+        this.sliderEl && (this.sliderEl.disabled = t),
+        this.toggleEl && (this.toggleEl.disabled = t),
+        this.dropdownEl && (this.dropdownEl.disabled = t)
     }
 }
 class _a extends Ma { // client settings
@@ -19658,8 +19686,8 @@ class _a extends Ma { // client settings
                 })), this.settings.set("fov", new Ca({
                     text: "Field of view",
                     type: "slider",
-                    min: 20,
-                    max: 160
+            min: 40,
+            max: 140
                 })), this.settings.set("mouseSensitivity", new Ca({
                     text: "Mouse sensitivity",
                     type: "slider",
@@ -19681,6 +19709,14 @@ class _a extends Ma { // client settings
                 })), this.settings.set("landHeadBob", new Ca({
                     text: "Land head bob",
                     type: "toggle"
+        })), this.settings.set("theme", new Ca({
+            text: "Theme",
+            type: "enum",
+            enumValues: {
+                system: "Sync with system",
+                light: "Light",
+                dark: "Dark"
+            }
                 })), this.settings.set("hideUi", new Ca({
                     text: "Hide in game UI",
                     type: "toggle"
@@ -19724,16 +19760,21 @@ class graphicSettings extends Ma { // client graphic settings
             /*this.settings.set("versionspoof", new Ca({
                 text: "Version Spoof",
                 type: "toggle"
-            })),*/ this.settings.set("framerate", new Ca({
+            })),*/
+            /*** NEEDED FIX
+            this.settings.set("framerate", new Ca({
             text: "Target Framerate",
             type: "slider",
             min: 5,
             max: 260,
             step: 5
-        })), this.settings.set("vsync", new Ca({
+        })),
+             this.settings.set("vsync", new Ca({
             text: "Vsync",
             type: "toggle"
-        })), this.settings.set("statsfornerds", new Ca({
+        })),
+             ***/
+             this.settings.set("statsfornerds", new Ca({
             text: "Stats for nerds",
             type: "toggle"
         })), this.settings.set("noalerts", new Ca({
@@ -19770,25 +19811,25 @@ class graphicSettings extends Ma { // client graphic settings
             text: "Crosshair Ticks",
             type: "slider",
             min: 1,
-            max: 12,
+            max: 11,
             step: 1
         })), this.settings.set("cursorheight", new Ca({
             text: "Crosshair Height",
             type: "slider",
             min: 1,
-            max: 24,
+            max: 400,
             step: 1
         })), this.settings.set("cursorborderradius", new Ca({
             text: "Crosshair Border Radius",
             type: "slider",
             min: 0,
-            max: 4,
+            max: 50,
             step: 1
         })), this.settings.set("cursorypos", new Ca({
-            text: "Crosshair Y Position",
+            text: "Crosshair Vertical Position",
             type: "slider",
-            min: -12,
-            max: 12,
+            min: -90,
+            max: 90,
             step: 1
         })), this.settings.set("cursorbackgroundr", new Ca({
             text: "Crosshair Background Red",
@@ -21470,11 +21511,11 @@ class Ha {
     applyLookRotation(t, e, i) {
         if (!t)
             return;
-        const n = t.getWorldQuaternion(new v);
+        const n = t.getWorldQuaternion(new y);
         n.invert();
         const s = e;
         s.applyQuaternion(n);
-        const r = new v;
+        const r = new y;
         r.setFromAxisAngle(s, i),
         t.quaternion.multiply(r)
     }
@@ -21750,7 +21791,7 @@ class Wa {
             applyWorldColor: h
         };
         let f,
-        y;
+            v;
         e = {
             name: t,
             ...g,
@@ -21762,7 +21803,7 @@ class Wa {
             ...i
         },
         f = n || this.buildVertexShader(e),
-        y = s || this.buildFragShader(i),
+            v = s || this.buildFragShader(i),
         r = {
             saturation: {
                 value: 1
@@ -21790,22 +21831,22 @@ class Wa {
             },
             ...r
         };
-        const v = new ke({
+        const y = new ke({
             name: t,
             vertexShader: f,
-            fragmentShader: y,
+            fragmentShader: v,
             uniforms: r,
             side: m,
             vertexColors: !0,
             depthWrite: u,
             depthTest: p
         });
-        return v.defaultAttributeValues = {
-            ...v.defaultAttributeValues,
+        return y.defaultAttributeValues = {
+            ...y.defaultAttributeValues,
             ...o
         },
-        this.addCachedMaterial(v),
-        v
+            this.addCachedMaterial(y),
+            y
     }
 }
 function qa(t, {
@@ -21939,17 +21980,17 @@ class ja {
         })
     }
 }
-const Ya = new Map;
-Ya.set("movementSpeed", {
+const Ja = new Map;
+Ja.set("movementSpeed", {
     icon: "img/menuUI/shop/classIcons/movementSpeed.svg"
-}), Ya.set("bowAttackStrength", {
+}), Ja.set("bowAttackStrength", {
     icon: "img/menuUI/shop/classIcons/bowAttackStrength.svg"
-}), Ya.set("armorStrength", {
+}), Ja.set("armorStrength", {
     icon: "img/menuUI/shop/classIcons/armorStrength.svg"
-}), Ya.set("shootingFocus", {
+}), Ja.set("shootingFocus", {
     icon: "img/menuUI/shop/classIcons/shootingFocus.svg"
 });
-class Ja extends Ma {
+class Ya extends Ma {
     constructor(t, {
         renderOptions: e
     }) {
@@ -22174,7 +22215,7 @@ class $a {
             t.classList.add("shopItemStatClassesContainer"),
             this.el.appendChild(t);
             for (const e of Object.keys(this.config.statClasses)) {
-                const i = Ya.get(e);
+                const i = Ja.get(e);
                 if (!i)
                     continue;
                 const n = i.icon;
@@ -22371,7 +22412,7 @@ class $a {
         })
     }
     openConfirmPurchaseDialog() {
-        const t = new Ja(this.config, {
+        const t = new Ya(this.config, {
             renderOptions: this.renderOptions
         });
         uc().dialogManager.addDialog(t),
@@ -24219,17 +24260,21 @@ class pl extends Ma {
         this.currentSquadId = null,
         this.squadIdText = document.createElement("div"),
         this.squadIdText.classList.add("allow-select", "squad-id"),
-        c.appendChild(this.squadIdText),
-        this.copyUrlButton = document.createElement("div"),
-        this.copyUrlButton.classList.add("squad-id-button", "icon-button", "copy-squad-url-button"),
-        c.appendChild(this.copyUrlButton);
+            c.appendChild(this.squadIdText);
         const d = document.createElement("div");
         d.classList.add("squad-id-copied-text"),
         d.textContent = "Copied!",
-        this.copyUrlButton.appendChild(d),
-        this.copyUrlButton.addEventListener("click", (async() => {
+            this.copyUrlButton = new Sa({
+                isIconButton: !0,
+                ariaLabel: "Copy squad id to clipboard",
+                icon: "img/menuUI/copy.svg",
+                extraClasses: ["squad-id-button"],
+                onClick: async() => {
                 null != this.currentSquadId && (await navigator.clipboard.writeText(this.currentSquadId), d.classList.remove("animating"), d.offsetHeight, d.classList.add("animating"))
-            })),
+                }
+            }),
+            c.appendChild(this.copyUrlButton.el),
+            this.copyUrlButton.el.appendChild(d),
         this.clipboardPermissionGranted = !1,
         this.updateCopyUrlButtonVisibility(),
         this.queryClipboardPermission();
@@ -24250,14 +24295,14 @@ class pl extends Ma {
         const f = document.createElement("div");
         f.classList.add("squad-split-section"),
         r.appendChild(f);
-        const y = document.createElement("h3");
-        y.classList.add("dialogTitle", "blueNight"),
-        y.textContent = "Join existing squad",
-        f.appendChild(y);
-        const v = document.createElement("form");
-        v.classList.add("text-with-submit-form"),
-        f.appendChild(v),
-        v.addEventListener("submit", (async t => {
+        const v = document.createElement("h3");
+        v.classList.add("dialogTitle", "blueNight"),
+            v.textContent = "Join existing squad",
+            f.appendChild(v);
+        const y = document.createElement("form");
+        y.classList.add("text-with-submit-form"),
+            f.appendChild(y),
+            y.addEventListener("submit", (async t => {
                 if (t.preventDefault(), this.networkManager.hasGameServerConnection) {
                     if (uc().settingsManager.getValue("noalerts") == false) {
                         const t = uc().dialogManager.showAlert({
@@ -24284,11 +24329,11 @@ class pl extends Ma {
                 this.updateJoinButtonVisibility()
             }
         }),
-        v.appendChild(this.joinSquadIdInput.el),
+            y.appendChild(this.joinSquadIdInput.el),
         this.joinSquadIdButton = new Sa({
             text: "Join"
         }),
-        v.appendChild(this.joinSquadIdButton.el),
+            y.appendChild(this.joinSquadIdButton.el),
         this.updateJoinButtonVisibility();
         const w = document.createElement("div");
         w.classList.add("in-squad-content"),
@@ -24325,14 +24370,19 @@ class pl extends Ma {
         }),
         this.inSquadButtonsContainer.appendChild(this.startButton.el),
         this.squadSettingsDialog = null;
-        const M = document.createElement("div");
-        M.classList.add("squad-settings-button", "icon-button"),
-        this.el.appendChild(M),
-        M.addEventListener("click", (() => {
+        const M = new Sa({
+            isIconButton: !0,
+            ariaLabel: "Squad settings",
+            icon: "img/menuUI/settings.svg",
+            extraClasses: ["squad-settings-button"],
+            iconSize: 1.5,
+            onClick: () => {
                 this.squadSettingsDialog || (this.squadSettingsDialog = new ul(this.squadManager), uc().dialogManager.addDialog(this.squadSettingsDialog), this.squadSettingsDialog.addOnCloseCb((() => {
                             this.squadSettingsDialog = null
                         })))
-            })),
+            }
+        });
+        this.el.appendChild(M.el),
         this.currentAvatarBlobUrlReferences = new Set,
         this.boundUpdateSquadId = this.updateSquadId.bind(this),
         this.boundOnSquadIdChange = this.onSquadIdChanged.bind(this),
@@ -24412,7 +24462,7 @@ class pl extends Ma {
     }
     updateCopyUrlButtonVisibility() {
         const t = this.clipboardPermissionGranted && !!this.currentSquadId;
-        this.copyUrlButton.style.display = t ? "" : "none"
+        this.copyUrlButton.visible = t
     }
     updateMembersUi() {
         for (; this.membersTbody.firstChild; )
@@ -24825,7 +24875,7 @@ class fl {
             }))
     }
 }
-class yl {
+class vl {
     constructor() {
         this.visiblePages = new Set,
         this.desktopBanner = document.createElement("div"),
@@ -24852,7 +24902,7 @@ class yl {
         uc().poki.updateBannerVisibility()
     }
 }
-class vl extends Ma {
+class yl extends Ma {
     constructor({
         title: t = "",
         text: e = "",
@@ -24973,7 +25023,7 @@ class wl {
         performance.now() - this.lastDialogAddTime < 300 || this.firstClosableDialog && this.firstClosableDialog.close()
     }
     showAlert(t) {
-        const e = new vl(t);
+        const e = new yl(t);
         return this.addDialog(e),
         e
     }
@@ -25964,9 +26014,9 @@ class kl {
                 if (this.setMapScene(La.deserializeThreeObject(t.scene)), this.currentMapHasScene = !0, t.lobbyCamPositions) {
                     const e = t.lobbyCamPositions.map((t => ({
                                     posA: (new w).fromArray(t.posA),
-                                    rotA: (new v).fromArray(t.rotA),
+                        rotA: (new y).fromArray(t.rotA),
                                     posB: (new w).fromArray(t.posB),
-                                    rotB: (new v).fromArray(t.rotB)
+                        rotB: (new y).fromArray(t.rotB)
                                 })));
                     uc().cam.setLobbyCamPositions(e)
                 }
@@ -25981,11 +26031,11 @@ class kl {
                 const e = t.flags.map((t => ({
                                 flagTeamId: t.flagTeamId,
                                 pos: (new w).fromArray(t.pos),
-                                rot: (new v).fromArray(t.rot)
+                        rot: (new y).fromArray(t.rot)
                             }))),
                 i = t.spawnPositions.map((t => t.map((t => ({
                                         pos: (new w).fromArray(t.pos),
-                                        rot: (new v).fromArray(t.rot)
+                        rot: (new y).fromArray(t.rot)
                                     })))));
                 uc().physics.removeMapColliders();
                 for (const {
@@ -26173,7 +26223,7 @@ class Fl {
         this.allConfigs = [this.shopConfig, this.promosConfig, this.mapsConfig]
     }
     init() {
-        const t = va();
+        const t = ya();
         if (t.configBasePath)
             this.basePath = t.configBasePath;
         else if ("dev" == t.configEnv || "staging" == t.configEnv || t.pokiDebug || "staging.narrow.one" == location.hostname)
@@ -26364,10 +26414,10 @@ class Nl {
         const i = t.clone();
         i.x += 1,
         i.cross(t).normalize();
-        const n = new v;
+        const n = new y;
         n.setFromAxisAngle(t, Math.random() * Math.PI * 2),
         i.applyQuaternion(n);
-        const s = new v;
+        const s = new y;
         return s.setFromAxisAngle(i, la(-e, e, Math.random())),
         t.clone().applyQuaternion(s)
     }
@@ -26601,9 +26651,9 @@ class Ul {
         this.holdingObject = e,
         this.thirdPersonParentName = i,
         this.firstPersonPosOffset = new w,
-        this.firstPersonRotOffset = new v,
+            this.firstPersonRotOffset = new y,
         this.smoothFirstPersonPosOffset = new w,
-        this.smoothFirstPersonRotOffset = new v,
+            this.smoothFirstPersonRotOffset = new y,
         this.smoothFirstPersonPosFovMultiplierX = 0,
         this.smoothFirstPersonPosBaseFovMultiplierX = 0,
         this.smoothFirstPersonPosFovMultiplierY = 0,
@@ -26707,7 +26757,7 @@ class Ul {
         this.firstPersonPosOffset.copy(this.firstPersonConfig.posOffset);
         const i = (new ot).setFromVector3(this.firstPersonConfig.rotOffset, "YXZ");
         this.firstPersonRotOffset.setFromEuler(i),
-        this.firstPersonRotOffset.multiply((new v).setFromAxisAngle(new w(0, 1, 0), Math.PI)),
+            this.firstPersonRotOffset.multiply((new y).setFromAxisAngle(new w(0, 1, 0), Math.PI)),
         e && (this.smoothFirstPersonPosOffset.copy(this.firstPersonConfig.posOffset), this.smoothFirstPersonRotOffset.copy(this.firstPersonRotOffset), this.smoothFirstPersonPosFovMultiplierX = this.firstPersonConfig.posFovMultiplierX, this.smoothFirstPersonPosBaseFovMultiplierX = this.firstPersonConfig.posBaseFovMultiplierX, this.smoothFirstPersonPosFovMultiplierY = this.firstPersonConfig.posFovMultiplierY, this.smoothFirstPersonWalkBobMultiplier = this.firstPersonConfig.walkBobMultiplier, this.smoothFirstPersonPitchHeightMultiplier = this.firstPersonConfig.pitchHeightMultiplier, this.smoothFirstPersonMinFov = this.firstPersonConfig.minFov, this.smoothFirstPersonMaxFov = this.firstPersonConfig.maxFov, this.updateRenderOverlayFovs(), this.renderOverlay.updateProjectionMatrix()),
         this.updateFirstPersonPosition()
     }
@@ -26729,24 +26779,24 @@ class Ul {
         n.clone().cross(l).y > 0 && (h = -h);
         let c = o.angleTo(l);
         o.clone().cross(l).dot(a) > 0 && (c = -c);
-        const d = new v;
+        const d = new y;
         s.applyQuaternion(e),
         d.setFromAxisAngle(s, c);
-        (new v).setFromAxisAngle(new w(0, 1, 0), -h);
+        (new y).setFromAxisAngle(new w(0, 1, 0), -h);
         const u = this.smoothFirstPersonPosOffset.clone(),
         p = Math.min(window.innerWidth / window.innerHeight, 2),
         m = this.renderOverlay.cam.fov,
         g = Math.tan(m / 115) * p,
         f = Math.tan(m / 115),
-        y = Math.tan(t.cam.baseFov / 115) * p;
+            v = Math.tan(t.cam.baseFov / 115) * p;
         u.x += g * this.smoothFirstPersonPosFovMultiplierX,
-        u.x += y * this.smoothFirstPersonPosBaseFovMultiplierX,
+            u.x += v * this.smoothFirstPersonPosBaseFovMultiplierX,
         u.y -= f * this.smoothFirstPersonPosFovMultiplierY,
         u.y -= c * this.smoothFirstPersonPitchHeightMultiplier,
         t.settingsManager.getValue("walkHeadBob") && (u.x += .1 * Math.cos(this.player.legsMoveTForCos / 2) * this.smoothFirstPersonWalkBobMultiplier, u.y +=  - .07 * Math.sin(this.player.legsMoveTForCos) * this.smoothFirstPersonWalkBobMultiplier),
         u.sub(this.camPosOffsetPhysics.value),
         u.x += this.camRotOffsetPhysics.value;
-        const b = new v;
+        const b = new y;
         b.multiply(this.smoothFirstPersonRotOffset),
         this.firstPersonObjContainer.position.copy(u),
         this.firstPersonObjContainer.quaternion.copy(b),
@@ -26846,7 +26896,7 @@ class Hl {
     }
     init() {
         this.matchMakingLoadingText = uc().mainMenu.requestLoadingText("Searching for players...");
-        const t = va();
+        const t = ya();
         if ("local" != uc().env || t.useProductionServers)
             this.matchMakingSocketUrl = "wss://matchmaking.narrow-one.com/";
         else {
@@ -27539,7 +27589,7 @@ class Wl {
     init() {
         const t = uc();
         this.joiningLoadingText = t.mainMenu.requestLoadingText("Joining game...");
-        const e = va();
+        const e = ya();
         this.useMatchMaking = "production" == t.env || !!e.useMatchMaking || !!e.useProductionServers,
         this.matchMaking.init(),
         t.auth.onLoggedInAccountChange((() => {
@@ -27571,7 +27621,7 @@ class Wl {
             uc().profileState.setUsername(betterNarrowCharacter + uc().profileState.getCurrentState().username)
 
             let t = null;
-        const e = va();
+        const e = ya();
         if (this.nextCloseIsIntentional = !1, e.ip && !this.squadManager.isInSquad)
             t = e.ip;
         else if (this.shouldUseMatchMaking)
@@ -28030,7 +28080,7 @@ class Wl {
         this.lastDisconnectReason = "unknown",
         this.lastSentSkinData = "",
         this.nextCloseIsIntentional = !1;
-        const t = va();
+        const t = ya();
         t.gameId ? this.sendJoinGameId(Number(t.gameId)) : (this.sendJoinGameId(this.nextJoinGameId, this.nextJoinRequestId), this.nextJoinGameId = -1),
         this.sendCurrentVersion(),
         this.sendCurrentSession(),
@@ -28244,8 +28294,8 @@ class Wl {
         a[7] = m,
         a[8] = g,
         a[9] = f;
-        const y = this.unnormalizeS16(m, -1, 1),
-        v = this.unnormalizeS16(g, -1, 1),
+        const v = this.unnormalizeS16(m, -1, 1),
+            y = this.unnormalizeS16(g, -1, 1),
         b = this.unnormalizeS16(f, -1, 1),
         x = this.normalizeU16(s);
         a[10] = x;
@@ -28254,7 +28304,7 @@ class Wl {
         return {
             arrowId: e,
             pos: new w(d, u, p),
-            dir: new w(y, v, b),
+            dir: new w(v, y, b),
             fireAmount01: S,
             networkOffsetPos: new w(0, 0, 0)
         }
@@ -28399,7 +28449,7 @@ class jl {
         throw new Error("base class")
     }
 }
-const Yl = 1, Jl = 2, Xl = 3, $l = 4, Zl = 5, Kl = 6;
+const Jl = 1, Yl = 2, Xl = 3, $l = 4, Zl = 5, Kl = 6;
 class Ql extends jl {
     constructor(...t) {
         super(...t),
@@ -28453,11 +28503,11 @@ class Ql extends jl {
         o = n.clone().negate(),
         a = new w(0, 1, 0),
         l = [{
-                face: Yl,
+                face: Jl,
                 normal: i,
                 dot: 0
             }, {
-                face: Jl,
+                face: Yl,
                 normal: r,
                 dot: 0
             }, {
@@ -28486,9 +28536,9 @@ class Ql extends jl {
     }
     getIsOnFace(t, e) {
         switch (e.face) {
+            case Jl:
+                return t.y >= 1;
         case Yl:
-            return t.y >= 1;
-        case Jl:
             return t.y <= -1;
         case Xl:
             return t.x >= 1;
@@ -28583,8 +28633,11 @@ class eh extends th {
         this.velocity.z *= n,
         this.pos.addScaledVector(this.velocity, t)
     }
+    updateLastFloorTouchTime() {
+        this.lastFloorTouchTime = uc().now
+    }
     endPhysicsSteps() {
-        (this.isOnFloor || this.climbingLadder) && (this.lastFloorTouchTime = uc().now, this.inAirAfterJump = !1),
+        (this.isOnFloor || this.climbingLadder) && (this.updateLastFloorTouchTime(), this.inAirAfterJump = !1),
         this.isOnJumpableCollider && (this.lastJumpableColliderTouchTime = uc().now),
         this.totalForce.set(0, 0, 0)
     }
@@ -28603,23 +28656,63 @@ class eh extends th {
         const t = this.getCurrentPlayerAabb();
         return uc().physics.getOctreeNodesInAabb(t)
     }
-    getManifolds() {
-        const t = [],
-        e = this.getCurrentPlayerAabb();
-        for (const i of uc().physics.getCollidersForAabbUsingOctree(e))
-            if (i.aabb && i.aabb.intersectsBox(e) && i.excludeTeamId != this.player.teamId)
-                for (const e of this.colliders) {
-                    const n = i.getSphereManifold(e.center, e.radius);
-                    n.penetration > 0 && t.push({
-                        manifold: n,
-                        mapCollider: i,
-                        playerCollider: e
+    getPlayerManifolds() {
+        const t = this.getCurrentPlayerAabb();
+        return this.getManifoldsHelper(t, this.colliders)
+    }
+    getManifoldsHelper(t, e) {
+        const i = [];
+        for (const n of uc().physics.getCollidersForAabbUsingOctree(t))
+            if (n.aabb && n.aabb.intersectsBox(t) && n.excludeTeamId != this.player.teamId)
+                for (const t of e) {
+                    const e = n.getSphereManifold(t.center, t.radius);
+                    e.penetration > 0 && i.push({
+                        manifold: e,
+                        mapCollider: n,
+                        playerCollider: t
                     })
                 }
-        return t
+        return i
+    }
+    isAboveJumpableCollider() {
+        let t = null;
+        for (const e of this.colliders)
+            if ("feet" == e.bodyPart) {
+                t = e;
+                break
+            }
+        if (!t)
+            return !1;
+        const e = [],
+            i = t.center;
+        for (let n = 0; n < 5; n++) {
+            const s = i.clone();
+            s.y -= .1 * n,
+                e.push({
+                    center: s,
+                    radius: t.radius
+                    })
+                }
+        const n = new S;
+        n.expandByPoint(e[0].center),
+            n.expandByPoint(e[e.length - 1].center),
+            n.expandByScalar(t.radius);
+        const s = this.getManifoldsHelper(n, e);
+        for (const {
+            manifold: t
+        }
+            of s) {
+            const e = t.normal.dot(new w(0, 1, 0));
+            if (e > .3 || this.manifoldShouldMovePlayerUp(t, e))
+                return !0
+        }
+        return !1
+    }
+    manifoldShouldMovePlayerUp(t, e) {
+        return "box" == t.colliderType && t.isAtEdge && t.isAtUpFace && e > .1
     }
     resolveMapCollisionsOctree(t) {
-        const e = this.getManifolds();
+        const e = this.getPlayerManifolds();
         this.slowDownColliderAmount = 0;
         let i = 0;
         for (const {
@@ -28638,7 +28731,7 @@ class eh extends th {
             if (this.needsLadderPhysics(t, n))
                 continue;
             let r = !1;
-            if ("feet" == s.bodyPart && (e > .6 || "box" == t.colliderType && t.isAtEdge && t.isAtUpFace && e > .1) && (r = !0), r && t.penetration > 0) {
+            if ("feet" == s.bodyPart && (e > .6 || this.manifoldShouldMovePlayerUp(t, e)) && (r = !0), r && t.penetration > 0) {
                 const e = t.normal.clone();
                 e.setLength(t.penetration + 1e-7);
                 const s = t.normal.clone().cross(new w(0, 1, 0));
@@ -28667,7 +28760,7 @@ class eh extends th {
                 s.set(i, e)
             }
             let r = !1;
-            const o = this.getManifolds();
+            const o = this.getPlayerManifolds();
             for (const {
                 manifold: t,
                 mapCollider: e
@@ -28762,7 +28855,7 @@ class rh {
     reportPlayer(t, e) {
         const i = this.reportedPlayerTimes.get(t),
         n = uc().now;
-        i && n < i + 1e4 || (this.reportedPlayerTimes.set(t, n), this.onPlayerNeedsReportCbs.forEach((i => i(t, e))))
+        i && n < i + 1e3 || (this.reportedPlayerTimes.set(t, n), this.onPlayerNeedsReportCbs.forEach((i => i(t, e))))
     }
     onPlayerNeedsReport(t) {
         this.onPlayerNeedsReportCbs.add(t)
@@ -28813,15 +28906,15 @@ class oh {
         this.predictedServerVelocity = new w,
         this.predictedServerAcceleration = new w,
         this.serverPosSmooth = new w,
-        this.unlockRigidBodyY = !1,
         this.networkPosIsMovingUp = !1,
-        this.flyAntiCheatCooldownTime = 0,
+            this.inAirTime = 0,
         this.pos = new w,
         this.negativeHealthStartTime = 0,
         this.prevHealthIsNegative = !1,
+            this.negativeHealthCounter = 0,
         this.cachedCamPos = new w,
         this.cachedCamPosDirty = !0,
-        this.cachedCamRot = new v,
+            this.cachedCamRot = new y,
         this.cachedCamRotDirty = !0,
         this.lookRot = new h,
         this.smoothLookRotTarget = new h,
@@ -28838,7 +28931,6 @@ class oh {
         this.boundOnFireUp = this.onFireUp.bind(this),
         this.lastAirJumpPressTime = -1,
         this.prevWasOnFloor = !1,
-        this.prevOnFloorTime = 0,
         this.hasTouchedFloorEver = !1,
         this.lastJumpTime = 0,
         this.lastJumpLandTime = 0,
@@ -28964,7 +29056,7 @@ class oh {
                 e = uc().now - this.lastJumpTime > 500 && !this.rigidBody.isOnFloor;
                 let i = !0;
                 if (t > 0 && !e && (i = !1), i) {
-                    const t = new v;
+                    const t = new y;
                     t.setFromUnitVectors(new w(0, 1, 0), this.rigidBody.climbingLadderNormal),
                     n.applyQuaternion(t)
                 }
@@ -29039,8 +29131,9 @@ class oh {
             this.legsMoveAmount += .005 * e,
             this.legsMoveAmount = Math.min(this.legsMoveAmount, 1e3 * l / e),
             this.legsMoveAmount = ua(this.legsMoveAmount),
-            this.pos.distanceTo(this.serverPos) > this.maxPredictedServerPosDistance ? (this.rigidBody.pos.copy(this.serverPos), this.serverPosSmooth.copy(this.serverPos), this.rigidBody.velocity.set(0, 0, 0)) : (this.rigidBody.pos.x = this.serverPosSmooth.x, this.rigidBody.pos.z = this.serverPosSmooth.z, this.unlockRigidBodyY || (this.rigidBody.pos.y = this.serverPosSmooth.y)),
-            !this.dead && this.hasTouchedFloorEver && !this.prevWasOnFloor && t > this.prevOnFloorTime + 5e3 && t - this.lastReceivedServerPosTime < 500 && t > this.flyAntiCheatCooldownTime && this.report(ih)
+                this.pos.distanceTo(this.serverPos) > this.maxPredictedServerPosDistance ? (this.rigidBody.pos.copy(this.serverPos), this.serverPosSmooth.copy(this.serverPos), this.rigidBody.velocity.set(0, 0, 0)) : this.rigidBody.pos.copy(this.serverPosSmooth),
+                this.rigidBody.inAirTime > 200 && !this.rigidBody.climbingLadder ? t - this.lastReceivedServerPosTime < 200 && (this.inAirTime += e) : this.inAirTime = 0,
+            !this.dead && this.hasTouchedFloorEver && this.inAirTime > 5e3 && this.report(ih)
         }
         if (this.health < 1 && !this.dead) {
             const i = ua((.3 * ((t - this.lastHitTime) / 1e3 - 4)) ** 5);
@@ -29051,7 +29144,7 @@ class oh {
         }
         const i = this.health < 0;
         if (i != this.prevHealthIsNegative && (this.prevHealthIsNegative = i, i && (this.negativeHealthStartTime = t)), i && !this.dead) {
-            t - this.negativeHealthStartTime > 3e3 && this.report(nh)
+            t - this.negativeHealthStartTime > 1e3 && (this.health = 1, this.negativeHealthCounter++, this.negativeHealthCounter >= 2 && (this.report(nh), this.negativeHealthCounter = 0))
         }
         this.weapon && this.weapon.loop(t, e);
         const n = Math.floor((this.legsMoveTForCos + Math.PI / 2) / Math.PI);
@@ -29074,8 +29167,7 @@ class oh {
         return this.legsMoveT * this.legsMoveSpeed
     }
     afterPhysicsLoop(t, e) {
-        if (this.prevWasOnFloor != this.rigidBody.isOnFloor)
-            if (this.prevWasOnFloor = this.rigidBody.isOnFloor, this.rigidBody.isOnFloor) {
+        if (this.prevWasOnFloor != this.rigidBody.isOnFloor && (this.prevWasOnFloor = this.rigidBody.isOnFloor, this.rigidBody.isOnFloor)) {
                 t - this.lastAirJumpPressTime < 300 && this.lastAirJumpPressTime >= 0 && (this.lastAirJumpPressTime = -1, this.jump());
                 const e = this.highestInAirPoint - this.pos.y,
                 i = ca(.5, 20, 0, this.sfxManager.cachedSfx["player/land"].opts.volume, e, !0);
@@ -29086,10 +29178,8 @@ class oh {
                         maxPitch: "female" == this.gender ? 1.2 : 1
                     }), this.lastJumpLandTime = t, this.lastJumpLandAmount = i),
                 this.highestInAirPoint = this.pos.y,
-                this.hasTouchedFloorEver = !0,
-                this.unlockRigidBodyY = !1
-            } else
-                this.prevOnFloorTime = t;
+                this.hasTouchedFloorEver = !0
+        }
         if (this.rigidBody.isOnFloor || (this.highestInAirPoint = Math.max(this.highestInAirPoint, this.pos.y)), this.hasOwnership && (this.rigidBody.inAirTime > 50 ? this.startFallSound() : this.stopFallSound(), !this.hasWalkedAwayFromSpawn && this.game.gameStarted)) {
             this.pos.distanceTo(this.lastRespawnPosition) > 5 && (this.hasWalkedAwayFromSpawn = !0, this.game.weaponSelectionDialog.visible = !1, uc().adBanners.setPageVisibility("respawn", !1))
         }
@@ -29459,7 +29549,7 @@ class oh {
     getClampedCamRot() {
         const t = da(this.lookRot.y, -Math.PI / 2, Math.PI / 2),
         e = new ot(t, this.lookRot.x, 0, "YXZ"),
-        i = new v;
+            i = new y;
         return i.setFromEuler(e),
         i
     }
@@ -29474,7 +29564,7 @@ class oh {
         this.predictedServerVelocity.copy(this.serverPos),
         this.predictedServerVelocity.sub(o);
         const a = uc().now - this.lastReceivedServerPosTime;
-        if (this.lastReceivedServerPosTime = uc().now, a > 100 && (this.flyAntiCheatCooldownTime = uc().now + 1e3), a <= 0 || this.predictedServerVelocity.length() > 5 ? (this.predictedServerVelocity.set(0, 0, 0), this.predictedServerAcceleration.set(0, 0, 0)) : (this.predictedServerVelocity.divideScalar(a), this.predictedServerAcceleration.copy(this.predictedServerVelocity), this.predictedServerAcceleration.sub(this.lastPredictedServerVelocity), this.predictedServerAcceleration.divideScalar(a)), this.hasOwnership && r) {
+        if (this.lastReceivedServerPosTime = uc().now, a <= 0 || this.predictedServerVelocity.length() > 5 ? (this.predictedServerVelocity.set(0, 0, 0), this.predictedServerAcceleration.set(0, 0, 0)) : (this.predictedServerVelocity.divideScalar(a), this.predictedServerAcceleration.copy(this.predictedServerVelocity), this.predictedServerAcceleration.sub(this.lastPredictedServerVelocity), this.predictedServerAcceleration.divideScalar(a)), this.hasOwnership && r) {
             let t = !1;
             for (const e of this.recentForcedServerPositions)
                 if (this.serverPos.distanceTo(e.pos) < .1) {
@@ -29490,7 +29580,7 @@ class oh {
         this.lastPredictedServerVelocity.copy(this.predictedServerVelocity),
         this.hasOwnership || this.lookRot.set(n, s);
         const l = e > o.y;
-        l != this.networkPosIsMovingUp && (this.networkPosIsMovingUp = l, !this.rigidBody.isOnFloor && l && (this.unlockRigidBodyY = !0))
+        l != this.networkPosIsMovingUp && (this.networkPosIsMovingUp = l, l && this.rigidBody.isAboveJumpableCollider() && this.rigidBody.updateLastFloorTouchTime())
     }
     setPingData(t) {
         this.ping = t
@@ -29907,7 +29997,7 @@ class ch {
                 h = d;
                 const p = new $;
                 p.lookAt(new w, u, new w(0, 1, 0));
-                const m = new v;
+            const m = new y;
                 m.setFromRotationMatrix(p);
                 for (let t = 0; t < 3; t++) {
                     const e = i[t].clone();
@@ -30020,7 +30110,7 @@ class ch {
             const e = t - this.worldHitTime,
             i = 100,
             n = Math.cos(.08 * e) * (i / (e + i)),
-            s = new v;
+                s = new y;
             s.setFromAxisAngle(this.worldHitTangent, .03 * n),
             this.obj.quaternion.copy(this.worldHitRot),
             this.obj.quaternion.premultiply(s)
@@ -30057,7 +30147,7 @@ class ch {
     map3dDirTo2d(t) {
         let e = new w(t.x, 0, t.z).angleTo(new w(1, 0, 0));
         t.z < 0 && (e = 2 * Math.PI - e);
-        const i = new v;
+        const i = new y;
         i.setFromAxisAngle(new w(0, 1, 0), e);
         const n = i.clone().invert();
         return {
@@ -30427,7 +30517,7 @@ class fh { // cursor crosshair mousebutton screencenter
         this.el.style.display = t ? "" : "none"
     }
 }
-class yh {
+class vh {
     constructor(t) {
         this.el = document.createElement("div"),
         this.el.classList.add("flagScoreItem"),
@@ -30473,7 +30563,7 @@ class yh {
         return this.score >= this.maxScore
     }
 }
-class vh {
+class yh {
     constructor(t) {
         this.el = document.createElement("div"),
         this.el.classList.add("flagScoreContainer"),
@@ -30482,7 +30572,7 @@ class vh {
         for (let e = 0; e < t; e++) {
             if (0 == e)
                 continue;
-            const t = new yh(e);
+            const t = new vh(e);
             this.el.appendChild(t.el),
             this.scoreItems[e] = t
         }
@@ -30656,7 +30746,7 @@ class Sh extends Ma {
         for (const [t, e] of Ka.entries()) {
             const i = document.createElement("div");
             i.classList.add("playersListTeam", "wrinkledPaper"),
-            i.style.cssText = `\n\t\t\t\tbackground: ${e.cssColorLight};\n\t\t\t\tbackground: paint(wrinkledPaper);\n\t\t\t\t--wrinkled-paper-color: ${e.cssColorLight};\n\t\t\t\t--wrinkled-paper-seed: ${pa(1,99999)};\n\t\t\t`;
+                i.style.cssText = `\n\t\t\t\tbackground: ${e.cssColorLight};\n\t\t\t\tbackground: paint(wrinkledPaper);\n\t\t\t\t--team-bg-color-light: ${e.cssColorLight};\n\t\t\t\t--team-bg-color-dark: ${e.cssColorDark};\n\t\t\t\t--wrinkled-paper-seed: ${pa(1,99999)};\n\t\t\t`;
             const n = document.createElement("table");
             n.classList.add("playersListTeamTable", "itemsTable"),
             i.appendChild(n);
@@ -31148,7 +31238,7 @@ class Th extends Ma {
         this.el.appendChild(s),
         this.statsContainer = document.createElement("div"),
         this.statsContainer.classList.add("gameoverStatsContainer", "wrinkledPaper"),
-        this.statsContainer.style.cssText = `\n\t\t\tbackground: ${r.cssColorLight};\n\t\t\tbackground: paint(wrinkledPaper);\n\t\t\t--wrinkled-paper-color: ${r.cssColorLight};\n\t\t\t--wrinkled-paper-seed: ${pa(1,99999)};\n\t\t`,
+            this.statsContainer.style.cssText = `\n\t\t\tbackground: ${r.cssColorLight};\n\t\t\tbackground: paint(wrinkledPaper);\n\t\t\t--team-bg-color-light: ${r.cssColorLight};\n\t\t\t--team-bg-color-dark: ${r.cssColorDark};\n\t\t\t--wrinkled-paper-seed: ${pa(1,99999)};\n\t\t`,
         this.el.appendChild(this.statsContainer);
         const o = document.createElement("table");
         o.classList.add("gameOverStatsTable", "itemsTable"),
@@ -31283,7 +31373,7 @@ class Lh {
                 true),
         this.flags = [],
         this.uiVisible = !1,
-        this.flagScoreUi = new vh(this.teamCount),
+            this.flagScoreUi = new yh(this.teamCount),
         this.healthUi = new wh,
         this.bottomText = new bh,
         this.weaponSelectionDialog = new Ch,
@@ -31667,7 +31757,7 @@ class Lh {
         const e = this.spawnPositions[t];
         return e ? fa(e) : {
             pos: new w,
-            rot: new v
+            rot: new y
         }
     }
     playerHitByArrowFromServer(t, e, i, n) {
@@ -32942,14 +33032,14 @@ class qh {
                     this.onLoadCbs.push(t)
                 }));
         this.loading = !0;
-        const t = uc().assets.getPackage("sfx" + Yh.audioFormatCamelCase);
+        const t = uc().assets.getPackage("sfx" + Jh.audioFormatCamelCase);
         if (this.opts.useMediaElement) {
-            const e = await t.getAsObjectUrl(this.opts.name + "." + Yh.audioFormat, "audio/" + Yh.audioFormat);
+            const e = await t.getAsObjectUrl(this.opts.name + "." + Jh.audioFormat, "audio/" + Jh.audioFormat);
             this.mediaElement = document.createElement("audio"),
             this.mediaElement.src = e,
             this.mediaElement.loop = this.opts.loop
         } else {
-            const e = await t.getFileAsBuffer(this.opts.name + "." + Yh.audioFormat);
+            const e = await t.getFileAsBuffer(this.opts.name + "." + Jh.audioFormat);
             this.buffer = await new Promise((t => {
                         this.ctx.decodeAudioData(e, t)
                     }))
@@ -33088,10 +33178,10 @@ class jh {
             })() : this.sourceNode.playbackRate.value = this.pitch)
     }
 }
-class Yh {
+class Jh {
     constructor() {
         if (window.AudioContext = window.AudioContext || window.webkitAudioContext, this.supported = !!AudioContext, this.supported && this.supported) {
-            this.packageName = "sfx" + Yh.audioFormatCamelCase,
+            this.packageName = "sfx" + Jh.audioFormatCamelCase,
             this.ctx = new AudioContext,
             this.ctx.destination.maxChannelCount >= 6 && (this.ctx.destination.channelCount = 6),
             this.cachedSfx = {},
@@ -33414,7 +33504,7 @@ class Yh {
         e >= 0 && this.createdSfx.splice(e, 1)
     }
 }
-class Jh extends Ma {
+class Yh extends Ma {
     constructor(t = "login") {
         super({
             title: "login" == t ? "Log in and keep your loot safe!" : "Link new account"
@@ -33462,6 +33552,7 @@ class Jh extends Ma {
             const i = this.addButton({
                 text: e.loginButtonText,
                 icon: e.loginButtonIcon,
+                iconIsInvertable: !!e.invertableIcon,
                 onClick: () => {
                     this.didClickAnyButton = !0,
                     this.setButtonsEnabled(!1),
@@ -33537,7 +33628,8 @@ class Zh {
             loginButtonText: "Login with Apple",
             loginButtonIcon: "img/loginUI/apple.svg",
             issuer: "https://appleid.apple.com",
-            clientId: "co.pelicanparty.narrow.one.signin"
+                clientId: "co.pelicanparty.narrow.one.signin",
+                invertableIcon: !0
         }),
         this.prevSessionNonce = null,
         this.sessionNonce = null,
@@ -33575,7 +33667,7 @@ class Zh {
         for (const t of this.onInitCbs)
             t();
         this.onInitCbs.clear();
-        const t = va();
+        const t = ya();
         if (t.loginIdToken) {
             this.handleAuthToken(t.loginIdToken, !0);
             const e = new URL(window.location.href);
@@ -33600,7 +33692,7 @@ class Zh {
         this.onGuestSessionDataChangeCbs.add(t)
     }
     async showLoginDialog(t = "login") {
-        const e = new Jh(t);
+        const e = new Yh(t);
         return uc().dialogManager.addDialog(e),
         await e.waitForFlowEnd()
     }
@@ -34791,22 +34883,22 @@ class rc {
         const f = await g.getBlob();
         if (this.renderer.removeRenderView(g), c.destructor(), d && d.destructor(), !f)
             return null;
-        const y = document.createElement("canvas");
-        y.width = i,
-        y.height = n;
-        const v = y.getContext("2d");
-        if (!v)
+        const v = document.createElement("canvas");
+        v.width = i,
+            v.height = n;
+        const y = v.getContext("2d");
+        if (!y)
             return null;
         if ("circle" == a) {
-            v.beginPath();
+            y.beginPath();
             const t = Math.min(i, n);
-            v.arc(i / 2, n / 2, .45 * t, 0, 2 * Math.PI),
-            v.clip()
+            y.arc(i / 2, n / 2, .45 * t, 0, 2 * Math.PI),
+                y.clip()
         }
-        v.fillStyle = s,
-        v.globalAlpha = r,
-        v.fillRect(0, 0, i, n),
-        v.globalAlpha = 1;
+        y.fillStyle = s,
+            y.globalAlpha = r,
+            y.fillRect(0, 0, i, n),
+            y.globalAlpha = 1;
         const w = URL.createObjectURL(f),
         b = new Image;
         b.src = w,
@@ -34814,10 +34906,10 @@ class rc {
                 b.onload = t,
                 b.onerror = e
             })),
-        v.drawImage(b, 0, 0),
+            y.drawImage(b, 0, 0),
         URL.revokeObjectURL(w);
         const x = new Promise((t => {
-                    y.toBlob(t)
+                v.toBlob(t)
                 })),
         S = await x;
         return S || null
@@ -35078,7 +35170,7 @@ class hc {
 class cc { // global instance
     constructor() {
         this.thirdPartyEnabled = !0;
-        const t = va();
+        const t = ya();
         t.thirdParty && (this.thirdPartyEnabled = "false" != t.thirdParty),
         this.scene = new ns,
         this.scene.autoUpdate = !1,
@@ -35087,7 +35179,7 @@ class cc { // global instance
         this.explorer = new EnvironmentExplorer(this.scene),
         this.settingsManager = new na(this.indexedDb),
         this.mainMenu = new fl,
-        this.adBanners = new yl,
+            this.adBanners = new vl,
         this.dialogManager = new wl,
         this.input = new Al,
         this.config = new Fl,
@@ -35106,7 +35198,7 @@ class cc { // global instance
         this.skeletons = new Wh,
         this.avatars = new rc(this.renderer),
         this.classSelectionImageManager = new ac,
-        this.sfx = new Yh,
+            this.sfx = new Jh,
         this.network = new Wl(this.gameManager),
         this.auth = new Zh,
         this.profileState = new Qh(this.auth, this.indexedDb),
@@ -35114,6 +35206,7 @@ class cc { // global instance
         this.quantcastManager = new ic,
         this.poki = new ec(this.thirdPartyEnabled),
         this.aprilFools = new lc(this.settingsManager),
+            this.boundLoop = this.vsyncLoop.bind(this),
         this.prevNow = 0,
         this.now = 0,
         this.dt = 0,
@@ -35122,20 +35215,20 @@ class cc { // global instance
         this.fakeNow = 0,
         this.fastLoopCount = 1,
         this.frameCount = 0,
-        this.frameCap = 1,
-        this.boundLoop = this.initVsync.bind(this);
+            this.frameCap = 1;
         const e = function (t) {
             try {
                 return localStorage.getItem(t)
             } catch (e) {
-                return ya.get(t)
+                return va.get(t)
             }
         }
         ("frameCap");
         e && (this.frameCap = parseInt(e, 10)),
         this.maxDt = 100,
         "000" == VERSION_TIMESTAMP ? (this.env = "local", window.location.hostname.includes("narrow.one") && !window.location.hostname.includes("localhost") && (this.env = "dev")) : (this.env = "production", "staging.narrow.one" == window.location.hostname && (this.env = "staging"), this.poki.isPokiBuild && document.referrer && document.referrer.includes("qa.po.ki") && (this.env = "staging")),
-        "paintWorklet" in CSS && CSS.paintWorklet.addModule("narrowCssWorklet.js?v=" + VERSION_TIMESTAMP)
+        "paintWorklet" in CSS && CSS.paintWorklet.addModule("narrowCssWorklet.js?v=" + VERSION_TIMESTAMP),
+            this.darkMedia = window.matchMedia("(prefers-color-scheme: dark)")
     }
     init() {
         ea.init(),
@@ -35158,56 +35251,29 @@ class cc { // global instance
         this.profileState.init(),
         this.shopState.init(),
         this.quantcastManager.init(this.thirdPartyEnabled),
-        this.poki.init()
-
-        this.frames = 0;
-        this.prevTimer = Date.now();
-
-        this.reinitFramerate();
-    }
-    reinitFramerate() {
-        tmpFunc = this.initVsync;
-        tmpFunc2 = this.renderFrame;
-
-        if (vsyncActive)
-            this.initVsync();
-        else
-            this.initUnlimited();
-    }
-    async initUnlimited() {
-        let frameFunc = this.renderFrame;
-        let instance = this;
-        let oldFramerate = gamesTargetFramerate;
-        let tmpBrk = true;
-
-        let id = setInterval(function () {
-            if (gamesTargetFramerate != oldFramerate || vsyncActive) {
-                instance.reinitFramerate();
-                clearInterval(id);
-                tmpBrk = false;
-            }
-
-            if (globalInstance)
-                globalInstance.renderFrame();
-        }, 1000 / gamesTargetFramerate)
-    }
-    initVsync() {
-        if (!vsyncActive) {
-            globalInstance.reinitFramerate();
-            return;
+            this.poki.init(),
+            this.vsyncLoop(),
+    this.settingsManager.onValueChange("theme", (() => {
+    this.updateTheme()
+})),
+this.darkMedia.addEventListener("change", (() => {
+    this.updateTheme()
+})),
+    this.updateTheme()
+}
+updateTheme() {
+    const t = this.settingsManager.getValue("theme");
+    let e = !1;
+    "dark" == t ? e = !0 : "system" == t && (e = this.darkMedia.matches),
+        document.documentElement.classList.toggle("theme-dark", e)
+}
+    vsyncLoop() {
+        if (this.frameCount++, this.frameCount % this.frameCap == 0) {
+            for (let t = 0; t < this.fastLoopCount - 1; t++)
+                this.loop();
+            this.loop()
         }
-
-        tmpFunc2(globalInstance);
-        window.requestAnimationFrame(tmpFunc);
-    }
-    async renderFrame() {
-        if (globalInstance) {
-            if (globalInstance.frameCount++, globalInstance.frameCount % globalInstance.frameCap == 0) {
-                for (let t = 0; t < globalInstance.fastLoopCount - 1; t++)
-                    globalInstance.loop();
-                globalInstance.loop()
-            }
-        }
+        window.requestAnimationFrame(this.boundLoop)
     }
     loop() { // called every frame
         this.frames++;
@@ -35223,7 +35289,6 @@ class cc { // global instance
                 return;
             frameObj.innerHTML = `FPS: ${gameFramerate}`;
         }
-
         let t = performance.now();
         this.useFakeNow && (t = this.fakeNow, this.fakeNow += 30),
         this.prevNow <= 0 && (this.prevNow = t);
@@ -35255,21 +35320,23 @@ function uc() {
     return dc
 }
 const pc = new CSSStyleSheet;
-pc.replaceSync(":root{\n\t--default-drop-shadow: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));\n\t--default-wrinkled-paper-border-color: #353535;\n\t--disabled-wrinkled-paper-border-color: #919191;\n\t--shop-item-background-color: #f1f1f1;\n\t--shop-item-highlight-color: #fdc570;\n\t--blue-highlight-color: #0c5fcc;\n}\n\nbody, html {\n\t/* Setting overflow to hidden prevents the page from being scrolled by the user.\n\tBut scripts like scrollIntoView() can still cause the page to be scrolled.\n\tTry fixing the element that causet the page to get scrollable rather than setting\n\tthe body to overflow: hidden */\n\t/* overflow: hidden; */\n}\n\n.allow-select {\n\tuser-select: text;\n\t-webkit-user-select: text;\n}\n\n@property --wrinkled-paper-color {\n\tsyntax: '<color>';\n\tinherits: false;\n\tinitial-value: blue;\n}\n\n.fullScreen.safeArea{\n\tleft: 0;\n\tright: 0;\n\ttop: 0;\n\tbottom: 0;\n\tleft: env(safe-area-inset-left);\n\tright: env(safe-area-inset-right);\n\ttop: env(safe-area-inset-top);\n\tbottom: env(safe-area-inset-bottom);\n\twidth: initial;\n\theight: initial;\n}\n\n.mainCanvas{\n\tz-index: -1;\n}\n\n.wrinkledPaper{\n\t--wrinkled-paper-wrinkle-size: 6px;\n\t--wrinkled-paper-color: white;\n\t--wrinkled-paper-border-segments: 0.016;\n\t--wrinkled-paper-tear-count-min: 0.001;\n\t--wrinkled-paper-tear-count-max: 0.003;\n\t--wrinkled-paper-tear-depth-min: 5px;\n\t--wrinkled-paper-tear-depth-max: 15px;\n\t--wrinkled-paper-tear-width-min: 10px;\n\t--wrinkled-paper-tear-width-max: 20px;\n\t--wrinkled-paper-tear-angle-offset-min: 0.7;\n\t--wrinkled-paper-tear-angle-offset-max: 1.1;\n}\n\n.wrinkledLine {\n\t--wrinkled-line-color: black;\n\t--wrinkled-line-width: 1px;\n\t--wrinkled-line-wrinkle-size: 6px;\n\t--wrinkled-line-segments: 0.016;\n}\n\n.dialogCurtain{\n\tbackground: rgba(0,0,0,0.3);\n}\n.dialogCurtain.hidden{\n\tvisibility: hidden;\n\topacity: 0;\n}\n\n.dialogWrapper, .dialog {\n\tdisplay: block;\n\tposition: absolute;\n\tmax-width: 100%;\n\tmin-height: 150px;\n\tmax-height: 100%;\n\tleft: 50%;\n\ttop: 50%;\n\ttransform: translate(-50%, -50%);\n\t-webkit-transform: translate3d(-50%,-50%,0);\n\ttransition: transform 0.2s, opacity 0.2s, visibility 0.2s;\n\ttransition-timing-function: cubic-bezier(0.3, -0.8, 0.7, 1.8);\n}\n\n.dialogWrapper > .dialog {\n\tposition: relative;\n\tleft: 0;\n\ttop: 0;\n\ttransform: initial;\n\t-webkit-transform: initial;\n}\n\n.dialog{\n\tfilter: var(--default-drop-shadow);\n\tpadding: 30px;\n\tbox-sizing: border-box;\n\twidth: fit-content;\n}\n.dialog.hidden, .dialogWrapper.hidden{\n\topacity: 0;\n\ttransform: translate(-50%, -50%) scale(0.95);\n\tvisibility: hidden;\n}\n.dialog.topCenter{\n\ttop: 10px;\n\ttransform: translate(-50%, 0);\n}\n\n.dialog-title-header-container {\n\tdisplay: flex;\n\tgap: 20px;\n}\n\nh2.dialogTitle{\n\tmargin: 0px 0px 20px 0px;\n\tfont-size: 42px;\n}\n\nh3.dialogTitle{\n\tmargin: 0px 0px 10px 0px;\n\tfont-size: 30px;\n}\n\n.dialogButtonsContainer {\n\tmargin-top: 10px;\n\ttext-align: center;\n\tdisplay: flex;\n\tjustify-content: center;\n}\n\n.dialogButtonsContainer.vertical {\n\tflex-direction: column;\n\tmax-width: 300px;\n\tmargin: auto;\n}\n\n.dialog-art-wrapper {\n\twidth: 100%;\n\tmargin: auto;\n}\n\n.dialog-art {\n\twidth: 0;\n\tmin-width: 100%;\n\theight: 100%;\n\tmax-height: 50vh;\n\tobject-fit: contain;\n}\n\n.dialog-art-buttons-container {\n\tdisplay: flex;\n}\n\n@media (min-height: 500px) {\n\t.dialog-art-buttons-container {\n\t\tflex-direction: column;\n\t}\n}\n\n@media (max-width: 500px) and (max-height: 600px) {\n\t.dialog-art-wrapper {\n\t\tdisplay: none;\n\t}\n}\n\n.currency-button {\n\tpadding: 0px 30px;\n}\n\n.currency-container {\n\tdisplay: flex;\n\talign-items: center;\n\tfont-size: 18px;\n\tjustify-content: center;\n}\n\n.coin-icon {\n\twidth: 20px;\n\theight: 20px;\n\tdisplay: inline-block;\n\tbackground-image: url(img/coin.svg);\n\tmargin-right: 5px;\n}\n\n.coin-count-text {\n\tcolor: #fbd413;\n\tfont-weight: 900;\n\t-webkit-text-stroke: 2px #766200;\n\tfilter: drop-shadow(0px 1px #766200);\n\tposition: relative;\n\tletter-spacing: 1px;\n\tfont-size: 20pt;\n}\n\n.coin-count-text::after {\n\tcontent: attr(data-text-content);\n\t-webkit-text-stroke: 0;\n\tfilter: none;\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0px;\n}\n\n.dialogTabs {\n\tposition: absolute;\n\ttop: -50px;\n\tleft: 5px;\n\tpointer-events: none;\n}\n\n.dialogTab {\n\tdisplay: inline-block;\n\tpointer-events: auto;\n\ttransition: transform 0.1s;\n\theight: 80px;\n}\n\n.dialogTabSpacer {\n\tdisplay: inline-block;\n\twidth: 20px;\n}\n\n.dialogTab.back {\n\t--wrinkled-paper-color: #d1d1d1;\n}\n\n.dialogTab.front:not(.active), .dialogTab.back.active {\n\topacity: 0;\n\tpointer-events: none;\n}\n\n.dialogTab.back:not(.active) {\n\ttransform: translateY(4px);\n\tcursor: pointer;\n}\n\n.dialogTab:not(.active):hover {\n\ttransform: translateY(2px);\n}\n\n.dialogTabIcon {\n\twidth: 60px;\n\theight: 60px;\n\tbackground-size: contain;\n\tbackground-repeat: no-repeat;\n}\n\n.skipDialogText {\n\tposition: absolute;\n\tbottom: 0;\n\tleft: 50%;\n\ttransform: translate(-50%, 25px);\n\tcolor: #dddddd;\n\ttext-shadow: 1px 1px #00000073;\n\tfont-size: 16px;\n\tcursor: pointer;\n\twhite-space: nowrap;\n}\n\n.toggle-menu-touch-button {\n\tpadding: 10px;\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\tz-index: 110;\n}\n\n.menuButtonsContainer {\n\tmax-width: fit-content;\n}\n\n.main-menu-corner-profile {\n\twidth: 300px;\n\tdisplay: flex;\n\tgap: 10px;\n\tmargin: 10px;\n}\n\n.main-menu-username {\n\tfont-size: 30px;\n}\n\n.main-menu-username:not(.blueNight) {\n\tfont-size: 25px;\n\tfont-weight: bold;\n}\n\n.main-menu-promo-banner-container {\n\ttop: 20px;\n\tright: 20px;\n\tposition: absolute;\n\twidth: 320px;\n\theight: 210px;\n\tfilter: var(--default-drop-shadow);\n}\n.main-menu-promo-banner-container.hidden {\n\tdisplay: none;\n}\n\n@media (max-width: 1200px), (max-height: 700px) {\n\t.main-menu-promo-banner-container {\n\t\twidth: 220px;\n\t\theight: 140px;\n\t}\n}\n\n@media (max-width: 500px), (max-height: 420px) {\n\t.main-menu-promo-banner-container {\n\t\tdisplay: none;\n\t}\n}\n\n.main-menu-promo-banner {\n\twidth: 100%;\n\theight: 100%;\n\tbackground: center / cover, white;\n\t--wrinkled-paper-wrinkle-size: 8px;\n\t--wrinkled-paper-tear-count-min: 0.003;\n\t--wrinkled-paper-tear-count-max: 0.004;\n\tcursor: pointer;\n}\n.main-menu-promo-banner:hover {\n\tfilter: brightness(0.9);\n}\n.main-menu-promo-banner:active {\n\tfilter: brightness(0.85);\n}\n\n.main-menu-promo-button {\n\tposition: absolute;\n\tbottom: 0;\n\tleft: 50%;\n\ttransform: translate(-50%, 50%);\n\tmargin: 0;\n}\n\n.gameAd{\n\tposition: absolute;\n\tbottom: 0;\n\tmargin-bottom: 20px;\n\tleft: 50%;\n\ttransform: translate(-50%);\n\tbackground: #0000004f;\n\tz-index: 20;\n}\n.gameAd.desktop{\n\twidth: 728px;\n\theight: 90px;\n}\n.gameAd.mobile{\n\twidth: 320px;\n\theight: 50px;\n\tdisplay: none;\n}\n@media(max-width: 1220px){\n\t.gameAd.desktop{\n\t\tdisplay: none;\n\t}\n\t.gameAd.mobile{\n\t\tdisplay: inherit;\n\t}\n}\n.gameAd.hidden{\n\tdisplay: none;\n}\n\n.shake-anim {\n\tanimation: 2.5s linear infinite shake;\n}\n\n@keyframes shake {\n\t0% { transform: rotate(0deg); }\n\t4% { transform: rotate(4deg); }\n\t8% { transform: rotate(-3deg); }\n\t12% { transform: rotate(2deg); }\n\t16% { transform: rotate(1deg); }\n\t20% { transform: rotate(0deg); }\n}\n\n.crosshairContainer{\n\tposition: absolute;\n\tleft: 50%;\n\ttop: 50%;\n\tz-index: 100;\n\ttransform: translate(-50%, -50%);\n\tpointer-events: none;\n}\n.crosshairLine{\n\tposition: absolute;\n\twidth: 15px;\n\theight: 2px;\n\tbackground: white;\n\tborder: 2px solid black;\n\tborder-radius: 10px;\n\ttransform-origin: left;\n\twill-change: transform;\n}\n.flagReturnProgressContainer {\n\tposition: absolute;\n\ttransform: translate(-50%, -50%);\n\ttransition: opacity 0.2s;\n}\n.flagReturnProgressContainer.hidden{\n\topacity: 0;\n}\n.flagReturnProgressPath {\n\tfill: none;\n\tstroke-width: 10px;\n\tstroke-linecap: round;\n}\n\n.flagScoreContainer{\n\tposition: absolute;\n\tright: 0;\n\ttop: 0;\n\tz-index: 100;\n\tmargin: 30px;\n\tfilter: var(--default-drop-shadow);\n\tpointer-events: none;\n}\n\n.flagScoreItem{\n\tmargin: 3px;\n\tdisplay: flex;\n}\n\n.flagScoreIcon{\n\theight: 50px;\n\twidth: 50px;\n\ttransform: translateY(-5px);\n}\n\n.flagScorePointEl{\n\twidth: 40px;\n\theight: 40px;\n\talign-self: center;\n}\n\n.healthUiContainer{\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\tmargin: 30px;\n\twidth: 330px;\n\theight: 50px;\n\tz-index: 100;\n\tpointer-events: none;\n}\n\n.healthUiBorder{\n\tbackground: url(img/healthUiBorder.svg);\n\twidth: 100%;\n\theight: 100%;\n\tposition: absolute;\n\tfilter: var(--default-drop-shadow);\n}\n\n.healthUiBarContainer{\n\tbackground: black;\n\twidth: 276px;\n\theight: 20px;\n\tposition: absolute;\n\ttop: 15px;\n\tleft: 37px;\n\toverflow: hidden;\n}\n\n.healthUiBar{\n\twidth: 100%;\n\theight: 100%;\n\tbackground: #e81d25;\n\tbackground: linear-gradient(90deg, #740e12 33.333%, #ae161c 33.334%, #ae161c 66.666%, #e81d25 66.667%);\n}\n\n.gameplayBottomText{\n\tfont-size: 45px;\n\tposition: absolute;\n\tleft: 0;\n\twidth: 100%;\n\tbottom: 25px;\n\ttext-align: center;\n\tpointer-events: none;\n}\n\n.scoreBoardContainer{\n\tbackground: white;\n}\n\n.notificationIconsUiContainer{\n\twidth: 200px;\n\theight: 200px;\n\tpointer-events: none;\n}\n\n.notificationIconsUiContainer.topleft{\n\tleft: 0;\n\ttop: 80px;\n\tposition: absolute;\n\ttransform-origin: top left;\n}\n\n.notificationIconsUiContainer.centerbig{\n\tleft: 50%;\n\ttop: 50%;\n\twidth: 50vw;\n\theight: min(50vw, 100vh);\n\tposition: absolute;\n\ttransform: translate(-50%, -50%);\n}\n\n.notificationIconsUiContainer.crosshair{\n\tleft: 50%;\n\ttop: 50%;\n\twidth: 200px;\n\theight: 200px;\n\tposition: absolute;\n\ttransform: translate(-50%, -50%) translateY(-140px);\n}\n\n.notificationIcon{\n\tfilter: var(--default-drop-shadow);\n\tanimation: 1s notificationIconFade 6s both, 0.2s notificationIconPop;\n\twidth: 100%;\n\theight: 100%;\n\tbackground-position: center;\n\tbackground-repeat: no-repeat;\n}\n\n.crosshair > .notificationIcon{\n\tanimation: 1s notificationIconFade 0.5s both, 0.2s notificationIconPop;\n}\n\n@keyframes notificationIconPop{\n\t0%{\n\t\ttransform: scale(1);\n\t}\n\t50%{\n\t\ttransform: scale(1.2);\n\t}\n\t100%{\n\t\ttransform: scale(1);\n\t}\n}\n@keyframes notificationIconFade{\n\t0%{\n\t\topacity: 1;\n\t}\n\n\t100%{\n\t\topacity: 0;\n\t}\n}\n\n.score-offset-notifications-container {\n\tpointer-events: none;\n\toverflow: hidden;\n}\n\n.score-offset-notifications-list {\n\tfont-size: 30px;\n\ttext-align: center;\n\ttop: 20%;\n\tposition: absolute;\n\twidth: 100%;\n}\n\n.scoreOffsetNotification {\n\tposition: absolute;\n\twidth: 100%;\n\ttransition: transform 0.5s;\n}\n\n.scoreOffsetNotificationScore {\n\tcolor: #b0e9b0;\n}\n\n.touchInputWhiteBorder{\n\tbackground: #00000047;\n\tborder-radius: 150px;\n\tbox-sizing: border-box;\n\tborder: solid white;\n\tpointer-events: none;\n}\n\n.touchInputJoyStickContainer{\n\twidth: 150px;\n\theight: 150px;\n\tposition: absolute;\n\ttransition: opacity 0.3s;\n}\n\n.touchInputJoyStick{\n\twidth: 60px;\n\theight: 60px;\n\tleft: 50%;\n\ttop: 50%;\n\tbackground: white;\n\tborder-radius: 60px;\n\tposition: absolute;\n\ttransform: translate(-50%, -50%);\n}\n\n.touchInputButton{\n\twidth: 70px;\n\theight: 70px;\n\tposition: absolute;\n}\n\n.touchInputButton.touching{\n\tbackground: #ffffff47;\n}\n\n@media(max-width: 700px), (max-height: 450px){\n\t.healthUiContainer{\n\t\tmargin: 10px;\n\t\ttransform: scale(0.5) translateX(60px);\n\t\ttransform-origin: top left;\n\t}\n\n\t.flagScoreContainer{\n\t\tmargin: 10px;\n\t\ttransform: scale(0.5);\n\t\ttransform-origin: top right;\n\t}\n\n\t.notificationIconsUiContainer{\n\t\ttransform: scale(0.5);\n\t}\n\n\t.notificationIconsUiContainer.topleft{\n\t\ttop: 40px;\n\t}\n}\n\n.screenFlash{\n\tpointer-events: none;\n\tbackground: red;\n\topacity: 0;\n}\n\n.settingsItem{\n\tdisplay: flex;\n\tmargin-bottom: 6px;\n\tflex-wrap: wrap;\n}\n.settingsItemText{\n\tdisplay: inline;\n\tflex-grow: 1;\n\tflex-shrink: 0;\n\twidth: 200px;\n}\n.settingsItemSlider{\n\tdisplay: inline;\n\twidth: 220px;\n\tflex-shrink: 0;\n}\n.settingsItemSlider > input{\n\twidth: 170px;\n}\n.settingsItemSliderValue{\n\tdisplay: inline-block;\n\twidth: 40px;\n\ttext-align: right;\n}\n\n.settings-list {\n\toverflow: auto;\n\tmax-height: min(250px, 40vh);\n}\n\n.playersListTeamWonTitle{\n\ttext-align: center;\n\tfont-size: 34px;\n\tmargin: 0;\n}\n\n.playersListContainer{\n\toverflow: auto;\n\tmax-height: 600px;\n\tdisplay: flex;\n\tgap: 20px;\n\talign-items: flex-start;\n}\n\n@media(max-width: 1000px){\n\t.playersListContainer{\n\t\tflex-direction: column;\n\t}\n}\n\n.playersListTeam{\n\t--wrinkled-paper-wrinkle-size: 4px;\n\twidth: 550px;\n}\n\n.itemsTable{\n\tborder-collapse: collapse;\n}\n\n.playersListHead{\n\tcolor: white;\n}\n\n.itemsTable > tbody > tr:nth-child(even){\n\t--wrinkled-paper-wrinkle-size: 2px;\n\t--wrinkled-paper-color: #ffffff6b;\n}\n\n.itemsTable > tbody > tr > td:first-child{\n\tpadding-left: 10px;\n}\n.itemsTable > tbody > tr > td:last-child{\n\tpadding-right: 10px;\n}\n\n.itemsTable > tbody > tr > td, .playersListHead > th{\n\tpadding: 10px 0px;\n}\n\n.player-list-avatar {\n\twidth: 40px;\n\theight: 40px;\n\tbackground-size: contain;\n}\n\n.players-list-label{\n\tcolor: white;\n\tbackground: #909090;\n\tpadding: 2px 3px;\n\tfont-size: 13px;\n\tmargin-left: 7px;\n\tborder-radius: 3px;\n}\n\n.players-list-item-username {\n\tdisplay: flex;\n\tmax-width: 200px;\n\talign-items: center;\n}\n\n.player-list-username {\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\twhite-space: nowrap;\n}\n\n.player-name-verified-icon {\n\tmargin-left: 5px;\n\twidth: 20px;\n\theight: 20px;\n\tbackground-repeat: no-repeat;\n\tbackground-image: url(img/menuUI/verified.svg);\n}\n\n.playersListItem > td:first-child {\n\tpadding: 0px;\n}\n\n.playersListItemScore{\n\ttext-align: center;\n}\n\n.gameoverStatsContainer {\n\t--wrinkled-paper-color: #cdcdcd;\n\twidth: fit-content;\n\tmargin: auto;\n\toverflow: auto;\n}\n\n.gameOverStatsTable {\n\twidth: 240px;\n}\n\n.game-over-stats-coins-container {\n\tdisplay: flex;\n\tgap: 10px;\n\tjustify-content: center;\n\tmargin-top: 20px;\n}\n\n.totalScoreRow {\n\tfont-weight: bold;\n}\n\n.ownedCoinsContainer {\n\tposition: absolute;\n\ttop: -20px;\n\tright: -20px;\n\tpadding: 10px;\n\tfilter: var(--default-drop-shadow);\n}\n\n.weaponSelectionDialog{\n\tbottom: 130px;\n\ttop: inherit;\n\ttransform: translate(-50%, 0px);\n\ttransform-origin: bottom;\n}\n.weaponSelectionDialog.hidden{\n\ttransform: translate(-50%, 0px) scale(0.95);\n}\n\n@media(max-width: 1220px){\n\t.weaponSelectionDialog{\n\t\tbottom: 90px;\n\t\ttransform: translate(-50%, 0px) scale(0.5);\n\t}\n\t.weaponSelectionDialog.hidden{\n\t\ttransform: translate(-50%, 0px) scale(0.45);\n\t}\n}\n.weaponSelectionContainer{\n\tdisplay: flex;\n\tgap: 10px;\n}\n\n.weaponSelectionItem{\n\ttransition: transform 0.2s;\n\ttransition-timing-function: cubic-bezier(0.0, 0.0, 0.0, 1.8);\n\t--wrinkled-paper-color: #d8d8d8;\n\t--wrinkled-paper-border-segments: 0.02;\n\t--wrinkled-paper-banner-color: #0000001c;\n\t--wrinkled-paper-banner-size: 17px;\n\t--wrinkled-paper-border-size: 8px;\n\t--wrinkled-paper-border-color: #0000002b;\n\tposition: relative;\n\tfilter: var(--default-drop-shadow);\n}\n\n.weaponSelectionItem.selected{\n\ttransform: scale(1.1);\n\t--wrinkled-paper-color: #bfbfbf;\n}\n.weaponSelectionItem:not(.selected){\n\tfilter: brightness(0.8);\n}\n.weaponSelectionItem:not(.selected):hover{\n\tfilter: brightness(0.9);\n}\n\n.weaponSelectionItemKeyNumber{\n\tposition: absolute;\n\tmargin: 9px;\n\tcolor: white;\n\ttop: 0;\n\tright: 0;\n}\n\n.weaponSelectionItemIcon{\n\twidth: 80px;\n\theight: 80px;\n\tmargin: 5px;\n}\n\n.text-with-submit-form {\n\tdisplay: flex;\n\tgap: 5px;\n\twidth: 100%;\n\tpadding: 4px 10px;\n\tbox-sizing: border-box;\n}\n\n.text-with-submit-form > * {\n\tmargin-left: 0;\n\tmargin-right: 0;\n}\n\n.text-with-submit-form > button {\n\tpadding-left: 10px;\n\tpadding-right: 10px;\n}\n\n.skin-downloader-dialog-content {\n\tmax-width: 600px;\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: center;\n}\n\n.skin-downloader-dialog-controls {\n\tdisplay: flex;\n\tflex-direction: column;\n}\n\n.skin-downloader-dialog-controls > * {\n\theight: 30px;\n}\n\n.skin-downloader-size-input {\n\twidth: 50px;\n}\n\n.skin-downloader-download-container {\n\tpadding: 10px;\n\talign-self: center;\n}\n\n.downloadable-skin-preview {\n\twidth: 250px;\n\theight: 250px;\n\tbackground-size: contain;\n\tbackground-repeat: no-repeat;\n\tflex-shrink: 0;\n}\n\n.af-mirror > #mainMenu,\n.af-mirror > .mainCanvas {\n\ttransform: scale(-1, 1);\n}\n\n.af-mirror > .dialog,\n.af-mirror > .dialogWrapper {\n\ttransform: translate(-50%, -50%) scale(-1, 1);\n}\n\n.af-mirror> .weaponSelectionDialog{\n\ttransform: translate(-50%, 0px) scale(-1, 1);\n}\n.af-mirror > .weaponSelectionDialog.hidden{\n\ttransform: translate(-50%, 0px) scale(-0.95, 0.95);\n}\n\n@media(max-width: 1220px){\n\t.af-mirror > .weaponSelectionDialog{\n\t\ttransform: translate(-50%, 0px) scale(-0.5, 0.5);\n\t}\n\t.af-mirror > .weaponSelectionDialog.hidden{\n\t\ttransform: translate(-50%, 0px) scale(-0.45, 0.45);\n\t}\n}\n.af-mirror > .dialog.topCenter{\n\ttransform: translate(-50%, 0) scale(-1, 1);\n}\n\n.shop-paged-view-container {\n\twidth: 340px;\n\theight: 300px;\n\tposition: relative;\n\toverflow: hidden;\n}\n");
+pc.replaceSync("body, html {\n\t/* Setting overflow to hidden prevents the page from being scrolled by the user.\n\tBut scripts like scrollIntoView() can still cause the page to be scrolled.\n\tTry fixing the element that causet the page to get scrollable rather than setting\n\tthe body to overflow: hidden */\n\t/* overflow: hidden; */\n\tcolor: var(--default-text-color);\n}\n\n.allow-select {\n\tuser-select: text;\n\t-webkit-user-select: text;\n}\n\n@property --wrinkled-paper-color {\n\tsyntax: '<color>';\n\tinherits: false;\n\tinitial-value: blue;\n}\n\n.fullScreen.safeArea{\n\tleft: 0;\n\tright: 0;\n\ttop: 0;\n\tbottom: 0;\n\tleft: env(safe-area-inset-left);\n\tright: env(safe-area-inset-right);\n\ttop: env(safe-area-inset-top);\n\tbottom: env(safe-area-inset-bottom);\n\twidth: initial;\n\theight: initial;\n}\n\n.mainCanvas{\n\tz-index: -1;\n}\n\n.wrinkledPaper{\n\t--wrinkled-paper-wrinkle-size: 6px;\n\t--wrinkled-paper-color: var(--default-ui-bg-color);\n\t--wrinkled-paper-border-segments: 0.016;\n\t--wrinkled-paper-tear-count-min: 0.001;\n\t--wrinkled-paper-tear-count-max: 0.003;\n\t--wrinkled-paper-tear-depth-min: 5px;\n\t--wrinkled-paper-tear-depth-max: 15px;\n\t--wrinkled-paper-tear-width-min: 10px;\n\t--wrinkled-paper-tear-width-max: 20px;\n\t--wrinkled-paper-tear-angle-offset-min: 0.7;\n\t--wrinkled-paper-tear-angle-offset-max: 1.1;\n}\n\n.wrinkledLine {\n\t--wrinkled-line-color: var(--default-text-color);\n\t--wrinkled-line-width: 1px;\n\t--wrinkled-line-wrinkle-size: 6px;\n\t--wrinkled-line-segments: 0.016;\n}\n\n.dialogCurtain{\n\tbackground: rgba(0,0,0,0.3);\n}\n.dialogCurtain.hidden{\n\tvisibility: hidden;\n\topacity: 0;\n}\n\n.dialogWrapper, .dialog {\n\tdisplay: block;\n\tposition: absolute;\n\tmax-width: 100%;\n\tmin-height: 150px;\n\tmax-height: 100%;\n\tleft: 50%;\n\ttop: 50%;\n\ttransform: translate(-50%, -50%);\n\t-webkit-transform: translate3d(-50%,-50%,0);\n\ttransition: transform 0.2s, opacity 0.2s, visibility 0.2s;\n\ttransition-timing-function: cubic-bezier(0.3, -0.8, 0.7, 1.8);\n}\n\n.dialogWrapper > .dialog {\n\tposition: relative;\n\tleft: 0;\n\ttop: 0;\n\ttransform: initial;\n\t-webkit-transform: initial;\n}\n\n.dialog{\n\tfilter: var(--default-drop-shadow);\n\tpadding: 30px;\n\tbox-sizing: border-box;\n\twidth: fit-content;\n}\n.dialog.hidden, .dialogWrapper.hidden{\n\topacity: 0;\n\ttransform: translate(-50%, -50%) scale(0.95);\n\tvisibility: hidden;\n}\n.dialog.topCenter{\n\ttop: 10px;\n\ttransform: translate(-50%, 0);\n}\n\n.dialog-title-header-container {\n\tdisplay: flex;\n\tgap: 20px;\n}\n\nh2.dialogTitle{\n\tmargin: 0px 0px 20px 0px;\n\tfont-size: 42px;\n}\n\nh3.dialogTitle{\n\tmargin: 0px 0px 10px 0px;\n\tfont-size: 30px;\n}\n\n.dialogButtonsContainer {\n\tmargin-top: 10px;\n\ttext-align: center;\n\tdisplay: flex;\n\tjustify-content: center;\n}\n\n.dialogButtonsContainer.vertical {\n\tflex-direction: column;\n\tmax-width: 300px;\n\tmargin: auto;\n}\n\n.dialog-art-wrapper {\n\twidth: 100%;\n\tmargin: auto;\n}\n\n.dialog-art {\n\twidth: 0;\n\tmin-width: 100%;\n\theight: 100%;\n\tmax-height: 50vh;\n\tobject-fit: contain;\n}\n\n.dialog-art-buttons-container {\n\tdisplay: flex;\n}\n\n@media (min-height: 500px) {\n\t.dialog-art-buttons-container {\n\t\tflex-direction: column;\n\t}\n}\n\n@media (max-width: 500px) and (max-height: 600px) {\n\t.dialog-art-wrapper {\n\t\tdisplay: none;\n\t}\n}\n\n.currency-button {\n\tpadding: 0px 30px;\n}\n\n.currency-container {\n\tdisplay: flex;\n\talign-items: center;\n\tfont-size: 18px;\n\tjustify-content: center;\n}\n\n.coin-icon {\n\twidth: 20px;\n\theight: 20px;\n\tdisplay: inline-block;\n\tbackground-image: url(img/coin.svg);\n\tmargin-right: 5px;\n}\n\n.coin-count-text {\n\tcolor: #fbd413;\n\tfont-weight: 900;\n\t-webkit-text-stroke: 2px #766200;\n\tfilter: drop-shadow(0px 1px #766200);\n\tposition: relative;\n\tletter-spacing: 1px;\n\tfont-size: 20pt;\n}\n\n.coin-count-text::after {\n\tcontent: attr(data-text-content);\n\t-webkit-text-stroke: 0;\n\tfilter: none;\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0px;\n}\n\n.dialogTabs {\n\tposition: absolute;\n\ttop: -50px;\n\tleft: 5px;\n\tpointer-events: none;\n}\n\n.dialogTab {\n\tdisplay: inline-block;\n\tpointer-events: auto;\n\ttransition: transform 0.1s;\n\theight: 80px;\n}\n\n.dialogTabSpacer {\n\tdisplay: inline-block;\n\twidth: 20px;\n}\n\n.dialogTab.back {\n\t--wrinkled-paper-color: #d1d1d1;\n}\n\n.dialogTab.front:not(.active), .dialogTab.back.active {\n\topacity: 0;\n\tpointer-events: none;\n}\n\n.dialogTab.back:not(.active) {\n\ttransform: translateY(4px);\n\tcursor: pointer;\n}\n\n.dialogTab:not(.active):hover {\n\ttransform: translateY(2px);\n}\n\n.dialogTabIcon {\n\twidth: 60px;\n\theight: 60px;\n\tbackground-size: contain;\n\tbackground-repeat: no-repeat;\n}\n\n.skipDialogText {\n\tposition: absolute;\n\tbottom: 0;\n\tleft: 50%;\n\ttransform: translate(-50%, 25px);\n\tcolor: #dddddd;\n\ttext-shadow: 1px 1px #00000073;\n\tfont-size: 16px;\n\tcursor: pointer;\n\twhite-space: nowrap;\n}\n\n.toggle-menu-touch-button {\n\tpadding: 10px;\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\tz-index: 110;\n}\n\n.menuButtonsContainer {\n\tmax-width: fit-content;\n}\n\n.main-menu-corner-profile {\n\twidth: 300px;\n\tdisplay: flex;\n\tgap: 10px;\n\tmargin: 10px;\n}\n\n.main-menu-username {\n\tfont-size: 30px;\n}\n\n.main-menu-username:not(.blueNight) {\n\tfont-size: 25px;\n\tfont-weight: bold;\n}\n\n.main-menu-promo-banner-container {\n\ttop: 20px;\n\tright: 20px;\n\tposition: absolute;\n\twidth: 320px;\n\theight: 210px;\n\tfilter: var(--default-drop-shadow);\n}\n.main-menu-promo-banner-container.hidden {\n\tdisplay: none;\n}\n\n@media (max-width: 1200px), (max-height: 700px) {\n\t.main-menu-promo-banner-container {\n\t\twidth: 220px;\n\t\theight: 140px;\n\t}\n}\n\n@media (max-width: 500px), (max-height: 420px) {\n\t.main-menu-promo-banner-container {\n\t\tdisplay: none;\n\t}\n}\n\n.main-menu-promo-banner {\n\twidth: 100%;\n\theight: 100%;\n\tbackground: center / cover, var(--default-ui-bg-color);\n\t--wrinkled-paper-wrinkle-size: 8px;\n\t--wrinkled-paper-tear-count-min: 0.003;\n\t--wrinkled-paper-tear-count-max: 0.004;\n\tcursor: pointer;\n}\n.main-menu-promo-banner:hover {\n\tfilter: brightness(0.9);\n}\n.main-menu-promo-banner:active {\n\tfilter: brightness(0.85);\n}\n\n.gameAd{\n\tposition: absolute;\n\tbottom: 0;\n\tmargin-bottom: 20px;\n\tleft: 50%;\n\ttransform: translate(-50%);\n\tbackground: #0000004f;\n\tz-index: 20;\n}\n.gameAd.desktop{\n\twidth: 728px;\n\theight: 90px;\n}\n.gameAd.mobile{\n\twidth: 320px;\n\theight: 50px;\n\tdisplay: none;\n}\n@media(max-width: 1220px){\n\t.gameAd.desktop{\n\t\tdisplay: none;\n\t}\n\t.gameAd.mobile{\n\t\tdisplay: inherit;\n\t}\n}\n.gameAd.hidden{\n\tdisplay: none;\n}\n\n.shake-anim {\n\tanimation: 2.5s linear infinite shake;\n}\n\n@keyframes shake {\n\t0% { transform: rotate(0deg); }\n\t4% { transform: rotate(4deg); }\n\t8% { transform: rotate(-3deg); }\n\t12% { transform: rotate(2deg); }\n\t16% { transform: rotate(1deg); }\n\t20% { transform: rotate(0deg); }\n}\n\n.crosshairContainer{\n\tposition: absolute;\n\tleft: 50%;\n\ttop: 50%;\n\tz-index: 100;\n\ttransform: translate(-50%, -50%);\n\tpointer-events: none;\n}\n.crosshairLine{\n\tposition: absolute;\n\twidth: 15px;\n\theight: 2px;\n\tbackground: white;\n\tborder: 2px solid black;\n\tborder-radius: 10px;\n\ttransform-origin: left;\n\twill-change: transform;\n}\n.flagReturnProgressContainer {\n\tposition: absolute;\n\ttransform: translate(-50%, -50%);\n\ttransition: opacity 0.2s;\n}\n.flagReturnProgressContainer.hidden{\n\topacity: 0;\n}\n.flagReturnProgressPath {\n\tfill: none;\n\tstroke-width: 10px;\n\tstroke-linecap: round;\n}\n\n.flagScoreContainer{\n\tposition: absolute;\n\tright: 0;\n\ttop: 0;\n\tz-index: 100;\n\tmargin: 30px;\n\tfilter: var(--default-drop-shadow);\n\tpointer-events: none;\n}\n\n.flagScoreItem{\n\tmargin: 3px;\n\tdisplay: flex;\n}\n\n.flagScoreIcon{\n\theight: 50px;\n\twidth: 50px;\n\ttransform: translateY(-5px);\n}\n\n.flagScorePointEl{\n\twidth: 40px;\n\theight: 40px;\n\talign-self: center;\n}\n\n.healthUiContainer{\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\tmargin: 30px;\n\twidth: 330px;\n\theight: 50px;\n\tz-index: 100;\n\tpointer-events: none;\n}\n\n.healthUiBorder{\n\tbackground: url(img/healthUiBorder.svg);\n\twidth: 100%;\n\theight: 100%;\n\tposition: absolute;\n\tfilter: var(--default-drop-shadow);\n}\n\n.healthUiBarContainer{\n\tbackground: black;\n\twidth: 276px;\n\theight: 20px;\n\tposition: absolute;\n\ttop: 15px;\n\tleft: 37px;\n\toverflow: hidden;\n}\n\n.healthUiBar{\n\twidth: 100%;\n\theight: 100%;\n\tbackground: #e81d25;\n\tbackground: linear-gradient(90deg, #740e12 33.333%, #ae161c 33.334%, #ae161c 66.666%, #e81d25 66.667%);\n}\n\n.gameplayBottomText{\n\tfont-size: 45px;\n\tposition: absolute;\n\tleft: 0;\n\twidth: 100%;\n\tbottom: 25px;\n\ttext-align: center;\n\tpointer-events: none;\n}\n\n.notificationIconsUiContainer{\n\twidth: 200px;\n\theight: 200px;\n\tpointer-events: none;\n}\n\n.notificationIconsUiContainer.topleft{\n\tleft: 0;\n\ttop: 80px;\n\tposition: absolute;\n\ttransform-origin: top left;\n}\n\n.notificationIconsUiContainer.centerbig{\n\tleft: 50%;\n\ttop: 50%;\n\twidth: 50vw;\n\theight: min(50vw, 100vh);\n\tposition: absolute;\n\ttransform: translate(-50%, -50%);\n}\n\n.notificationIconsUiContainer.crosshair{\n\tleft: 50%;\n\ttop: 50%;\n\twidth: 200px;\n\theight: 200px;\n\tposition: absolute;\n\ttransform: translate(-50%, -50%) translateY(-140px);\n}\n\n.notificationIcon{\n\tfilter: var(--default-drop-shadow);\n\tanimation: 1s notificationIconFade 6s both, 0.2s notificationIconPop;\n\twidth: 100%;\n\theight: 100%;\n\tbackground-position: center;\n\tbackground-repeat: no-repeat;\n}\n\n.crosshair > .notificationIcon{\n\tanimation: 1s notificationIconFade 0.5s both, 0.2s notificationIconPop;\n}\n\n@keyframes notificationIconPop{\n\t0%{\n\t\ttransform: scale(1);\n\t}\n\t50%{\n\t\ttransform: scale(1.2);\n\t}\n\t100%{\n\t\ttransform: scale(1);\n\t}\n}\n@keyframes notificationIconFade{\n\t0%{\n\t\topacity: 1;\n\t}\n\n\t100%{\n\t\topacity: 0;\n\t}\n}\n\n.score-offset-notifications-container {\n\tpointer-events: none;\n\toverflow: hidden;\n}\n\n.score-offset-notifications-list {\n\tfont-size: 30px;\n\ttext-align: center;\n\ttop: 20%;\n\tposition: absolute;\n\twidth: 100%;\n}\n\n.scoreOffsetNotification {\n\tposition: absolute;\n\twidth: 100%;\n\ttransition: transform 0.5s;\n}\n\n.scoreOffsetNotificationScore {\n\tcolor: #b0e9b0;\n}\n\n.touchInputWhiteBorder{\n\tbackground: #00000047;\n\tborder-radius: 150px;\n\tbox-sizing: border-box;\n\tborder: solid white;\n\tpointer-events: none;\n}\n\n.touchInputJoyStickContainer{\n\twidth: 150px;\n\theight: 150px;\n\tposition: absolute;\n\ttransition: opacity 0.3s;\n}\n\n.touchInputJoyStick{\n\twidth: 60px;\n\theight: 60px;\n\tleft: 50%;\n\ttop: 50%;\n\tbackground: white;\n\tborder-radius: 60px;\n\tposition: absolute;\n\ttransform: translate(-50%, -50%);\n}\n\n.touchInputButton{\n\twidth: 70px;\n\theight: 70px;\n\tposition: absolute;\n}\n\n.touchInputButton.touching{\n\tbackground: #ffffff47;\n}\n\n@media(max-width: 700px), (max-height: 450px){\n\t.healthUiContainer{\n\t\tmargin: 10px;\n\t\ttransform: scale(0.5) translateX(60px);\n\t\ttransform-origin: top left;\n\t}\n\n\t.flagScoreContainer{\n\t\tmargin: 10px;\n\t\ttransform: scale(0.5);\n\t\ttransform-origin: top right;\n\t}\n\n\t.notificationIconsUiContainer{\n\t\ttransform: scale(0.5);\n\t}\n\n\t.notificationIconsUiContainer.topleft{\n\t\ttop: 40px;\n\t}\n}\n\n.screenFlash{\n\tpointer-events: none;\n\tbackground: red;\n\topacity: 0;\n}\n\n.settingsItem{\n\tdisplay: flex;\n\tmargin-bottom: 6px;\n\tflex-wrap: wrap;\n}\n.settingsItemText{\n\tdisplay: inline;\n\tflex-grow: 1;\n\tflex-shrink: 0;\n\twidth: 200px;\n}\n.settingsItemSlider{\n\tdisplay: inline;\n\twidth: 220px;\n\tflex-shrink: 0;\n}\n.settingsItemSlider > input{\n\twidth: 170px;\n}\n.settingsItemSliderValue{\n\tdisplay: inline-block;\n\twidth: 40px;\n\ttext-align: right;\n}\n\n.settings-list {\n\toverflow: auto;\n\tmax-height: min(250px, 40vh);\n}\n\n.playersListTeamWonTitle{\n\ttext-align: center;\n\tfont-size: 34px;\n\tmargin: 0;\n}\n\n.playersListContainer{\n\toverflow: auto;\n\tmax-height: 600px;\n\tdisplay: flex;\n\tgap: 20px;\n\talign-items: flex-start;\n}\n\n@media(max-width: 1000px){\n\t.playersListContainer{\n\t\tflex-direction: column;\n\t}\n}\n\n.playersListTeam{\n\t--wrinkled-paper-wrinkle-size: 4px;\n\twidth: 550px;\n\t--wrinkled-paper-color: var(--team-bg-color-light);\n}\n\n@media (prefers-color-scheme: dark) {\n\t.playersListTeam{\n\t\t--wrinkled-paper-color: var(--team-bg-color-dark);\n\t}\n}\n.itemsTable{\n\tborder-collapse: collapse;\n}\n\n.playersListHead{\n\tcolor: white;\n}\n\n.itemsTable > tbody > tr:nth-child(even){\n\t--wrinkled-paper-wrinkle-size: 2px;\n\t--wrinkled-paper-color: var(--items-table-odd-row-color);\n}\n\n.itemsTable > tbody > tr > td:first-child{\n\tpadding-left: 10px;\n}\n.itemsTable > tbody > tr > td:last-child{\n\tpadding-right: 10px;\n}\n\n.itemsTable > tbody > tr > td, .playersListHead > th{\n\tpadding: 10px 0px;\n}\n\n.player-list-avatar {\n\twidth: 40px;\n\theight: 40px;\n\tbackground-size: contain;\n}\n\n.players-list-label{\n\tcolor: white;\n\tbackground: #909090;\n\tpadding: 2px 3px;\n\tfont-size: 13px;\n\tmargin-left: 7px;\n\tborder-radius: 3px;\n}\n\n.players-list-item-username {\n\tdisplay: flex;\n\tmax-width: 200px;\n\talign-items: center;\n}\n\n.player-list-username {\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\twhite-space: nowrap;\n}\n\n.player-name-verified-icon {\n\tmargin-left: 5px;\n\twidth: 20px;\n\theight: 20px;\n\tbackground-repeat: no-repeat;\n\tbackground-image: url(img/menuUI/verified.svg);\n\tfilter: var(--icon-filter)\n}\n\n.playersListItem > td:first-child {\n\tpadding: 0px;\n}\n\n.playersListItemScore{\n\ttext-align: center;\n}\n\n.gameoverStatsContainer {\n\t--team-bg-color-light: var(--items-table-bg-color);\n\t--team-bg-color-dark: var(--items-table-bg-color);\n\twidth: fit-content;\n\tmargin: auto;\n\toverflow: auto;\n\t--wrinkled-paper-color: var(--team-bg-color-light);\n}\n@media (prefers-color-scheme: dark) {\n\t.gameoverStatsContainer{\n\t\t--wrinkled-paper-color: var(--team-bg-color-dark);\n\t}\n}\n\n.gameOverStatsTable {\n\twidth: 240px;\n}\n\n.game-over-stats-coins-container {\n\tdisplay: flex;\n\tgap: 10px;\n\tjustify-content: center;\n\tmargin-top: 20px;\n}\n\n.totalScoreRow {\n\tfont-weight: bold;\n}\n\n.ownedCoinsContainer {\n\tposition: absolute;\n\ttop: -20px;\n\tright: -20px;\n\tpadding: 10px;\n\tfilter: var(--default-drop-shadow);\n}\n\n.weaponSelectionDialog{\n\tbottom: 130px;\n\ttop: inherit;\n\ttransform: translate(-50%, 0px);\n\ttransform-origin: bottom;\n}\n.weaponSelectionDialog.hidden{\n\ttransform: translate(-50%, 0px) scale(0.95);\n}\n\n@media(max-width: 1220px){\n\t.weaponSelectionDialog{\n\t\tbottom: 90px;\n\t\ttransform: translate(-50%, 0px) scale(0.5);\n\t}\n\t.weaponSelectionDialog.hidden{\n\t\ttransform: translate(-50%, 0px) scale(0.45);\n\t}\n}\n.weaponSelectionContainer{\n\tdisplay: flex;\n\tgap: 10px;\n}\n\n.weaponSelectionItem{\n\ttransition: transform 0.2s;\n\ttransition-timing-function: cubic-bezier(0.0, 0.0, 0.0, 1.8);\n\t--wrinkled-paper-color: #d8d8d8;\n\t--wrinkled-paper-border-segments: 0.02;\n\t--wrinkled-paper-banner-color: #0000001c;\n\t--wrinkled-paper-banner-size: 17px;\n\t--wrinkled-paper-border-size: 8px;\n\t--wrinkled-paper-border-color: #0000002b;\n\tposition: relative;\n\tfilter: var(--default-drop-shadow);\n}\n\n.weaponSelectionItem.selected{\n\ttransform: scale(1.1);\n\t--wrinkled-paper-color: #bfbfbf;\n}\n.weaponSelectionItem:not(.selected){\n\tfilter: brightness(0.8);\n}\n.weaponSelectionItem:not(.selected):hover{\n\tfilter: brightness(0.9);\n}\n\n.weaponSelectionItemKeyNumber{\n\tposition: absolute;\n\tmargin: 9px;\n\tcolor: white;\n\ttop: 0;\n\tright: 0;\n}\n\n.weaponSelectionItemIcon{\n\twidth: 80px;\n\theight: 80px;\n\tmargin: 5px;\n}\n\n.text-with-submit-form {\n\tdisplay: flex;\n\tgap: 5px;\n\twidth: 100%;\n\tpadding: 4px 10px;\n\tbox-sizing: border-box;\n}\n\n.text-with-submit-form > * {\n\tmargin-left: 0;\n\tmargin-right: 0;\n}\n\n.text-with-submit-form > button {\n\tpadding-left: 10px;\n\tpadding-right: 10px;\n}\n\n.skin-downloader-dialog-content {\n\tmax-width: 600px;\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: center;\n}\n\n.skin-downloader-dialog-controls {\n\tdisplay: flex;\n\tflex-direction: column;\n}\n\n.skin-downloader-dialog-controls > * {\n\theight: 30px;\n}\n\n.skin-downloader-size-input {\n\twidth: 50px;\n}\n\n.skin-downloader-download-container {\n\tpadding: 10px;\n\talign-self: center;\n}\n\n.downloadable-skin-preview {\n\twidth: 250px;\n\theight: 250px;\n\tbackground-size: contain;\n\tbackground-repeat: no-repeat;\n\tflex-shrink: 0;\n}\n\n.af-mirror > #mainMenu,\n.af-mirror > .mainCanvas {\n\ttransform: scale(-1, 1);\n}\n\n.af-mirror > .dialog,\n.af-mirror > .dialogWrapper {\n\ttransform: translate(-50%, -50%) scale(-1, 1);\n}\n\n.af-mirror> .weaponSelectionDialog{\n\ttransform: translate(-50%, 0px) scale(-1, 1);\n}\n.af-mirror > .weaponSelectionDialog.hidden{\n\ttransform: translate(-50%, 0px) scale(-0.95, 0.95);\n}\n\n@media(max-width: 1220px){\n\t.af-mirror > .weaponSelectionDialog{\n\t\ttransform: translate(-50%, 0px) scale(-0.5, 0.5);\n\t}\n\t.af-mirror > .weaponSelectionDialog.hidden{\n\t\ttransform: translate(-50%, 0px) scale(-0.45, 0.45);\n\t}\n}\n.af-mirror > .dialog.topCenter{\n\ttransform: translate(-50%, 0) scale(-1, 1);\n}\n\n.shop-paged-view-container {\n\twidth: 340px;\n\theight: 300px;\n\tposition: relative;\n\toverflow: hidden;\n}\n");
 const mc = new CSSStyleSheet;
-mc.replaceSync('.dialog-button,\n.icon-button {\n\tborder: none;\n\tappearance: none;\n}\n\n.dialog-button,\n.main-menu-button {\n\t-webkit-tap-highlight-color: transparent;\n}\n\n.dialog-button{\n\tpadding: 7px 30px;\n\tmargin: 4px 10px;\n\tfont-size: 24px;\n\theight: 38px;\n\tcolor: var(--default-wrinkled-paper-border-color);\n\tvertical-align: middle;\n\twhite-space: nowrap;\n\t--wrinkled-paper-border-size: 3;\n\t--wrinkled-paper-border-size-bottom: 6;\n\t--wrinkled-paper-border-color: var(--default-wrinkled-paper-border-color);\n\t--wrinkled-paper-seed: 70;\n\t--wrinkled-paper-wrinkle-size: 2px;\n\t--wrinkled-paper-border-segments: 0.02;\n\t--wrinkled-paper-tear-count-min: 0;\n\t--wrinkled-paper-tear-count-max: 0;\n}\n.dialog-button:hover:not(:disabled){\n\tfilter: brightness(0.9);\n}\n.dialog-button:active:not(:disabled){\n\tfilter: brightness(0.8);\n}\n\n.dialog-button:not(:disabled){\n\tcursor: pointer;\n}\n\n.dialog-button:disabled {\n\t--wrinkled-paper-border-color: #959595;\n\tcolor: #959595;\n}\n\n.dialog-button:disabled > .currency-container, .dialog-button:disabled > .dialog-button-icon {\n\topacity: 0.5;\n}\n\n.dialog-button-icon {\n\twidth: 20px;\n\theight: 20px;\n\tdisplay: inline-block;\n\tbackground-size: contain;\n\tbackground-position: center;\n\tbackground-repeat: no-repeat;\n\tmargin-right: 10px;\n\tvertical-align: middle;\n}\n\n.icon-button {\n\tcursor: pointer;\n\tbackground: transparent;\n\tbackground-repeat: no-repeat;\n\tbackground-position: center;\n}\n\n.icon-button:hover {\n\topacity: 0.7;\n}\n.icon-button:active {\n\topacity: 0.6;\n}\n\n.header-button {\n\tpadding: 0;\n}\n\n.icon-button > .dialog-button-icon,\n.header-button > .dialog-button-icon {\n\twidth: 20px;\n\theight: 20px;\n\tmargin: 3px;\n}\n\n.header-back-button > .dialog-button-icon {\n\twidth: 30px;\n}\n\n\n.main-menu-button-container {\n\tdisplay: flex;\n\talign-items: center;\n}\n\n.main-menu-button{\n\tborder: none;\n\twidth: 70px;\n\theight: 70px;\n\tcursor: pointer;\n\tmargin: 5px;\n\tpadding: 0;\n\t--wrinkled-paper-border-segments: 0.04;\n\t--wrinkled-paper-wrinkle-size: 5px;\n\t--wrinkled-paper-tear-count-min: 0.003;\n\t--wrinkled-paper-tear-count-max: 0.004;\n\t--wrinkled-paper-border-size: 3;\n\t--wrinkled-paper-border-size-bottom: 6;\n\t--wrinkled-paper-border-color: var(--default-wrinkled-paper-border-color);\n\t--wrinkled-paper-tear-count-min: 0;\n\t--wrinkled-paper-tear-count-max: 0;\n\tfilter: var(--default-drop-shadow);\n}\n.main-menu-button:hover{\n\tfilter: var(--default-drop-shadow) brightness(0.9);\n}\n.main-menu-button:active{\n\tfilter: var(--default-drop-shadow) brightness(0.8);\n}\n\n.main-menu-button-text {\n\tcolor: white;\n\tfont-size: 30px;\n}\n\n.buttonImage{\n\twidth: 100%;\n\theight: 100%;\n\tbackground-size: contain;\n\tbackground-repeat: no-repeat;\n\tbackground-position: center;\n}\n\n.dialog-text-input,\n.dialog-select-wrapper,\n.dialog-checkbox-input,\n.dialog-toggle-input {\n\t--wrinkled-paper-border-size: 3;\n\t--wrinkled-paper-border-size-bottom: 4;\n\t--wrinkled-paper-border-color: var(--default-wrinkled-paper-border-color);\n\t--wrinkled-paper-seed: 70;\n\t--wrinkled-paper-wrinkle-size: 2px;\n\t--wrinkled-paper-border-segments: 0.02;\n\t--wrinkled-paper-border-color-top-extra: #e2e2e2;\n\t--wrinkled-paper-border-size-top-extra: 10;\n\t--wrinkled-paper-tear-count-min: 0;\n\t--wrinkled-paper-tear-count-max: 0;\n}\n.dialog-checkbox-input:focus-visible,\n.dialog-toggle-input:focus-visible,\n.dialog-text-input:focus-visible,\n.dialog-button:focus-visible,\n.main-menu-button:focus-visible,\n.dialog-select-wrapper:has(> select:focus-visible) {\n\toutline: none;\n\t--wrinkled-paper-border-color: var(--blue-highlight-color);\n\t--wrinkled-paper-border-size: 5;\n\t--wrinkled-paper-border-size-bottom: 7;\n}\n.icon-button:focus-visible {\n\toutline: var(--blue-highlight-color) auto 1px;\n}\n.dialog-text-input:disabled,\n.dialog-checkbox-input:disabled,\n.dialog-toggle-input:disabled {\n\t--wrinkled-paper-border-color: var(--disabled-wrinkled-paper-border-color);\n}\n\n.dialog-text-input {\n\tpadding: 7px;\n\tmargin: 4px 10px;\n\tfont-size: 24px;\n\theight: 38px;\n\tborder: none;\n\tbox-sizing: border-box;\n}\n\n.dialog-checkbox-input,\n.dialog-toggle-input {\n\tappearance: none;\n\twidth: 30px;\n\theight: 30px;\n\tdisplay: grid;\n\tplace-content: center;\n}\n.dialog-toggle-input {\n\twidth: 45px;\n}\n.dialog-checkbox-input:active:not(:disabled),\n.dialog-toggle-input:active:not(:disabled) {\n\t--wrinkled-paper-color: #e7e7e7;\n}\n.dialog-checkbox-input:checked::before {\n\tcontent: "";\n\twidth: 20px;\n\theight: 20px;\n\tbackground-image: url(img/menuUI/check.svg);\n\tbackground-size: contain;\n}\n.dialog-checkbox-input:checked:disabled::before,\n.dialog-toggle-input:checked:disabled::before {\n\topacity: 0.5;\n}\n.dialog-toggle-input {\n\t--wrinkled-paper-extra-box-color: white;\n\t--wrinkled-paper-extra-box-size: 10px;\n\t--wrinkled-paper-extra-box-border-color: var(--default-wrinkled-paper-border-color);\n\t--wrinkled-paper-extra-box-border-size: 2;\n\t--wrinkled-paper-extra-box-side: left;\n}\n.dialog-toggle-input:checked {\n\t--wrinkled-paper-extra-box-side: right;\n}\n\n.dialog-select-input {\n\tappearance: none;\n\toutline: none;\n\tborder: none;\n\tpadding: 8px 25px 8px 8px;\n\tfont-size: 14pt;\n\tbackground: url(img/downArrowSmall.svg) no-repeat right center;\n}\n');
+mc.replaceSync("html {\n\t--default-text-color: black;\n\t--default-ui-bg-color: white;\n\t--icon-filter: none;\n\t--default-drop-shadow: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));\n\t--default-wrinkled-paper-border-color: #353535;\n\t/** Used for buttons that appear directly on top of the game rather\n\tthan in a dialog. */\n\t--button-on-clear-bg-wrinkled-paper-border-color: var(--default-wrinkled-paper-border-color);\n\t--disabled-wrinkled-paper-border-color: #919191;\n\t--default-wrinkled-paper-top-color-extra: #e2e2e2;\n\t--shop-item-background-color: #f1f1f1;\n\t--shop-item-highlight-color: #fdc570;\n\t--blue-highlight-color: #0c5fcc;\n\t--items-table-bg-color: #cdcdcd;\n\t--items-table-odd-row-color: #ffffff6b;\n}\n\nhtml.theme-dark {\n\t--default-text-color: white;\n\t--default-ui-bg-color: #454545;\n\t--icon-filter: invert(100%);\n\t--default-wrinkled-paper-border-color: #a5a5a5;\n\t--button-on-clear-bg-wrinkled-paper-border-color: #242424;\n\t--disabled-wrinkled-paper-border-color: #646464;\n\t--default-wrinkled-paper-top-color-extra: #606060;\n\t--shop-item-background-color: #646464;\n\t--shop-item-highlight-color: #9c6f2d;\n\t--blue-highlight-color: #3f92ff;\n\t--items-table-bg-color: #6d6d6d;\n\t--items-table-odd-row-color: #0000002b;\n}\n");
 const gc = new CSSStyleSheet;
-gc.replaceSync('.paged-view-page {\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n\ttransition: opacity 0.3s, transform 0.3s;\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n}\n\n.paged-view-page.hidden {\n\topacity: 0;\n\tpointer-events: none;\n}\n.paged-view-page.hiddenleft {\n\ttransform: translateX(-20%);\n}\n\n.paged-view-page.hiddenright {\n\ttransform: translateX(20%);\n}\n\n.paged-view-page-header {\n\tdisplay: grid;\n\twidth: 100%;\n\tgrid-template-columns: 40px 1fr auto;\n\tgrid-template-areas: "back-button header-title header-corner";\n}\n.paged-view-page-header > * {\n\talign-self: center;\n\tjustify-self: center;\n}\n\n.paged-view-page-back-button {\n\twidth: 30px;\n\theight: 30px;\n\tbackground-image: url(img/arrow.svg);\n}\n\n.paged-view-page-header-title {\n\tgrid-area: header-title;\n\tfont-size: 24pt;\n\tmargin: 15px;\n}\n\n.paged-view-page-header-corner {\n\tgrid-area: header-corner;\n}\n\n.paged-view-page-header-line {\n\theight: 20px;\n\twidth: 100%;\n}\n\n.paged-view-page-items-list {\n\tdisplay: flex;\n\tflex-direction: column;\n\twidth: 100%;\n\tbox-sizing: border-box;\n\tmax-width: 300px;\n}\n\n.paged-view-page-custom-subpage,\n.paged-view-page-items-list {\n\twidth: 100%;\n\theight: 100%;\n\toverflow-y: scroll;\n}\n');
+gc.replaceSync('.dialog-button,\n.icon-button {\n\tborder: none;\n\tappearance: none;\n}\n\n.dialog-button,\n.main-menu-button {\n\t-webkit-tap-highlight-color: transparent;\n}\n\n.dialog-button{\n\tpadding: 7px 30px;\n\tmargin: 4px 10px;\n\tfont-size: 24px;\n\theight: 38px;\n\tcolor: var(--default-text-color);\n\tvertical-align: middle;\n\twhite-space: nowrap;\n\t--wrinkled-paper-border-size: 3;\n\t--wrinkled-paper-border-size-bottom: 6;\n\t--wrinkled-paper-border-color: var(--default-wrinkled-paper-border-color);\n\t--wrinkled-paper-seed: 70;\n\t--wrinkled-paper-wrinkle-size: 2px;\n\t--wrinkled-paper-border-segments: 0.02;\n\t--wrinkled-paper-tear-count-min: 0;\n\t--wrinkled-paper-tear-count-max: 0;\n}\n.dialog-button:hover:not(:disabled){\n\tfilter: brightness(0.9);\n}\n.dialog-button:active:not(:disabled){\n\tfilter: brightness(0.8);\n}\n\n.dialog-button:not(:disabled){\n\tcursor: pointer;\n}\n\n.dialog-button:disabled {\n\tcolor: #959595;\n}\n\n.dialog-button:disabled > .currency-container, .dialog-button:disabled > .dialog-button-icon {\n\topacity: 0.5;\n}\n\n.dialog-button-icon {\n\twidth: 20px;\n\theight: 20px;\n\tdisplay: inline-block;\n\tbackground-size: contain;\n\tbackground-position: center;\n\tbackground-repeat: no-repeat;\n\tmargin-right: 10px;\n\tvertical-align: middle;\n}\n.dialog-button-icon:not(.no-dark-mode-invert) {\n\tfilter: var(--icon-filter);\n}\n\n.icon-button {\n\tcursor: pointer;\n\tbackground: transparent;\n\tbackground-repeat: no-repeat;\n\tbackground-position: center;\n}\n\n.icon-button:hover {\n\topacity: 0.7;\n}\n.icon-button:active {\n\topacity: 0.6;\n}\n\n.header-button {\n\tpadding: 0;\n}\n\n.icon-button > .dialog-button-icon,\n.header-button > .dialog-button-icon {\n\twidth: 20px;\n\theight: 20px;\n\tmargin: 3px;\n}\n\n.header-back-button > .dialog-button-icon {\n\twidth: 30px;\n}\n\n\n.main-menu-button-container {\n\tdisplay: flex;\n\talign-items: center;\n}\n\n.main-menu-button{\n\tborder: none;\n\twidth: 70px;\n\theight: 70px;\n\tcursor: pointer;\n\tmargin: 5px;\n\tpadding: 0;\n\t--wrinkled-paper-border-segments: 0.04;\n\t--wrinkled-paper-wrinkle-size: 5px;\n\t--wrinkled-paper-tear-count-min: 0.003;\n\t--wrinkled-paper-tear-count-max: 0.004;\n\t--wrinkled-paper-border-size: 3;\n\t--wrinkled-paper-border-size-bottom: 6;\n\t--wrinkled-paper-border-color: var(--button-on-clear-bg-wrinkled-paper-border-color);\n\t--wrinkled-paper-tear-count-min: 0;\n\t--wrinkled-paper-tear-count-max: 0;\n\tfilter: var(--default-drop-shadow);\n}\n.main-menu-button:hover{\n\tfilter: var(--default-drop-shadow) brightness(0.9);\n}\n.main-menu-button:active{\n\tfilter: var(--default-drop-shadow) brightness(0.8);\n}\n\n.main-menu-button-text {\n\tcolor: white;\n\tfont-size: 30px;\n}\n\n.main-menu-promo-button {\n\tposition: absolute;\n\tbottom: 0;\n\tleft: 50%;\n\ttransform: translate(-50%, 50%);\n\tmargin: 0;\n\t--wrinkled-paper-border-color: var(--button-on-clear-bg-wrinkled-paper-border-color);\n}\n\n.buttonImage{\n\twidth: 100%;\n\theight: 100%;\n\tbackground-size: contain;\n\tbackground-repeat: no-repeat;\n\tbackground-position: center;\n\tfilter: var(--icon-filter);\n}\n\n.dialog-text-input,\n.dialog-select-wrapper,\n.dialog-checkbox-input,\n.dialog-toggle-input {\n\t--wrinkled-paper-border-size: 3;\n\t--wrinkled-paper-border-size-bottom: 4;\n\t--wrinkled-paper-border-color: var(--default-wrinkled-paper-border-color);\n\t--wrinkled-paper-seed: 70;\n\t--wrinkled-paper-wrinkle-size: 2px;\n\t--wrinkled-paper-border-segments: 0.02;\n\t--wrinkled-paper-border-color-top-extra: var(--default-wrinkled-paper-top-color-extra);\n\t--wrinkled-paper-border-size-top-extra: 10;\n\t--wrinkled-paper-tear-count-min: 0;\n\t--wrinkled-paper-tear-count-max: 0;\n}\n.dialog-checkbox-input:focus-visible,\n.dialog-toggle-input:focus-visible,\n.dialog-text-input:focus-visible,\n.dialog-button:focus-visible,\n.main-menu-button:focus-visible,\n.dialog-select-wrapper:has(> select:focus-visible) {\n\toutline: none;\n\t--wrinkled-paper-border-color: var(--blue-highlight-color);\n\t--wrinkled-paper-border-size: 5;\n\t--wrinkled-paper-border-size-bottom: 7;\n}\n.icon-button:focus-visible {\n\toutline: var(--blue-highlight-color) auto 1px;\n}\n.dialog-button:disabled,\n.dialog-text-input:disabled,\n.dialog-checkbox-input:disabled,\n.dialog-toggle-input:disabled {\n\t--wrinkled-paper-border-color: var(--disabled-wrinkled-paper-border-color);\n}\n\n.dialog-text-input {\n\tpadding: 7px;\n\tmargin: 4px 10px;\n\tfont-size: 24px;\n\theight: 38px;\n\tborder: none;\n\tbox-sizing: border-box;\n}\n\n.dialog-checkbox-input,\n.dialog-toggle-input {\n\tappearance: none;\n\twidth: 30px;\n\theight: 30px;\n\tdisplay: grid;\n\tplace-content: center;\n}\n.dialog-toggle-input {\n\twidth: 45px;\n}\n.dialog-checkbox-input:active:not(:disabled),\n.dialog-toggle-input:active:not(:disabled) {\n\t--wrinkled-paper-color: #e7e7e7;\n}\n.dialog-checkbox-input:checked::before {\n\tcontent: "";\n\twidth: 20px;\n\theight: 20px;\n\tbackground-image: url(img/menuUI/check.svg);\n\tbackground-size: contain;\n\tfilter: var(--icon-filter);\n}\n.dialog-checkbox-input:checked:disabled::before,\n.dialog-toggle-input:checked:disabled::before {\n\topacity: 0.5;\n}\n.dialog-toggle-input {\n\t--wrinkled-paper-extra-box-color: white;\n\t--wrinkled-paper-extra-box-size: 10px;\n\t--wrinkled-paper-extra-box-border-color: var(--default-wrinkled-paper-border-color);\n\t--wrinkled-paper-extra-box-border-size: 2;\n\t--wrinkled-paper-extra-box-side: left;\n}\n.dialog-toggle-input:checked {\n\t--wrinkled-paper-extra-box-side: right;\n}\n\n.dialog-select-wrapper {\n\tposition: relative;\n}\n.dialog-select-wrapper::after {\n\tcontent: "";\n\tposition: absolute;\n\twidth: 20px;\n\theight: 20px;\n\ttop: 50%;\n\ttransform: translateY(-50%);\n\tright: 3px;\tbackground: url(img/downArrowSmall.svg) no-repeat right center;\n\tfilter: var(--icon-filter);\n}\n\n.dialog-select-input {\n\tcolor: var(--default-text-color);\n\tappearance: none;\n\toutline: none;\n\tborder: none;\n\tpadding: 8px 25px 8px 8px;\n\tfont-size: 14pt;\n\tbackground-color: transparent;\n}\n.dialog-select-input > option {\n\tbackground-color: var(--default-ui-bg-color);\n}\n');
 const fc = new CSSStyleSheet;
-fc.replaceSync(".maps-container {\n\tdisplay: flex;\n\tflex-direction: row;\n\tflex-wrap: wrap;\n\trow-gap: 40px;\n\tcolumn-gap: 20px;\n\twidth: 80vw;\n\tmax-width: 660px;\n\toverflow-y: scroll;\n\tmax-height: 80vh;\n}\n\n.map-item {\n\twidth: 200px;\n\tposition: relative;\n}\n\n.map-item-title {\n\tfont-size: 30pt;\n\tmargin: 0;\n\tmargin-bottom: 5px;\n\twhite-space: nowrap;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n}\n\n.map-item-thumb {\n\twidth: 200px;\n\theight: 100px;\n\tbackground: center / cover, white;\n\t--wrinkled-paper-wrinkle-size: 8px;\n\t--wrinkled-paper-tear-count-min: 0.003;\n\t--wrinkled-paper-tear-count-max: 0.004;\n\tfilter: var(--default-drop-shadow);\n}\n\n.map-item-join-button {\n\tposition: absolute;\n\tleft: 50%;\n\tbottom: 0;\n\ttransform: translate(-50%, 50%);\n\tmargin: 0;\n}\n");
-const yc = new CSSStyleSheet;
-yc.replaceSync(".shopDialogContent{\n\tdisplay: flex;\n\talign-items: stretch;\n\tmax-width: 80vw;\n\twidth: max-content;\n\tgap: 10px;\n}\n\nh2.shop-presets-title {\n\tmargin: 0;\n}\n\n.shop-skin-selection-list {\n\tdisplay: flex;\n\toverflow-x: scroll;\n\tmax-width: 700px;\n\tscroll-behavior: smooth;\n}\n\n@media (min-height: 650px) and (min-width: 800px) {\n\t.shop-class-selection-list {\n\t\toverflow-x: initial;\n\t\tflex-wrap: wrap;\n\t\tjustify-content: center;\n\t\twidth: 700px;\n\t}\n}\n\n.shop-skin-selection-item {\n\tposition: relative;\n\tmin-width: 200px;\n\tmin-height: 320px;\n\tmargin: 10px;\n}\n\n.shop-skin-selection-image {\n\tmin-width: 200px;\n\tmin-height: 300px;\n}\n\n.shop-class-selection-item {\n\tmin-height: 240px;\n}\n\n.shop-skin-selection-list-add-button {\n\talign-self: center;\n}\n\n.shop-skin-selection-edit-button {\n\tposition: absolute;\n    left: 50%;\n    bottom: 0px;\n    transform: translate(-50%, 0);\n    margin: 0px;\n}\n\n.corner-delete-button {\n\tposition: absolute;\n\ttop: 0;\n\tright: 0;\n\tpadding: 8px;\n\tfont-size: 12pt;\n\theight: auto;\n\tmargin: 0;\n}\n\n.shop-items-grid-view{\n\tdisplay: grid;\n\tgrid-template-columns: repeat(auto-fit, 100px);\n\tgrid-gap: 5px;\n\twidth: 100%;\n\theight: fit-content;\n\tmax-height: 300px;\n\tjustify-content: center;\n}\n\n.shopItem{\n\tborder: none;\n\twidth: 100px;\n\theight: 100px;\n\tposition: relative;\n\ttransition: --wrinkled-paper-color 2s;\n\t--wrinkled-paper-color: #e3e3e3;\n}\n\n.shopItemUsage-confirmPurchase {\n\tmargin: auto;\n\twidth: 200px;\n\theight: 200px;\n}\n\n.shopItem.selected{\n\t--wrinkled-paper-color: #c0c0c0;\n\t--wrinkled-paper-border-size: 3;\n\t--wrinkled-paper-border-color: var(--default-wrinkled-paper-border-color);\n}\n.shopItem:focus-visible {\n\toutline: none;\n\t--wrinkled-paper-border-size: 3;\n\t--wrinkled-paper-border-color: var(--blue-highlight-color);\n}\n\n.shopItem:not(.shopItemUsage-confirmPurchase):not(.selected.preventUnequip) {\n\tcursor: pointer;\n}\n.shopItem:hover:not(.shopItemUsage-confirmPurchase):not(.selected.preventUnequip) {\n\tfilter: brightness(0.9);\n}\n.shopItem:active:not(.shopItemUsage-confirmPurchase):not(.selected.preventUnequip) {\n\tfilter: brightness(0.85);\n}\n\n.shopItemStatClassesContainer {\n\tposition: absolute;\n\ttop: 3px;\n\tleft: 3px;\n}\n\n.shopItemStatClassIcon {\n\twidth: 30px;\n\theight: 30px;\n}\n\n.shopItemLocked:not(.shopItemUsage-confirmPurchase) {\n\t--wrinkled-paper-color: var(--shop-item-background-color);\n}\n\n.shopItem.highlight:not(.shopItemUsage-confirmPurchase) {\n\tanimation: shop-item-highlight 5s;\n}\n\n@keyframes shop-item-highlight {\n\t0% {\n\t\t--wrinkled-paper-color: var(--shop-item-highlight-color);\n\t}\n\t50% {\n\t\t--wrinkled-paper-color: var(--shop-item-highlight-color);\n\t}\n\t100% {\n\t\t--wrinkled-paper-color: var(--shop-item-background-color);\n\t}\n}\n\n.shopItemLocked:not(.shopItemUsage-confirmPurchase) > canvas {\n\tfilter: grayscale(100%);\n}\n\n.shopItemLock {\n\twidth: 80px;\n\theight: 80px;\n\tposition: absolute;\n\tleft: 50%;\n\ttop: 50%;\n\ttransform: translate(-50%, -50%);\n\tbackground: url(img/menuUI/shop/lock.svg);\n\topacity: 0.3;\n}\n.shopItemLock.rewarded-break-unlockable {\n\twidth: 60px;\n\theight: 60px;\n\tbackground: url(img/rewardedAdIcon.svg);\n}\n\n.shopItem:hover > .shopItemLock {\n\topacity: 0.8;\n}\n\n.shopItemOwned > .shopItemLock, .shopItemUsage-confirmPurchase > .shopItemLock {\n\tdisplay: none;\n}\n\n.shopItem > .currency-container {\n\tposition: absolute;\n\tbottom: 0;\n\tleft: 50%;\n\ttransform: translateX(-50%);\n}\n\n.shopSkinPreview{\n\tdisplay: inline-block;\n\tmin-width: 200px;\n\tbackground: #0088ff;\n\tposition: relative;\n}\n\n.shop-skin-preview-canvas {\n\tdisplay: block;\n}\n\n.shop-skin-preview-download-button {\n\twidth: 50px;\n\theight: 50px;\n\tbackground: url(img/menuUI/download.svg);\n\tposition: absolute;\n\tbottom: 0;\n\tright: 0;\n\tcursor: pointer;\n\topacity: 0.4;\n}\n.shop-skin-preview-download-button:hover {\n\topacity: 0.7;\n}\n\n.shop-gender-toggle-container {\n\tdisplay: flex;\n\talign-items: center;\n}\n.gender-icon{\n\twidth: 25px;\n\theight: 25px;\n\tbackground: no-repeat center;\n}\n.gender-icon.male {\n\tbackground-image: url(img/menuUI/shop/male.svg);\n}\n.gender-icon.female {\n\tbackground-image: url(img/menuUI/shop/female.svg);\n}\n\n.shop-color-buttons-corner {\n\tdisplay: flex;\n}\n\n.shop-color-button {\n\twidth: 20px;\n\theight: 20px;\n\tmargin: 0 1px;\n\tappearance: none;\n\tborder-radius: 100px;\n\toutline: none;\n\tborder: 2px solid var(--default-wrinkled-paper-border-color);\n\tpadding: 0;\n\tbox-shadow: 0px 1px var(--default-wrinkled-paper-border-color);\n\tcursor: pointer;\n}\n\n.shop-color-button:hover {\n\tfilter: brightness(120%);\n}\n");
+fc.replaceSync('.paged-view-page {\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n\ttransition: opacity 0.3s, transform 0.3s;\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n}\n\n.paged-view-page.hidden {\n\topacity: 0;\n\tpointer-events: none;\n}\n.paged-view-page.hiddenleft {\n\ttransform: translateX(-20%);\n}\n\n.paged-view-page.hiddenright {\n\ttransform: translateX(20%);\n}\n\n.paged-view-page-header {\n\tdisplay: grid;\n\twidth: 100%;\n\tgrid-template-columns: 40px 1fr auto;\n\tgrid-template-areas: "back-button header-title header-corner";\n}\n.paged-view-page-header > * {\n\talign-self: center;\n\tjustify-self: center;\n}\n\n.paged-view-page-back-button {\n\twidth: 30px;\n\theight: 30px;\n\tbackground-image: url(img/arrow.svg);\n}\n\n.paged-view-page-header-title {\n\tgrid-area: header-title;\n\tfont-size: 24pt;\n\tmargin: 15px;\n}\n\n.paged-view-page-header-corner {\n\tgrid-area: header-corner;\n}\n\n.paged-view-page-header-line {\n\theight: 20px;\n\twidth: 100%;\n}\n\n.paged-view-page-items-list {\n\tdisplay: flex;\n\tflex-direction: column;\n\twidth: 100%;\n\tbox-sizing: border-box;\n\tmax-width: 300px;\n}\n\n.paged-view-page-custom-subpage,\n.paged-view-page-items-list {\n\twidth: 100%;\n\theight: 100%;\n\toverflow-y: scroll;\n}\n');
 const vc = new CSSStyleSheet;
-vc.replaceSync(".squad-split-container {\n\tdisplay: flex;\n\tjustify-content: center;\n\talign-items: stretch;\n\tmargin-bottom: 30px;\n}\n\n.squad-split-divider {\n\tdisplay: flex;\n\tflex-direction: column;\n\ttext-align: center;\n\tmargin: 0px 15px;\n}\n\n.squad-split-divider-line {\n\twidth: 19px;\n\tflex-grow: 1;\n\t--wrinkled-line-direction: vertical;\n\t--wrinkled-line-segments: 0.05;\n\t--wrinkled-line-wrinkle-size: 6px;\n}\n\n.squad-split-section {\n\twidth: 234px;\n\ttext-align: center;\n\tmargin: auto;\n}\n\n.squad-id-container {\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: center;\n\tgap: 7px;\n}\n\n.squad-id-button {\n\twidth: 20px;\n\theight: 20px;\n}\n\n.copy-squad-url-button {\n\tbackground-image: url(img/menuUI/copy.svg);\n\tposition: relative;\n}\n\n.squad-id-copied-text {\n\tposition: absolute;\n\tleft: 50%;\n\ttop: 50%;\n\ttransform: translate(-50%, -50%);\n\tdisplay: none;\n}\n.squad-id-copied-text.animating {\n\tdisplay: inherit;\n\tanimation-name: copy-squad-url-button-animation;\n\tanimation-duration: 1s;\n\tanimation-fill-mode: both;\n}\n\n@keyframes copy-squad-url-button-animation {\n\t0% {\n\t\topacity: 1;\n\t\ttransform: translate(-50%, -50%);\n\t}\n\t100% {\n\t\topacity: 0;\n\t\ttransform: translate(-50%, -50%) translateY(-30px);\n\t}\n}\n\n.squad-id {\n\tfont-size: 20pt;\n}\n\n.join-squad-input {\n\twidth: 100%;\n\ttext-align: center;\n}\n\n.in-squad-content {\n\tdisplay: flex;\n\tjustify-content: center;\n\talign-items: flex-start;\n}\n\n.squad-settings-button {\n\tbackground-image: url(img/menuUI/settings.svg);\n\twidth: 30px;\n\theight: 30px;\n\tposition: absolute;\n\tright: 20px;\n\tbottom: 20px;\n}\n\n.squad-players-list {\n\tbackground: #cdcdcd !important;\n\toverflow: auto;\n\tflex-grow: 1;\n\tmax-width: 250px;\n\tmax-height: min(300px, 30vh);\n}\n\n.squad-players-list > table {\n\twidth: 100%;\n}\n\n.squad-players-list > table > tbody > tr > .squad-players-leader-container {\n\twidth: 20px;\n}\n\n.squad-players-list > table > tbody > tr > .squad-players-avatar-container {\n\twidth: 40px;\n\tpadding: 0px;\n}\n\n.squad-leader-icon {\n\tbackground: url(img/menuUI/crown.svg) no-repeat center;\n\twidth: 15px;\n\theight: 15px;\n}\n\n.in-squad-buttons {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-self: flex-end;\n}\n\n.in-squad-buttons.hidden {\n\tdisplay: none;\n}\n\n@media (max-width: 520px) {\n\t.squad-split-container {\n\t\tflex-direction: column;\n\t}\n\n\t.squad-split-divider {\n\t\tflex-direction: row;\n\t\tmargin: 15px 0px;\n\t}\n\n\t.squad-split-divider-line {\n\t\t--wrinkled-line-direction: horizontal;\n\t}\n\n\t.in-squad-content {\n\t\tflex-direction: column;\n\t\talign-items: stretch;\n\t}\n\n\t.in-squad-buttons {\n\t\tflex-flow: row wrap;\n\t\talign-self: auto;\n\t}\n\n\t.squad-split-divider-line {\n\t\t--wrinkled-line-wrinkle-size: 3px;\n\t}\n\n\t.squad-split-divider > span {\n\t\tmargin: 0px 10px;\n\t}\n\n\t.squad-players-list {\n\t\tmax-width: 100%;\n\t}\n\n\n\t.squad-settings-button {\n\t\tright: 20px;\n\t\ttop: 20px;\n\t\tbottom: initial;\n\t}\n}\n\n.squad-settings-leader-only-message {\n\tmax-width: 200px;\n\tmargin-bottom: 20px;\n}\n");
+vc.replaceSync(".maps-container {\n\tdisplay: flex;\n\tflex-direction: row;\n\tflex-wrap: wrap;\n\trow-gap: 40px;\n\tcolumn-gap: 20px;\n\twidth: 80vw;\n\tmax-width: 660px;\n\toverflow-y: scroll;\n\tmax-height: 80vh;\n}\n\n.map-item {\n\twidth: 200px;\n\tposition: relative;\n}\n\n.map-item-title {\n\tfont-size: 30pt;\n\tmargin: 0;\n\tmargin-bottom: 5px;\n\twhite-space: nowrap;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n}\n\n.map-item-thumb {\n\twidth: 200px;\n\theight: 100px;\n\tbackground: center / cover, white;\n\t--wrinkled-paper-wrinkle-size: 8px;\n\t--wrinkled-paper-tear-count-min: 0.003;\n\t--wrinkled-paper-tear-count-max: 0.004;\n\tfilter: var(--default-drop-shadow);\n}\n\n.map-item-join-button {\n\tposition: absolute;\n\tleft: 50%;\n\tbottom: 0;\n\ttransform: translate(-50%, 50%);\n\tmargin: 0;\n}\n");
+const yc = new CSSStyleSheet;
+yc.replaceSync(".shopDialogContent{\n\tdisplay: flex;\n\talign-items: stretch;\n\tmax-width: 80vw;\n\twidth: max-content;\n\tgap: 10px;\n}\n\nh2.shop-presets-title {\n\tmargin: 0;\n}\n\n.shop-skin-selection-list {\n\tdisplay: flex;\n\toverflow-x: scroll;\n\tmax-width: 700px;\n\tscroll-behavior: smooth;\n}\n\n@media (min-height: 650px) and (min-width: 800px) {\n\t.shop-class-selection-list {\n\t\toverflow-x: initial;\n\t\tflex-wrap: wrap;\n\t\tjustify-content: center;\n\t\twidth: 700px;\n\t}\n}\n\n.shop-skin-selection-item {\n\tposition: relative;\n\tmin-width: 200px;\n\tmin-height: 320px;\n\tmargin: 10px;\n}\n\n.shop-skin-selection-image {\n\tmin-width: 200px;\n\tmin-height: 300px;\n}\n\n.shop-class-selection-item {\n\tmin-height: 240px;\n}\n\n.shop-skin-selection-list-add-button {\n\talign-self: center;\n}\n\n.shop-skin-selection-edit-button {\n\tposition: absolute;\n    left: 50%;\n    bottom: 0px;\n    transform: translate(-50%, 0);\n    margin: 0px;\n}\n\n.corner-delete-button {\n\tposition: absolute;\n\ttop: 0;\n\tright: 0;\n\tpadding: 8px;\n\tfont-size: 12pt;\n\theight: auto;\n\tmargin: 0;\n}\n\n.shop-items-grid-view{\n\tdisplay: grid;\n\tgrid-template-columns: repeat(auto-fit, 100px);\n\tgrid-gap: 5px;\n\twidth: 100%;\n\theight: fit-content;\n\tmax-height: 300px;\n\tjustify-content: center;\n}\n\n.shopItem{\n\tborder: none;\n\twidth: 100px;\n\theight: 100px;\n\tposition: relative;\n\ttransition: --wrinkled-paper-color 2s;\n\t--wrinkled-paper-color: var(--shop-item-background-color);\n}\n\n.shopItemUsage-confirmPurchase {\n\tmargin: auto;\n\twidth: 200px;\n\theight: 200px;\n}\n\n.shopItem.selected{\n\t--wrinkled-paper-border-size: 3;\n\t--wrinkled-paper-border-color: var(--default-wrinkled-paper-border-color);\n}\n.shopItem:focus-visible {\n\toutline: none;\n\t--wrinkled-paper-border-size: 3;\n\t--wrinkled-paper-border-color: var(--blue-highlight-color);\n}\n\n.shopItem:not(.shopItemUsage-confirmPurchase):not(.selected.preventUnequip) {\n\tcursor: pointer;\n}\n.shopItem:hover:not(.shopItemUsage-confirmPurchase):not(.selected.preventUnequip) {\n\tfilter: brightness(0.9);\n}\n.shopItem:active:not(.shopItemUsage-confirmPurchase):not(.selected.preventUnequip) {\n\tfilter: brightness(0.85);\n}\n\n.shopItemStatClassesContainer {\n\tposition: absolute;\n\ttop: 3px;\n\tleft: 3px;\n}\n\n.shopItemStatClassIcon {\n\twidth: 30px;\n\theight: 30px;\n}\n\n.shopItem.highlight:not(.shopItemUsage-confirmPurchase) {\n\tanimation: shop-item-highlight 5s;\n}\n\n@keyframes shop-item-highlight {\n\t0% {\n\t\t--wrinkled-paper-color: var(--shop-item-highlight-color);\n\t}\n\t50% {\n\t\t--wrinkled-paper-color: var(--shop-item-highlight-color);\n\t}\n\t100% {\n\t\t--wrinkled-paper-color: var(--shop-item-background-color);\n\t}\n}\n\n.shopItemLocked:not(.shopItemUsage-confirmPurchase) > canvas {\n\tfilter: grayscale(100%);\n}\n\n.shopItemLock {\n\twidth: 80px;\n\theight: 80px;\n\tposition: absolute;\n\tleft: 50%;\n\ttop: 50%;\n\ttransform: translate(-50%, -50%);\n\tbackground: url(img/menuUI/shop/lock.svg);\n\topacity: 0.3;\n}\n.shopItemLock.rewarded-break-unlockable {\n\twidth: 60px;\n\theight: 60px;\n\tbackground: url(img/rewardedAdIcon.svg);\n}\n\n.shopItem:hover > .shopItemLock {\n\topacity: 0.8;\n}\n\n.shopItemOwned > .shopItemLock, .shopItemUsage-confirmPurchase > .shopItemLock {\n\tdisplay: none;\n}\n\n.shopItem > .currency-container {\n\tposition: absolute;\n\tbottom: 0;\n\tleft: 50%;\n\ttransform: translateX(-50%);\n}\n\n.shopSkinPreview{\n\tdisplay: inline-block;\n\tmin-width: 200px;\n\tbackground: #0088ff;\n\tposition: relative;\n}\n\n.shop-skin-preview-canvas {\n\tdisplay: block;\n}\n\n.shop-skin-preview-download-button {\n\twidth: 50px;\n\theight: 50px;\n\tbackground: url(img/menuUI/download.svg);\n\tposition: absolute;\n\tbottom: 0;\n\tright: 0;\n\tcursor: pointer;\n\topacity: 0.4;\n}\n.shop-skin-preview-download-button:hover {\n\topacity: 0.7;\n}\n\n.shop-gender-toggle-container {\n\tdisplay: flex;\n\talign-items: center;\n}\n.gender-icon{\n\twidth: 25px;\n\theight: 25px;\n\tbackground: no-repeat center;\n\tfilter: var(--icon-filter);\n}\n.gender-icon.male {\n\tbackground-image: url(img/menuUI/shop/male.svg);\n}\n.gender-icon.female {\n\tbackground-image: url(img/menuUI/shop/female.svg);\n}\n\n.shop-color-buttons-corner {\n\tdisplay: flex;\n}\n\n.shop-color-button {\n\twidth: 20px;\n\theight: 20px;\n\tmargin: 0 1px;\n\tappearance: none;\n\tborder-radius: 100px;\n\toutline: none;\n\tborder: 2px solid var(--default-wrinkled-paper-border-color);\n\tpadding: 0;\n\tbox-shadow: 0px 1px var(--default-wrinkled-paper-border-color);\n\tcursor: pointer;\n}\n\n.shop-color-button:hover {\n\tfilter: brightness(120%);\n}\n");
 const wc = new CSSStyleSheet;
-wc.replaceSync(".class-selection-image-container {\n\tposition: relative;\n\tmin-width: 200px;\n\tmin-height: 200px;\n}\n\n.class-selection-image-container.in-game {\n\tmin-width: 100px;\n\tmin-height: 100px;\n}\n\n.class-selection-image,\n.class-selection-image-background {\n\tposition: absolute;\n\tinset: 0;\n}\n\n.class-selection-image {\n\tbackground-size: contain;\n}\n\n.class-selection-image-background {\n\t--wrinkled-paper-color: #d8d8d8;\n\t--wrinkled-paper-banner-color: #0000001c;\n\t--wrinkled-paper-banner-size: 40px;\n\t--wrinkled-paper-border-size: 20px;\n\t--wrinkled-paper-border-color: #0000002b;\n}\n\n.class-selection-image-container.in-game > .class-selection-image-background {\n\t--wrinkled-paper-banner-size: 20px;\n\t--wrinkled-paper-border-size: 12px;\n}\n\n.class-selection-image-container.in-game > .class-selection-image {\n\tbackground-size: 130%;\n\tbackground-position: 50% 10%;\n}\n");
+wc.replaceSync(".squad-split-container {\n\tdisplay: flex;\n\tjustify-content: center;\n\talign-items: stretch;\n\tmargin-bottom: 30px;\n}\n\n.squad-split-divider {\n\tdisplay: flex;\n\tflex-direction: column;\n\ttext-align: center;\n\tmargin: 0px 15px;\n}\n\n.squad-split-divider-line {\n\twidth: 19px;\n\tflex-grow: 1;\n\t--wrinkled-line-direction: vertical;\n\t--wrinkled-line-segments: 0.05;\n\t--wrinkled-line-wrinkle-size: 6px;\n}\n\n.squad-split-section {\n\twidth: 234px;\n\ttext-align: center;\n\tmargin: auto;\n}\n\n.squad-id-container {\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: center;\n\tgap: 7px;\n}\n\n.squad-id-button {\n\tpadding: 0;\n\tposition: relative;\n}\n\n.squad-id-copied-text {\n\tcolor: var(--default-text-color);\n\tposition: absolute;\n\tleft: 50%;\n\ttop: 50%;\n\ttransform: translate(-50%, -50%);\n\tdisplay: none;\n}\n.squad-id-copied-text.animating {\n\tdisplay: inherit;\n\tanimation-name: copy-squad-url-button-animation;\n\tanimation-duration: 1s;\n\tanimation-fill-mode: both;\n}\n\n@keyframes copy-squad-url-button-animation {\n\t0% {\n\t\topacity: 1;\n\t\ttransform: translate(-50%, -50%);\n\t}\n\t100% {\n\t\topacity: 0;\n\t\ttransform: translate(-50%, -50%) translateY(-30px);\n\t}\n}\n\n.squad-id {\n\tfont-size: 20pt;\n}\n\n.join-squad-input {\n\twidth: 100%;\n\ttext-align: center;\n}\n\n.in-squad-content {\n\tdisplay: flex;\n\tjustify-content: center;\n\talign-items: flex-start;\n}\n\n.squad-settings-button {\n\twidth: 30px;\n\theight: 30px;\n\tposition: absolute;\n\tright: 20px;\n\tbottom: 20px;\n}\n\n.squad-players-list {\n\tbackground: var(--items-table-bg-color) !important;\n\toverflow: auto;\n\tflex-grow: 1;\n\tmax-width: 250px;\n\tmax-height: min(300px, 30vh);\n}\n\n.squad-players-list > table {\n\twidth: 100%;\n}\n\n.squad-players-list > table > tbody > tr > .squad-players-leader-container {\n\twidth: 20px;\n}\n\n.squad-players-list > table > tbody > tr > .squad-players-avatar-container {\n\twidth: 40px;\n\tpadding: 0px;\n}\n\n.squad-leader-icon {\n\tbackground: url(img/menuUI/crown.svg) no-repeat center;\n\twidth: 15px;\n\theight: 15px;\n\tfilter: var(--icon-filter);\n}\n\n.in-squad-buttons {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-self: flex-end;\n}\n\n.in-squad-buttons.hidden {\n\tdisplay: none;\n}\n\n@media (max-width: 520px) {\n\t.squad-split-container {\n\t\tflex-direction: column;\n\t}\n\n\t.squad-split-divider {\n\t\tflex-direction: row;\n\t\tmargin: 15px 0px;\n\t}\n\n\t.squad-split-divider-line {\n\t\t--wrinkled-line-direction: horizontal;\n\t}\n\n\t.in-squad-content {\n\t\tflex-direction: column;\n\t\talign-items: stretch;\n\t}\n\n\t.in-squad-buttons {\n\t\tflex-flow: row wrap;\n\t\talign-self: auto;\n\t}\n\n\t.squad-split-divider-line {\n\t\t--wrinkled-line-wrinkle-size: 3px;\n\t}\n\n\t.squad-split-divider > span {\n\t\tmargin: 0px 10px;\n\t}\n\n\t.squad-players-list {\n\t\tmax-width: 100%;\n\t}\n\n\n\t.squad-settings-button {\n\t\tright: 20px;\n\t\ttop: 20px;\n\t\tbottom: initial;\n\t}\n}\n\n.squad-settings-leader-only-message {\n\tmax-width: 200px;\n\tmargin-bottom: 20px;\n}\n");
 const bc = new CSSStyleSheet;
-bc.replaceSync('#qc-cmp2-ui {\n\tbackground: paint(wrinkledPaper);\n\t--wrinkled-paper-wrinkle-size: 6px;\n\t--wrinkled-paper-color: white;\n\t--wrinkled-paper-border-segments: 0.016;\n\t--wrinkled-paper-tear-count-min: 0.001;\n\t--wrinkled-paper-tear-count-max: 0.003;\n\t--wrinkled-paper-tear-depth-min: 5px;\n\t--wrinkled-paper-tear-depth-max: 15px;\n\t--wrinkled-paper-tear-width-min: 10px;\n\t--wrinkled-paper-tear-width-max: 20px;\n\t--wrinkled-paper-tear-angle-offset-min: 0.7;\n\t--wrinkled-paper-tear-angle-offset-max: 1.1;\n\t--wrinkled-paper-seed: 33;\n}\n\n#qc-cmp2-ui .qc-cmp2-consent-info {\n\tpadding: 30px;\n}\n\n#qc-cmp2-ui h2 {\n\tfont-family: BlueNight, sans-serif;\n\ttext-transform: lowercase;\n\tfont-weight: lighter;\n\tline-height: 0.7em;\n\tfont-size: 26pt;\n}\n\n#qc-cmp2-ui .qc-cmp2-footer {\n\tborder-top: none;\n\tbox-shadow: none;\n}\n\n#qc-cmp2-ui button[mode="primary"] > span,\n#qc-cmp2-ui button[mode="secondary"] > span,\n#qc-cmp2-ui button[mode="primary"],\n#qc-cmp2-ui button[mode="secondary"] {\n\tfont-family: BlueNight, sans-serif;\n\ttext-transform: lowercase;\n\tfont-weight: lighter;\n\tline-height: 0.7em;\n\tfont-size: 18pt;\n\tcursor: pointer;\n}\n\n#qc-cmp2-ui button[mode="primary"],\n#qc-cmp2-ui button[mode="secondary"] {\n\tpadding: 7px 30px;\n    margin: 4px 10px;\n    font-size: 24px;\n    height: 38px;\n    color: var(--default-wrinkled-paper-border-color);\n    white-space: nowrap;\n\n\tborder: none;\n\tappearance: none;\n\tbox-shadow: none;\n\tdisplay: block;\n\ttransition: none;\n\n\tbackground: paint(wrinkledPaper);\n\t--wrinkled-paper-color: white;\n    --wrinkled-paper-border-size: 3;\n    --wrinkled-paper-border-size-bottom: 6;\n    --wrinkled-paper-border-color: var(--default-wrinkled-paper-border-color);\n    --wrinkled-paper-seed: 70;\n    --wrinkled-paper-wrinkle-size: 2px;\n    --wrinkled-paper-border-segments: 0.02;\n    --wrinkled-paper-tear-count-min: 0;\n    --wrinkled-paper-tear-count-max: 0;\n}\n\n#qc-cmp2-ui button[mode="primary"]:hover:not(:disabled),\n#qc-cmp2-ui button[mode="secondary"]:hover:not(:disabled) {\n\tfilter: brightness(0.9);\n}\n#qc-cmp2-ui button[mode="primary"]:active:not(:disabled),\n#qc-cmp2-ui button[mode="secondary"]:active:not(:disabled) {\n\tfilter: brightness(0.8);\n}\n\n@media (min-width: 768px) {\n\t#qc-cmp2-ui button.qc-cmp2-hide-desktop {\n\t\tdisplay: none;\n\t}\n}\n'), document.adoptedStyleSheets = [pc, mc, gc, fc, yc, vc, wc, bc], function () {
+bc.replaceSync(".class-selection-image-container {\n\tposition: relative;\n\tmin-width: 200px;\n\tmin-height: 200px;\n}\n\n.class-selection-image-container.in-game {\n\tmin-width: 100px;\n\tmin-height: 100px;\n}\n\n.class-selection-image,\n.class-selection-image-background {\n\tposition: absolute;\n\tinset: 0;\n}\n\n.class-selection-image {\n\tbackground-size: contain;\n}\n\n.class-selection-image-background {\n\t--wrinkled-paper-color: #d8d8d8;\n\t--wrinkled-paper-banner-color: #0000001c;\n\t--wrinkled-paper-banner-size: 40px;\n\t--wrinkled-paper-border-size: 20px;\n\t--wrinkled-paper-border-color: #0000002b;\n}\n\n.class-selection-image-container.in-game > .class-selection-image-background {\n\t--wrinkled-paper-banner-size: 20px;\n\t--wrinkled-paper-border-size: 12px;\n}\n\n.class-selection-image-container.in-game > .class-selection-image {\n\tbackground-size: 130%;\n\tbackground-position: 50% 10%;\n}\n");
+const xc = new CSSStyleSheet;
+xc.replaceSync('#qc-cmp2-ui {\n\tbackground: paint(wrinkledPaper);\n\t--wrinkled-paper-wrinkle-size: 6px;\n\t--wrinkled-paper-color: white;\n\t--wrinkled-paper-border-segments: 0.016;\n\t--wrinkled-paper-tear-count-min: 0.001;\n\t--wrinkled-paper-tear-count-max: 0.003;\n\t--wrinkled-paper-tear-depth-min: 5px;\n\t--wrinkled-paper-tear-depth-max: 15px;\n\t--wrinkled-paper-tear-width-min: 10px;\n\t--wrinkled-paper-tear-width-max: 20px;\n\t--wrinkled-paper-tear-angle-offset-min: 0.7;\n\t--wrinkled-paper-tear-angle-offset-max: 1.1;\n\t--wrinkled-paper-seed: 33;\n}\n\n#qc-cmp2-ui .qc-cmp2-consent-info {\n\tpadding: 30px;\n}\n\n#qc-cmp2-ui h2 {\n\tfont-family: BlueNight, sans-serif;\n\ttext-transform: lowercase;\n\tfont-weight: lighter;\n\tline-height: 0.7em;\n\tfont-size: 26pt;\n}\n\n#qc-cmp2-ui .qc-cmp2-footer {\n\tborder-top: none;\n\tbox-shadow: none;\n}\n\n#qc-cmp2-ui button[mode="primary"] > span,\n#qc-cmp2-ui button[mode="secondary"] > span,\n#qc-cmp2-ui button[mode="primary"],\n#qc-cmp2-ui button[mode="secondary"] {\n\tfont-family: BlueNight, sans-serif;\n\ttext-transform: lowercase;\n\tfont-weight: lighter;\n\tline-height: 0.7em;\n\tfont-size: 18pt;\n\tcursor: pointer;\n}\n\n#qc-cmp2-ui button[mode="primary"],\n#qc-cmp2-ui button[mode="secondary"] {\n\tpadding: 7px 30px;\n    margin: 4px 10px;\n    font-size: 24px;\n    height: 38px;\n    color: var(--default-wrinkled-paper-border-color);\n    white-space: nowrap;\n\n\tborder: none;\n\tappearance: none;\n\tbox-shadow: none;\n\tdisplay: block;\n\ttransition: none;\n\n\tbackground: paint(wrinkledPaper);\n\t--wrinkled-paper-color: white;\n    --wrinkled-paper-border-size: 3;\n    --wrinkled-paper-border-size-bottom: 6;\n    --wrinkled-paper-border-color: var(--default-wrinkled-paper-border-color);\n    --wrinkled-paper-seed: 70;\n    --wrinkled-paper-wrinkle-size: 2px;\n    --wrinkled-paper-border-segments: 0.02;\n    --wrinkled-paper-tear-count-min: 0;\n    --wrinkled-paper-tear-count-max: 0;\n}\n\n#qc-cmp2-ui button[mode="primary"]:hover:not(:disabled),\n#qc-cmp2-ui button[mode="secondary"]:hover:not(:disabled) {\n\tfilter: brightness(0.9);\n}\n#qc-cmp2-ui button[mode="primary"]:active:not(:disabled),\n#qc-cmp2-ui button[mode="secondary"]:active:not(:disabled) {\n\tfilter: brightness(0.8);\n}\n\n@media (min-width: 768px) {\n\t#qc-cmp2-ui button.qc-cmp2-hide-desktop {\n\t\tdisplay: none;\n\t}\n}\n'), document.adoptedStyleSheets = [pc, mc, gc, fc, vc, yc, wc, bc, xc], function () {
     let t = "";
     if (window.Intl && Intl.RelativeTimeFormat) {
         const e = new Intl.RelativeTimeFormat,
