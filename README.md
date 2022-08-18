@@ -36,7 +36,7 @@ If you're looking for the best way to improve your narrow.one experience, Better
 </p>
 
 <h2 align="center">Common Issues</h2>
-<h3 align="center">If BetterNarrow doesn't start, refresh the page with fn5.</h3>
+<h3 align="center">If BetterNarrow doesn't start, refresh the page.</h3>
 
 <h2 align="center">Discord Server</h2>
 <h3 align="center">https://discord.gg/mfJBTJR9gt</h3>
