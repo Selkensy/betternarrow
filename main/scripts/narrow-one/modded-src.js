@@ -29516,12 +29516,11 @@ class oh {
 
             if (dmgObj !== undefined && dmgObj !== null) {
                 dmgObj.innerHTML = `DMG: ${Math.floor(avrgDmg)}`;
-
-                if (globalInstance.settingsManager.getValue("damagedisplay")) {
-                    if (cd >= 1)
-                        globalInstance.gameManager.currentGame.scoreOffsetNotificationsUi.showOffsetNotification("Player damaged " + cd + " saved " + Math.floor(Math.abs(i.arrowDamage - n) * 100), null, "hey");
-                }
             }
+			
+			console.log("Player damaged " + cd + " saved " + Math.floor(Math.abs(i.arrowDamage - n) * 100));
+			
+			globalInstance.gameManager.currentGame.scoreOffsetNotificationsUi.showCustomNotification("Player damaged " + cd + " saved " + Math.floor(Math.abs(i.arrowDamage - n) * 100));
         }
 
         const a = {
@@ -31222,6 +31221,21 @@ class Ph {
         o.textContent = `+${t}`,
         r.appendChild(o),
         this.destroyOldNotifications(),
+        this.updateNotificationOffsets()
+    }
+    showCustomNotification(msg) { // custom notification stuffs
+        let duration = 2;
+		
+        const s = document.createElement("div");
+        s.classList.add("scoreOffsetNotification"),
+        this.listEl.appendChild(s),
+        this.createdNotifications.unshift({ el: s, destroyTime: Date.now() + 1e3 * duration + 1e3 });
+        const r = document.createElement("div");
+        if (r.classList.add("scoreOffsetNotificationAnim"), r.style.animation = `1s notificationIconFade ${duration}s both, 0.2s notificationIconPop`, s.appendChild(r), msg) {
+            const t = document.createTextNode(msg);
+            r.appendChild(t)
+        }
+        this.destroyOldNotifications()
         this.updateNotificationOffsets()
     }
     destroyOldNotifications() {
