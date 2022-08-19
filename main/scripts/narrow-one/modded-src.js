@@ -3,7 +3,8 @@ let enumThemes = { // setting naming here
 	light: "Light",
 	dark: "Dark",
 	amoled: "Amoled",
-	black: "Black"
+	black: "Black"/*,
+	mycustom: "My Custom Theme"*/
 }
 
 let themes = [ // game themes here
@@ -21,7 +22,12 @@ let themes = [ // game themes here
 		"theme-black",
 		"html.theme-black {\n\t--default-text-color: white;\n\t--default-ui-bg-color: #000000;\n\t--icon-filter: invert(100%);\n\t--default-wrinkled-paper-border-color: #000000;\n\t--button-on-clear-bg-wrinkled-paper-border-color: #0A0A0A;\n\t--disabled-wrinkled-paper-border-color: #000000;\n\t--default-wrinkled-paper-top-color-extra: #000000;\n\t--shop-item-background-color: #000000;\n\t--shop-item-highlight-color: #242424;\n\t--blue-highlight-color: #3f92ff;\n\t--items-table-bg-color: #000000;\n\t--items-table-odd-row-color: #0000002b;\n}\n",
 		"black"
-	]
+	]/*,
+	[
+		"theme-my-custom",
+		"html.theme-my-custom {\n\t--default-text-color: white;\n\t--default-ui-bg-color: #000000;\n\t--icon-filter: invert(100%);\n\t--default-wrinkled-paper-border-color: #000000;\n\t--button-on-clear-bg-wrinkled-paper-border-color: #0A0A0A;\n\t--disabled-wrinkled-paper-border-color: #000000;\n\t--default-wrinkled-paper-top-color-extra: #000000;\n\t--shop-item-background-color: #000000;\n\t--shop-item-highlight-color: #242424;\n\t--blue-highlight-color: #3f92ff;\n\t--items-table-bg-color: #000000;\n\t--items-table-odd-row-color: #0000002b;\n}\n",
+		"mycustom" // this has to match the enumThemes tag
+	]*/
 ];
 
 !function () {
