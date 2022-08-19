@@ -27645,9 +27645,13 @@ class Wl {
         e + "://" + window.location.hostname + ":" + t + "/gameServer"
     }
     async prepareJoinGame() {
-        if (!uc().profileState.getCurrentState().username.includes(betterNarrowCharacter))
-            uc().profileState.setUsername(betterNarrowCharacter + uc().profileState.getCurrentState().username)
-
+        try {
+        if (!uc().profileState.getCurrentState().username.includes(betterNarrowCharacter));
+            uc().profileState.setUsername(betterNarrowCharacter + uc().profileState.getCurrentState().username);
+        }
+        catch (error) {
+            console.log('Guest Fix Activated', error);
+        }
             let t = null;
         const e = ya();
         if (this.nextCloseIsIntentional = !1, e.ip && !this.squadManager.isInSquad)
