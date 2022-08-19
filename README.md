@@ -35,8 +35,8 @@ If you're looking for the best way to improve your narrow.one experience, Better
   <img width="80%" height="80%" src="https://raw.githubusercontent.com/Selkensy/betternarrowimages/master/betternarrow/Screenshot006.png">
 </p>
 
-<h2 align="center">Common Issues</h2>
-<h3 align="center">If BetterNarrow doesn't start, refresh the page and wait the game to fully load.</h3>
+<h2 align="center">If BetterNarrow doesn't start:</h2>
+<h3 align="center">1. REFRESH THE PAGE AND WAIT THE GAME TO FULLY LOAD.<br>2. LOGIN WITH AN ACCOUNT.</h3>
 
-<h2 align="center">Discord Server</h2>
+<h2 align="center">BetterNarrow Discord Server:</h2>
 <h3 align="center">https://discord.gg/mfJBTJR9gt</h3>
