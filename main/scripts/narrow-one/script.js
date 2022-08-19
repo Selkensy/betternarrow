@@ -84,7 +84,7 @@ function ReloadLabels() {
         if (keepInTouch[i] != "")
             createLab(keepInTouch[i], 10, 10 + (25 * i), keepInTouch[i].toUpperCase() + ": 0", "white")
 
-            GetLabelById("VERSION").innerHTML = "v1.1.6a";
+            GetLabelById("VERSION").innerHTML = "v1.1.7";
     GetLabelById("NARROWVERSION").innerHTML = versionKey;
 }
 
