@@ -72,6 +72,7 @@ function ReloadLabels() {
 
     let keepInTouch = [
         //"FPS", NEEDED FIX
+        "FPS",
         "Ping",
         "DMG",
         "",

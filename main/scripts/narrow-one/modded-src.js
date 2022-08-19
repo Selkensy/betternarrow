@@ -35214,6 +35214,8 @@ class cc { // global instance
         this.smoothDt = 0,
         this.useFakeNow = !1,
         this.fakeNow = 0,
+        this.frames = 0,
+        this.prevTimer = Date.now(),
         this.fastLoopCount = 1,
         this.frameCount = 0,
             this.frameCap = 1;
@@ -35293,9 +35295,8 @@ updateTheme() {
             this.loop()
         }
         window.requestAnimationFrame(this.boundLoop)
-    }
-    loop() { // called every frame
-        this.frames++;
+		
+		this.frames++;
         if (Math.abs(this.prevTimer - Date.now()) >= 1000) {
             this.prevTimer = Date.now();
 
@@ -35308,6 +35309,8 @@ updateTheme() {
                 return;
             frameObj.innerHTML = `FPS: ${gameFramerate}`;
         }
+    }
+    loop() { // called every frame
         let t = performance.now();
         this.useFakeNow && (t = this.fakeNow, this.fakeNow += 30),
         this.prevNow <= 0 && (this.prevNow = t);
