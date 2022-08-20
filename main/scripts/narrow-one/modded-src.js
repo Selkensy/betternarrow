@@ -2,12 +2,8 @@ let enumThemes = { // setting naming here
     system: "Sync with system",
     light: "Light",
     dark: "Dark",
-    darker: "Darker",
-    moredarker: "More Darker",
+    amoled: "Amoled",
     black: "Black",
-    red: "Red",
-    green: "Green",
-    blue: "Blue"
     /*mycustom: "My Custom Theme"*/
 }
 
@@ -18,34 +14,14 @@ let themes = [ // game themes here
         "dark"
     ],
     [
-        "theme-darker",
-        "html.theme-darker {\n\t--default-text-color: white;\n\t--default-ui-bg-color: #2a2a2a;\n\t--icon-filter: invert(100%);\n\t--default-wrinkled-paper-border-color: #a5a5a5;\n\t--button-on-clear-bg-wrinkled-paper-border-color: #242424;\n\t--disabled-wrinkled-paper-border-color: #2a2a2a;\n\t--default-wrinkled-paper-top-color-extra: #606060;\n\t--shop-item-background-color: #2a2a2a;\n\t--shop-item-highlight-color: #9c6f2d;\n\t--blue-highlight-color: #3f92ff;\n\t--items-table-bg-color: #3e3e3e;\n\t--items-table-odd-row-color: #0000002b;\n}\n\n\n",
-        "darker"
-    ],
-    [
-        "theme-more-darker",
-        "html.theme-more-darker {\n\t--default-text-color: white;\n\t--default-ui-bg-color: #1a1a1a;\n\t--icon-filter: invert(100%);\n\t--default-wrinkled-paper-border-color: #a5a5a5;\n\t--button-on-clear-bg-wrinkled-paper-border-color: #242424;\n\t--disabled-wrinkled-paper-border-color: #1a1a1a;\n\t--default-wrinkled-paper-top-color-extra: #606060;\n\t--shop-item-background-color: #1a1a1a;\n\t--shop-item-highlight-color: #9c6f2d;\n\t--blue-highlight-color: #3f92ff;\n\t--items-table-bg-color: #1f1f1f;\n\t--items-table-odd-row-color: #0000002b;\n}\n\n\n",
-        "moredarker"
+        "theme-amoled",
+        "html.theme-amoled {\n\t--default-text-color: white;\n\t--default-ui-bg-color: #1a1a1a;\n\t--icon-filter: invert(100%);\n\t--default-wrinkled-paper-border-color: #a5a5a5;\n\t--button-on-clear-bg-wrinkled-paper-border-color: #242424;\n\t--disabled-wrinkled-paper-border-color: #1a1a1a;\n\t--default-wrinkled-paper-top-color-extra: #606060;\n\t--shop-item-background-color: #1a1a1a;\n\t--shop-item-highlight-color: #9c6f2d;\n\t--blue-highlight-color: #3f92ff;\n\t--items-table-bg-color: #1f1f1f;\n\t--items-table-odd-row-color: #0000002b;\n}\n\n\n",
+        "amoled"
     ],
     [
         "theme-black",
         "html.theme-black {\n\t--default-text-color: white;\n\t--default-ui-bg-color: #000000;\n\t--icon-filter: invert(100%);\n\t--default-wrinkled-paper-border-color: #a5a5a5;\n\t--button-on-clear-bg-wrinkled-paper-border-color: #242424;\n\t--disabled-wrinkled-paper-border-color: #000000;\n\t--default-wrinkled-paper-top-color-extra: #606060;\n\t--shop-item-background-color: #000000;\n\t--shop-item-highlight-color: #9c6f2d;\n\t--blue-highlight-color: #3f92ff;\n\t--items-table-bg-color: #0a0a0a;\n\t--items-table-odd-row-color: #0000002b;\n}\n\n\n",
         "black"
-    ],
-    [
-        "theme-red",
-        "html.theme-red {\n\t--default-text-color: white;\n\t--default-ui-bg-color: #410c08;\n\t--icon-filter: invert(100%);\n\t--default-wrinkled-paper-border-color: #a5a5a5;\n\t--button-on-clear-bg-wrinkled-paper-border-color: #242424;\n\t--disabled-wrinkled-paper-border-color: #410c08;\n\t--default-wrinkled-paper-top-color-extra: #606060;\n\t--shop-item-background-color: #410c08;\n\t--shop-item-highlight-color: #9c6f2d;\n\t--blue-highlight-color: #3f92ff;\n\t--items-table-bg-color: #59100b;\n\t--items-table-odd-row-color: #0000002b;\n}\n\n\n",
-        "red"
-    ],
-    [
-        "theme-green",
-        "html.theme-green {\n\t--default-text-color: white;\n\t--default-ui-bg-color: #2b4108;\n\t--icon-filter: invert(100%);\n\t--default-wrinkled-paper-border-color: #a5a5a5;\n\t--button-on-clear-bg-wrinkled-paper-border-color: #242424;\n\t--disabled-wrinkled-paper-border-color: #2b4108;\n\t--default-wrinkled-paper-top-color-extra: #606060;\n\t--shop-item-background-color: #2b4108;\n\t--shop-item-highlight-color: #9c6f2d;\n\t--blue-highlight-color: #3f92ff;\n\t--items-table-bg-color: #42630e;\n\t--items-table-odd-row-color: #0000002b;\n}\n\n\n",
-        "green"
-    ],
-    [
-        "theme-blue",
-        "html.theme-blue {\n\t--default-text-color: white;\n\t--default-ui-bg-color: #082941;\n\t--icon-filter: invert(100%);\n\t--default-wrinkled-paper-border-color: #a5a5a5;\n\t--button-on-clear-bg-wrinkled-paper-border-color: #242424;\n\t--disabled-wrinkled-paper-border-color: #082941;\n\t--default-wrinkled-paper-top-color-extra: #606060;\n\t--shop-item-background-color: #082941;\n\t--shop-item-highlight-color: #9c6f2d;\n\t--blue-highlight-color: #3f92ff;\n\t--items-table-bg-color: #0c3c5e;\n\t--items-table-odd-row-color: #0000002b;\n}\n\n\n",
-        "blue"
     ]
     /*,
 	[

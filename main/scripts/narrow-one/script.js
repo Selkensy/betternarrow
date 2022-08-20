@@ -2,7 +2,7 @@ console.log('Injected!');
 
 let ThreeAPI;
 
-let oVersionKey = '1660844401'; // last updated timestamp patch
+let oVersionKey = '1660950618'; // last updated timestamp patch
 let versionKey = oVersionKey;
 
 function SpoofVersion(bool) {
