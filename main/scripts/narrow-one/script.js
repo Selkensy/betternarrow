@@ -222,7 +222,7 @@ function checkBNupdate(url) {
 		}
 	}
 }
-checkBNupdate("https://raw.githubusercontent.com/Selkensy/betternarrowimages/master/betternarrowbackup/BetterNarrow-1.2.0.zip"); //BNversion
+checkBNupdate("https://raw.githubusercontent.com/Selkensy/betternarrowimages/master/betternarrowbackup/BetterNarrow-1.2.1.zip"); //BNversion
 //Update checker
 
 /** OLD FUNCTIONS
