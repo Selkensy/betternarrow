@@ -1,7 +1,7 @@
 if (!window.injected) {
 	window.injected = true;
 	console.log('Injecting...');
-	
+
 	async function LoadPlugin(plugin) {
 		let pluginInstance = document.createElement('script');
 		pluginInstance.innerHTML = await fetch(chrome.runtime.getURL(plugin)).then((resp) => resp.text()).then();

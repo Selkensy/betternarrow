@@ -2,7 +2,7 @@ console.log('Injected!');
 
 let ThreeAPI;
 
-let oVersionKey = '1660950618'; // last updated timestamp patch
+let oVersionKey = '1660844401'; // last updated timestamp patch
 let versionKey = oVersionKey;
 
 function SpoofVersion(bool) {
@@ -84,7 +84,7 @@ function ReloadLabels() {
         if (keepInTouch[i] != "")
             createLab(keepInTouch[i], 10, 10 + (25 * i), keepInTouch[i].toUpperCase() + ": 0", "white")
 
-            GetLabelById("VERSION").innerHTML = "v1.1.8";
+            GetLabelById("VERSION").innerHTML = "v1.2.0"; //BNversion
     GetLabelById("NARROWVERSION").innerHTML = versionKey;
 }
 
@@ -205,6 +205,27 @@ function waitForElm(selector) {
     });
 }
 
+
+//Update checker
+function checkBNupdate(url) {
+	var request = new XMLHttpRequest();
+	request.open("GET", url, true);
+	request.send();
+	request.onload = function() {
+		status = request.status;
+		if (request.status == 200)
+		{
+			console.log("update exists");
+			alert('A new version of BetterNarrow has been spotted! Go download it!');
+		} else {
+			console.log("update doesn't exist");
+		}
+	}
+}
+checkBNupdate("https://raw.githubusercontent.com/Selkensy/betternarrowimages/master/betternarrowbackup/BetterNarrow-1.2.0.zip"); //BNversion
+//Update checker
+
+/** OLD FUNCTIONS
 function init() {
 	__require(['https://unpkg.com/three@latest/build/three.min.js'], function(threejs)
 	{
@@ -247,7 +268,7 @@ function init() {
 				}
 				
 			}
-			/***
+			//DISABLED START
 			if (client && firstTime) {
 				firstTime = false;
 				
@@ -277,15 +298,16 @@ function init() {
 				});
 				
 				window.dispatchEvent(BetterNarrowAPI.onInitialization_Event);
-			} ***/
-			/***
+			} //DISABLED STOP
+			//DISABLED START
 			waitForElm('#mainMenu > div.main-menu-promo-banner-container > div').then((elm) => {
 				elm.style.backgroundImage =
 				'url(\"https://raw.githubusercontent.com/Laamy/narrow-one-tmp/main/discord-dark.png")';
-			});***/
-
+			});
+			//DISABLED STOP
 		}
 		animate();
 	})
 }
+**/
 init();
